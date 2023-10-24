@@ -1,0 +1,68 @@
+nav {
+  width: 100vw;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  border-bottom: 2px solid rgb(7, 34, 49);
+}
+
+nav .logo {
+  position: absolute;
+  left: 2rem;
+  height: 100%;
+  margin: 8px;
+}
+
+nav .logo img:hover {
+  transition: 500ms;
+  transform: scale(1.1);
+}
+
+nav ul {
+  display: flex;
+  gap: 5rem;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0 1rem;
+  margin: 0;
+  list-style: none;
+  width: 60%;
+}
+
+nav ul a {
+  color: rgb(7, 34, 49);
+  font-size: 1.4rem;
+  border-bottom: 2px solid transparent;
+}
+
+nav ul a:hover {
+  color: rgb(22, 106, 150);
+  transition-duration: 500ms;
+  transform: scale(1.5);
+}
+
+nav .user-profile {
+  position: absolute;
+  right: 2rem;
+}
+
+nav .user-profile div {
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgb(7, 34, 49);
+  margin: 8px;
+}
+
+.user-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.user-profile img:hover {
+  transition: 500ms;
+  transform: scale(1.1);
+}
