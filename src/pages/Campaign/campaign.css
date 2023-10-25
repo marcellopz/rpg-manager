@@ -1,0 +1,78 @@
+.campaign__header {
+  background-image: url("/src/assets/background/2.png");
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  /* background-position-y: bottom; */
+  color: var(--background);
+}
+
+.campaign__header h1 {
+  font-size: 2rem;
+  padding-left: 50px;
+}
+
+.campaign__backdrop {
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.475),
+    transparent
+  );
+  display: flex;
+  align-items: center;
+}
+
+.campaign__card {
+  width: 250px;
+  height: 300px;
+  border-radius: 10px;
+  background-color: #fffff8ab;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgb(163, 164, 123);
+}
+
+.campaign__card:hover {
+  transition: 500ms;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.cards__section {
+  /* padding: 30px; */
+  overflow: hidden;
+}
+
+.campaign__cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.card-body {
+  width: 100%;
+}
+
+.card-body > h4,
+.card-body > h5 {
+  margin: 0;
+}
+
+.card-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.card-text {
+  text-align: center;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.campaign__card {
+  margin: 10px;
+}

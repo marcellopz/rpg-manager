@@ -5,6 +5,7 @@ nav {
   justify-content: center;
   position: relative;
   border-bottom: 2px solid rgb(7, 34, 49);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 nav .logo {

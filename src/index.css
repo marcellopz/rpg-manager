@@ -5,13 +5,14 @@
 
   color-scheme: light dark;
   color: rgb(7, 34, 49);
-  background-color: #effffa;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --background: #faffef;
+  background-color: var(--background);
 }
 
 * {
@@ -25,8 +26,8 @@ ul {
 }
 
 a {
-  font-weight: 500;
-  text-decoration: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 body {
@@ -56,6 +57,10 @@ button {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.header_inset {
+  box-shadow: inset 10px -10px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 /* @media (prefers-color-scheme: light) {
