@@ -7,10 +7,9 @@ const About = () => <h1>About</h1>;
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
   { to: "/campaign", label: "Campaign" },
-  //   { to: "/maps", label: "Maps" },
   { to: "/calculator", label: "Calculator" },
+  { to: "/about", label: "About" },
 ];
 
 export default function AppRoutes() {
