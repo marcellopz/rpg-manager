@@ -1,5 +1,5 @@
 import CampaignCard from "./CampaignCard";
-import "./Campaign.css";
+import "./campaign.css";
 
 const campaigns = [
   {
