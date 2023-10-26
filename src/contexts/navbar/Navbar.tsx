@@ -1,14 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import { AuthContext } from "../authContext";
+import UserMenu from "./UserMenu";
 
 interface NavbarProps {
   links: { to: string; label: string }[];
 }
 
 const Navbar: React.FC<NavbarProps> = ({ links }) => {
-  const { isAuthenticated } = useContext(AuthContext);
   return (
     <nav>
       <div className="logo">
@@ -23,19 +22,7 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => {
           </li>
         ))}
       </ul>
-      <div className="user-profile">
-        <div>
-          {isAuthenticated ? (
-            <Link to="/profile">
-              <img src="" alt="profile" height="64px" />
-            </Link>
-          ) : (
-            <Link to="/login">
-              <img src="src/assets/user.png" alt="profile" height="64px" />
-            </Link>
-          )}
-        </div>
-      </div>
+      <UserMenu />
     </nav>
   );
 };

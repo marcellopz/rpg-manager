@@ -20,7 +20,7 @@ nav .logo img:hover {
   transform: scale(1.1);
 }
 
-nav ul {
+nav > ul {
   display: flex;
   gap: 5rem;
   align-items: center;
@@ -31,13 +31,13 @@ nav ul {
   width: 60%;
 }
 
-nav ul a {
+nav > ul a {
   color: rgb(7, 34, 49);
   font-size: 1.4rem;
   border-bottom: 2px solid transparent;
 }
 
-nav ul a:hover {
+nav > ul a:hover {
   color: rgb(22, 106, 150);
   transition-duration: 500ms;
   transform: scale(1.5);
@@ -48,7 +48,7 @@ nav .user-profile {
   right: 2rem;
 }
 
-nav .user-profile div {
+.user-icon {
   height: 64px;
   width: 64px;
   border-radius: 50%;

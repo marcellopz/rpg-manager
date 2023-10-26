@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import { useNavbarContext } from "../../contexts/navbarContext";
 import "./home.css";
