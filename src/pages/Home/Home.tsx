@@ -8,25 +8,25 @@ const itemsUnderCastle = [
     id: 1,
     name: "Lorem Ipsum",
     description: "Lorem Ipsum",
-    img: "public/assets/img/icone.svg",
+    img: "/assets/img/icone.svg",
   },
   {
     id: 2,
     name: "Lorem Ipsum",
     description: "Lorem Ipsum",
-    img: "public/assets/img/icone.svg",
+    img: "/assets/img/icone.svg",
   },
   {
     id: 3,
     name: "Lorem Ipsum",
     description: "Lorem Ipsum",
-    img: "public/assets/img/icone.svg",
+    img: "/assets/img/icone.svg",
   },
   {
     id: 4,
     name: "Lorem Ipsum",
     description: "Lorem Ipsum",
-    img: "public/assets/img/icone.svg",
+    img: "/assets/img/icone.svg",
   },
 ];
 
@@ -40,7 +40,7 @@ const Home = () => {
       <section id="section-one">
         <div id="child-one">
           <div id="knife-and-text">
-            <img src="public/assets/faca.svg" id="knife" alt="faca" />
+            <img src="/assets/faca.svg" id="knife" alt="faca" />
             <div id="h3-and-h1">
               <h3>RPG Manager</h3>
               <h1>Comece Agora!</h1>
@@ -58,7 +58,7 @@ const Home = () => {
           </div>
         </div>
         <div id="child-two">
-          <img src="public/assets/castelo.png" id="castle" alt="castelo" />
+          <img src="/assets/castelo.png" id="castle" alt="castelo" />
         </div>
       </section>
       <section id="section-two">
@@ -71,7 +71,7 @@ const Home = () => {
           {itemsUnderCastle.map((item) => (
             <div key={item.id}>
               <img
-                src="public/assets/barra_elemento.svg"
+                src="/assets/barra_elemento.svg"
                 className="element-bar"
                 alt="element-bar"
               />
@@ -79,10 +79,10 @@ const Home = () => {
           ))}
         </div>
         <div id="habilities-img">
-          <img src="public/assets/icone.svg" className="img" alt="habilidade" />
-          <img src="public/assets/icone.svg" className="img" alt="habilidade" />
-          <img src="public/assets/icone.svg" className="img" alt="habilidade" />
-          <img src="public/assets/icone.svg" className="img" alt="habilidade" />
+          <img src="/assets/icone.svg" className="img" alt="habilidade" />
+          <img src="/assets/icone.svg" className="img" alt="habilidade" />
+          <img src="/assets/icone.svg" className="img" alt="habilidade" />
+          <img src="/assets/icone.svg" className="img" alt="habilidade" />
         </div>
       </section>
     </main>
