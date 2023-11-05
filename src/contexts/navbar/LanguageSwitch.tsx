@@ -22,14 +22,14 @@ export default function LanguageSwitch() {
       onClick={() => setIsMenuOpen((prev) => !prev)}
     >
       <div id="language-toggle">
-        <img src="src/assets/flags/us.png" id="language-flag" />
-        <img id="language-toggle-arrow" src="src/assets/arrow.svg" />
+        <img src="public/assets/flags/us.png" id="language-flag" />
+        <img id="language-toggle-arrow" src="public/assets/arrow.svg" />
       </div>
       {isMenuOpen && (
         <div className="language-menu" ref={menuRef}>
           <ul>
             <li onClick={() => console.log("br")}>
-              <img src="src/assets/flags/br.png" width={30} />
+              <img src="public/assets/flags/br.png" width={30} />
               BR
             </li>
           </ul>

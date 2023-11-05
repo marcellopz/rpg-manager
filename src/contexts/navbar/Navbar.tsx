@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./navbar.css";
 import LanguageSwitch from "./LanguageSwitch";
 import UserMenu from "./UserMenu";
-// import UserMenu from "./UserMenu";
 
 interface NavbarProps {
   links: { to: string; label: string }[];
