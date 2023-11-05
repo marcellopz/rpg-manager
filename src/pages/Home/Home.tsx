@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import { useNavbarContext } from "../../contexts/navbarContext";
 import "./home.css";
@@ -33,6 +33,7 @@ const itemsUnderCastle = [
 const Home = () => {
   const { isAuthenticated } = useContext(AuthContext);
   const n = useNavbarContext();
+  console.log(n, isAuthenticated);
 
   return (
     <main>

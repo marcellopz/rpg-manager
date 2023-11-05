@@ -7,6 +7,7 @@ const UserMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { isAuthenticated } = useContext(AuthContext);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  console.log(isAuthenticated);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -22,7 +23,7 @@ const UserMenu: React.FC = () => {
 
   return (
     <>
-      <div id="name" onClick={() => setIsOpen((prev) => !prev)}>
+      <div id="name" onClick={() => setIsOpen((prev) => !prev)} ref={menuRef}>
         John Doe
       </div>
       <div id="img" onClick={() => setIsOpen((prev) => !prev)}>

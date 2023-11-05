@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 
 export default function LanguageSwitch() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
