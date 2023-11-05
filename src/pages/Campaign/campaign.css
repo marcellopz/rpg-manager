@@ -1,5 +1,5 @@
 .campaign__header {
-  background-image: url("/src/assets/background/2.png");
+  background-image: url("https://i.imgur.com/4hUcbLk.png");
   height: 200px;
   background-size: cover;
   background-position: center;
@@ -9,7 +9,6 @@
 
 .campaign__header h1 {
   font-size: 2rem;
-  padding-left: 50px;
 }
 
 .campaign__backdrop {
@@ -21,7 +20,13 @@
     transparent
   );
   display: flex;
+  justify-content: space-between;
   align-items: center;
+}
+
+.campaign__backdrop > * {
+  margin: 0 70px;
+  padding: 0;
 }
 
 .campaign__card {

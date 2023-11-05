@@ -7,14 +7,14 @@ const UserMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { isAuthenticated } = useContext(AuthContext);
   const menuRef = useRef<HTMLDivElement | null>(null);
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-      setIsOpen(false);
-    }
-  };
+  console.log(isAuthenticated);
 
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -22,20 +22,15 @@ const UserMenu: React.FC = () => {
   }, []);
 
   return (
-    <div className="user-profile" ref={menuRef}>
-      <div className="user-icon" onClick={() => setIsOpen(!isOpen)}>
-        {isAuthenticated ? (
-          <Link to="/profile">
-            <img src="" alt="profile" height="64px" />
-          </Link>
-        ) : (
-          <Link to="/login">
-            <img src="src/assets/user.png" alt="profile" height="64px" />
-          </Link>
-        )}
+    <>
+      <div id="name" onClick={() => setIsOpen((prev) => !prev)} ref={menuRef}>
+        John Doe
+      </div>
+      <div id="img" onClick={() => setIsOpen((prev) => !prev)}>
+        <img src="https://img.freepik.com/vetores-gratis/design-de-vetores-coloridos-de-maca_341269-1123.jpg?w=2000" />
       </div>
       {isOpen && (
-        <div className="navbar-user-dropdown">
+        <div className="navbar-user-dropdown" ref={menuRef}>
           <ul>
             <Link to="/profile">
               <li>Profile</li>
@@ -50,7 +45,7 @@ const UserMenu: React.FC = () => {
           </ul>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
