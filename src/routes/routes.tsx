@@ -11,7 +11,6 @@ const links = [
   { to: "/", label: "Home" },
   { to: "/campaign", label: "Campaign" },
   { to: "/calculator", label: "Calculator" },
-  { to: "/about", label: "About" },
 ];
 
 export default function AppRoutes() {
@@ -21,6 +20,7 @@ export default function AppRoutes() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/campaign" element={<CampaignApp />} />
+          <Route path="/campaign/:id" element={<CampaignApp />} />
           <Route path="/about" element={<About />} />
           <Route path="/calculator" element={<CalculatorApp />} />
           <Route path="*" element={<PageNotFound />} />

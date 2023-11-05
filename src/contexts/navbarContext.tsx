@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import Navbar from "./navbar/Navbar";
+import Footer from "./navbar/Footer";
 
 interface NavbarContextProps {
   count: number;
@@ -39,6 +40,7 @@ export const NavbarProvider = ({
     <NavbarContext.Provider value={navbarContextValue}>
       <Navbar links={links} />
       {children}
+      <Footer />
     </NavbarContext.Provider>
   );
 };
