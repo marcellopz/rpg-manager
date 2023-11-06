@@ -21,6 +21,16 @@ const UserMenu: React.FC = () => {
     };
   }, []);
 
+  if (!isAuthenticated) {
+    return (
+      <Link to="/authenticate">
+        <div id="name" onClick={() => setIsOpen((prev) => !prev)} ref={menuRef}>
+          Sign up
+        </div>
+      </Link>
+    );
+  }
+
   return (
     <>
       <div id="name" onClick={() => setIsOpen((prev) => !prev)} ref={menuRef}>

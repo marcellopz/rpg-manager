@@ -63,13 +63,13 @@
 
 #section-two {
   display: flex;
-  flex-direction: column;
   justify-content: space-around;
 }
 
 #habilities-img {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 20px;
 }
 
 #element-bar-img {
@@ -82,20 +82,24 @@
   height: 55px;
 }
 
-#items-names {
-  display: flex;
-  justify-content: space-around;
-}
-
 .element-bar {
-  height: 10px;
+  width: 250px;
 }
 
 .white-color {
   color: white;
 }
 
-#items-names > p {
+.home-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.home-item p {
   text-transform: uppercase;
   font-size: 1rem;
   font-weight: 700;

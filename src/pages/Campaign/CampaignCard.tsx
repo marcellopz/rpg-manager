@@ -15,7 +15,7 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
   id,
 }) => {
   return (
-    <Link to={`/campaign/${id}`}>
+    <Link to={`/campaign/${id}/${title}`}>
       <div className="campaign__card">
         <img src={imageSrc} alt={title} width="100%" />
         <div className="card-body">

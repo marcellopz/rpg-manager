@@ -4,6 +4,7 @@ import PageNotFound from "./PageNotFound";
 import { NavbarProvider } from "../contexts/navbarContext";
 import CampaignApp from "../pages/Campaign/CampaignApp";
 import CalculatorApp from "../pages/Calculator/CalculatorApp";
+import Authenticate from "../pages/Authenticate/Authenticate";
 
 const About = () => <h1>About</h1>;
 
@@ -19,8 +20,9 @@ export default function AppRoutes() {
       <NavbarProvider links={links}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/authenticate" element={<Authenticate />} />
           <Route path="/campaign" element={<CampaignApp />} />
-          <Route path="/campaign/:id" element={<CampaignApp />} />
+          <Route path="/campaign/:id/:name?" element={<CampaignApp />} />
           <Route path="/about" element={<About />} />
           <Route path="/calculator" element={<CalculatorApp />} />
           <Route path="*" element={<PageNotFound />} />

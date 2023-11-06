@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
 import Navbar from "./navbar/Navbar";
 import Footer from "./navbar/Footer";
+import { useLocation } from "react-router-dom";
+
+const noNavbarRoutes = ["/authenticate"];
 
 interface NavbarContextProps {
   count: number;
@@ -30,11 +33,20 @@ export const NavbarProvider = ({
   links,
 }: NavbarContextProviderProps) => {
   const [count, setCount] = useState<number>(0);
+  const location = useLocation();
 
   const navbarContextValue: NavbarContextProps = {
     count,
     setCount,
   };
+
+  if (noNavbarRoutes.includes(location.pathname)) {
+    return (
+      <NavbarContext.Provider value={navbarContextValue}>
+        {children}
+      </NavbarContext.Provider>
+    );
+  }
 
   return (
     <NavbarContext.Provider value={navbarContextValue}>

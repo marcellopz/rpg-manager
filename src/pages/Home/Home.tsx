@@ -3,32 +3,53 @@ import { AuthContext } from "../../contexts/authContext";
 import { useNavbarContext } from "../../contexts/navbarContext";
 import "./home.css";
 
+type ItemProps = {
+  id: number;
+  name: string;
+  description: string;
+  img: string;
+};
+
 const itemsUnderCastle = [
   {
     id: 1,
-    name: "Lorem Ipsum",
+    name: "Gerencie Inventários",
     description: "Lorem Ipsum",
-    img: "/assets/img/icone.svg",
+    img: "/assets/icone.svg",
   },
   {
     id: 2,
-    name: "Lorem Ipsum",
+    name: "Registre suas sessões",
     description: "Lorem Ipsum",
-    img: "/assets/img/icone.svg",
+    img: "/assets/icone.svg",
   },
   {
     id: 3,
-    name: "Lorem Ipsum",
+    name: "Controle suas habilidades",
     description: "Lorem Ipsum",
-    img: "/assets/img/icone.svg",
+    img: "/assets/icone.svg",
   },
   {
     id: 4,
-    name: "Lorem Ipsum",
+    name: "Área do mestre",
     description: "Lorem Ipsum",
-    img: "/assets/img/icone.svg",
+    img: "/assets/icone.svg",
   },
 ];
+
+const Item = ({ name, img }: ItemProps) => {
+  return (
+    <div className="home-item">
+      <p>{name}</p>
+      <img
+        src="/assets/barra_elemento.svg"
+        className="element-bar"
+        alt="element-bar"
+      />
+      <img className="medium" src={img} alt="icone" />
+    </div>
+  );
+};
 
 const Home = () => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -62,28 +83,9 @@ const Home = () => {
         </div>
       </section>
       <section id="section-two">
-        <div id="items-names">
-          {itemsUnderCastle.map((item) => (
-            <p key={item.id}>{item.name}</p>
-          ))}
-        </div>
-        <div id="element-bar-img">
-          {itemsUnderCastle.map((item) => (
-            <div key={item.id}>
-              <img
-                src="/assets/barra_elemento.svg"
-                className="element-bar"
-                alt="element-bar"
-              />
-            </div>
-          ))}
-        </div>
-        <div id="habilities-img">
-          <img src="/assets/icone.svg" className="img" alt="habilidade" />
-          <img src="/assets/icone.svg" className="img" alt="habilidade" />
-          <img src="/assets/icone.svg" className="img" alt="habilidade" />
-          <img src="/assets/icone.svg" className="img" alt="habilidade" />
-        </div>
+        {itemsUnderCastle.map((i) => (
+          <Item key={i.id} {...i} />
+        ))}
       </section>
     </main>
   );
