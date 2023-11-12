@@ -1,12 +1,10 @@
-import { TabType } from "./campaignMock";
-
 interface CampaignDetailsContentProps {
-  tab: TabType;
+  content: string | undefined
 }
 
 export default function CampaignDetailsContent({
-  tab,
+  content
 }: CampaignDetailsContentProps) {
-  console.log(tab);
-  return <div className="tab-content">{tab.content}</div>;
+  console.log(content);
+  return <div className="tab-content">{content}</div>;
 }

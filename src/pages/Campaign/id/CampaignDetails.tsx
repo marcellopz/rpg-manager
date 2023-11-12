@@ -1,16 +1,30 @@
 import { useParams } from "react-router-dom";
-import campaignData, { playerMock as playerData } from "./campaignMock";
-import { useState } from "react";
+import campaignData, { CampaignType, PlayerType, playerMock as playerData } from "./campaignMock";
+import { useState, useEffect } from "react";
 import CampaignDetailsContent from "./CampaignDetailsContent";
 import CampaignContentSelection from "./CampaignContentSelection";
 
+export const getTabContent = (category: number, tabId: number, data: CampaignType | PlayerType) => {
+  return data.categories.find((cat) => cat.id === category)?.tabs.find((tab) => tab.id === tabId)?.content;
+}
+
 export default function CampaignDetails() {
   const { name } = useParams();
-  const [category, setCategory] = useState<string>("public");
+  const [publicSelected, setPublicSelected] = useState<boolean>(true);
+  const [categoryId, setCategoryId] = useState<number>(0);
   const [tabId, setTabId] = useState<number>(0);
+  const [selectedData, setSelectedData] = useState<CampaignType | PlayerType>(campaignData);
 
-  const handleCategoryChange = (cat: string) => {
-    setCategory(cat);
+  useEffect(() => {
+    if (publicSelected) {
+      setSelectedData(campaignData);
+    } else {
+      setSelectedData(playerData);
+    }
+  }, [publicSelected]);
+
+  const handleCategoryChange = (catId: number) => {
+    setCategoryId(catId);
     setTabId(0);
   };
 
@@ -27,18 +41,21 @@ export default function CampaignDetails() {
       </section>
       <section className="campaign__details">
         <CampaignContentSelection
-          category={category}
+          categoryId={categoryId}
           handleCategoryChange={handleCategoryChange}
           tabId={tabId}
           setTabId={setTabId}
-          campaignData={campaignData}
-          playerData={playerData}
+          selectedData={selectedData}
+          // campaignData={campaignData}
+          // playerData={playerData}
+          publicSelected={publicSelected}
+          setPublicSelected={setPublicSelected}
         />
         <CampaignDetailsContent
-          tab={
-            category === "public"
-              ? campaignData.tabs[tabId]
-              : playerData.tabs[tabId]
+          content={
+            publicSelected ?
+              getTabContent(categoryId, tabId, campaignData) :
+              getTabContent(categoryId, tabId, playerData)
           }
         />
       </section>
