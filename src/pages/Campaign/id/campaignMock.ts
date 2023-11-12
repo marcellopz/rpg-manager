@@ -37,7 +37,7 @@ const playerMock: PlayerType = {
         {
           id: 0,
           name: "Game Mechanics",
-          type: "video",
+          type: "text",
           content: "game_mechanics_video.mp4"
         },
         {
@@ -49,7 +49,7 @@ const playerMock: PlayerType = {
         {
           id: 2,
           name: "Pro Tips",
-          type: "image",
+          type: "text",
           content: "pro_tips_image.jpg"
         }
       ]
@@ -67,7 +67,7 @@ const playerMock: PlayerType = {
         {
           id: 1,
           name: "World Lore",
-          type: "audio",
+          type: "text",
           content: "world_lore_podcast.mp3"
         }
       ]
@@ -85,7 +85,7 @@ const playerMock: PlayerType = {
         {
           id: 1,
           name: "Game Reviews",
-          type: "video",
+          type: "text",
           content: "game_reviews_video.mp4"
         }
       ]
@@ -110,25 +110,25 @@ const campaignMock: CampaignType = {
         {
           id: 0,
           name: "Game Mechanics",
-          type: "video",
+          type: "text",
           content: "game_mechanics_video.mp4"
         },
         {
           id: 1,
           name: "Expert Talks",
-          type: "audio",
+          type: "text",
           content: "expert_talks_podcast.mp3"
         },
         {
           id: 2,
           name: "Pro Tips",
-          type: "image",
+          type: "text",
           content: "pro_tips_image.jpg"
         },
         {
           id: 3,
           name: "Game Reviews",
-          type: "video",
+          type: "text",
           content: "game_reviews_video.mp4"
         },
         {
@@ -140,7 +140,7 @@ const campaignMock: CampaignType = {
         {
           id: 5,
           name: "Strategy Maps",
-          type: "image",
+          type: "text",
           content: "strategy_maps.jpg"
         }
       ]
@@ -152,7 +152,7 @@ const campaignMock: CampaignType = {
         {
           id: 0,
           name: "Quest Maps",
-          type: "image",
+          type: "text",
           content: "quest_maps.jpg"
         },
         {
@@ -194,9 +194,57 @@ const campaignMock: CampaignType = {
         {
           id: 1,
           name: "Game Reviews",
-          type: "video",
+          type: "text",
           content: "game_reviews_video.mp4"
         }
+      ]
+    },
+    {
+      id: 4,
+      name: "Inventory",
+      tabs: [
+        {
+          id: 0,
+          name: "Boris",
+          type: "inventory",
+          content: "List of items in Boris inventory."
+        },
+        {
+          id: 1,
+          name: "Polaco",
+          type: "inventory",
+          content: "List of items in Polaco inventory."
+        },
+        {
+          id: 2,
+          name: "Lupus",
+          type: "inventory",
+          content: "List of items in Lupus inventory."
+        },
+        {
+          id: 3,
+          name: "Gregory",
+          type: "inventory",
+          content: "List of items in Gregory inventory."
+        },
+        {
+          id: 4,
+          name: "Celim",
+          type: "inventory",
+          content: "List of items in Celim inventory."
+        },
+        {
+          id: 5,
+          name: "Liara",
+          type: "inventory",
+          content: "List of items in Liara inventory."
+        },
+        {
+          id: 6,
+          name: "Vutho",
+          type: "inventory",
+          content: "List of items in Vutho inventory."
+        },
       ]
     }
   ],

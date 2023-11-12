@@ -1,3 +1,5 @@
+import TextDetails from "./details/TextDetails";
+
 interface CampaignDetailsContentProps {
   content: string | undefined
 }
@@ -5,6 +7,7 @@ interface CampaignDetailsContentProps {
 export default function CampaignDetailsContent({
   content
 }: CampaignDetailsContentProps) {
-  console.log(content);
-  return <div className="tab-content">{content}</div>;
+  return <div className="tab-content" data-color-mode="light">
+    <TextDetails content={content || ""} />
+  </div>;
 }

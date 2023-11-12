@@ -8,8 +8,6 @@ interface CampaignContentSelectionProps {
   handleCategoryChange: (category: number) => void;
   tabId: number;
   setTabId: React.Dispatch<React.SetStateAction<number>>;
-  // campaignData: CampaignType;
-  // playerData: PlayerType;
   selectedData: CampaignType | PlayerType;
   publicSelected: boolean;
   setPublicSelected: React.Dispatch<React.SetStateAction<boolean>>;
@@ -39,7 +37,7 @@ export default function CampaignContentSelection({
     <div className="content-container">
       <CampaignPublicPrivateDropdown publicSelected={publicSelected} setPublicSelected={setPublicSelected} />
       <div className="content-selection">
-        <Resizable width={categoryWidth} axis="x" minConstraints={[150, 150]} maxConstraints={[400, 400]} onResize={handleCategoryResize}>
+        <Resizable width={categoryWidth} axis="x" minConstraints={[80, 80]} maxConstraints={[400, 400]} onResize={handleCategoryResize}>
           <div style={{ width: categoryWidth }} className="category-selection item-list">
             {selectedData.categories.map((cat) => (
               <div
@@ -52,7 +50,7 @@ export default function CampaignContentSelection({
             ))}
           </div>
         </Resizable>
-        <Resizable width={tabWidth} axis="x" minConstraints={[150, 150]} maxConstraints={[400, 400]} onResize={handleTabResize}>
+        <Resizable width={tabWidth} axis="x" minConstraints={[80, 80]} maxConstraints={[400, 400]} onResize={handleTabResize}>
           <div style={{ width: tabWidth }} className="tab-selection item-list">
             {selectedData.categories.find((cat) => cat.id === categoryId)?.tabs.map((tab) => (
               <div
