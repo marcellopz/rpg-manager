@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import "./navbar.css";
 import LanguageSwitch from "./LanguageSwitch";
 import UserMenu from "./UserMenu";
+import { useTranslation } from "react-i18next";
 
 interface NavbarProps {
   links: { to: string; label: string }[];
 }
 
 const Navbar: React.FC<NavbarProps> = ({ links }) => {
+  const { t } = useTranslation();
+
   useEffect(() => {
     const navbar = document.querySelector("nav");
     document.addEventListener("scroll", () => {
@@ -25,12 +28,12 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => {
   return (
     <nav>
       <button id="nav-btn-black">
-        <Link to="/">RPG Manager</Link>
+        <Link to="/">{t('APP_NAME')}</Link>
       </button>
       <ul>
         {links.map((link) => (
           <li key={link.to}>
-            <Link to={link.to}>{link.label}</Link>
+            <Link to={link.to}>{t(link.label)}</Link>
           </li>
         ))}
       </ul>

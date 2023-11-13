@@ -7,7 +7,7 @@ interface CampaignDetailsContentProps {
 export default function CampaignDetailsContent({
   content
 }: CampaignDetailsContentProps) {
-  return <div className="tab-content" data-color-mode="light">
+  return <div className="tab-content">
     <TextDetails content={content || ""} />
   </div>;
 }

@@ -2,8 +2,10 @@ import React, { useContext, useState, useRef, useEffect } from "react";
 import "./usermenu.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../authContext";
+import { useTranslation } from "react-i18next";
 
 const UserMenu: React.FC = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { isAuthenticated } = useContext(AuthContext);
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -25,7 +27,7 @@ const UserMenu: React.FC = () => {
     return (
       <Link to="/authenticate">
         <div id="name" onClick={() => setIsOpen((prev) => !prev)} ref={menuRef}>
-          Sign up
+          {t("NAV_LOGIN")}
         </div>
       </Link>
     );
@@ -43,14 +45,14 @@ const UserMenu: React.FC = () => {
         <div className="navbar-user-dropdown" ref={menuRef}>
           <ul>
             <Link to="/profile">
-              <li>Profile</li>
+              <li>{t("NAV_PROFILE")}</li>
             </Link>
             <Link to="/settings">
-              <li>Settings</li>
+              <li>{t("NAV_SETTINGS")}</li>
             </Link>
             <li className="divider"></li>
             <Link to="/logout">
-              <li>Log Out</li>
+              <li>{t("NAV_LOGOUT")} Out</li>
             </Link>
           </ul>
         </div>

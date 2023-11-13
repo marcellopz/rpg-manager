@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@uiw/react-markdown-editor": "^5.13.1",
+    "@mdxeditor/editor": "^1.8.1",
+    "i18next": "^23.7.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^13.4.1",
     "react-resizable": "^3.0.5",
     "react-router-dom": "^6.17.0"
   },

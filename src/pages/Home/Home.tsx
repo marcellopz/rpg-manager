@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import { useNavbarContext } from "../../contexts/navbarContext";
+import { useTranslation } from "react-i18next";
 import "./home.css";
 
 type ItemProps = {
@@ -13,34 +14,35 @@ type ItemProps = {
 const itemsUnderCastle = [
   {
     id: 1,
-    name: "Gerencie Inventários",
+    name: "HOME_MANAGE_INVENTORY",
     description: "Lorem Ipsum",
     img: "/assets/icone.svg",
   },
   {
     id: 2,
-    name: "Registre suas sessões",
+    name: "HOME_MANAGE_SESSIONS",
     description: "Lorem Ipsum",
     img: "/assets/icone.svg",
   },
   {
     id: 3,
-    name: "Controle suas habilidades",
+    name: "HOME_MANAGE_SKILLS",
     description: "Lorem Ipsum",
     img: "/assets/icone.svg",
   },
   {
     id: 4,
-    name: "Área do mestre",
+    name: "HOME_STORE_CAMPAIGNS",
     description: "Lorem Ipsum",
     img: "/assets/icone.svg",
   },
 ];
 
 const Item = ({ name, img }: ItemProps) => {
+  const { t } = useTranslation();
   return (
     <div className="home-item">
-      <p>{name}</p>
+      <p>{t(name)}</p>
       <img
         src="/assets/barra_elemento.svg"
         className="element-bar"
@@ -52,6 +54,7 @@ const Item = ({ name, img }: ItemProps) => {
 };
 
 const Home = () => {
+  const { t } = useTranslation();
   const { isAuthenticated } = useContext(AuthContext);
   const n = useNavbarContext();
   console.log(n, isAuthenticated);
@@ -63,20 +66,18 @@ const Home = () => {
           <div id="knife-and-text">
             <img src="/assets/faca.svg" id="knife" alt="faca" />
             <div id="h3-and-h1">
-              <h3>RPG Manager</h3>
-              <h1>Comece Agora!</h1>
+              <h3>{t('APP_NAME')}</h3>
+              <h1>{t('HOME_START_NOW')}</h1>
             </div>
           </div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-            porro molestiae sit, voluptas quas, perspiciatis accusantium nobis
-            alias vitae.
+            {t('HOME_DESCRIPTION')}
           </p>
-          <div id="input-container">
+          {/* <div id="input-container">
             <input placeholder="Username" />
             <input placeholder="Email" />
             <input placeholder="Password" />
-          </div>
+          </div> */}
         </div>
         <div id="child-two">
           <img src="/assets/castelo.png" id="castle" alt="castelo" />

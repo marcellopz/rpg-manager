@@ -105,43 +105,25 @@ const campaignMock: CampaignType = {
   categories: [
     {
       id: 0,
-      name: "Strategy",
+      name: "World Lore",
       tabs: [
         {
           id: 0,
-          name: "Game Mechanics",
+          name: "World Context",
           type: "text",
-          content: "game_mechanics_video.mp4"
+          content: "world_lore_podcast.mp3"
         },
         {
           id: 1,
-          name: "Expert Talks",
+          name: "World Maps",
           type: "text",
-          content: "expert_talks_podcast.mp3"
+          content: "world_maps.jpg"
         },
         {
           id: 2,
-          name: "Pro Tips",
+          name: "World Lore",
           type: "text",
-          content: "pro_tips_image.jpg"
-        },
-        {
-          id: 3,
-          name: "Game Reviews",
-          type: "text",
-          content: "game_reviews_video.mp4"
-        },
-        {
-          id: 4,
-          name: "Strategy Guides",
-          type: "text",
-          content: "Text on how to play strategy games."
-        },
-        {
-          id: 5,
-          name: "Strategy Maps",
-          type: "text",
-          content: "strategy_maps.jpg"
+          content: "Text on the world lore."
         }
       ]
     },
@@ -246,7 +228,49 @@ const campaignMock: CampaignType = {
           content: "List of items in Vutho inventory."
         },
       ]
-    }
+    },
+    {
+      id: 5,
+      name: "Strategy",
+      tabs: [
+        {
+          id: 0,
+          name: "Game Mechanics",
+          type: "text",
+          content: "game_mechanics_video.mp4"
+        },
+        {
+          id: 1,
+          name: "Expert Talks",
+          type: "text",
+          content: "expert_talks_podcast.mp3"
+        },
+        {
+          id: 2,
+          name: "Pro Tips",
+          type: "text",
+          content: "pro_tips_image.jpg"
+        },
+        {
+          id: 3,
+          name: "Game Reviews",
+          type: "text",
+          content: "game_reviews_video.mp4"
+        },
+        {
+          id: 4,
+          name: "Strategy Guides",
+          type: "text",
+          content: "Text on how to play strategy games."
+        },
+        {
+          id: 5,
+          name: "Strategy Maps",
+          type: "text",
+          content: "strategy_maps.jpg"
+        }
+      ]
+    },
   ],
   backdropImage: "campaign_backdrop.jpg"
 };

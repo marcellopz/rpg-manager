@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import CampaignCard from "./CampaignCard";
 import "./campaign.css";
 
@@ -81,13 +82,14 @@ const campaigns = [
 ];
 
 export default function CampaignList() {
+  const { t } = useTranslation();
   return (
     <div className="campaign">
       <section className="campaign__header header_inset">
         <div className="campaign__backdrop">
-          <h1>Campanhas</h1>
+          <h1>{t('CAMPAIGN_TITLE')}</h1>
           <div>
-            <button>Criar campanha</button>
+            <button>{t('CAMPAIGN_NEW')}</button>
           </div>
         </div>
       </section>

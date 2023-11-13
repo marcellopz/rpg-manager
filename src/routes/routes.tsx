@@ -9,9 +9,9 @@ import Authenticate from "../pages/Authenticate/Authenticate";
 const About = () => <h1>About</h1>;
 
 const links = [
-  { to: "/", label: "Home" },
-  { to: "/campaign", label: "Campaign" },
-  { to: "/calculator", label: "Calculator" },
+  { to: "/", label: "NAV_HOME" },
+  { to: "/campaign", label: "NAV_CAMPAIGNS" },
+  { to: "/calculator", label: "NAV_CALCULATOR" },
 ];
 
 export default function AppRoutes() {

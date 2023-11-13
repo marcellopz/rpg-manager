@@ -1,6 +1,19 @@
 import React, { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
+
+const languages = [
+  {
+    flag: "/assets/flags/us.png",
+    code: "en",
+  },
+  {
+    flag: "/assets/flags/br.png",
+    code: "br",
+  },
+];
 
 export default function LanguageSwitch() {
+  const { i18n } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -22,19 +35,25 @@ export default function LanguageSwitch() {
       onClick={() => setIsMenuOpen((prev) => !prev)}
     >
       <div id="language-toggle">
-        <img src="/assets/flags/us.png" id="language-flag" />
+        {
+          languages.filter((language) => language.code === i18n.language).map((lang) => (
+            <img src={lang.flag} id="language-flag" key={lang.code} />
+          ))
+        }
         <img id="language-toggle-arrow" src="/assets/arrow.svg" />
       </div>
-      {isMenuOpen && (
-        <div className="language-menu" ref={menuRef}>
-          <ul>
-            <li onClick={() => console.log("br")}>
-              <img src="/assets/flags/br.png" width={30} />
-              BR
-            </li>
-          </ul>
-        </div>
-      )}
+      {isMenuOpen &&
+        languages.filter((language) => language.code !== i18n.language).map((lang) => (
+          <div className="language-menu" ref={menuRef} key={lang.code}>
+            <ul>
+              <li onClick={() => i18n.changeLanguage(lang.code)}>
+                <img src={lang.flag} width={30} />
+                {lang.code}
+              </li>
+            </ul>
+          </div>
+        ))
+      }
     </div>
   );
 }

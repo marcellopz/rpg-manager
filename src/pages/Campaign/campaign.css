@@ -82,6 +82,11 @@
   margin: 10px;
 }
 
+.campaign__cards a {
+  text-decoration: none;
+  color: black;
+}
+
 .campaign__backdrop > div {
   display: flex;
   gap: 20px;
@@ -152,6 +157,12 @@
   background-color: rgba(0, 0, 0, 0.20);
 }
 
+.public-private-selection strong {
+  font-size: 20.5px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
 .content-container {
   display: flex;
   flex-direction: column;
@@ -179,7 +190,32 @@
 
 .markdown-editor {
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
+  font-size: 18px;
+  max-width: 100%;
 }
+
+.markdown-editor div[role=toolbar] {
+  border-bottom: 1px solid rgb(170, 170, 170);
+  border-radius: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+
+.markdown-editor div[role=textbox] {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.markdown-editor div[role=textbox] ul {
+  padding-left: 30px;
+}
+
+.markdown-editor div[role=textbox] ol {
+  padding-left: 30px;
+}
+
+.markdown-editor p {
+  font-size: 16px;
+}
+
