@@ -41,7 +41,7 @@ export default function TextDetails({ content }: TextDetailsProps) {
         mdxRef?.current?.setMarkdown?.(content);
     }, [content])
 
-    console.log(markdownVal);
+    console.log({ markdownVal });
 
     return (
         <MDXEditor

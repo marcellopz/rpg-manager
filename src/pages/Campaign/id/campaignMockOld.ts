@@ -38,21 +38,21 @@ const playerMock: PlayerType = {
           id: 0,
           name: "Game Mechanics",
           type: "text",
-          content: "game_mechanics_video.mp4",
+          content: "game_mechanics_video.mp4"
         },
         {
           id: 1,
           name: "Advanced Strategies",
           type: "text",
-          content: "Detailed text about advanced strategies in strategy games.",
+          content: "Detailed text about advanced strategies in strategy games."
         },
         {
           id: 2,
           name: "Pro Tips",
           type: "text",
-          content: "pro_tips_image.jpg",
-        },
-      ],
+          content: "pro_tips_image.jpg"
+        }
+      ]
     },
     {
       id: 1,
@@ -62,15 +62,15 @@ const playerMock: PlayerType = {
           id: 0,
           name: "Character Building",
           type: "text",
-          content: "Guide on how to build a strong character.",
+          content: "Guide on how to build a strong character."
         },
         {
           id: 1,
           name: "World Lore",
           type: "text",
-          content: "world_lore_podcast.mp3",
-        },
-      ],
+          content: "world_lore_podcast.mp3"
+        }
+      ]
     },
     {
       id: 2,
@@ -80,140 +80,36 @@ const playerMock: PlayerType = {
           id: 0,
           name: "High Scores",
           type: "text",
-          content: "List of high scores and players.",
+          content: "List of high scores and players."
         },
         {
           id: 1,
           name: "Game Reviews",
           type: "text",
-          content: "game_reviews_video.mp4",
-        },
-      ],
-    },
-  ],
+          content: "game_reviews_video.mp4"
+        }
+      ]
+    }
+  ]
 };
 
 const campaignMock: CampaignType = {
-  players: [],
-  config: {},
+  players: [
+  ],
+  config: {
+    difficulty: "Expert",
+    timeLimit: "4 hours",
+    region: "Global",
+    language: "English"
+  },
   categories: [
     {
       id: 0,
-      name: "Contexto geral",
+      name: "World Lore",
       tabs: [
         {
           id: 0,
-          name: "História",
-          type: "text",
-          content: `# A Guerra da Caverna&#x20;
-
-
-
-Assim denominada pelos vencedores, essa guerra teve início há cerca de 15 anos, com fim após 2 anos de duração. Nesse tempo, os Orcs ampliaram sua população de forma significativa e, coordenados por Obould, juntamente numa aliança com gigantes, eles destroçaram em campo de batalha as forças Draconicas e Anãs. Quando ambos acharam que Obould iria continuar seu avanço, de forma inusitada, ele ofereceu um acordo de paz, que foi aceito por ambos. Esse acordo confundiu bastante os Orcs que estão sob seu comando, divindo as opiniões em duas: ou Obould fez uma jogada inteligente para ganhar tempo, ou ele desviou dos caminhos de Gruumsh e precisa ser destruido. Até hoje não se sabe ao certo o motivo de Obould ter encerrado a guerra, porém o seu governo continua forte perante a maioria dos Orcs.&#x20;
-
-
-
-# A Morte do Rei Marius&#x20;
-
-
-
-Há cerca de 22 anos, por volta de 1442, o Rei Marius - conhecido como o Rei Bondoso - foi assassinado junto com sua família durante a noite.&#x20;
-
-
-
-Nadarr, o seu meio irmão, se auto-proclamou defensor do reino e informou para a população que ele teria sido assassinado pelos Homens Lagartos, uma raça criada para servir a família real.&#x20;
-
-
-
-# A Purgação&#x20;
-
-
-
-Após o assassinato do Rei Marinus e Nadarr assumir o posto como defensor do reino, ele proclamou também que os Homens Lagarto eram inimigos da coroa e iniciou um massacre. Nos anos subsequentes, que entraram para a história como A Purgação, milhares de Homens Lagarto foram caçados e mortos no reino de Lustril. Esses formidáveis guerreiros que serviram a coroa por mais de 500 anos, agora encontram-se a beira da extinção.`,
-        },
-        {
-          id: 1,
-          name: "Personalidades Importantes",
-          type: "text",
-          content: `### Flint Storunn (Anão, cerca de 450 anos, L/B)&#x20;
-
-Flint é o atual Rei de Britsvall. É um grande responsável pelo crescimento econômico da sociedade anã, estimula bastante principalmente a forja. Não apresenta uma aparência robusta, mas dizem carregar uma grande inteligência.&#x20;
-
-
-
-***
-
-
-
-### Nadarr Turnoth (Draconato, cerca de 40 anos, L/N)&#x20;
-
-Nadarr atualmente é o rei de Lustril. Comanda o local com pulso firme, juntamente com seus conselheiros. Pune severamente os que considera criminosos.&#x20;
-
-
-
-***
-
-
-
-### Obould Muitas-Flechas (Orc, idade desconhecida, C/N)&#x20;
-
-Obould é o líder Orc que unificou pela primeira vez a nação na história, além de ser um grande general de guerra. Suas intenções atualmente são desconhecidas.&#x20;
-
-
-
-***
-
-
-
-### Alton Chá de Folha (Hafling, cerca de 70 anos, L/B)&#x20;
-
-Alton é o atual governante de Valstris Zel, eleito há cerca de 4 anos. Nesse meio de governo, ele propagou bastante o desenvolvimento das artes no Reino, principalmente as musicais e pinturas, criando a Escola de Bellavis.&#x20;
-
-
-
-***
-
-
-
-### Orianna Art (Tiefling, idade desconhecida, C/N)&#x20;
-
-Orianna é uma Tiefling mundialmente famosa por ser uma seguidora assídua de Mask. É capaz de roubar até os seres mais poderosos.&#x20;
-
-
-
-***
-
-
-
-### Mei Tan (Humana, cerca de 25 anos, N/N)&#x20;
-
-Mei é uma figura um tanto quanto particular. Uma humana que, apesar de nova, esbanjava sabedoria. A última informação que se tem sobre ela, é que se perder nos Reinos Livres.&#x20;
-
-
-
-***
-
-
-
-### Zook (Gnomo, 370 anos, N/B)&#x20;
-
-Atual diretor de Faris, Zook é o primeiro Gnomo a alcançar tal posto. Dizem que a seleção para a escola se tornou menos rigorosa em seu comando.`,
-        },
-        {
-          id: 2,
-          name: "Mapa",
-          type: "text",
-          content: `![Mapa](https://media.discordapp.net/attachments/270999120917823498/1173759104217530458/Scrimura_mapa_mundi.jpg?ex=65651f59&is=6552aa59&hm=6b9dde66f89dfaa15f044b7ec581470c250d84483a157cc5b3f3399a2b46b0b3&=&width=810&height=608)`,
-        },
-      ],
-    },
-    {
-      id: 1,
-      name: "Deuses",
-      tabs: [
-        {
-          id: 0,
-          name: "História dos deuses",
+          name: "Deuses",
           type: "text",
           content: `# **A história dos deuses**
 
@@ -249,40 +145,27 @@ Atual diretor de Faris, Zook é o primeiro Gnomo a alcançar tal posto. Dizem qu
 * **A Divergência**
   * Após a vitória dos Deuses Primordiais e o banimento dos Deuses Traidores para outros planos, os Deuses Primordiais decidiram que sua influência no mundo era perigosa.
   * Os Deuses primordiais criaram o Portão Divino, que impede todos os Deuses Criadores (Deuses Primordiais e Traidores) de entrarem fisicamente no Plano Material.
-`,
-        },
-        {
-          id: 1,
-          name: "Deuses Primordiais",
-          type: "text",
-          content: `# **Deuses Primordiais**
+
+
+
+# **Deuses Primordiais**
 
 * São os Deuses Criadores que decidiram ajudar o povo na luta contra os ataques dos seres primordiais durante A Fundação.
 * Foram os criadores do Portão Divino que marcou o início da Divergência.
 * Importante descobrir quais deuses fazem parte desse grupo.
 
-`,
-        },
-        {
-          id: 2,
-          name: "Deuses Traidores",
-          type: "text",
-          content: `# **Deuses Traidores**
+
+
+# **Deuses Traidores**
 
 * São os Deuses Criadores que decidiram abandonar o povo na luta contra os ataques dos seres primordiais durante A Fundação.
 * Acreditavam ser melhor recomeçar em outro lugar.
 * Importante descobrir quais deuses fazem parte desse grupo.
-`,
+          `
         },
-      ],
-    },
-    {
-      id: 2,
-      name: "Lugares",
-      tabs: [
         {
-          id: 0,
-          name: "Valstrits Zel",
+          id: 1,
+          name: "Lugares",
           type: "text",
           content: `# **Valstrits Zel**
 
@@ -291,25 +174,35 @@ Atual diretor de Faris, Zook é o primeiro Gnomo a alcançar tal posto. Dizem qu
 * As principais fontes de subsistência do povo dessa região é pesca, colheita e agropecuária.
 * É fácil de encontrar na região templos de Chauntea, Eldath e Sune.
 * A região atualmente está tomada de mortos-vivos.
-`,
-        },
-        {
-          id: 1,
-          name: "Esterosa",
-          type: "text",
-          content: `# **Esterosa**
+
+
+
+# **Esterosa**
 
 * O reino de Esterosa é a terra dos elfos, porém também conta com uma quantidade expressiva de gnomos em sua população.
 * Possui uma das maiores escolas de magia do continente de Scrimura, a escola de Farnis.
 * O reino é governado por um conselho de cinco governantes, sendo que não se sabe ao certo como são decididos, mas um é sempre gnomo.
 * Atividades de destaque em Esterosa são a arte, os estudos, o artesanato e a costura.
-`,
-        },
-        {
-          id: 2,
-          name: "Grotsvat",
-          type: "text",
-          content: `# **Grotsvat**
+
+
+
+## **Amphail** 
+
+* Antiga cidade de Amphail, extinta por Nesseus após o ritual realizado com auxílio do Celin.
+
+
+
+## **Mastoofan** 
+
+* Cidade governada por Elanin Silverall.
+* Local onde os Pequenos Gigantes foram premiados pelos seu serviços prestados ao resolver os ataques realizados pelos gigantes.
+* A cidade foi a primeira a ser tomada pelo Conclave Cromático e hoje em dia parece ser o centro de sua influência.
+* Possuía um Templo do Conhecimento, dedicado a Oghma e que era regido pela Relatora Anciã Salyndra Shaern, que foi morta pelo dragão branco no ataque do Conclave Cromático.
+  * A relatora foi responsável por nos informar da história dos deuses que consta no tópico 5.
+
+
+
+# **Grotsvat**
 
 * O reino de Grotsvat foi criado por um grupo de cerca de 30 humanos há mais de 500 anos.
 * Antes de sua colonização, Grotsvat fazia parte dos territórios conhecidos como Reinos Livres.
@@ -317,38 +210,43 @@ Atual diretor de Faris, Zook é o primeiro Gnomo a alcançar tal posto. Dizem qu
   * Esse apoio explica a vasta população de meio-elfos na região.
 * É governado por uma tríplice coroa, que é formada por dois humanos e um meio-elfo.
 * Dizem que Helm abençoou o local em sua criação, o que garantiu a prosperidade do reino e, por conta disso, templos desse deus são facilmente encontrados pela região
-`,
-        },
-        {
-          id: 3,
-          name: "Britsvall",
-          type: "text",
-          content: `# **Britsvall**
+
+
+
+## **Relógio cego**
+
+* Cidade na floresta de Grotsvat.
+* É governada por um conselho religioso.
+
+
+
+# **Britsvall**
 
 * O reino de Britsvall é a terra dos anões.
 * A família Storunn governa o reino desde que foi fundado, passando o trono sempre para o sucessor homem mais velho.
 * O atual rei de Britsvall é Flint Storunn
 
-`,
-        },
-        {
-          id: 4,
-          name: "Grundar",
-          type: "text",
-          content: `# **Grundar**
+
+
+## **Tazuten**
+
+* Cidade no deserto de Britsvall.
+* Possui uma imensa forja e habilidosos ferreiros, como Waylon Dothy.
+* Foi o local da batalha entre os Pequenos Gigantes e Osea, o dragão negro, na qual os Pequenos Gigantes saíram vitoriosos.
+
+
+
+# **Grundar**
 
 * Grundar é a terra dos orcs.
 * Os orcs não eram organizados sob um governo centralizado até a chegada de Obould, da tribo Muitas-Flechas.
 * Atualmente os orcs são liderados por Obould.
   * Obould é considerado pelos orcs uma lenda de guerra e, sob seu comando, eles ampliaram o território de Grundar ao vencer a Guerra da Caverna.
   * Foi dito por Rogan que Obould negou os ensinamentos de Gruumsh e por conta disso a sociedade orc está em guerra civil.
-`,
-        },
-        {
-          id: 5,
-          name: "Lustril",
-          type: "text",
-          content: `# **Lustril**
+
+
+
+# **Lustril**
 
 * O reino de Lustril, também conhecido como Inferno Escaldante,  é governado por draconatos.
 * Atualmente é governado pelo rei Nadarr Turnoth.
@@ -357,63 +255,25 @@ Atual diretor de Faris, Zook é o primeiro Gnomo a alcançar tal posto. Dizem qu
   * Não se sabe ao certo a origem do Mar Vermelho.
   * Alguns acreditam que foi criado por Falcor, para demonstrar seu poder, mas outros acreditam apenas que seu surgimento foi causado pelos resquícios de um antigo vulcão.
 
-`,
-        },
-        {
-          id: 6,
-          name: "Reinos Livres",
-          type: "text",
-          content: `# **Reinos Livres**
+
+
+# **Reinos Livres**
 
 * Pouco é o conhecimento sobre os Reinos Livres.
 * Alguns boatos dizem que povos de raças exóticas vivem no local.
 * Outros boatos dizem que as principais entradas para o mundo subterrâneo se encontram na região, o que possibilita o acesso à povos como os drows.
 
-`,
-        },
-        {
-          id: 7,
-          name: "Ghor Dranas",
-          type: "text",
-          content: `## **Ghor Dranas**
 
-* Cidade criada pelos Deuses Traidores para servir como sua base durante a Guerra da Divergência.`,
-        },
-        {
-          id: 8,
-          name: "Tazuten",
-          type: "text",
-          content: `## **Tazuten**
 
-* Cidade no deserto de Britsvall.
-* Possui uma imensa forja e habilidosos ferreiros, como Waylon Dothy.
-* Foi o local da batalha entre os Pequenos Gigantes e Osea, o dragão negro, na qual os Pequenos Gigantes saíram vitoriosos.
+## **Ghor Dranas**
 
-`,
-        },
-        {
-          id: 9,
-          name: "Relógio cedo",
-          type: "text",
-          content: `## **Relógio cego**
-
-* Cidade na floresta de Grotsvat.
-* É governada por um conselho religioso.`,
-        },
-        {
-          id: 10,
-          name: "Amphail",
-          type: "text",
-          content: `## **Amphail** 
-
-* Antiga cidade de Amphail, extinta por Nesseus após o ritual realizado com auxílio do Celin.
-`,
-        },
-      ],
+* Cidade criada pelos Deuses Traidores para servir como sua base durante a Guerra da Divergência.`
+        }
+      ]
     },
     {
-      id: 3,
-      name: "Pactos",
+      id: 1,
+      name: "Pacts",
       tabs: [
         {
           id: 0,
@@ -476,12 +336,12 @@ O contratante promete não interferir de forma diretamente danosa e nem ampliar 
 
 
 O contratado itã devolver ao contratante Akmon, o Martelo do Propósito, sem danificado, dar o martelo alguém com esse intuito, pedir a ajuda de um Deus ou qualquer ser forte o suficiente para destruí-lo, esconder o martelo ou dar a alguém para escondê-lo. A partir do momento da posse de Akmon, o contratado tem 7 dias para retornar o item ao contratante.
-`,
+`
         },
-      ],
+      ]
     },
     {
-      id: 4,
+      id: 2,
       name: "Organizações",
       tabs: [
         {
@@ -489,13 +349,13 @@ O contratado itã devolver ao contratante Akmon, o Martelo do Propósito, sem da
           name: "Valstrits Zel",
           type: "text",
           content: `* **Escola de Belavis**
-  * Criada por Alton, chá de folha, o atual governante de Valstrits Zel.`,
+  * Criada por Alton, chá de folha, o atual governante de Valstrits Zel.`
         },
         {
           id: 1,
           name: "Esterosa",
           type: "text",
-          content: "Latest scoreboard of trivia challenges.",
+          content: "Latest scoreboard of trivia challenges."
         },
         {
           id: 2,
@@ -507,84 +367,144 @@ O contratado itã devolver ao contratante Akmon, o Martelo do Propósito, sem da
           id: 3,
           name: "Grotsvat",
           type: "text",
-          content: "",
+          content: ""
         },
         {
           id: 4,
           name: "Lustril",
           type: "text",
-          content: "",
+          content: ""
         },
         {
           id: 5,
           name: "Reinos Livres",
           type: "text",
-          content: "",
+          content: ""
         },
         {
           id: 6,
           name: "Ghor Dranas",
           type: "text",
-          content: "",
+          content: ""
         },
         {
           id: 7,
           name: "Grundar",
           type: "text",
-          content: "",
+          content: ""
         },
-      ],
+      ]
     },
     {
-      id: 5,
-      name: "Inventário",
+      id: 3,
+      name: "Arcade",
+      tabs: [
+        {
+          id: 0,
+          name: "High Scores",
+          type: "text",
+          content: "List of high scores and players."
+        },
+        {
+          id: 1,
+          name: "Game Reviews",
+          type: "text",
+          content: "game_reviews_video.mp4"
+        }
+      ]
+    },
+    {
+      id: 4,
+      name: "Inventory",
       tabs: [
         {
           id: 0,
           name: "Boris",
           type: "inventory",
-          content: "List of items in Boris inventory.",
+          content: "List of items in Boris inventory."
         },
         {
           id: 1,
           name: "Polaco",
           type: "inventory",
-          content: "List of items in Polaco inventory.",
+          content: "List of items in Polaco inventory."
         },
         {
           id: 2,
           name: "Lupus",
           type: "inventory",
-          content: "List of items in Lupus inventory.",
+          content: "List of items in Lupus inventory."
         },
         {
           id: 3,
           name: "Gregory",
           type: "inventory",
-          content: "List of items in Gregory inventory.",
+          content: "List of items in Gregory inventory."
         },
         {
           id: 4,
           name: "Celim",
           type: "inventory",
-          content: "List of items in Celim inventory.",
+          content: "List of items in Celim inventory."
         },
         {
           id: 5,
           name: "Liara",
           type: "inventory",
-          content: "List of items in Liara inventory.",
+          content: "List of items in Liara inventory."
         },
         {
           id: 6,
           name: "Vutho",
           type: "inventory",
-          content: "List of items in Vutho inventory.",
+          content: "List of items in Vutho inventory."
         },
-      ],
+      ]
+    },
+    {
+      id: 5,
+      name: "Strategy",
+      tabs: [
+        {
+          id: 0,
+          name: "Game Mechanics",
+          type: "text",
+          content: "game_mechanics_video.mp4"
+        },
+        {
+          id: 1,
+          name: "Expert Talks",
+          type: "text",
+          content: "expert_talks_podcast.mp3"
+        },
+        {
+          id: 2,
+          name: "Pro Tips",
+          type: "text",
+          content: "pro_tips_image.jpg"
+        },
+        {
+          id: 3,
+          name: "Game Reviews",
+          type: "text",
+          content: "game_reviews_video.mp4"
+        },
+        {
+          id: 4,
+          name: "Strategy Guides",
+          type: "text",
+          content: "Text on how to play strategy games."
+        },
+        {
+          id: 5,
+          name: "Strategy Maps",
+          type: "text",
+          content: "strategy_maps.jpg"
+        }
+      ]
     },
   ],
-  backdropImage: "",
+  backdropImage: "campaign_backdrop.jpg"
 };
 
 export { playerMock };

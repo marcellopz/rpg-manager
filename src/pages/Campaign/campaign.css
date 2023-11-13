@@ -215,6 +215,10 @@
   padding-left: 30px;
 }
 
+.markdown-editor div[role=textbox] * {
+  margin-bottom: 20px;
+}
+
 .markdown-editor p {
   font-size: 16px;
 }
