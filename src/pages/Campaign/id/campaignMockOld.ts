@@ -38,21 +38,21 @@ const playerMock: PlayerType = {
           id: 0,
           name: "Game Mechanics",
           type: "text",
-          content: "game_mechanics_video.mp4"
+          content: "game_mechanics_video.mp4",
         },
         {
           id: 1,
           name: "Advanced Strategies",
           type: "text",
-          content: "Detailed text about advanced strategies in strategy games."
+          content: "Detailed text about advanced strategies in strategy games.",
         },
         {
           id: 2,
           name: "Pro Tips",
           type: "text",
-          content: "pro_tips_image.jpg"
-        }
-      ]
+          content: "pro_tips_image.jpg",
+        },
+      ],
     },
     {
       id: 1,
@@ -62,15 +62,15 @@ const playerMock: PlayerType = {
           id: 0,
           name: "Character Building",
           type: "text",
-          content: "Guide on how to build a strong character."
+          content: "Guide on how to build a strong character.",
         },
         {
           id: 1,
           name: "World Lore",
           type: "text",
-          content: "world_lore_podcast.mp3"
-        }
-      ]
+          content: "world_lore_podcast.mp3",
+        },
+      ],
     },
     {
       id: 2,
@@ -80,27 +80,26 @@ const playerMock: PlayerType = {
           id: 0,
           name: "High Scores",
           type: "text",
-          content: "List of high scores and players."
+          content: "List of high scores and players.",
         },
         {
           id: 1,
           name: "Game Reviews",
           type: "text",
-          content: "game_reviews_video.mp4"
-        }
-      ]
-    }
-  ]
+          content: "game_reviews_video.mp4",
+        },
+      ],
+    },
+  ],
 };
 
 const campaignMock: CampaignType = {
-  players: [
-  ],
+  players: [],
   config: {
     difficulty: "Expert",
     timeLimit: "4 hours",
     region: "Global",
-    language: "English"
+    language: "English",
   },
   categories: [
     {
@@ -161,7 +160,7 @@ const campaignMock: CampaignType = {
 * São os Deuses Criadores que decidiram abandonar o povo na luta contra os ataques dos seres primordiais durante A Fundação.
 * Acreditavam ser melhor recomeçar em outro lugar.
 * Importante descobrir quais deuses fazem parte desse grupo.
-          `
+          `,
         },
         {
           id: 1,
@@ -186,13 +185,13 @@ const campaignMock: CampaignType = {
 
 
 
-## **Amphail** 
+## **Amphail**
 
 * Antiga cidade de Amphail, extinta por Nesseus após o ritual realizado com auxílio do Celin.
 
 
 
-## **Mastoofan** 
+## **Mastoofan**
 
 * Cidade governada por Elanin Silverall.
 * Local onde os Pequenos Gigantes foram premiados pelos seu serviços prestados ao resolver os ataques realizados pelos gigantes.
@@ -267,9 +266,9 @@ const campaignMock: CampaignType = {
 
 ## **Ghor Dranas**
 
-* Cidade criada pelos Deuses Traidores para servir como sua base durante a Guerra da Divergência.`
-        }
-      ]
+* Cidade criada pelos Deuses Traidores para servir como sua base durante a Guerra da Divergência.`,
+        },
+      ],
     },
     {
       id: 1,
@@ -336,9 +335,9 @@ O contratante promete não interferir de forma diretamente danosa e nem ampliar 
 
 
 O contratado itã devolver ao contratante Akmon, o Martelo do Propósito, sem danificado, dar o martelo alguém com esse intuito, pedir a ajuda de um Deus ou qualquer ser forte o suficiente para destruí-lo, esconder o martelo ou dar a alguém para escondê-lo. A partir do momento da posse de Akmon, o contratado tem 7 dias para retornar o item ao contratante.
-`
+`,
         },
-      ]
+      ],
     },
     {
       id: 2,
@@ -349,13 +348,13 @@ O contratado itã devolver ao contratante Akmon, o Martelo do Propósito, sem da
           name: "Valstrits Zel",
           type: "text",
           content: `* **Escola de Belavis**
-  * Criada por Alton, chá de folha, o atual governante de Valstrits Zel.`
+  * Criada por Alton, chá de folha, o atual governante de Valstrits Zel.`,
         },
         {
           id: 1,
           name: "Esterosa",
           type: "text",
-          content: "Latest scoreboard of trivia challenges."
+          content: "Latest scoreboard of trivia challenges.",
         },
         {
           id: 2,
@@ -367,33 +366,33 @@ O contratado itã devolver ao contratante Akmon, o Martelo do Propósito, sem da
           id: 3,
           name: "Grotsvat",
           type: "text",
-          content: ""
+          content: "",
         },
         {
           id: 4,
           name: "Lustril",
           type: "text",
-          content: ""
+          content: "",
         },
         {
           id: 5,
           name: "Reinos Livres",
           type: "text",
-          content: ""
+          content: "",
         },
         {
           id: 6,
           name: "Ghor Dranas",
           type: "text",
-          content: ""
+          content: "",
         },
         {
           id: 7,
           name: "Grundar",
           type: "text",
-          content: ""
+          content: "",
         },
-      ]
+      ],
     },
     {
       id: 3,
@@ -403,15 +402,15 @@ O contratado itã devolver ao contratante Akmon, o Martelo do Propósito, sem da
           id: 0,
           name: "High Scores",
           type: "text",
-          content: "List of high scores and players."
+          content: "List of high scores and players.",
         },
         {
           id: 1,
           name: "Game Reviews",
           type: "text",
-          content: "game_reviews_video.mp4"
-        }
-      ]
+          content: "game_reviews_video.mp4",
+        },
+      ],
     },
     {
       id: 4,
@@ -421,45 +420,45 @@ O contratado itã devolver ao contratante Akmon, o Martelo do Propósito, sem da
           id: 0,
           name: "Boris",
           type: "inventory",
-          content: "List of items in Boris inventory."
+          content: "List of items in Boris inventory.",
         },
         {
           id: 1,
           name: "Polaco",
           type: "inventory",
-          content: "List of items in Polaco inventory."
+          content: "List of items in Polaco inventory.",
         },
         {
           id: 2,
           name: "Lupus",
           type: "inventory",
-          content: "List of items in Lupus inventory."
+          content: "List of items in Lupus inventory.",
         },
         {
           id: 3,
           name: "Gregory",
           type: "inventory",
-          content: "List of items in Gregory inventory."
+          content: "List of items in Gregory inventory.",
         },
         {
           id: 4,
           name: "Celim",
           type: "inventory",
-          content: "List of items in Celim inventory."
+          content: "List of items in Celim inventory.",
         },
         {
           id: 5,
           name: "Liara",
           type: "inventory",
-          content: "List of items in Liara inventory."
+          content: "List of items in Liara inventory.",
         },
         {
           id: 6,
           name: "Vutho",
           type: "inventory",
-          content: "List of items in Vutho inventory."
+          content: "List of items in Vutho inventory.",
         },
-      ]
+      ],
     },
     {
       id: 5,
@@ -469,42 +468,42 @@ O contratado itã devolver ao contratante Akmon, o Martelo do Propósito, sem da
           id: 0,
           name: "Game Mechanics",
           type: "text",
-          content: "game_mechanics_video.mp4"
+          content: "game_mechanics_video.mp4",
         },
         {
           id: 1,
           name: "Expert Talks",
           type: "text",
-          content: "expert_talks_podcast.mp3"
+          content: "expert_talks_podcast.mp3",
         },
         {
           id: 2,
           name: "Pro Tips",
           type: "text",
-          content: "pro_tips_image.jpg"
+          content: "pro_tips_image.jpg",
         },
         {
           id: 3,
           name: "Game Reviews",
           type: "text",
-          content: "game_reviews_video.mp4"
+          content: "game_reviews_video.mp4",
         },
         {
           id: 4,
           name: "Strategy Guides",
           type: "text",
-          content: "Text on how to play strategy games."
+          content: "Text on how to play strategy games.",
         },
         {
           id: 5,
           name: "Strategy Maps",
           type: "text",
-          content: "strategy_maps.jpg"
-        }
-      ]
+          content: "strategy_maps.jpg",
+        },
+      ],
     },
   ],
-  backdropImage: "campaign_backdrop.jpg"
+  backdropImage: "campaign_backdrop.jpg",
 };
 
 export { playerMock };

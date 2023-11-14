@@ -6,7 +6,7 @@ import UserMenu from "./UserMenu";
 import { useTranslation } from "react-i18next";
 
 interface NavbarProps {
-  links: { to: string; label: string }[];
+  links: { to: string; label: string; role: string }[];
 }
 
 const Navbar: React.FC<NavbarProps> = ({ links }) => {
@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => {
       </button>
       <ul>
         {links.map((link) => (
-          <li key={link.to}>
+          <li key={link.to} role={link.role}>
             <Link to={link.to}>{t(link.label)}</Link>
           </li>
         ))}

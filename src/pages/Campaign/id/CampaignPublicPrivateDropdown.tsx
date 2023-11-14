@@ -3,9 +3,11 @@ import React, { useEffect, useRef } from "react";
 interface CampaignPublicPrivateDropdownProps {
     publicSelected: boolean;
     setPublicSelected: React.Dispatch<React.SetStateAction<boolean>>;
+    hideSelection: boolean;
+    handleHide: (e: React.MouseEvent) => void;
 }
 
-export default function CampaignPublicPrivateDropdown({ publicSelected, setPublicSelected }: CampaignPublicPrivateDropdownProps) {
+export default function CampaignPublicPrivateDropdown({ publicSelected, setPublicSelected, handleHide, hideSelection }: CampaignPublicPrivateDropdownProps) {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -24,10 +26,13 @@ export default function CampaignPublicPrivateDropdown({ publicSelected, setPubli
     return (
         <div className="public-private-container">
             <div className="public-private-selection cursor-pointer" onClick={() => setIsMenuOpen(prev => !prev)}>
-                <strong>
-                    {publicSelected ? "Public content" : "Private content"}
-                </strong>
-                <img src="/assets/arrow.svg" />
+                <div>
+                    <strong>
+                        {publicSelected ? "Public content" : "Private content"}
+                    </strong>
+                    <img src="/assets/arrow.svg" />
+                </div>
+                <p onClick={handleHide}>{hideSelection ? "show" : "hide"}</p>
             </div>
             {
                 isMenuOpen && (

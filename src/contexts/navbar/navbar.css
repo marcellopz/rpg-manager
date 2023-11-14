@@ -139,3 +139,30 @@ nav ul li {
 .language-menu {
   text-transform: uppercase
 }
+
+@media only screen and (max-width: 800px) {
+  nav {
+    font-size: 12px;
+  }
+
+  nav #nav-btn-black {
+    padding: 0 10px;
+  }
+
+  nav li[role="home"] {
+    display: none
+  }
+
+  nav li[role="calculator"] {
+    display: none;
+  }
+
+  nav ul {
+    gap: 20px;
+  }
+
+  nav #language-toggle {
+    display: none;
+  }
+  
+}

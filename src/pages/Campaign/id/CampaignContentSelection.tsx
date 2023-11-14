@@ -22,6 +22,7 @@ export default function CampaignContentSelection({
   publicSelected,
   setPublicSelected
 }: CampaignContentSelectionProps) {
+  const [hideSelection, setHideSelection] = React.useState<boolean>(false);
   const [categoryWidth, setCategoryWidth] = React.useState<number>(200);
   const [tabWidth, setTabWidth] = React.useState<number>(200);
 
@@ -33,10 +34,20 @@ export default function CampaignContentSelection({
     setTabWidth(data.size.width);
   };
 
+  const handleHide = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setHideSelection(prev => !prev);
+  }
+
   return (
     <div className="content-container">
-      <CampaignPublicPrivateDropdown publicSelected={publicSelected} setPublicSelected={setPublicSelected} />
-      <div className="content-selection">
+      <CampaignPublicPrivateDropdown
+        hideSelection={hideSelection}
+        handleHide={handleHide}
+        publicSelected={publicSelected}
+        setPublicSelected={setPublicSelected}
+      />
+      <div className="content-selection" style={hideSelection ? { display: 'none', height: 0, minHeight: 0 } : {}}>
         <Resizable width={categoryWidth} axis="x" minConstraints={[80, 80]} maxConstraints={[400, 400]} onResize={handleCategoryResize}>
           <div style={{ width: categoryWidth }} className="category-selection item-list">
             {selectedData.categories.map((cat) => (

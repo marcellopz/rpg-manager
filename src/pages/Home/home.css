@@ -74,6 +74,7 @@
 #section-two {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 #habilities-img {
@@ -113,4 +114,24 @@
   text-transform: uppercase;
   font-size: 1rem;
   font-weight: 700;
+}
+
+
+@media only screen and (max-width: 800px) {
+  #child-one {
+    max-width: 100%;
+  }
+
+  #child-two {
+    opacity: 0.3;
+  }
+
+  #section-one {
+    height: 300px;
+    margin: 40px;
+  }
+
+  #knife-and-text {
+    margin-bottom: 50px;
+  }
 }
