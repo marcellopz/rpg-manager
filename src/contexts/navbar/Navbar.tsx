@@ -5,8 +5,14 @@ import LanguageSwitch from "./LanguageSwitch";
 import UserMenu from "./UserMenu";
 import { useTranslation } from "react-i18next";
 
-interface NavbarProps {
-  links: { to: string; label: string; role: string }[];
+export interface NavbarLink {
+  to: string;
+  label: string;
+  role: string;
+}
+
+export interface NavbarProps {
+  links: NavbarLink[];
 }
 
 const Navbar: React.FC<NavbarProps> = ({ links }) => {

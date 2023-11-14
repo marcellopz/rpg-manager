@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import Navbar from "./navbar/Navbar";
+import Navbar, { NavbarLink } from "./navbar/Navbar";
 import Footer from "./navbar/Footer";
 import { useLocation } from "react-router-dom";
 
@@ -24,7 +24,7 @@ export const useNavbarContext = () => {
 
 interface NavbarContextProviderProps {
   children: React.ReactNode;
-  links: { to: string; label: string }[];
+  links: NavbarLink[];
   // Define any properties you want to pass down to children components here
 }
 
