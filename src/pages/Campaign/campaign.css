@@ -166,7 +166,7 @@
   padding: 10px;
   border-bottom: 1px solid rgb(170, 170, 170);
   border-right: 1px solid rgb(170, 170, 170);
-  background-color: rgba(0, 0, 0, 0.20);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .public-private-selection div {
@@ -235,15 +235,16 @@
 
 .markdown-editor div[role=textbox] * {
   margin-bottom: 20px;
+  max-width: 100%;
 }
 
 .markdown-editor p {
   font-size: 16px;
 }
 
-  .public-private-selection p {
-    display: none;
-  }
+.public-private-selection p {
+  display: none;
+}
 
 @media only screen and (max-width: 800px) {
   .campaign__backdrop {
@@ -251,6 +252,10 @@
     justify-content: center;
     align-items: center;
     gap: 20px
+  }
+
+  .campaign__backdrop > div {
+    margin: 0;
   }
 
   .campaign__cards a {
