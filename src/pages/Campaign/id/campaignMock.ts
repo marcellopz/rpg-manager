@@ -1,29 +1,35 @@
-export interface CampaignType {
-  players: PlayerType[];
-  config: any;
-  categories: CategoryType[];
-  backdropImage: string;
-}
+import { CampaignType, InventoryContent, PlayerType } from "../campaignTypes";
 
-export interface CategoryType {
-  id: number;
-  name: string;
-  tabs: TabType[];
-}
-
-export interface PlayerType {
-  id: string;
-  name: string;
-  avatar: string;
-  categories: CategoryType[];
-}
-
-export interface TabType {
-  id: number;
-  name: string;
-  type: string;
-  content: string;
-}
+const inventoryMock: InventoryContent = {
+  playerName: "JohnDoe",
+  playerAvatar: "avatarURL",
+  inventory: [
+    {
+      numberOfItems: 3,
+      item: {
+        weight: 1,
+        name: "Healing Potion",
+        type: "consummable",
+      },
+    },
+    {
+      numberOfItems: 2,
+      item: {
+        weight: 5,
+        name: "Magic Sword",
+        type: "magic",
+      },
+    },
+    {
+      numberOfItems: 1,
+      item: {
+        weight: 10,
+        name: "Iron Shield",
+        type: "normal",
+      },
+    },
+  ],
+};
 
 const playerMock: PlayerType = {
   id: "player123",
@@ -543,43 +549,43 @@ O contratado itã devolver ao contratante Akmon, o Martelo do Propósito, sem da
           id: 0,
           name: "Boris",
           type: "inventory",
-          content: "List of items in Boris inventory.",
+          content: inventoryMock,
         },
         {
           id: 1,
           name: "Polaco",
           type: "inventory",
-          content: "List of items in Polaco inventory.",
+          content: inventoryMock,
         },
         {
           id: 2,
           name: "Lupus",
           type: "inventory",
-          content: "List of items in Lupus inventory.",
+          content: inventoryMock,
         },
         {
           id: 3,
           name: "Gregory",
           type: "inventory",
-          content: "List of items in Gregory inventory.",
+          content: inventoryMock,
         },
         {
           id: 4,
           name: "Celim",
           type: "inventory",
-          content: "List of items in Celim inventory.",
+          content: inventoryMock,
         },
         {
           id: 5,
           name: "Liara",
           type: "inventory",
-          content: "List of items in Liara inventory.",
+          content: inventoryMock,
         },
         {
           id: 6,
           name: "Vutho",
           type: "inventory",
-          content: "List of items in Vutho inventory.",
+          content: inventoryMock,
         },
       ],
     },

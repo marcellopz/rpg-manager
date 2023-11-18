@@ -34,14 +34,12 @@ interface TextDetailsProps {
 
 export default function TextDetails({ content }: TextDetailsProps) {
     const mdxRef = useRef<MDXEditorMethods>(null)
-    const [markdownVal, setMarkdownVal] = useState(content)
+    const [markdownVal, setMarkdownVal] = useState<string>(content);
 
     useEffect(() => {
         setMarkdownVal(content)
         mdxRef?.current?.setMarkdown?.(content);
     }, [content])
-
-    // console.log({ markdownVal });
 
     return (
         <MDXEditor

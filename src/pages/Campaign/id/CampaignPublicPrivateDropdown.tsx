@@ -5,9 +5,16 @@ interface CampaignPublicPrivateDropdownProps {
     setPublicSelected: React.Dispatch<React.SetStateAction<boolean>>;
     hideSelection: boolean;
     handleHide: (e: React.MouseEvent) => void;
+    resetCatTab: () => void;
 }
 
-export default function CampaignPublicPrivateDropdown({ publicSelected, setPublicSelected, handleHide, hideSelection }: CampaignPublicPrivateDropdownProps) {
+export default function CampaignPublicPrivateDropdown({
+    publicSelected,
+    setPublicSelected,
+    handleHide,
+    hideSelection,
+    resetCatTab
+}: CampaignPublicPrivateDropdownProps) {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -23,12 +30,18 @@ export default function CampaignPublicPrivateDropdown({ publicSelected, setPubli
         };
     }, []);
 
+    const handleSelection = (pub: boolean) => {
+        setPublicSelected(pub);
+        setIsMenuOpen(false);
+        resetCatTab();
+    }
+
     return (
         <div className="public-private-container">
             <div className="public-private-selection cursor-pointer" onClick={() => setIsMenuOpen(prev => !prev)}>
                 <div>
                     <strong>
-                        {publicSelected ? "Public content" : "Private content"}
+                        {publicSelected ? "Public" : "Private"}
                     </strong>
                     <img src="/assets/arrow.svg" />
                 </div>
@@ -37,8 +50,8 @@ export default function CampaignPublicPrivateDropdown({ publicSelected, setPubli
             {
                 isMenuOpen && (
                     <div className="public-private-selection-dropdown" ref={menuRef}>
-                        <div onClick={() => { setPublicSelected(true); setIsMenuOpen(false) }}>Public</div>
-                        <div onClick={() => { setPublicSelected(false); setIsMenuOpen(false) }}>Private</div>
+                        <div onClick={() => { handleSelection(true) }}>Public</div>
+                        <div onClick={() => { handleSelection(false) }}>Private</div>
                     </div>
                 )
             }

@@ -1,24 +1,24 @@
-export interface CampaignType {
+interface CampaignType {
   players: PlayerType[];
   config: any;
   categories: CategoryType[];
   backdropImage: string;
 }
 
-export interface CategoryType {
+interface CategoryType {
   id: number;
   name: string;
   tabs: TabType[];
 }
 
-export interface PlayerType {
+interface PlayerType {
   id: string;
   name: string;
   avatar: string;
   categories: CategoryType[];
 }
 
-export interface TabType {
+interface TabType {
   id: number;
   name: string;
   type: string;

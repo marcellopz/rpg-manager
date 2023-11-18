@@ -1,5 +1,5 @@
 import React from "react";
-import { CampaignType, PlayerType } from "./campaignMock";
+import { CampaignType, PlayerType } from "../campaignTypes";
 import CampaignPublicPrivateDropdown from "./CampaignPublicPrivateDropdown";
 import { Resizable, ResizeCallbackData } from 'react-resizable';
 
@@ -11,6 +11,7 @@ interface CampaignContentSelectionProps {
   selectedData: CampaignType | PlayerType;
   publicSelected: boolean;
   setPublicSelected: React.Dispatch<React.SetStateAction<boolean>>;
+  resetCatTab: () => void;
 }
 
 export default function CampaignContentSelection({
@@ -20,35 +21,44 @@ export default function CampaignContentSelection({
   setTabId,
   selectedData,
   publicSelected,
-  setPublicSelected
+  setPublicSelected,
+  resetCatTab
 }: CampaignContentSelectionProps) {
   const [hideSelection, setHideSelection] = React.useState<boolean>(false);
   const [categoryWidth, setCategoryWidth] = React.useState<number>(200);
   const [tabWidth, setTabWidth] = React.useState<number>(200);
 
-  const handleCategoryResize = (_e: React.SyntheticEvent<Element, Event>, data: ResizeCallbackData) => {
+  const handleCategoryResize = (e: React.SyntheticEvent<Element, Event>, data: ResizeCallbackData) => {
+    e.stopPropagation();
     setCategoryWidth(data.size.width);
   };
 
-  const handleTabResize = (_e: React.SyntheticEvent<Element, Event>, data: ResizeCallbackData) => {
+  const handleTabResize = (e: React.SyntheticEvent<Element, Event>, data: ResizeCallbackData) => {
+    e.stopPropagation();
     setTabWidth(data.size.width);
   };
 
   const handleHide = (e: React.MouseEvent) => {
     e.stopPropagation();
     setHideSelection(prev => !prev);
-  }
+  };
 
   return (
-    <div className="content-container">
+    <div style={{ width: categoryWidth + tabWidth }} className="content-container">
       <CampaignPublicPrivateDropdown
         hideSelection={hideSelection}
         handleHide={handleHide}
         publicSelected={publicSelected}
         setPublicSelected={setPublicSelected}
+        resetCatTab={resetCatTab}
       />
       <div className="content-selection" style={hideSelection ? { display: 'none', height: 0, minHeight: 0 } : {}}>
-        <Resizable width={categoryWidth} axis="x" minConstraints={[80, 80]} maxConstraints={[400, 400]} onResize={handleCategoryResize}>
+        <Resizable
+          width={categoryWidth}
+          axis="x"
+          minConstraints={[40, 40]}
+          maxConstraints={[400, 400]} onResize={handleCategoryResize}
+        >
           <div style={{ width: categoryWidth }} className="category-selection item-list">
             {selectedData.categories.map((cat) => (
               <div
@@ -56,19 +66,19 @@ export default function CampaignContentSelection({
                 onClick={() => handleCategoryChange(cat.id)}
                 key={cat.id}
               >
-                <div>{cat.name}</div>
+                {cat.name}
               </div>
             ))}
           </div>
         </Resizable>
-        <Resizable width={tabWidth} axis="x" minConstraints={[80, 80]} maxConstraints={[400, 400]} onResize={handleTabResize}>
+        <Resizable width={tabWidth} axis="x" minConstraints={[40, 40]} maxConstraints={[400, 400]} onResize={handleTabResize}>
           <div style={{ width: tabWidth }} className="tab-selection item-list">
             {selectedData.categories.find((cat) => cat.id === categoryId)?.tabs.map((tab) => (
               <div
                 className={tabId === tab.id ? "tab-selected" : ""}
                 onClick={() => setTabId(tab.id)}
                 key={tab.id}>
-                <div>{tab.name}</div>
+                {tab.name}
               </div>
             ))}
           </div>

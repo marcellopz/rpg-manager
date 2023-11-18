@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
-import campaignData, { CampaignType, PlayerType, playerMock as playerData } from "./campaignMock";
+import campaignData, { playerMock as playerData } from "./campaignMock";
+import { CampaignType, PlayerType } from "../campaignTypes";
 import { useState, useEffect } from "react";
 import CampaignDetailsContent from "./CampaignDetailsContent";
 import CampaignContentSelection from "./CampaignContentSelection";
 import { useTranslation } from "react-i18next";
 
-export const getTabContent = (category: number, tabId: number, data: CampaignType | PlayerType) => {
-  return data.categories[category].tabs[tabId].content;
+export const getTab = (category: number, tabId: number, data: CampaignType | PlayerType) => {
+  return data.categories[category].tabs[tabId];
 }
 
 export default function CampaignDetails() {
@@ -30,6 +31,11 @@ export default function CampaignDetails() {
     setTabId(0);
   };
 
+  const resetCatTab = () => {
+    setCategoryId(0);
+    setTabId(0);
+  }
+
   return (
     <main className="campaign__main h-full">
       <section className="campaign__header header_inset">
@@ -52,12 +58,13 @@ export default function CampaignDetails() {
           // playerData={playerData}
           publicSelected={publicSelected}
           setPublicSelected={setPublicSelected}
+          resetCatTab={resetCatTab}
         />
         <CampaignDetailsContent
-          content={
+          tab={
             publicSelected ?
-              getTabContent(categoryId, tabId, campaignData) :
-              getTabContent(categoryId, tabId, playerData)
+              getTab(categoryId, tabId, campaignData) :
+              getTab(categoryId, tabId, playerData)
           }
         />
       </section>
