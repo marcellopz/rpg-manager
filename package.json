@@ -11,12 +11,14 @@
   },
   "dependencies": {
     "@mdxeditor/editor": "^1.8.1",
+    "firebase": "^10.6.0",
     "i18next": "^23.7.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-firebase-hooks": "^5.1.1",
     "react-i18next": "^13.4.1",
     "react-resizable": "^3.0.5",
-    "react-router-dom": "^6.17.0"
+    "react-router-dom": "^6.20.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

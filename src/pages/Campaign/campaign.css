@@ -30,17 +30,18 @@
 }
 
 .campaign__card {
-  width: 250px;
-  height: 300px;
+  display: flex;
+  height: 200px;
   border-radius: 10px;
-  background-color: #fffff8ab;
+  background-color: #f0f0f0;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgb(163, 164, 123);
+  border: 2px solid #606060;
 }
 
 .campaign__card:hover {
   transition: 500ms;
+  background-color: #cfcfcf;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   cursor: pointer;
 }
@@ -52,19 +53,22 @@
 
 .campaign__cards {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  flex-direction: column;
 }
 
 .card-body {
-  width: 100%;
+  margin: 15px 10px;
+  flex: 1;
+  overflow: hidden;
 }
 
 .card-image {
-  height: 150px; 
-  width: 100%; 
+  width: 350px; 
   background-size: cover; 
   background-position: center;
+  margin: 10px;
+  border-radius: 10px;
+  border: 3px solid black;
 }
 
 .card-body > h4,
@@ -74,12 +78,11 @@
 
 .card-title {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 500;
 }
 
 .card-text {
-  text-align: center;
   padding: 10px;
   font-size: 1rem;
   font-weight: 400;

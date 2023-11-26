@@ -1,45 +1,128 @@
-import React, { createContext, useState } from "react";
-
-interface User {
-  id: string;
-  username: string;
-  email: string;
-  img: string;
-}
+import {
+  GoogleAuthProvider,
+  signOut,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  User,
+  updateProfile,
+} from "firebase/auth";
+import React, { createContext, useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import auth from "./firebase/firebase";
+import NameDialog from "./name-dialog/NameDialog";
+import { checkIsAdmin } from "./firebase/database";
 
 interface AuthContextType {
-  isAuthenticated: boolean;
-  user: User | null;
-  login: () => void;
-  logout: () => void;
+  authUser: User | null;
+  signOutRpg: () => JSX.Element;
+  signUpEmailPwd: (email: string, password: string) => void;
+  signInEmailPwd: (email: string, password: string) => void;
+  signInGoogle: () => void;
+  handleUpdateProfile: (name: string, photoURL: string) => void;
+  handleUserEditProfile: () => void;
 }
 
 interface AuthProviderProps {
   children: React.ReactNode;
 }
 
+const provider = new GoogleAuthProvider();
+
 export const AuthContext = createContext<AuthContextType>({
-  isAuthenticated: false,
-  user: null,
-  login: () => {},
-  logout: () => {},
+  authUser: null,
+  signOutRpg: () => <Navigate to="/" />,
+  signUpEmailPwd: () => {},
+  signInEmailPwd: () => {},
+  signInGoogle: () => {},
+  handleUpdateProfile: () => {},
+  handleUserEditProfile: () => {},
 });
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, _] = useState<User | null>(null);
+  const [authUser, setAuthUser] = useState<User | null>(null);
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const [userEditingProfile, setUserEditingProfile] = useState<boolean>(false);
 
-  const login = () => {
-    setIsAuthenticated(true);
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      setAuthUser(user);
+    });
+
+    return () => {
+      listen();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (authUser && isAdmin === null) {
+      checkIsAdmin(authUser.uid).then((res) => {
+        setIsAdmin(res);
+      });
+    }
+  }, [authUser]);
+
+  const signInGoogle = async () => {
+    signInWithPopup(auth, provider);
   };
 
-  const logout = () => {
-    setIsAuthenticated(false);
+  const signInEmailPwd = async (email: string, password: string) => {
+    signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const signUpEmailPwd = (email: string, password: string) => {
+    createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const signOutRpg = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("signed out");
+        setAuthUser(null);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return <Navigate to="/" />;
+  };
+
+  const handleUpdateProfile = (name: string, photoURL: string) => {
+    if (!authUser) return;
+    updateProfile(authUser, {
+      displayName: name,
+      photoURL: photoURL === "" ? undefined : photoURL,
+    }).then(() => {
+      window.location.reload();
+    });
+  };
+
+  const handleUserEditProfile = () => {
+    setUserEditingProfile(true);
+  };
+
+  const handleUserEditProfileClose = () => {
+    setUserEditingProfile(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, user }}>
+    <AuthContext.Provider
+      value={{
+        authUser,
+        signOutRpg,
+        signUpEmailPwd,
+        signInEmailPwd,
+        signInGoogle,
+        handleUpdateProfile,
+        handleUserEditProfile,
+      }}
+    >
       {children}
+      <NameDialog
+        open={(authUser && !authUser.displayName)!! || userEditingProfile}
+        onSave={handleUpdateProfile}
+        onClose={handleUserEditProfileClose}
+      />
     </AuthContext.Provider>
   );
 };

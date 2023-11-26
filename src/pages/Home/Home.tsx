@@ -1,6 +1,3 @@
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/authContext";
-import { useNavbarContext } from "../../contexts/navbarContext";
 import { useTranslation } from "react-i18next";
 import "./home.css";
 
@@ -48,31 +45,34 @@ const Item = ({ name, img }: ItemProps) => {
         className="element-bar"
         alt="element-bar"
       />
-      <img className="medium" src={img} alt="icone" />
+      <img
+        className="medium"
+        src={img}
+        alt="icone"
+      />
     </div>
   );
 };
 
 const Home = () => {
   const { t } = useTranslation();
-  const { isAuthenticated } = useContext(AuthContext);
-  const n = useNavbarContext();
-  console.log(n, isAuthenticated);
 
   return (
     <main>
       <section id="section-one">
         <div id="child-one">
           <div id="knife-and-text">
-            <img src="/assets/faca.svg" id="knife" alt="faca" />
+            <img
+              src="/assets/faca.svg"
+              id="knife"
+              alt="faca"
+            />
             <div id="h3-and-h1">
-              <h3>{t('APP_NAME')}</h3>
-              <h1>{t('HOME_START_NOW')}</h1>
+              <h3>{t("APP_NAME")}</h3>
+              <h1>{t("HOME_START_NOW")}</h1>
             </div>
           </div>
-          <p>
-            {t('HOME_DESCRIPTION')}
-          </p>
+          <p>{t("HOME_DESCRIPTION")}</p>
           {/* <div id="input-container">
             <input placeholder="Username" />
             <input placeholder="Email" />
@@ -80,12 +80,19 @@ const Home = () => {
           </div> */}
         </div>
         <div id="child-two">
-          <img src="/assets/castelo.png" id="castle" alt="castelo" />
+          <img
+            src="/assets/castelo.png"
+            id="castle"
+            alt="castelo"
+          />
         </div>
       </section>
       <section id="section-two">
         {itemsUnderCastle.map((i) => (
-          <Item key={i.id} {...i} />
+          <Item
+            key={i.id}
+            {...i}
+          />
         ))}
       </section>
     </main>

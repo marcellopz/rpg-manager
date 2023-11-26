@@ -1,0 +1,45 @@
+.dialog-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.dialog {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.dialog h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+.dialog form {
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog label {
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog label input {
+    font-size: large;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.error {
+    color: red;
+    /* font-size: small; */
+}

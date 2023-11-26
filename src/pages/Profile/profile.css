@@ -1,0 +1,28 @@
+.profile-background {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 50px;
+    width: 100vw;
+}
+
+.profile {
+    margin: 20px;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+}
+
+.profile > div {
+    padding: 0 20px;
+}
+
+.profile-img-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.profile-img-container > img {
+    width: 200px;
+    border-radius: 10px;
+    border: 5px solid black;
+}

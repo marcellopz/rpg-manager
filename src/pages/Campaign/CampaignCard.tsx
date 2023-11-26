@@ -17,13 +17,19 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
   return (
     <Link to={`/campaign/${id}/${title}`}>
       <div className="campaign__card">
-        <div className="card-image" style={{ backgroundImage: `url(${imageSrc})` }} />
+        <div
+          className="card-image"
+          style={{ backgroundImage: `url(${imageSrc})` }}
+        />
         <div className="card-body">
           <h4 className="card-title">{title}</h4>
-          <h5 className="card-text">
-            {description.length > 100
-              ? description.slice(0, 100) + "..."
-              : description}
+          <h5
+            className="card-text"
+            style={{
+              textAlign: description.length > 50 ? "justify" : "center",
+            }}
+          >
+            {description}
           </h5>
         </div>
       </div>
