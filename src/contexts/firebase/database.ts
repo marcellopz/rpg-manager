@@ -1,9 +1,17 @@
 import {
   get,
   child,
+  push,
+  set,
   // set
 } from "firebase/database";
-import { dbRef } from "./firebase";
+import auth, { dbRef } from "./firebase";
+
+import {
+  CampaignType,
+  CategoryType,
+  TabType,
+} from "../../pages/Campaign/campaignTypes";
 
 export async function checkIsAdmin(userId: string) {
   return get(child(dbRef, `users/${userId}/isAdmin`))
@@ -18,3 +26,142 @@ export async function checkIsAdmin(userId: string) {
       console.error(error);
     });
 }
+
+export const addNewCampaign = async (campaign: Partial<CampaignType>) => {
+  return push(child(dbRef, "campaigns"), campaign).then((ref) => {
+    push(child(dbRef, `users/${campaign.creatorId}/campaigns`), ref.key);
+  });
+};
+
+export const getCampaigns = async () => {
+  const campaigns = await get(
+    child(dbRef, `users/${auth.currentUser?.uid}/campaigns`)
+  );
+  if (campaigns.exists()) {
+    return campaigns.val();
+  } else {
+    return null;
+  }
+};
+
+export const getCampaign = async (campaignId: string) => {
+  return Promise.all([
+    get(child(dbRef, `campaigns/${campaignId}/backdropImage`)),
+    get(child(dbRef, `campaigns/${campaignId}/creatorId`)),
+    get(child(dbRef, `campaigns/${campaignId}/description`)),
+    get(child(dbRef, `campaigns/${campaignId}/name`)),
+    get(child(dbRef, `campaigns/${campaignId}/categories`)),
+  ]).then((values) => {
+    const campaign = {
+      backdropImage: values[0].val(),
+      creatorId: values[1].val(),
+      description: values[2].val(),
+      name: values[3].val(),
+      categories: values[4].val(),
+    } as CampaignType;
+    return campaign;
+  });
+};
+
+export const invitePlayer = async (campaignId: string, email: string) => {
+  push(child(dbRef, `campaign-invites/${campaignId}`), email);
+};
+
+export const getPlayerCampaign = async (
+  campaignId: string,
+  playerId: string
+) => {
+  const player = await get(
+    child(dbRef, `campaigns/${campaignId}/players/${playerId}`)
+  );
+  if (player.exists()) {
+    return player.val();
+  } else {
+    return null;
+  }
+};
+
+export const addCategoryCampaign = async (
+  campaignId: string,
+  category: CategoryType,
+  playerId: string
+) => {
+  if (playerId === "") {
+    // add to campaign
+    push(child(dbRef, `campaigns/${campaignId}/categories`), category);
+    return;
+  }
+  push(
+    child(dbRef, `campaigns/${campaignId}/players/${playerId}/categories`),
+    category
+  ); // add to player
+};
+
+export const addTabCampaign = async (
+  campaignId: string,
+  tab: TabType,
+  playerId: string,
+  categoryId: string
+) => {
+  if (playerId === "") {
+    // add to campaign
+    push(
+      child(dbRef, `campaigns/${campaignId}/categories/${categoryId}/tabs`),
+      tab
+    );
+    return;
+  }
+  // add to player
+  push(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/players/${playerId}/categories/${categoryId}/tabs`
+    ),
+    tab
+  );
+};
+
+export const deleteTab = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  playerId: string
+) => {
+  if (playerId === "") {
+    set(
+      child(
+        dbRef,
+        `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}`
+      ),
+      null
+    );
+    return;
+  }
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/players/${playerId}/categories/${categoryId}/tabs/${tabId}`
+    ),
+    null
+  );
+  return;
+};
+
+export const deleteCategory = async (
+  campaignId: string,
+  categoryId: string,
+  playerId: string
+) => {
+  if (playerId === "") {
+    set(child(dbRef, `campaigns/${campaignId}/categories/${categoryId}`), null);
+    return;
+  }
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/players/${playerId}/categories/${categoryId}`
+    ),
+    null
+  );
+  return;
+};

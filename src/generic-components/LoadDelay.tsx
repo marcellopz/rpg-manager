@@ -3,10 +3,10 @@ import React from "react";
 type Props = {
   children: React.ReactNode;
   timeout: number;
-  overwrite?: boolean;
+  className?: string;
 };
 
-export default function LoadDelay({ timeout, overwrite, children }: Props) {
+export default function LoadDelay({ timeout, children, className }: Props) {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -15,8 +15,8 @@ export default function LoadDelay({ timeout, overwrite, children }: Props) {
     }, timeout);
   }, []);
 
-  if (loading && !overwrite) {
-    return <div className="loader"></div>;
+  if (loading) {
+    return <div className={`loader ${className}`}></div>;
   }
 
   return children as JSX.Element;

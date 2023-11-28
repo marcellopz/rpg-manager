@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./nameDialog.css";
+// import "./nameDialog.css";
 
 interface NameDialogProps {
   open: boolean;

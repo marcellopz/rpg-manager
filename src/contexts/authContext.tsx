@@ -12,7 +12,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import auth from "./firebase/firebase";
 import NameDialog from "./name-dialog/NameDialog";
-import { checkIsAdmin } from "./firebase/database";
+import { checkIsAdmin, getCampaigns } from "./firebase/database";
 
 interface AuthContextType {
   authUser: User | null;
@@ -22,6 +22,8 @@ interface AuthContextType {
   signInGoogle: () => void;
   handleUpdateProfile: (name: string, photoURL: string) => void;
   handleUserEditProfile: () => void;
+  campaignIds: string[];
+  isAdmin: boolean | null | undefined;
 }
 
 interface AuthProviderProps {
@@ -38,12 +40,16 @@ export const AuthContext = createContext<AuthContextType>({
   signInGoogle: () => {},
   handleUpdateProfile: () => {},
   handleUserEditProfile: () => {},
+  campaignIds: [],
+  isAdmin: false,
 });
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [authUser, setAuthUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [userEditingProfile, setUserEditingProfile] = useState<boolean>(false);
+  const [campaignIds, setCampaignIds] = useState<string[]>([]);
+  const [invites, setInvites] = useState<any[]>([]);
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
@@ -56,10 +62,17 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   useEffect(() => {
-    if (authUser && isAdmin === null) {
+    if (authUser) {
       checkIsAdmin(authUser.uid).then((res) => {
         setIsAdmin(res);
       });
+      getCampaigns().then((res) => {
+        if (res === null) return;
+        setCampaignIds(Object.values(res));
+      });
+      // getInvites(authUser.email).then((res) => {
+      //   console.log(res);
+      // }
     }
   }, [authUser]);
 
@@ -115,6 +128,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         signInGoogle,
         handleUpdateProfile,
         handleUserEditProfile,
+        campaignIds,
+        isAdmin,
       }}
     >
       {children}

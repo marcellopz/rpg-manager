@@ -1,14 +1,31 @@
 import React from "react";
 import { CampaignType, PlayerType } from "../campaignTypes";
 import CampaignPublicPrivateDropdown from "./CampaignPublicPrivateDropdown";
-import { Resizable, ResizeCallbackData } from 'react-resizable';
+import { Resizable, ResizeCallbackData } from "react-resizable";
+import AddCategoryDialog from "../dialogs/AddCategoryDialog";
+import AddTabDialog from "../dialogs/AddTabDialog";
+import ConfirmDeleteDialog from "../dialogs/ConfirmDeleteDialog";
+
+interface deleteCategoryTabDialogProps {
+  open: boolean;
+  publicSelected: boolean;
+  category: { id: string; name: string };
+  tab: { id: string; name: string } | null;
+}
+
+const deleteCategoryInitialState: deleteCategoryTabDialogProps = {
+  open: false,
+  publicSelected: true,
+  category: { id: "", name: "" },
+  tab: null,
+};
 
 interface CampaignContentSelectionProps {
-  categoryId: number;
-  handleCategoryChange: (category: number) => void;
-  tabId: number;
-  setTabId: React.Dispatch<React.SetStateAction<number>>;
-  selectedData: CampaignType | PlayerType;
+  categoryId: string;
+  handleCategoryChange: (category: string) => void;
+  tabId: string;
+  setTabId: React.Dispatch<React.SetStateAction<string>>;
+  selectedData: CampaignType | PlayerType | null;
   publicSelected: boolean;
   setPublicSelected: React.Dispatch<React.SetStateAction<boolean>>;
   resetCatTab: () => void;
@@ -22,70 +39,194 @@ export default function CampaignContentSelection({
   selectedData,
   publicSelected,
   setPublicSelected,
-  resetCatTab
+  resetCatTab,
 }: CampaignContentSelectionProps) {
   const [hideSelection, setHideSelection] = React.useState<boolean>(false);
   const [categoryWidth, setCategoryWidth] = React.useState<number>(200);
   const [tabWidth, setTabWidth] = React.useState<number>(200);
+  const [addCategoryDialogOpen, setAddCategoryDialogOpen] =
+    React.useState<boolean>(false);
+  const [addTabDialogOpen, setAddTabDialogOpen] =
+    React.useState<boolean>(false);
+  const [deleteDialog, setDeleteDialog] =
+    React.useState<deleteCategoryTabDialogProps>(deleteCategoryInitialState);
 
-  const handleCategoryResize = (e: React.SyntheticEvent<Element, Event>, data: ResizeCallbackData) => {
+  const handleCategoryResize = (
+    e: React.SyntheticEvent<Element, Event>,
+    data: ResizeCallbackData
+  ) => {
     e.stopPropagation();
     setCategoryWidth(data.size.width);
   };
 
-  const handleTabResize = (e: React.SyntheticEvent<Element, Event>, data: ResizeCallbackData) => {
+  const handleTabResize = (
+    e: React.SyntheticEvent<Element, Event>,
+    data: ResizeCallbackData
+  ) => {
     e.stopPropagation();
     setTabWidth(data.size.width);
   };
 
   const handleHide = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setHideSelection(prev => !prev);
+    setHideSelection((prev) => !prev);
   };
 
+  const handleDeleteCategory = (categoryId: string) => {
+    if (!selectedData?.categories) return;
+    setDeleteDialog({
+      open: true,
+      publicSelected: publicSelected,
+      category: {
+        id: categoryId,
+        name: selectedData.categories[categoryId].name,
+      },
+      tab: null,
+    });
+  };
+
+  const handleDeleteTab = (categoryId: string, tabId: string) => {
+    if (!selectedData?.categories) return;
+    const selectedCategory = selectedData.categories[categoryId];
+    const selectedTab = selectedCategory?.tabs?.[tabId];
+
+    if (!selectedTab?.name) return;
+
+    setDeleteDialog({
+      open: true,
+      publicSelected: publicSelected,
+      category: {
+        id: categoryId,
+        name: selectedCategory.name,
+      },
+      tab: {
+        id: tabId,
+        name: selectedTab.name,
+      },
+    });
+  };
+
+  if (!selectedData) return null;
+
+  const categories = selectedData.categories;
+
+  const tabs =
+    categories && categories[categoryId] && categories[categoryId].tabs;
+
   return (
-    <div style={{ width: categoryWidth + tabWidth }} className="content-container">
-      <CampaignPublicPrivateDropdown
-        hideSelection={hideSelection}
-        handleHide={handleHide}
-        publicSelected={publicSelected}
-        setPublicSelected={setPublicSelected}
-        resetCatTab={resetCatTab}
-      />
-      <div className="content-selection" style={hideSelection ? { display: 'none', height: 0, minHeight: 0 } : {}}>
-        <Resizable
-          width={categoryWidth}
-          axis="x"
-          minConstraints={[40, 40]}
-          maxConstraints={[400, 400]} onResize={handleCategoryResize}
+    <>
+      <div
+        style={{ width: categoryWidth + tabWidth }}
+        className="content-container"
+      >
+        <CampaignPublicPrivateDropdown
+          hideSelection={hideSelection}
+          handleHide={handleHide}
+          publicSelected={publicSelected}
+          setPublicSelected={setPublicSelected}
+          resetCatTab={resetCatTab}
+        />
+        <div
+          className="content-selection"
+          style={
+            hideSelection ? { display: "none", height: 0, minHeight: 0 } : {}
+          }
         >
-          <div style={{ width: categoryWidth }} className="category-selection item-list">
-            {selectedData.categories.map((cat) => (
+          <Resizable
+            width={categoryWidth}
+            axis="x"
+            minConstraints={[40, 40]}
+            maxConstraints={[400, 400]}
+            onResize={handleCategoryResize}
+          >
+            <div
+              style={{ width: categoryWidth }}
+              className="category-selection item-list"
+            >
+              {categories &&
+                Object.entries(categories).map(([cat_id, cat]) => (
+                  <div
+                    className={categoryId === cat_id ? "tab-selected" : ""}
+                    onClick={() => handleCategoryChange(cat_id)}
+                    key={cat_id}
+                  >
+                    <p>{cat.name}</p>
+                    <p
+                      onClick={() => handleDeleteCategory(cat_id)}
+                      className="smaller-button"
+                    >
+                      🗑️
+                    </p>
+                  </div>
+                ))}
               <div
-                className={categoryId === cat.id ? "tab-selected" : ""}
-                onClick={() => handleCategoryChange(cat.id)}
-                key={cat.id}
+                className="create-new"
+                onClick={() => setAddCategoryDialogOpen(true)}
               >
-                {cat.name}
+                + Add category
               </div>
-            ))}
-          </div>
-        </Resizable>
-        <Resizable width={tabWidth} axis="x" minConstraints={[40, 40]} maxConstraints={[400, 400]} onResize={handleTabResize}>
-          <div style={{ width: tabWidth }} className="tab-selection item-list">
-            {selectedData.categories.find((cat) => cat.id === categoryId)?.tabs.map((tab) => (
-              <div
-                className={tabId === tab.id ? "tab-selected" : ""}
-                onClick={() => setTabId(tab.id)}
-                key={tab.id}>
-                {tab.name}
-              </div>
-            ))}
-          </div>
-        </Resizable>
-
+            </div>
+          </Resizable>
+          <Resizable
+            width={tabWidth}
+            axis="x"
+            minConstraints={[40, 40]}
+            maxConstraints={[400, 400]}
+            onResize={handleTabResize}
+          >
+            <div
+              style={{ width: tabWidth }}
+              className="tab-selection item-list"
+            >
+              {tabs &&
+                Object.entries(tabs).map(([tab_id, tab]) => (
+                  <div
+                    className={tabId === tab_id ? "tab-selected" : ""}
+                    onClick={() => setTabId(tab_id)}
+                    key={tab_id}
+                  >
+                    <p>{tab.name}</p>
+                    <p
+                      className="smaller-button"
+                      onClick={() => {
+                        handleDeleteTab(categoryId, tab_id);
+                      }}
+                    >
+                      🗑️
+                    </p>
+                  </div>
+                ))}
+              {categories && (
+                <div
+                  className="create-new"
+                  onClick={() => setAddTabDialogOpen(true)}
+                >
+                  + Add tab
+                </div>
+              )}
+            </div>
+          </Resizable>
+        </div>
       </div>
-    </div>
-
+      <AddCategoryDialog
+        publicSelected={publicSelected}
+        open={addCategoryDialogOpen}
+        onClose={() => {
+          setAddCategoryDialogOpen(false);
+        }}
+      />
+      <AddTabDialog
+        categoryId={categoryId}
+        publicSelected={publicSelected}
+        open={addTabDialogOpen}
+        onClose={() => setAddTabDialogOpen(false)}
+      />
+      <ConfirmDeleteDialog
+        {...deleteDialog}
+        onClose={() => {
+          setDeleteDialog(deleteCategoryInitialState);
+        }}
+      />
+    </>
   );
 }

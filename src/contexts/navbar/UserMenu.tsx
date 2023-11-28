@@ -70,6 +70,12 @@ const UserMenu: React.FC = () => {
               className="cursor-pointer"
               onClick={handleUserEditProfile}
             >
+              <li>Invitations</li>
+            </div>
+            <div
+              className="cursor-pointer"
+              onClick={handleUserEditProfile}
+            >
               <li>Edit profile</li>
             </div>
             <li className="divider-menu"></li>

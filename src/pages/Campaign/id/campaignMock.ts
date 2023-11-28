@@ -100,8 +100,12 @@ const playerMock: PlayerType = {
 };
 
 const campaignMock: CampaignType = {
-  players: [],
+  players: {},
   config: {},
+  id: "123",
+  name: "Scrimura",
+  creatorId: "creator123",
+  description: `# **Scrimura**`,
   categories: [
     {
       id: 0,

@@ -1,9 +1,61 @@
 import React from "react";
+import { invitePlayer } from "../../../contexts/firebase/database";
 
-type InvitePlayerDialogProps = {};
+type InvitePlayerDialogProps = {
+  campaignId?: string;
+  open: boolean;
+  onClose: () => void;
+};
 
-const InvitePlayerDialog: React.FC<InvitePlayerDialogProps> = ({}) => {
-  return <div>InvitePlayerDialog</div>;
+const InvitePlayerDialog: React.FC<InvitePlayerDialogProps> = ({
+  campaignId,
+  open,
+  onClose,
+}) => {
+  const [email, setEmail] = React.useState<string>("");
+  const [error, setError] = React.useState<boolean>(false);
+
+  if (!open || !campaignId) {
+    return null;
+  }
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!email) {
+      setError(true);
+      return;
+    }
+    invitePlayer(campaignId, email);
+    onClose();
+  };
+
+  return (
+    <div
+      className="dialog-background"
+      onClick={onClose}
+    >
+      <div
+        className="dialog"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        <h2>Enter the new player email</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Player email*
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {error && <p className="error">You must enter a campaign name</p>}
+          </label>
+          <button type="submit">Invite</button>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default InvitePlayerDialog;

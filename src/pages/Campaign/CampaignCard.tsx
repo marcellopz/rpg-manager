@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 interface CampaignCardProps {
-  imageSrc: string;
+  imageSrc?: string;
   title: string;
   description: string;
-  id: number;
+  id: string;
 }
 
 const CampaignCard: React.FC<CampaignCardProps> = ({
@@ -19,7 +19,11 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
       <div className="campaign__card">
         <div
           className="card-image"
-          style={{ backgroundImage: `url(${imageSrc})` }}
+          style={{
+            backgroundImage: imageSrc
+              ? `url(${imageSrc})`
+              : "url(https://i.imgur.com/vngQgSh.png)",
+          }}
         />
         <div className="card-body">
           <h4 className="card-title">{title}</h4>
