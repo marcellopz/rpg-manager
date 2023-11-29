@@ -13,7 +13,6 @@ const useCampaignDetails = (campaignId?: string) => {
   }, [campaignId]);
 
   const fetchCampaignDetails = async () => {
-    setLoading(true);
     if (!campaignId) return;
     getCampaign(campaignId).then((campaign) => {
       setCampaignDetails(campaign);

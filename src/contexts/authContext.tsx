@@ -49,7 +49,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [userEditingProfile, setUserEditingProfile] = useState<boolean>(false);
   const [campaignIds, setCampaignIds] = useState<string[]>([]);
-  const [invites, setInvites] = useState<any[]>([]);
+  // const [invites, setInvites] = useState<any[]>([]);
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {

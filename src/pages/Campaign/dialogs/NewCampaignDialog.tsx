@@ -14,11 +14,8 @@ const saveCampaign = (name: string, description: string, imageURL: string) => {
         id: auth.currentUser?.uid,
         name: auth.currentUser?.displayName,
         avatar: auth.currentUser?.photoURL,
-        categories: [],
       } as PlayerType,
     },
-    config: {},
-    categories: [],
   } as CampaignType;
   addNewCampaign(newCampaign).then(() => {
     window.location.reload();

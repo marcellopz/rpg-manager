@@ -165,3 +165,68 @@ export const deleteCategory = async (
   );
   return;
 };
+
+export const saveTabContent = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  playerId: string,
+  content: string
+) => {
+  console.log(content);
+  console.log(
+    `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content`
+  );
+  if (playerId === "") {
+    console.log("saving to campaign");
+    set(
+      child(
+        dbRef,
+        `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content`
+      ),
+      content
+    );
+    return;
+  }
+  console.log("saving to player");
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/players/${playerId}/categories/${categoryId}/tabs/${tabId}/content`
+    ),
+    content
+  );
+  return;
+};
+
+export const getTabContent = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  playerId: string
+) => {
+  if (playerId === "") {
+    const content = await get(
+      child(
+        dbRef,
+        `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content`
+      )
+    );
+    if (content.exists()) {
+      return content.val();
+    } else {
+      return null;
+    }
+  }
+  const content = await get(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/players/${playerId}/categories/${categoryId}/tabs/${tabId}/content`
+    )
+  );
+  if (content.exists()) {
+    return content.val();
+  } else {
+    return null;
+  }
+};

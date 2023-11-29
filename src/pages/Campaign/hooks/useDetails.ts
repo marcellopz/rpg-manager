@@ -19,8 +19,6 @@ const useDetails = () => {
     fetchPlayerDetails,
   } = usePlayerDetails(id, authUser?.uid);
 
-  console.log(campaignDetails, playerDetails);
-
   const detailsLoading = campaignLoading || playerLoading;
 
   const fetchAll = () => {

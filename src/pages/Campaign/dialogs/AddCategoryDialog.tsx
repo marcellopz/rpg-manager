@@ -36,9 +36,7 @@ const AddCategoryDialog: React.FC<AddCategoryDialogProps> = ({
       newCategory,
       publicSelected ? "" : (authUser as User).uid
     );
-    setTimeout(() => {
-      fetchAll();
-    }, 500);
+    fetchAll();
   };
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -48,6 +46,7 @@ const AddCategoryDialog: React.FC<AddCategoryDialogProps> = ({
       return;
     }
     addCategory();
+    setCategoryName("");
     onClose();
   };
 

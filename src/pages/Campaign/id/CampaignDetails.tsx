@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 // import campaignData, { playerMock as playerData } from "./campaignMock";
 import { CampaignType, PlayerType } from "../campaignTypes";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import CampaignDetailsContent from "./CampaignDetailsContent";
 import CampaignContentSelection from "./CampaignContentSelection";
 import { useTranslation } from "react-i18next";
@@ -20,98 +20,32 @@ export const getTab = (
 export default function CampaignDetails() {
   const { t } = useTranslation();
   const { id, name } = useParams();
-  const { campaignDetails, playerDetails, loading } =
-    useContext(DetailsContext);
+  const {
+    campaignDetails,
+    playerDetails,
+    loading,
+    setCatTab,
+    categoryId,
+    tabId,
+    publicSelected,
+  } = useContext(DetailsContext);
 
-  const [selectedData, setSelectedData] = useState<
-    CampaignType | PlayerType | null
-  >(null);
-
-  const [publicSelected, setPublicSelected] = useState<boolean>(true);
-  const [categoryId, setCategoryId] = useState<string>("");
-  const [tabId, setTabId] = useState<string>("");
   const [invitePlayerDialogOpen, setInvitePlayerDialogOpen] =
     useState<boolean>(false);
 
-  const resetTabIdsCampaign = () => {
-    if (!campaignDetails?.categories) return;
-    let firstTab = "";
-    const firstCategory = Object.keys(campaignDetails.categories)[0];
-    if (campaignDetails.categories[firstCategory].tabs) {
-      firstTab = Object.keys(
-        campaignDetails.categories[firstCategory].tabs as {
-          [key: string]: any;
-        }
-      )[0];
-    }
-    setCategoryId(firstCategory ?? "");
-    setTabId(firstTab);
-  };
-
-  const resetTabIdsPlayer = () => {
-    if (!playerDetails?.categories) return;
-    let firstTab = "";
-    const firstCategory = Object.keys(playerDetails.categories)[0];
-    if (playerDetails.categories[firstCategory].tabs) {
-      firstTab = Object.keys(
-        playerDetails.categories[firstCategory].tabs as {
-          [key: string]: any;
-        }
-      )[0];
-    }
-    setCategoryId(firstCategory ?? "");
-    setTabId(firstTab);
-  };
-
-  const resetIds = () => {
-    if (publicSelected) {
-      resetTabIdsCampaign();
-    } else {
-      resetTabIdsPlayer();
-    }
-  };
-
-  useEffect(() => {
-    resetIds();
-  }, [publicSelected]);
-
-  useEffect(() => {
-    if (categoryId === "" && tabId === "" && campaignDetails?.categories) {
-      resetIds();
-    }
-  }, [campaignDetails, playerDetails]);
-
-  useEffect(() => {
-    if (publicSelected) {
-      setSelectedData(campaignDetails);
-    } else {
-      setSelectedData(playerDetails);
-    }
-  }, [publicSelected, campaignDetails, playerDetails]);
-
   const handleCategoryChange = (catId: string) => {
-    setCategoryId(catId);
-    setTabId("");
+    setCatTab({
+      categoryId: catId,
+      tabId: "",
+    });
   };
 
   const resetCatTab = () => {
-    setCategoryId("");
-    setTabId("");
+    setCatTab({
+      categoryId: "",
+      tabId: "",
+    });
   };
-
-  const handleOpenInvite = () => {
-    setInvitePlayerDialogOpen(true);
-  };
-
-  if (
-    selectedData?.categories &&
-    selectedData?.categories?.[categoryId]?.tabs &&
-    (!(categoryId in selectedData?.categories) ||
-      //@ts-ignore
-      !(tabId in selectedData?.categories?.[categoryId]?.tabs ?? {}))
-  ) {
-    resetIds();
-  }
 
   return (
     <>
@@ -120,7 +54,11 @@ export default function CampaignDetails() {
           <div className="campaign__backdrop">
             <h1>{name}</h1>
             <div>
-              <button onClick={handleOpenInvite}>
+              <button
+                onClick={() => {
+                  setInvitePlayerDialogOpen(true);
+                }}
+              >
                 {t("CAMPAIGN_INVITE_PLAYER")}
               </button>
               <button>{t("CAMPAIGN_CONFIG")}</button>
@@ -130,13 +68,7 @@ export default function CampaignDetails() {
         <section className="campaign__details">
           <LoadWithFlag loading={loading}>
             <CampaignContentSelection
-              categoryId={categoryId}
               handleCategoryChange={handleCategoryChange}
-              tabId={tabId}
-              setTabId={setTabId}
-              selectedData={selectedData}
-              publicSelected={publicSelected}
-              setPublicSelected={setPublicSelected}
               resetCatTab={resetCatTab}
             />
             <CampaignDetailsContent

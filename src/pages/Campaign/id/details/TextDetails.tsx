@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
 import "@mdxeditor/editor/style.css";
 import { toolbarPlugin } from "@mdxeditor/editor/plugins/toolbar";
 import {
@@ -27,6 +27,13 @@ import {
   AdmonitionDirectiveDescriptor,
   MDXEditorMethods,
 } from "@mdxeditor/editor";
+import { DetailsContext } from "../../context/DetailsContext";
+import {
+  getTabContent,
+  saveTabContent,
+} from "../../../../contexts/firebase/database";
+import { useParams } from "react-router-dom";
+import auth from "../../../../contexts/firebase/firebase";
 
 interface TextDetailsProps {
   content: string;
@@ -34,27 +41,39 @@ interface TextDetailsProps {
 
 export default function TextDetails({ content }: TextDetailsProps) {
   const mdxRef = useRef<MDXEditorMethods>(null);
-  const [markdownVal, setMarkdownVal] = useState<string>(content);
+  const { id } = useParams();
+  const { catTab, publicSelected } = useContext(DetailsContext);
 
   useEffect(() => {
-    setMarkdownVal(content);
     mdxRef?.current?.setMarkdown?.(content);
   }, [content]);
 
   const loadMarkdown = () => {
-    // load from firebase
+    getTabContent(
+      id as string,
+      catTab.categoryId,
+      catTab.tabId,
+      publicSelected ? "" : (auth.currentUser?.uid as string)
+    ).then((res) => {
+      mdxRef?.current?.setMarkdown?.(res);
+    });
   };
 
   const saveMarkdown = () => {
-    // save to firebase
+    saveTabContent(
+      id as string,
+      catTab.categoryId,
+      catTab.tabId,
+      publicSelected ? "" : (auth.currentUser?.uid as string),
+      mdxRef?.current?.getMarkdown?.() as string
+    );
   };
 
   return (
     <MDXEditor
       ref={mdxRef}
       className="markdown-editor"
-      markdown={markdownVal}
-      onChange={(val) => setMarkdownVal(val)}
+      markdown={content}
       plugins={[
         toolbarPlugin({
           toolbarContents: () => (
@@ -62,8 +81,18 @@ export default function TextDetails({ content }: TextDetailsProps) {
               <UndoRedo />
               <Separator />
               <div className="flex">
-                <span className="small-button">💾</span>
-                <span className="small-button">🔄</span>
+                <span
+                  onClick={saveMarkdown}
+                  className="small-button"
+                >
+                  💾
+                </span>
+                <span
+                  onClick={loadMarkdown}
+                  className="small-button"
+                >
+                  🔄
+                </span>
               </div>
               <Separator />
               <BoldItalicUnderlineToggles />

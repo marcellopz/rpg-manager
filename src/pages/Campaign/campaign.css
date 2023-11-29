@@ -223,6 +223,13 @@
   flex-grow: 1;
   font-size: 18px;
   max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+[class*="rootContentEditableWrapper"] {
+  flex-grow: 1;
+  display: flex;
 }
 
 .markdown-editor div[role=toolbar] {

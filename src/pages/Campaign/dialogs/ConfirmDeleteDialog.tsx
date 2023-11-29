@@ -22,7 +22,7 @@ const ConfirmDeleteDialog: React.FC<ConfirmDeleteDialogProps> = ({
 }) => {
   const { id } = useParams();
   const { authUser } = React.useContext(AuthContext);
-  const { fetchAll } = React.useContext(DetailsContext);
+  const { fetchAll, resetIds } = React.useContext(DetailsContext);
 
   if (!open) {
     return null;
@@ -45,6 +45,7 @@ const ConfirmDeleteDialog: React.FC<ConfirmDeleteDialogProps> = ({
     }
     fetchAll();
     onClose();
+    resetIds();
   };
 
   return (

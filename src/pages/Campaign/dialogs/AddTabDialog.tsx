@@ -51,6 +51,8 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({
       return;
     }
     addTab();
+    setTabName("");
+    setTabType("text");
     onClose();
   };
 

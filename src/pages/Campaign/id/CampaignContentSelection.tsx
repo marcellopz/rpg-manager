@@ -1,10 +1,10 @@
-import React from "react";
-import { CampaignType, PlayerType } from "../campaignTypes";
+import React, { useContext } from "react";
 import CampaignPublicPrivateDropdown from "./CampaignPublicPrivateDropdown";
 import { Resizable, ResizeCallbackData } from "react-resizable";
 import AddCategoryDialog from "../dialogs/AddCategoryDialog";
 import AddTabDialog from "../dialogs/AddTabDialog";
 import ConfirmDeleteDialog from "../dialogs/ConfirmDeleteDialog";
+import { DetailsContext } from "../context/DetailsContext";
 
 interface deleteCategoryTabDialogProps {
   open: boolean;
@@ -21,29 +21,30 @@ const deleteCategoryInitialState: deleteCategoryTabDialogProps = {
 };
 
 interface CampaignContentSelectionProps {
-  categoryId: string;
   handleCategoryChange: (category: string) => void;
-  tabId: string;
-  setTabId: React.Dispatch<React.SetStateAction<string>>;
-  selectedData: CampaignType | PlayerType | null;
-  publicSelected: boolean;
-  setPublicSelected: React.Dispatch<React.SetStateAction<boolean>>;
   resetCatTab: () => void;
 }
 
 export default function CampaignContentSelection({
-  categoryId,
   handleCategoryChange,
-  tabId,
-  setTabId,
-  selectedData,
-  publicSelected,
-  setPublicSelected,
   resetCatTab,
 }: CampaignContentSelectionProps) {
+  // context states
+  const {
+    categoryId,
+    tabId,
+    setTabId,
+    selectedData,
+    publicSelected,
+    setPublicSelected,
+  } = useContext(DetailsContext);
+
+  // resizable states
   const [hideSelection, setHideSelection] = React.useState<boolean>(false);
   const [categoryWidth, setCategoryWidth] = React.useState<number>(200);
   const [tabWidth, setTabWidth] = React.useState<number>(200);
+
+  // dialog states
   const [addCategoryDialogOpen, setAddCategoryDialogOpen] =
     React.useState<boolean>(false);
   const [addTabDialogOpen, setAddTabDialogOpen] =
