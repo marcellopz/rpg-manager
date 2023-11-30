@@ -59,6 +59,12 @@ nav ul li {
   border-radius: 5px;
 }
 
+.img-notif {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+}
+
 #img img {
   height: 100%;
   width: 100%;

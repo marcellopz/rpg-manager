@@ -11,8 +11,6 @@ export default function CampaignDetailsContent({
 }: CampaignDetailsContentProps) {
   if (!tab) return null;
 
-  console.log(tab);
-
   if (tab.type === "text") {
     return (
       <div className="tab-content">

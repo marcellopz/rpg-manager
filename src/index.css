@@ -137,6 +137,10 @@ button:focus-visible {
   display: flex;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -193,4 +197,8 @@ select {
   margin-top: 5px;
   padding: 5px;
   font-size: large;
+}
+
+.relative {
+  position: relative;
 }

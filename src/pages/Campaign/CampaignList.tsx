@@ -18,7 +18,11 @@ export default function CampaignList() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (campaignIds.length === 0) return;
+    if (campaignIds === null) return;
+    if (campaignIds.length === 0) {
+      setLoading(false);
+      return;
+    }
     if (campaigns.length !== 0) return;
     campaignIds.forEach((id) => {
       getCampaign(id).then((camp) => {
@@ -37,7 +41,7 @@ export default function CampaignList() {
     setTimeout(() => {
       setLoading(false);
     }, 200);
-  }, [campaignIds.length]);
+  }, [campaignIds]);
 
   const handleNewCampaign = () => {
     setOpen(true);

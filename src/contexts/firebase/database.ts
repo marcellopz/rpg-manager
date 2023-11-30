@@ -1,10 +1,4 @@
-import {
-  get,
-  child,
-  push,
-  set,
-  // set
-} from "firebase/database";
+import { get, child, push, set } from "firebase/database";
 import auth, { dbRef } from "./firebase";
 
 import {
@@ -31,6 +25,17 @@ export const addNewCampaign = async (campaign: Partial<CampaignType>) => {
   return push(child(dbRef, "campaigns"), campaign).then((ref) => {
     push(child(dbRef, `users/${campaign.creatorId}/campaigns`), ref.key);
   });
+};
+
+export const getCampaignInvites = async (email: string) => {
+  const invites = await get(
+    child(dbRef, `campaign-invites/players/${email.replace(".", "|")}`)
+  );
+  if (invites.exists()) {
+    return invites.val();
+  } else {
+    return null;
+  }
 };
 
 export const getCampaigns = async () => {
@@ -63,8 +68,20 @@ export const getCampaign = async (campaignId: string) => {
   });
 };
 
-export const invitePlayer = async (campaignId: string, email: string) => {
-  push(child(dbRef, `campaign-invites/${campaignId}`), email);
+export const invitePlayer = async (
+  campaignId: string,
+  campaignName: string,
+  email: string,
+  playerId: string
+) => {
+  set(
+    child(dbRef, `campaign-invites/campaigns/${campaignId}/${playerId}`),
+    email
+  );
+  push(child(dbRef, `campaign-invites/players/${email.replace(".", "|")}`), {
+    campaignId,
+    campaignName,
+  });
 };
 
 export const getPlayerCampaign = async (
@@ -173,12 +190,7 @@ export const saveTabContent = async (
   playerId: string,
   content: string
 ) => {
-  console.log(content);
-  console.log(
-    `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content`
-  );
   if (playerId === "") {
-    console.log("saving to campaign");
     set(
       child(
         dbRef,
@@ -188,7 +200,6 @@ export const saveTabContent = async (
     );
     return;
   }
-  console.log("saving to player");
   set(
     child(
       dbRef,
@@ -226,6 +237,44 @@ export const getTabContent = async (
   );
   if (content.exists()) {
     return content.val();
+  } else {
+    return null;
+  }
+};
+
+export const acceptInvite = async (campaignId: string) => {
+  set(
+    child(dbRef, `campaigns/${campaignId}/players/${auth.currentUser?.uid}`),
+    {
+      id: auth.currentUser?.uid,
+      name: auth.currentUser?.displayName,
+    }
+  )
+    .then(() => {
+      push(
+        child(dbRef, `users/${auth.currentUser?.uid}/campaigns`),
+        campaignId
+      );
+    })
+    .then(() => {
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+export const saveEmailUid = async () => {
+  set(
+    child(dbRef, `user-emails/${auth.currentUser?.email?.replace(".", "|")}`),
+    auth.currentUser?.uid
+  );
+};
+
+export const getUidByEmail = async (email: string) => {
+  const uid = await get(child(dbRef, `user-emails/${email.replace(".", "|")}`));
+  if (uid.exists()) {
+    return uid.val();
   } else {
     return null;
   }

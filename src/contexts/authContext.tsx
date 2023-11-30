@@ -12,7 +12,17 @@ import React, { createContext, useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import auth from "./firebase/firebase";
 import NameDialog from "./name-dialog/NameDialog";
-import { checkIsAdmin, getCampaigns } from "./firebase/database";
+import {
+  checkIsAdmin,
+  getCampaignInvites,
+  getCampaigns,
+  saveEmailUid,
+} from "./firebase/database";
+
+interface InviteType {
+  campaignId: string;
+  campaignName: string;
+}
 
 interface AuthContextType {
   authUser: User | null;
@@ -22,8 +32,9 @@ interface AuthContextType {
   signInGoogle: () => void;
   handleUpdateProfile: (name: string, photoURL: string) => void;
   handleUserEditProfile: () => void;
-  campaignIds: string[];
+  campaignIds: string[] | null;
   isAdmin: boolean | null | undefined;
+  invites: InviteType[];
 }
 
 interface AuthProviderProps {
@@ -40,16 +51,17 @@ export const AuthContext = createContext<AuthContextType>({
   signInGoogle: () => {},
   handleUpdateProfile: () => {},
   handleUserEditProfile: () => {},
-  campaignIds: [],
+  campaignIds: null,
   isAdmin: false,
+  invites: [],
 });
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [authUser, setAuthUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [userEditingProfile, setUserEditingProfile] = useState<boolean>(false);
-  const [campaignIds, setCampaignIds] = useState<string[]>([]);
-  // const [invites, setInvites] = useState<any[]>([]);
+  const [campaignIds, setCampaignIds] = useState<string[] | null>(null);
+  const [invites, setInvites] = useState<InviteType[]>([]);
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
@@ -67,9 +79,23 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         setIsAdmin(res);
       });
       getCampaigns().then((res) => {
-        if (res === null) return;
+        if (res === null) {
+          setCampaignIds([]);
+          return;
+        }
         setCampaignIds(Object.values(res));
       });
+      if (authUser.email) {
+        getCampaignInvites(authUser.email).then((res) => {
+          if (res === null) return;
+          if (campaignIds === null) return;
+          setInvites(
+            Object.values(res as InviteType[]).filter(
+              (inv: InviteType) => !campaignIds.includes(inv.campaignId)
+            )
+          );
+        });
+      }
       // getInvites(authUser.email).then((res) => {
       //   console.log(res);
       // }
@@ -108,6 +134,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }).then(() => {
       window.location.reload();
     });
+    saveEmailUid();
   };
 
   const handleUserEditProfile = () => {
@@ -130,6 +157,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         handleUserEditProfile,
         campaignIds,
         isAdmin,
+        invites,
       }}
     >
       {children}

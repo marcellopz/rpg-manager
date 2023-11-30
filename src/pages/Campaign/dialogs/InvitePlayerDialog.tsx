@@ -1,13 +1,18 @@
 import React from "react";
-import { invitePlayer } from "../../../contexts/firebase/database";
+import {
+  getUidByEmail,
+  invitePlayer,
+} from "../../../contexts/firebase/database";
 
 type InvitePlayerDialogProps = {
-  campaignId?: string;
+  campaignId: string;
+  campaignName: string;
   open: boolean;
   onClose: () => void;
 };
 
 const InvitePlayerDialog: React.FC<InvitePlayerDialogProps> = ({
+  campaignName,
   campaignId,
   open,
   onClose,
@@ -25,8 +30,13 @@ const InvitePlayerDialog: React.FC<InvitePlayerDialogProps> = ({
       setError(true);
       return;
     }
-    invitePlayer(campaignId, email);
-    onClose();
+    getUidByEmail(email).then((playerId) => {
+      if (!playerId) {
+        setError(true);
+        return;
+      }
+      invitePlayer(campaignId, campaignName, email, playerId).then(onClose);
+    });
   };
 
   return (
@@ -49,7 +59,7 @@ const InvitePlayerDialog: React.FC<InvitePlayerDialogProps> = ({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {error && <p className="error">You must enter a campaign name</p>}
+            {error && <p className="error">This player email doesn't exist</p>}
           </label>
           <button type="submit">Invite</button>
         </form>

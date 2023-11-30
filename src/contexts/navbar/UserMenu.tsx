@@ -3,12 +3,14 @@ import "./usermenu.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../authContext";
 import { useTranslation } from "react-i18next";
+import CheckInvitesDialog from "./CheckInvitesDialog";
 
 const UserMenu: React.FC = () => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { authUser, handleUserEditProfile } = useContext(AuthContext);
+  const { authUser, handleUserEditProfile, invites } = useContext(AuthContext);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const [openInvites, setOpenInvites] = useState<boolean>(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -45,17 +47,22 @@ const UserMenu: React.FC = () => {
       >
         {authUser.displayName === "" ? "undefined" : authUser.displayName}
       </div>
-      <div
-        id="img"
-        onClick={() => setIsOpen((prev) => !prev)}
-      >
-        <img
-          src={
-            authUser.photoURL
-              ? authUser.photoURL
-              : "https://img.freepik.com/vetores-gratis/design-de-vetores-coloridos-de-maca_341269-1123.jpg?w=2000"
-          }
-        />
+      <div className="relative">
+        <div
+          id="img"
+          onClick={() => setIsOpen((prev) => !prev)}
+        >
+          <img
+            src={
+              authUser.photoURL
+                ? authUser.photoURL
+                : "https://img.freepik.com/vetores-gratis/design-de-vetores-coloridos-de-maca_341269-1123.jpg?w=2000"
+            }
+          />
+        </div>
+        {invites.length > 0 && (
+          <p className="img-notif circled-red">{invites.length}</p>
+        )}
       </div>
       {isOpen && (
         <div
@@ -68,9 +75,17 @@ const UserMenu: React.FC = () => {
             </Link>
             <div
               className="cursor-pointer"
-              onClick={handleUserEditProfile}
+              // onClick={handleUserEditProfile}
             >
-              <li>Invitations</li>
+              <li
+                className="flex space-between"
+                onClick={() => setOpenInvites(true)}
+              >
+                <p>Invitations</p>
+                {invites.length > 0 && (
+                  <p className="circled-red">{invites.length}</p>
+                )}
+              </li>
             </div>
             <div
               className="cursor-pointer"
@@ -85,6 +100,10 @@ const UserMenu: React.FC = () => {
           </ul>
         </div>
       )}
+      <CheckInvitesDialog
+        open={openInvites}
+        onClose={() => setOpenInvites(false)}
+      />
     </>
   );
 };

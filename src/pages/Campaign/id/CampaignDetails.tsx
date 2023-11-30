@@ -82,7 +82,8 @@ export default function CampaignDetails() {
         </section>
       </main>
       <InvitePlayerDialog
-        campaignId={id}
+        campaignName={name as string}
+        campaignId={id as string}
         open={invitePlayerDialogOpen}
         onClose={() => setInvitePlayerDialogOpen(false)}
       />
