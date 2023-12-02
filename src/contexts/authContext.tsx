@@ -16,6 +16,7 @@ import {
   checkIsAdmin,
   getCampaignInvites,
   getCampaigns,
+  getUidByEmail,
   saveEmailUid,
 } from "./firebase/database";
 
@@ -96,6 +97,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           );
         });
       }
+      getUidByEmail(authUser.email as string).then((res) => {
+        if (res === null) saveEmailUid();
+      });
       // getInvites(authUser.email).then((res) => {
       //   console.log(res);
       // }

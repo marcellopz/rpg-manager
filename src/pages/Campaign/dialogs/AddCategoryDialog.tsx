@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/authContext";
 import { User } from "firebase/auth";
 import { DetailsContext } from "../context/DetailsContext";
+import { CategoryType } from "../campaignTypes";
 
 type AddCategoryDialogProps = {
   open: boolean;
@@ -17,6 +18,7 @@ const AddCategoryDialog: React.FC<AddCategoryDialogProps> = ({
   publicSelected,
 }) => {
   const [categoryName, setCategoryName] = React.useState<string>("");
+  const [categoryType, setCategoryType] = React.useState<string>("normal");
   const [error, setError] = React.useState<boolean>(false);
   const { id } = useParams();
   const { authUser } = React.useContext(AuthContext);
@@ -27,8 +29,9 @@ const AddCategoryDialog: React.FC<AddCategoryDialogProps> = ({
   }
 
   const addCategory = () => {
-    const newCategory = {
+    const newCategory: CategoryType = {
       name: categoryName,
+      inventory: categoryType === "inventory",
       tabs: {},
     };
     addCategoryCampaign(
@@ -71,6 +74,16 @@ const AddCategoryDialog: React.FC<AddCategoryDialogProps> = ({
               onChange={(e) => setCategoryName(e.target.value)}
             />
             {error && <p className="error">You must enter a category name</p>}
+          </label>
+          <label>
+            Category type:
+            <select
+              value={categoryType}
+              onChange={(e) => setCategoryType(e.target.value)}
+            >
+              <option value="normal">Normal</option>
+              <option value="inventory">Inventory</option>
+            </select>
           </label>
           <button type="submit">Create</button>
         </form>

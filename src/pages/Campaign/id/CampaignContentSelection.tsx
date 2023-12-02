@@ -111,8 +111,9 @@ export default function CampaignContentSelection({
 
   const categories = selectedData.categories;
 
-  const tabs =
-    categories && categories[categoryId] && categories[categoryId].tabs;
+  const selectedCategory = categories && categories[categoryId];
+
+  const tabs = selectedCategory && categories[categoryId].tabs;
 
   return (
     <>
@@ -202,7 +203,9 @@ export default function CampaignContentSelection({
                   className="create-new"
                   onClick={() => setAddTabDialogOpen(true)}
                 >
-                  + Add tab
+                  {selectedCategory?.inventory
+                    ? "+ Add inventory"
+                    : "+ Add tab"}
                 </div>
               )}
             </div>
@@ -217,8 +220,6 @@ export default function CampaignContentSelection({
         }}
       />
       <AddTabDialog
-        categoryId={categoryId}
-        publicSelected={publicSelected}
         open={addTabDialogOpen}
         onClose={() => setAddTabDialogOpen(false)}
       />

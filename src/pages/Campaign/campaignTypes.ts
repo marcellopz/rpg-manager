@@ -15,6 +15,7 @@ export interface CampaignType {
 
 export interface CategoryType {
   name: string;
+  inventory?: boolean;
   tabs?: {
     [key: string]: TabType;
   };

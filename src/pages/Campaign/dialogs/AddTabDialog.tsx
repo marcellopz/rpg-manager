@@ -8,22 +8,18 @@ import { DetailsContext } from "../context/DetailsContext";
 type AddTabDialogProps = {
   open: boolean;
   onClose: () => void;
-  publicSelected: boolean;
-  categoryId: string;
 };
 
-const AddTabDialog: React.FC<AddTabDialogProps> = ({
-  open,
-  onClose,
-  publicSelected,
-  categoryId,
-}) => {
+const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
   const [TabName, setTabName] = React.useState<string>("");
   const [TabType, setTabType] = React.useState<string>("text");
   const [error, setError] = React.useState<boolean>(false);
   const { id } = useParams();
   const { authUser } = React.useContext(AuthContext);
-  const { fetchAll } = React.useContext(DetailsContext);
+  const { fetchAll, selectedData, categoryId, publicSelected } =
+    React.useContext(DetailsContext);
+
+  const isInventory = selectedData?.categories?.[categoryId]?.inventory;
 
   if (!open) {
     return null;
@@ -32,7 +28,7 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({
   const addTab = () => {
     const newTab = {
       name: TabName,
-      type: TabType,
+      type: isInventory ? "inventory" : TabType,
       content: "",
     };
     addTabCampaign(
@@ -67,35 +63,41 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({
           e.stopPropagation();
         }}
       >
-        <h2>Enter the new Tab name</h2>
+        <h2>
+          {isInventory ? "Enter character name" : "Enter the new Tab name"}
+        </h2>
         <form onSubmit={handleSubmit}>
           <label>
-            Tab name*
+            {isInventory ? "Character name*" : "Tab name*"}
             <input
               type="text"
               value={TabName}
               onChange={(e) => setTabName(e.target.value)}
             />
-            {error && <p className="error">You must enter a Tab name</p>}
+            {error && (
+              <p className="error">
+                {isInventory
+                  ? "You must enter a Character name"
+                  : "You must enter a Tab name"}
+              </p>
+            )}
           </label>
-          <label>
-            Tab type*
-            <select
-              onChange={(e) => setTabType(e.target.value)}
-              value={TabType}
-            >
-              <option value="text">Text</option>
-              <option value="inventory">Inventory</option>
-              <option value="sheet">Character sheet</option>
-              <option value="resource">Resource control</option>
-            </select>
-            {/* <input
-              type="text"
-              value={TabName}
-              onChange={(e) => setTabName(e.target.value)}
-            /> */}
-            {error && <p className="error">You must enter a Tab name</p>}
-          </label>
+          {!isInventory && (
+            <label>
+              Tab type*
+              <select
+                onChange={(e) => setTabType(e.target.value)}
+                value={TabType}
+              >
+                <option value="text">Text</option>
+                {/* <option value="inventory">Inventory</option> */}
+                <option value="sheet">Character sheet</option>
+                <option value="resource">Resource control</option>
+                <option value="combat">Combat control</option>
+              </select>
+              {error && <p className="error">You must enter a Tab name</p>}
+            </label>
+          )}
           <button type="submit">Create</button>
         </form>
       </div>

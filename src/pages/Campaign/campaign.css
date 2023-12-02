@@ -168,6 +168,10 @@
   background-color: rgba(0, 0, 0, 0.05);
 }
 
+.tab-selection {
+  border-right: 1px solid rgb(170, 170, 170);
+}
+
 .public-private-selection {
   display: flex;
   justify-content: space-between;
@@ -243,6 +247,7 @@
 .markdown-editor div[role=textbox] {
   flex-grow: 1;
   padding: 20px;
+  min-height: 500px;
 }
 
 .markdown-editor div[role=textbox] ul {
@@ -320,6 +325,12 @@ span.react-resizable-handle {
   margin: 10px;
 }
 
+#inventory-checkbox {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 @media only screen and (max-width: 800px) {
   .campaign__backdrop {
     flex-direction: column;
@@ -357,8 +368,17 @@ span.react-resizable-handle {
   }
 
   .content-container {
+    display: flex;
     flex-grow: 1;
     border-bottom: 1px solid rgb(142, 142, 142);
+  }
+
+  .content-container > div {
+    width: 100%;
+  }
+
+  .content-selection {
+    border-right: none;
   }
 
   .content-selection > div {
@@ -375,5 +395,9 @@ span.react-resizable-handle {
 
   .public-private-selection p {
     display: block;
+  }
+
+  .tab-selection {
+    border-right: none;
   }
 }

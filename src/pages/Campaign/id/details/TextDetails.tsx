@@ -42,7 +42,7 @@ interface TextDetailsProps {
 export default function TextDetails({ content }: TextDetailsProps) {
   const mdxRef = useRef<MDXEditorMethods>(null);
   const { id } = useParams();
-  const { catTab, publicSelected } = useContext(DetailsContext);
+  const { catTab, publicSelected, fetchAll } = useContext(DetailsContext);
 
   useEffect(() => {
     mdxRef?.current?.setMarkdown?.(content);
@@ -56,6 +56,7 @@ export default function TextDetails({ content }: TextDetailsProps) {
       publicSelected ? "" : (auth.currentUser?.uid as string)
     ).then((res) => {
       mdxRef?.current?.setMarkdown?.(res);
+      fetchAll();
     });
   };
 
@@ -66,7 +67,9 @@ export default function TextDetails({ content }: TextDetailsProps) {
       catTab.tabId,
       publicSelected ? "" : (auth.currentUser?.uid as string),
       mdxRef?.current?.getMarkdown?.() as string
-    );
+    ).then(() => {
+      fetchAll();
+    });
   };
 
   return (

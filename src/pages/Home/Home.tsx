@@ -73,11 +73,6 @@ const Home = () => {
             </div>
           </div>
           <p>{t("HOME_DESCRIPTION")}</p>
-          {/* <div id="input-container">
-            <input placeholder="Username" />
-            <input placeholder="Email" />
-            <input placeholder="Password" />
-          </div> */}
         </div>
         <div id="child-two">
           <img
