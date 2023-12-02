@@ -13,11 +13,17 @@ type CampaignWithId = CampaignType & { id: string };
 export default function CampaignList() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const { campaignIds } = useContext(AuthContext);
+  const { campaignIds, authUser } = useContext(AuthContext);
   const [campaigns, setCampaigns] = useState<CampaignWithId[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  console.log(authUser);
+
   useEffect(() => {
+    if (authUser === null) {
+      setLoading(false);
+      return;
+    }
     if (campaignIds === null) return;
     if (campaignIds.length === 0) {
       setLoading(false);
