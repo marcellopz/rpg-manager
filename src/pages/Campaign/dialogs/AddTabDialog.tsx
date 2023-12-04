@@ -13,6 +13,8 @@ type AddTabDialogProps = {
 const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
   const [TabName, setTabName] = React.useState<string>("");
   const [TabType, setTabType] = React.useState<string>("text");
+  const [CharacterStrength, setCharacterStrength] = React.useState<number>(0);
+  const [CharacterGold, setCharacterGold] = React.useState<number>(0);
   const [error, setError] = React.useState<boolean>(false);
   const { id } = useParams();
   const { authUser } = React.useContext(AuthContext);
@@ -29,14 +31,24 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
     const newTab = {
       name: TabName,
       type: isInventory ? "inventory" : TabType,
-      content: "",
+      content: isInventory
+        ? {
+            playerName: TabName,
+            playerStrength: CharacterStrength,
+            playerGold: CharacterGold,
+            playerAvatar: "",
+            inventory: {},
+          }
+        : "",
     };
+
     addTabCampaign(
       id as string,
       newTab,
       publicSelected ? "" : (authUser as User).uid,
       categoryId
     );
+
     fetchAll();
   };
 
@@ -82,7 +94,26 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
               </p>
             )}
           </label>
-          {!isInventory && (
+          {isInventory ? (
+            <>
+              <label>
+                Character strength
+                <input
+                  type="number"
+                  value={CharacterStrength}
+                  onChange={(e) => setCharacterStrength(Number(e.target.value))}
+                />
+              </label>
+              <label>
+                Character gold
+                <input
+                  type="number"
+                  value={CharacterGold}
+                  onChange={(e) => setCharacterGold(Number(e.target.value))}
+                />
+              </label>
+            </>
+          ) : (
             <label>
               Tab type*
               <select

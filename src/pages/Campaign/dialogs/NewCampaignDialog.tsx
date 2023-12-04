@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import auth from "../../../contexts/firebase/firebase";
 import { addNewCampaign } from "../../../contexts/firebase/database";
 import { CampaignType, PlayerType } from "../campaignTypes";
+import { AuthContext } from "../../../contexts/authContext";
 
 const saveCampaign = (name: string, description: string, imageURL: string) => {
   const newCampaign = {
@@ -35,6 +36,7 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
   const [description, setDescription] = React.useState<string>("");
   const [imageURL, setImageURL] = React.useState<string>("");
   const [error, setError] = React.useState<boolean>(false);
+  const { authUser } = useContext(AuthContext);
 
   if (!open) {
     return null;
@@ -50,6 +52,26 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
     onClose();
   };
 
+  if (authUser === null) {
+    return (
+      <div
+        className="dialog-background"
+        onClick={onClose}
+      >
+        <div
+          className="dialog"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <h2>You have to log in to create a campaign</h2>
+          <button>
+            <a href="/authenticate">Log in</a>
+          </button>
+        </div>
+      </div>
+    );
+  }
   return (
     <div
       className="dialog-background"

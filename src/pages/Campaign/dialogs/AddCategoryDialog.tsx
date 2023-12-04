@@ -75,16 +75,19 @@ const AddCategoryDialog: React.FC<AddCategoryDialogProps> = ({
             />
             {error && <p className="error">You must enter a category name</p>}
           </label>
-          <label>
-            Category type:
-            <select
-              value={categoryType}
-              onChange={(e) => setCategoryType(e.target.value)}
-            >
-              <option value="normal">Normal</option>
-              <option value="inventory">Inventory</option>
-            </select>
-          </label>
+          {publicSelected && (
+            <label>
+              Category type:
+              <select
+                value={categoryType}
+                onChange={(e) => setCategoryType(e.target.value)}
+              >
+                <option value="normal">Normal</option>
+                <option value="inventory">Inventory</option>
+              </select>
+            </label>
+          )}
+
           <button type="submit">Create</button>
         </form>
       </div>

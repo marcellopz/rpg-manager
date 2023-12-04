@@ -38,7 +38,9 @@ export interface TabType {
 
 export interface InventoryContent {
   playerName: string;
+  playerStrength: number;
   playerAvatar: string;
+  playerGold: number;
   inventory: {
     [key: string]: InventoryItemType;
   };
@@ -52,5 +54,5 @@ export interface InventoryItemType {
 export interface ItemType {
   weight: number;
   name: string;
-  type: "normal" | "magic" | "consummable";
+  type: "normal" | "magic" | "consumable";
 }

@@ -17,8 +17,6 @@ export default function CampaignList() {
   const [campaigns, setCampaigns] = useState<CampaignWithId[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  console.log(authUser);
-
   useEffect(() => {
     if (authUser === null) {
       setLoading(false);

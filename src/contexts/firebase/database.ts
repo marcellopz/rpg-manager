@@ -4,6 +4,7 @@ import auth, { dbRef } from "./firebase";
 import {
   CampaignType,
   CategoryType,
+  InventoryItemType,
   TabType,
 } from "../../pages/Campaign/campaignTypes";
 
@@ -278,4 +279,97 @@ export const getUidByEmail = async (email: string) => {
   } else {
     return null;
   }
+};
+
+export const addItemToInventory = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  Item: InventoryItemType
+) => {
+  push(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/inventory`
+    ),
+    Item
+  );
+};
+
+export const deleteItemCampaign = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  itemId: string
+) => {
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/inventory/${itemId}`
+    ),
+    null
+  );
+};
+
+export const updateGold = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  gold: number
+) => {
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/playerGold`
+    ),
+    gold
+  );
+};
+
+export const updateNumberOfItems = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  itemId: string,
+  numberOfItems: number
+) => {
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/inventory/${itemId}/numberOfItems`
+    ),
+    numberOfItems
+  );
+};
+
+export const updateNameOfItem = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  itemId: string,
+  name: string
+) => {
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/inventory/${itemId}/item/name`
+    ),
+    name
+  );
+};
+
+export const updateItemType = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  itemId: string,
+  type: string
+) => {
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/inventory/${itemId}/item/type`
+    ),
+    type
+  );
 };
