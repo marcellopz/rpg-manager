@@ -32,9 +32,10 @@ const Backpack = ({
       return "⚠️";
     } else if (weight <= very_heavy_box) {
       return "❌";
-    } else {
+    } else if (weight <= total_weight_box) {
       return "❌❌";
     }
+    return "❌❌❌";
   };
 
   const handleSaveGold = () => {

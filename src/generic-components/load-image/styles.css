@@ -1,0 +1,15 @@
+.Crop-Controls {
+  margin-bottom: 10px;
+}
+.Crop-Controls > * {
+  margin-bottom: 3px;
+}
+
+/* .LoadImage {
+  width: 500px;
+} */
+
+.LoadImage img {
+  max-width: 500px;
+  max-height: 500px;
+}

@@ -104,22 +104,25 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
           title="Double click to edit name"
         >
           {editingName ? (
-            <input
-              type="text"
-              value={name}
-              autoFocus
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleUpdateName();
-                  setEditingName(false);
-                  fetchAll();
-                }
-              }}
-              onBlur={() => setEditingName(false)}
-            />
+            <>
+              <input
+                type="text"
+                value={name}
+                autoFocus
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleUpdateName();
+                    setEditingName(false);
+                    fetchAll();
+                  }
+                }}
+                onBlur={() => setEditingName(false)}
+              />
+
+            </>
           ) : (
             item.item.name
           )}

@@ -23,7 +23,7 @@ const Profile = ({
           backgroundImage: `url(${
             !!character_avatar
               ? character_avatar
-              : "https://i.imgur.com/of0hnoj.png"
+              : "https://i.pinimg.com/736x/98/1d/6b/981d6b2e0ccb5e968a0618c8d47671da.jpg"
           })`,
         }}
       ></div>

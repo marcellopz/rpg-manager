@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/authContext";
 import { User } from "firebase/auth";
 import { DetailsContext } from "../context/DetailsContext";
+import LoadImage from "../../../generic-components/load-image/LoadImage";
 
 type AddTabDialogProps = {
   open: boolean;
@@ -13,8 +14,9 @@ type AddTabDialogProps = {
 const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
   const [TabName, setTabName] = React.useState<string>("");
   const [TabType, setTabType] = React.useState<string>("text");
-  const [CharacterStrength, setCharacterStrength] = React.useState<number>(0);
+  const [CharacterStrength, setCharacterStrength] = React.useState<number>(10);
   const [CharacterGold, setCharacterGold] = React.useState<number>(0);
+  const [characterImage, setCharacterImage] = React.useState<string>("");
   const [error, setError] = React.useState<boolean>(false);
   const { id } = useParams();
   const { authUser } = React.useContext(AuthContext);
@@ -36,7 +38,7 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
             playerName: TabName,
             playerStrength: CharacterStrength,
             playerGold: CharacterGold,
-            playerAvatar: "",
+            playerAvatar: characterImage,
             inventory: {},
           }
         : "",
@@ -112,6 +114,11 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
                   onChange={(e) => setCharacterGold(Number(e.target.value))}
                 />
               </label>
+              <LoadImage
+                setImageBlob={setCharacterImage}
+                aspectRatio={1}
+                sizeLimit={1000000}
+              />
             </>
           ) : (
             <label>

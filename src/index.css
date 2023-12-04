@@ -163,6 +163,7 @@ button:focus-visible {
     background: white;
     padding: 20px;
     border-radius: 5px;
+    max-width: 100vw;
 }
 
 .dialog h2 {
@@ -208,4 +209,9 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.text-border {
+    text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000,
+             1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
 }

@@ -50,7 +50,14 @@ export default function CampaignDetails() {
   return (
     <>
       <main className="campaign__main h-full">
-        <section className="campaign__header header_inset">
+        <section
+          className="campaign__header header_inset"
+          style={
+            campaignDetails?.backdropImage
+              ? { backgroundImage: `url(${campaignDetails?.backdropImage})` }
+              : {}
+          }
+        >
           <div className="campaign__backdrop">
             <h1>{name}</h1>
             <div>

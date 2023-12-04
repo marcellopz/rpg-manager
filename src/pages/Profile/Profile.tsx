@@ -25,7 +25,7 @@ const Profile: React.FC = () => {
           <h2>{authUser?.displayName}</h2>
           <p>Email: {authUser?.email}</p>
           <p>Member since: {authUser?.metadata.creationTime}</p>
-          <p>Number of campaigns: X</p>
+          {/* <p>Number of campaigns: X</p> */}
         </div>
       </div>
       {/* <div>

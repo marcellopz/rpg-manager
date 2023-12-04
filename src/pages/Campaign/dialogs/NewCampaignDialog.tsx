@@ -3,6 +3,7 @@ import auth from "../../../contexts/firebase/firebase";
 import { addNewCampaign } from "../../../contexts/firebase/database";
 import { CampaignType, PlayerType } from "../campaignTypes";
 import { AuthContext } from "../../../contexts/authContext";
+import LoadImage from "../../../generic-components/load-image/LoadImage";
 
 const saveCampaign = (name: string, description: string, imageURL: string) => {
   const newCampaign = {
@@ -105,14 +106,10 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
               <p className="error">You must enter a campaign description</p>
             )}
           </label>
-          <label>
-            Campaign image (url)
-            <input
-              type="text"
-              value={imageURL}
-              onChange={(e) => setImageURL(e.target.value)}
-            />
-          </label>
+          <LoadImage
+            setImageBlob={setImageURL}
+            sizeLimit={2000000}
+          />
           <br />
           <button type="submit">Save</button>
         </form>

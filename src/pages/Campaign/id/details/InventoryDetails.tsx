@@ -18,10 +18,13 @@ export default function InventoryDetails({ content }: InventoryDetailsProps) {
 
   const getCarryingWeight = () => {
     let carryingWeight = 0;
+    carryingWeight += content.playerGold * 0.009;
+    
+    if (!content.inventory) return carryingWeight;
+
     Object.values(content.inventory).forEach((item) => {
       carryingWeight += item.item.weight * item.numberOfItems;
     });
-    carryingWeight += content.playerGold * 0.009;
     return carryingWeight;
   };
 
