@@ -86,17 +86,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         }
         setCampaignIds(Object.values(res));
       });
-      if (authUser.email) {
-        getCampaignInvites(authUser.email).then((res) => {
-          if (res === null) return;
-          if (campaignIds === null) return;
-          setInvites(
-            Object.values(res as InviteType[]).filter(
-              (inv: InviteType) => !campaignIds.includes(inv.campaignId)
-            )
-          );
-        });
-      }
       getUidByEmail(authUser.email as string).then((res) => {
         if (res === null) saveEmailUid();
       });
@@ -105,6 +94,19 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       // }
     }
   }, [authUser]);
+
+  useEffect(() => {
+    if (authUser && authUser.email)
+      getCampaignInvites(authUser.email).then((res) => {
+        if (res === null) return;
+        if (campaignIds === null) return;
+        setInvites(
+          Object.values(res as InviteType[]).filter(
+            (inv: InviteType) => !campaignIds.includes(inv.campaignId)
+          )
+        );
+      });
+  }, [authUser, campaignIds]);
 
   const signInGoogle = async () => {
     signInWithPopup(auth, provider);
