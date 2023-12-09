@@ -8,6 +8,8 @@ import { useTranslation } from "react-i18next";
 import InvitePlayerDialog from "../dialogs/InvitePlayerDialog";
 import LoadWithFlag from "../../../generic-components/LoadWithFlag";
 import { DetailsContext } from "../context/DetailsContext";
+import { AuthContext } from "../../../contexts/authContext";
+import CampaignConfigsDialog from "../dialogs/CampaignConfigsDialog";
 
 export const getTab = (
   category: string,
@@ -19,7 +21,7 @@ export const getTab = (
 
 export default function CampaignDetails() {
   const { t } = useTranslation();
-  const { id, name } = useParams();
+  const { id } = useParams();
   const {
     campaignDetails,
     playerDetails,
@@ -29,8 +31,12 @@ export default function CampaignDetails() {
     tabId,
     publicSelected,
   } = useContext(DetailsContext);
+  const { authUser } = useContext(AuthContext);
 
   const [invitePlayerDialogOpen, setInvitePlayerDialogOpen] =
+    useState<boolean>(false);
+
+  const [editCampaignDialogOpen, setEditCampaignDialogOpen] =
     useState<boolean>(false);
 
   const handleCategoryChange = (catId: string) => {
@@ -59,17 +65,25 @@ export default function CampaignDetails() {
           }
         >
           <div className="campaign__backdrop">
-            <h1>{name}</h1>
-            <div>
-              <button
-                onClick={() => {
-                  setInvitePlayerDialogOpen(true);
-                }}
-              >
-                {t("CAMPAIGN_INVITE_PLAYER")}
-              </button>
-              <button>{t("CAMPAIGN_CONFIG")}</button>
-            </div>
+            <h1>{campaignDetails?.name}</h1>
+            {authUser?.uid === campaignDetails?.creatorId && (
+              <div>
+                <button
+                  onClick={() => {
+                    setInvitePlayerDialogOpen(true);
+                  }}
+                >
+                  {t("CAMPAIGN_INVITE_PLAYER")}
+                </button>
+                <button
+                  onClick={() => {
+                    setEditCampaignDialogOpen(true);
+                  }}
+                >
+                  {t("CAMPAIGN_CONFIG")}
+                </button>
+              </div>
+            )}
           </div>
         </section>
         <section className="campaign__details">
@@ -89,10 +103,14 @@ export default function CampaignDetails() {
         </section>
       </main>
       <InvitePlayerDialog
-        campaignName={name as string}
+        campaignName={campaignDetails?.name as string}
         campaignId={id as string}
         open={invitePlayerDialogOpen}
         onClose={() => setInvitePlayerDialogOpen(false)}
+      />
+      <CampaignConfigsDialog
+        open={editCampaignDialogOpen}
+        onClose={() => setEditCampaignDialogOpen(false)}
       />
     </>
   );

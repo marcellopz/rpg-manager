@@ -373,3 +373,12 @@ export const updateItemType = async (
     type
   );
 };
+
+export const editCampaignNameDescription = async (
+  campaignId: string,
+  name: string,
+  description: string
+) => {
+  set(child(dbRef, `campaigns/${campaignId}/name`), name);
+  set(child(dbRef, `campaigns/${campaignId}/description`), description);
+};

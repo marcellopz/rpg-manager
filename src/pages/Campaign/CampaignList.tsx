@@ -13,12 +13,12 @@ type CampaignWithId = CampaignType & { id: string };
 export default function CampaignList() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const { campaignIds, authUser } = useContext(AuthContext);
+  const { campaignIds, authUser, authLoading } = useContext(AuthContext);
   const [campaigns, setCampaigns] = useState<CampaignWithId[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (authUser === null) {
+    if (authUser === null && authLoading === false) {
       setLoading(false);
       return;
     }
@@ -29,22 +29,23 @@ export default function CampaignList() {
     }
     if (campaigns.length !== 0) return;
     campaignIds.forEach((id) => {
-      getCampaign(id).then((camp) => {
-        setCampaigns((prevCampaigns) => [
-          ...prevCampaigns,
-          {
-            name: camp.name,
-            description: camp.description,
-            backdropImage: camp.backdropImage,
-            creatorId: camp.creatorId,
-            id,
-          },
-        ]);
-      });
+      getCampaign(id)
+        .then((camp) => {
+          setCampaigns((prevCampaigns) => [
+            ...prevCampaigns,
+            {
+              name: camp.name,
+              description: camp.description,
+              backdropImage: camp.backdropImage,
+              creatorId: camp.creatorId,
+              id,
+            },
+          ]);
+        })
+        .then(() => {
+          setLoading(false);
+        });
     });
-    setTimeout(() => {
-      setLoading(false);
-    }, 200);
   }, [campaignIds]);
 
   const handleNewCampaign = () => {

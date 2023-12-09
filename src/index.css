@@ -189,6 +189,12 @@ button:focus-visible {
     margin-top: 5px;
 }
 
+.dialog textarea {
+    font-size: large;
+    padding: 5px;
+    margin-top: 5px;
+}
+
 .error {
     color: red;
     /* font-size: small; */

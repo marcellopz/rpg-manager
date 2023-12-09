@@ -36,6 +36,7 @@ interface AuthContextType {
   campaignIds: string[] | null;
   isAdmin: boolean | null | undefined;
   invites: InviteType[];
+  authLoading: boolean;
 }
 
 interface AuthProviderProps {
@@ -55,6 +56,7 @@ export const AuthContext = createContext<AuthContextType>({
   campaignIds: null,
   isAdmin: false,
   invites: [],
+  authLoading: true,
 });
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
@@ -63,10 +65,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [userEditingProfile, setUserEditingProfile] = useState<boolean>(false);
   const [campaignIds, setCampaignIds] = useState<string[] | null>(null);
   const [invites, setInvites] = useState<InviteType[]>([]);
+  const [authLoading, setAuthLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       setAuthUser(user);
+      setAuthLoading(false);
     });
 
     return () => {
@@ -164,6 +168,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         campaignIds,
         isAdmin,
         invites,
+        authLoading,
       }}
     >
       {children}
