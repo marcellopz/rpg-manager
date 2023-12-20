@@ -1,0 +1,41 @@
+.last_session {
+  position: relative;
+  top: 575px;
+  left: -351px;
+  width: 577px;
+  height: 148px;
+  display: flex;
+  gap: 10px;
+}
+
+.last_session .onest {
+  width: 185px;
+  height: 148px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.onest textarea {
+  width: 170px;
+  height: 128px;
+  font-size: 12px;
+  padding: 5px;
+}
+
+.last_session .twond {
+  width: 383px;
+  height: 148px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.twond textarea {
+  width: 363px;
+  height: 128px;
+    font-size: 12px;
+  padding: 5px;
+}

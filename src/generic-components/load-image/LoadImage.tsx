@@ -74,8 +74,6 @@ const LoadImage = ({
 
   const aspect = aspectRatio ?? 16 / 9;
 
-  // console.log({ imgSrc, crop, completedCrop, scale, rotate, aspect });
-
   function onSelectFile(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files.length > 0) {
       setCrop(undefined); // Makes crop preview update between images.

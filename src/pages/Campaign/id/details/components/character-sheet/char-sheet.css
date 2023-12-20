@@ -1,0 +1,104 @@
+.char-sheet-wrapper {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.char-sheet {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  background-size: 608px 779px;
+  width: 610px;
+  height: 779px;
+  background-image: url("/assets/ficha.svg");
+  background-repeat: no-repeat;
+  color: black;
+  overflow: hidden;
+}
+
+.char-sheet input {
+    color: black;
+}
+
+.char-sheet textarea {
+    color: black;
+}
+
+.char-sheet-container {
+  width: 100%;
+}
+
+.char-sheet-toolbar {
+  flex-grow: 1;
+  display: flex;
+  border-bottom: 1px solid rgb(170, 170, 170);
+  border-radius: 0;
+  max-width: 100%;
+  gap: 10px;
+  padding: 6px;
+  height: 52px;
+  align-items: center;
+  font-size: 26px;
+  background-color: lightgray;
+}
+
+.char-sheet-toolbar button {
+  padding: 5px;
+  font-size: 26px;
+  background-color: rgba(0,0,0,0.15);
+  color: black;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.char-sheet-toolbar button:hover {
+  background-color: rgba(0,0,0,0.30);
+}
+
+
+.char-sheet-toolbar > * {
+  background-color: lightgray;
+  padding: 3px;
+}
+
+.zoom-handler {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 5px;
+}
+
+.zoom-handler button {
+  padding: 5px;
+  font-size: 20px;
+  background-color: rgb(170, 170, 170);
+  color: black;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoom-handler input {
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 20px;
+}
+
+.char-sheet input {
+    border: none;
+}
+
+.char-sheet textarea {
+    border: none;
+}

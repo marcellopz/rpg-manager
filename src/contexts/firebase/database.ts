@@ -7,6 +7,7 @@ import {
   InventoryItemType,
   TabType,
 } from "../../pages/Campaign/campaignTypes";
+import { CharSheetType } from "../../pages/Campaign/id/details/components/character-sheet/CharSheetType";
 
 export async function checkIsAdmin(userId: string) {
   return get(child(dbRef, `users/${userId}/isAdmin`))
@@ -189,7 +190,7 @@ export const saveTabContent = async (
   categoryId: string,
   tabId: string,
   playerId: string,
-  content: string
+  content: string | CharSheetType
 ) => {
   if (playerId === "") {
     set(
@@ -381,4 +382,19 @@ export const editCampaignNameDescription = async (
 ) => {
   set(child(dbRef, `campaigns/${campaignId}/name`), name);
   set(child(dbRef, `campaigns/${campaignId}/description`), description);
+};
+
+export const saveCharImageInventory = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  image: string
+) => {
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/playerAvatar`
+    ),
+    image
+  );
 };

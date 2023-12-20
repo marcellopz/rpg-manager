@@ -237,7 +237,7 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-
+    min-height: 500px;
 }
 
 .items-section > * {
@@ -328,4 +328,9 @@
     /* text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, */
                /* 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff; */
     font-weight: 500;
+}
+
+.save-btn {
+    display: flex;
+    justify-content: end;
 }

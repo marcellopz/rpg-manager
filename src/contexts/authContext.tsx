@@ -93,9 +93,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       getUidByEmail(authUser.email as string).then((res) => {
         if (res === null) saveEmailUid();
       });
-      // getInvites(authUser.email).then((res) => {
-      //   console.log(res);
-      // }
     }
   }, [authUser]);
 
@@ -127,11 +124,11 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const signOutRpg = () => {
     signOut(auth)
       .then(() => {
-        console.log("signed out");
+        console.warn("signed out");
         setAuthUser(null);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
     return <Navigate to="/" />;
   };

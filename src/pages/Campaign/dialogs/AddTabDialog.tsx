@@ -5,6 +5,7 @@ import { AuthContext } from "../../../contexts/authContext";
 import { User } from "firebase/auth";
 import { DetailsContext } from "../context/DetailsContext";
 import LoadImage from "../../../generic-components/load-image/LoadImage";
+import { initialCharSheet } from "../id/details/components/character-sheet/CharSheetType";
 
 type AddTabDialogProps = {
   open: boolean;
@@ -41,6 +42,8 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
             playerAvatar: characterImage,
             inventory: {},
           }
+        : TabType === "sheet"
+        ? initialCharSheet
         : "",
     };
 
@@ -87,6 +90,7 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
               type="text"
               value={TabName}
               onChange={(e) => setTabName(e.target.value)}
+              autoFocus
             />
             {error && (
               <p className="error">
@@ -130,8 +134,8 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
                 <option value="text">Text</option>
                 {/* <option value="inventory">Inventory</option> */}
                 <option value="sheet">Character sheet</option>
-                <option value="resource">Resource control</option>
-                <option value="combat">Combat control</option>
+                {/* <option value="resource">Resource control</option> */}
+                {/* <option value="combat">Combat control</option> */}
               </select>
               {error && <p className="error">You must enter a Tab name</p>}
             </label>

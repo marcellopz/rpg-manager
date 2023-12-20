@@ -4,6 +4,7 @@ import CombatControl from "./details/CombatControl";
 import InventoryDetails from "./details/InventoryDetails";
 import ResourcesControl from "./details/ResourcesControl";
 import TextDetails from "./details/TextDetails";
+import { CharSheetType } from "./details/components/character-sheet/CharSheetType";
 
 interface CampaignDetailsContentProps {
   tab?: TabType;
@@ -30,26 +31,10 @@ export default function CampaignDetailsContent({
     );
   }
 
-  if (tab.type === "combat") {
-    return (
-      <div className="tab-content">
-        <CombatControl />
-      </div>
-    );
-  }
-
   if (tab.type === "sheet") {
     return (
       <div className="tab-content">
-        <CharacterSheet />
-      </div>
-    );
-  }
-
-  if (tab.type === "resource") {
-    return (
-      <div className="tab-content">
-        <ResourcesControl />
+        <CharacterSheet content={tab.content as CharSheetType} />
       </div>
     );
   }

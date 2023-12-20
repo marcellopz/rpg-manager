@@ -1,3 +1,5 @@
+import { CharSheetType } from "./id/details/components/character-sheet/CharSheetType";
+
 export interface CampaignType {
   // id?: string;
   name: string;
@@ -33,7 +35,7 @@ export interface PlayerType {
 export interface TabType {
   name: string;
   type: string;
-  content: string | InventoryContent;
+  content: string | InventoryContent | CharSheetType;
 }
 
 export interface InventoryContent {
