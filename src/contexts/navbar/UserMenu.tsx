@@ -81,7 +81,7 @@ const UserMenu: React.FC = () => {
                 className="flex space-between"
                 onClick={() => setOpenInvites(true)}
               >
-                <p>Invitations</p>
+                <p>{t("INVITES_LABEL")}</p>
                 {invites.length > 0 && (
                   <p className="circled-red">{invites.length}</p>
                 )}
@@ -91,11 +91,11 @@ const UserMenu: React.FC = () => {
               className="cursor-pointer"
               onClick={handleUserEditProfile}
             >
-              <li>Edit profile</li>
+              <li>{t("EDIT_PROFILE")}</li>
             </div>
             <li className="divider-menu"></li>
             <Link to="/signout">
-              <li>{t("NAV_LOGOUT")} Out</li>
+              <li>{t("NAV_LOGOUT")}</li>
             </Link>
           </ul>
         </div>

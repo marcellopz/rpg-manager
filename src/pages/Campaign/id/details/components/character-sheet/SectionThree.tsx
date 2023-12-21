@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { useCharSheetContext } from "./CharSheetContext";
 import "./SectionThree.css";
 
@@ -9,7 +10,7 @@ const SectionThree = () => {
       <div className="yellow">
         <div>
           <div className="armor_class">
-            <p>CLASSE DE ARMADURA</p>
+            <p>{t("CHAR_SHEET_ARMOR_CLASS")}</p>
             <input
               type="text"
               name="armor_class"
@@ -25,7 +26,7 @@ const SectionThree = () => {
           </div>
           <div className="initiative_and_displacement">
             <div>
-              <p id="iniciative">INICIATIVA</p>
+              <p id="iniciative">{t("CHAR_SHEET_INITIATIVE")}</p>
               <input
                 type="text"
                 name="initiative"
@@ -40,7 +41,7 @@ const SectionThree = () => {
               />
             </div>
             <div>
-              <p id="movement">DESLOCAMENTO</p>
+              <p id="movement">{t("CHAR_SHEET_SPEED")}</p>
               <input
                 type="text"
                 name="speed"
@@ -58,7 +59,7 @@ const SectionThree = () => {
         </div>
         <div className="health_points">
           <div className="max_health">
-            <p>PONTOS DE VIDA MÁXIMOS</p>
+            <p>{t("CHAR_SHEET_MAX_HP")}</p>
             <input
               type="number"
               maxLength={4}
@@ -83,7 +84,7 @@ const SectionThree = () => {
                 })
               }
             />
-            <p>PONTOS DE VIDA ATUAIS</p>
+            <p>{t("CHAR_SHEET_CURRENT_HP")}</p>
           </div>
         </div>
         <div className="temporary_hit_points">
@@ -98,7 +99,7 @@ const SectionThree = () => {
               })
             }
           />
-          <p>PONTOS DE VIDA TEMPORÁRIOS</p>
+          <p>{t("CHAR_SHEET_TEMPORARY_HP")}</p>
         </div>
         <div className="life_points">
           <div className="health_data">
@@ -127,11 +128,11 @@ const SectionThree = () => {
                 })
               }
             />
-            <p>DADO DE VIDA</p>
+            <p>{t("CHAR_SHEET_HIT_DICE")}</p>
           </div>
           <div className="successes_and_failures">
             <div className="successes">
-              <p>SUCESSOS</p>
+              <p>{t("CHAR_SHEET_SUCCESSES")}</p>
               <input
                 type="checkbox"
                 checked={charSheetData.success1}
@@ -164,7 +165,7 @@ const SectionThree = () => {
               />
             </div>
             <div className="failures">
-              <p>FALHAS</p>
+              <p>{t("CHAR_SHEET_FAILURES")}</p>
               <input
                 type="checkbox"
                 checked={charSheetData.fail1}
@@ -196,16 +197,16 @@ const SectionThree = () => {
                 }
               />
             </div>
-            <p>SALVAGUARDA CONTRA MORTE</p>
+            <p>{t("CHAR_SHEET_DEATH_SAVES")}</p>
           </div>
         </div>
       </div>
 
       <div className="red">
         <div className="title_container">
-          <p>NOME</p>
-          <p>BÔNUS ATAQUE</p>
-          <p>DANO/TIPO</p>
+          <p>{t("CHAR_SHEET_ATTACK_NAME")}</p>
+          <p>{t("CHAR_SHEET_ATTACK_BONUS")}</p>
+          <p>{t("CHAR_SHEET_ATTACK_DAMAGE_TYPE")}</p>
         </div>
         <div className="input_container">
           <input
@@ -350,7 +351,7 @@ const SectionThree = () => {
             })
           }
         />
-        <p>ATAQUES & CONJURAÇÃO</p>
+        <p>{t("CHAR_SHEET_ATTACKS_SPELLCASTING")}</p>
       </div>
 
       <div className="blue">
@@ -366,7 +367,7 @@ const SectionThree = () => {
               })
             }
           />
-          <p>TRAÇOS DE PERSONALIDADE</p>
+          <p>{t("CHAR_SHEET_PERSONALITY_TRAITS")}</p>
         </div>
         <div>
           <div className="purple_container">
@@ -381,7 +382,7 @@ const SectionThree = () => {
                 })
               }
             />
-            <p>IDEAIS</p>
+            <p>{t("CHAR_SHEET_IDEALS")}</p>
           </div>
           <div className="purple_container">
             <textarea
@@ -395,7 +396,7 @@ const SectionThree = () => {
                 })
               }
             />
-            <p>VÍNCULOS</p>
+            <p>{t("CHAR_SHEET_BONDS")}</p>
           </div>
           <div className="purple_container">
             <textarea
@@ -409,7 +410,7 @@ const SectionThree = () => {
                 })
               }
             />
-            <p>FRAQUEZAS</p>
+            <p>{t("CHAR_SHEET_FLAWS")}</p>
           </div>
         </div>
       </div>
@@ -426,7 +427,7 @@ const SectionThree = () => {
             })
           }
         />
-        <p>CARACTERÍSTICAS & TALENTOS</p>
+        <p>{t("CHAR_SHEET_FEATURES_AND_TRAITS")}</p>
       </div>
     </div>
   );

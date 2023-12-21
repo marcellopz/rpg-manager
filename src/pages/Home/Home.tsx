@@ -10,6 +10,12 @@ type ItemProps = {
 
 const itemsUnderCastle = [
   {
+    id: 4,
+    name: "HOME_STORE_CAMPAIGNS",
+    description: "Lorem Ipsum",
+    img: "/assets/icone.svg",
+  },
+  {
     id: 1,
     name: "HOME_MANAGE_INVENTORY",
     description: "Lorem Ipsum",
@@ -24,12 +30,6 @@ const itemsUnderCastle = [
   {
     id: 3,
     name: "HOME_MANAGE_SKILLS",
-    description: "Lorem Ipsum",
-    img: "/assets/icone.svg",
-  },
-  {
-    id: 4,
-    name: "HOME_STORE_CAMPAIGNS",
     description: "Lorem Ipsum",
     img: "/assets/icone.svg",
   },

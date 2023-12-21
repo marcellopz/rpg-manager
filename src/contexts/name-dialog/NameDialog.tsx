@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 // import "./nameDialog.css";
 
 interface NameDialogProps {
@@ -11,6 +12,7 @@ const NameDialog: React.FC<NameDialogProps> = ({ open, onSave, onClose }) => {
   const [name, setName] = useState<string>("");
   const [profilePicture, setProfilePicture] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   if (!open) {
     return null;
@@ -47,7 +49,7 @@ const NameDialog: React.FC<NameDialogProps> = ({ open, onSave, onClose }) => {
           e.stopPropagation();
         }}
       >
-        <h2>Enter your name and profile picture</h2>
+        <h2>{t("ENTER_NAME_PICTURE")}</h2>
         <form onSubmit={handleSubmit}>
           <label>
             Username*
@@ -56,11 +58,11 @@ const NameDialog: React.FC<NameDialogProps> = ({ open, onSave, onClose }) => {
               value={name}
               onChange={handleNameChange}
             />
-            {error && <p className="error">You must enter a username</p>}
+            {error && <p className="error">{t("ERROR_USERNAME")}</p>}
           </label>
           <br />
           <label>
-            Profile Picture URL
+            {t("PROFILE_PICTURE_LABEL")}
             <input
               type="text"
               value={profilePicture}
@@ -68,7 +70,7 @@ const NameDialog: React.FC<NameDialogProps> = ({ open, onSave, onClose }) => {
             />
           </label>
           <br />
-          <button type="submit">Save</button>
+          <button type="submit">{t("SAVE")}</button>
           {/* <button
           type="button"
           onClick={onClose}

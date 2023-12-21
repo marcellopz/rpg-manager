@@ -17,6 +17,11 @@
   overflow: hidden;
 }
 
+.char-sheet p {
+  /* uppercase */
+  text-transform: uppercase;
+}
+
 .char-sheet input {
     color: black;
 }

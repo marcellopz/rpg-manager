@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { useCharSheetContext } from "./CharSheetContext";
 import "./SectionTwo.css";
 
@@ -11,12 +12,12 @@ const attributes: {
     | "wisdom"
     | "charisma";
 }[] = [
-  { label: "FORÇA", key: "strength" },
-  { label: "DESTREZA", key: "dexterity" },
-  { label: "CONSTITUIÇÃO", key: "constitution" },
-  { label: "INTELIGÊNCIA", key: "intelligence" },
-  { label: "SABEDORIA", key: "wisdom" },
-  { label: "CARISMA", key: "charisma" },
+  { label: "CHAR_SHEET_STRENGTH", key: "strength" },
+  { label: "CHAR_SHEET_DEXTERITY", key: "dexterity" },
+  { label: "CHAR_SHEET_CONSTITUTION", key: "constitution" },
+  { label: "CHAR_SHEET_INTELLIGENCE", key: "intelligence" },
+  { label: "CHAR_SHEET_WISDOM", key: "wisdom" },
+  { label: "CHAR_SHEET_CHARISMA", key: "charisma" },
 ];
 
 const convertToModifier = (value: number) => {
@@ -58,7 +59,7 @@ const SectionTwo = () => {
             maxLength={2}
           />
           <div>
-            <p>BÔNUS DE PROFICIÊNCIA</p>
+            <p>{t("CHAR_SHEET_PROFICIENCY_BONUS")}</p>
           </div>
         </div>
         <div className="inspiration">
@@ -75,7 +76,7 @@ const SectionTwo = () => {
             maxLength={1}
           />
           <div>
-            <p>INSPIRAÇÃO</p>
+            <p>{t("CHAR_SHEET_INSPIRATION")}</p>
           </div>
         </div>
 
@@ -109,7 +110,7 @@ const SectionTwo = () => {
                   className="text_2"
                   maxLength={2}
                 />
-                <p>{atributo.label}</p>
+                <p>{t(atributo.label)}</p>
               </div>
             ))}
           </div>
@@ -144,7 +145,7 @@ const SectionTwo = () => {
                   }
                   maxLength={2}
                 />
-                <p>SALVAGUARDA</p>
+                <p>{t("CHAR_SHEET_SAVING_THROWS")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -174,7 +175,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>ATLETISMO</p>
+                <p>{t("CHAR_SHEET_ATLETHICS")}</p>
               </div>
             </div>
             <div>
@@ -206,7 +207,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>SALVAGUARDA</p>
+                <p>{t("CHAR_SHEET_SAVING_THROWS")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -236,7 +237,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>ACROBACIA</p>
+                <p>{t("CHAR_SHEET_ACROBATICS")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -266,7 +267,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>FURTIVIDADE</p>
+                <p>{t("CHAR_SHEET_STEALTH")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -296,7 +297,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>PRESTIDIGITAÇÃO</p>
+                <p>{t("CHAR_SHEET_SLEIGHT_OF_HAND")}</p>
               </div>
             </div>
             <div>
@@ -328,7 +329,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>SALVAGUARDA</p>
+                <p>{t("CHAR_SHEET_SAVING_THROWS")}</p>
               </div>
             </div>
             <div>
@@ -360,7 +361,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>SALVAGUARDA</p>
+                <p>{t("CHAR_SHEET_SAVING_THROWS")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -390,7 +391,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>ARCANA</p>
+                <p>{t("CHAR_SHEET_ARCANA")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -420,7 +421,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>HISTORIA</p>
+                <p>{t("CHAR_SHEET_HISTORY")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -450,7 +451,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>INVESTIGAÇÃO</p>
+                <p>{t("CHAR_SHEET_INVESTIGATION")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -480,7 +481,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>NATUREZA</p>
+                <p>{t("CHAR_SHEET_NATURE")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -510,7 +511,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>RELIGIÃO</p>
+                <p>{t("CHAR_SHEET_RELIGION")}</p>
               </div>
             </div>
             <div>
@@ -542,7 +543,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>SALVAGUARDA</p>
+                <p>{t("CHAR_SHEET_SAVING_THROWS")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -572,7 +573,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>LIDAR COM ANIMAIS</p>
+                <p>{t("CHAR_SHEET_ANIMAL_HANDLING")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -602,7 +603,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>INTUIÇÃO</p>
+                <p>{t("CHAR_SHEET_INSIGHT")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -632,7 +633,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>MEDICINA</p>
+                <p>{t("CHAR_SHEET_MEDICINE")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -662,7 +663,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>PERCEPTION</p>
+                <p>{t("CHAR_SHEET_PERCEPTION")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -692,7 +693,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>SOBREVIVENCIA</p>
+                <p>{t("CHAR_SHEET_SURVIVAL")}</p>
               </div>
             </div>
             <div>
@@ -724,7 +725,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>SALVAGUARDA</p>
+                <p>{t("CHAR_SHEET_SAVING_THROWS")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -754,7 +755,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>ENGANAÇÃO</p>
+                <p>{t("CHAR_SHEET_DECEPTION")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -784,7 +785,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>INTIMIDAÇÃO</p>
+                <p>{t("CHAR_SHEET_INTIMIDATION")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -814,7 +815,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>PERFORMANCE</p>
+                <p>{t("CHAR_SHEET_PERFORMANCE")}</p>
               </div>
               <div className="mini_container">
                 <input
@@ -844,7 +845,7 @@ const SectionTwo = () => {
                       : 0)
                   }
                 />
-                <p>PERSUASÃO</p>
+                <p>{t("CHAR_SHEET_PERSUASION")}</p>
               </div>
             </div>
           </div>

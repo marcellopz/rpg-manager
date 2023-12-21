@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { useCharSheetContext } from "./CharSheetContext";
 import "./SectionFour.css";
 
@@ -19,7 +20,7 @@ const SectionFour = () => {
             }
           />
           <p>
-            <b>OUTRAS PROEFICIÊNCIAS & IDIOMAS</b>
+            <b>{t("CHAR_SHEET_OTHER_PROFICIENCIES")}</b>
           </p>
         </div>
         <div className="twond">
@@ -35,7 +36,7 @@ const SectionFour = () => {
             }
           />
           <p>
-            <b>EQUIPAMENTOS & NOTAS DO PERSONAGEM</b>
+            <b>{t("CHAR_SHEET_EQUIPMENT")}</b>
           </p>
         </div>
       </div>

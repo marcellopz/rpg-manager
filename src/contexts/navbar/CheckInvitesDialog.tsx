@@ -1,6 +1,7 @@
 import React from "react";
 import { AuthContext } from "../authContext";
 import { acceptInvite } from "../firebase/database";
+import { useTranslation } from "react-i18next";
 
 type CheckInvitesDialogProps = {
   open: boolean;
@@ -12,6 +13,7 @@ const CheckInvitesDialog: React.FC<CheckInvitesDialogProps> = ({
   onClose,
 }) => {
   const { invites } = React.useContext(AuthContext);
+  const { t } = useTranslation();
 
   if (!open) {
     return null;
@@ -28,10 +30,10 @@ const CheckInvitesDialog: React.FC<CheckInvitesDialogProps> = ({
           e.stopPropagation();
         }}
       >
-        <h2>Your campaign invites:</h2>
+        <h2>{t("CAMPAIGN_INVITES_TITLE")}</h2>
         <div>
           {invites.length === 0 ? (
-            <p>You have no invites</p>
+            <p>{t("CAMPAIGN_NO_INVITES")}</p>
           ) : (
             invites.map((invite, i) => (
               <div

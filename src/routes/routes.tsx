@@ -3,7 +3,6 @@ import Home from "../pages/Home/Home";
 import PageNotFound from "./PageNotFound";
 import { NavbarProvider } from "../contexts/navbarContext";
 import CampaignApp from "../pages/Campaign/CampaignApp";
-import CalculatorApp from "../pages/Calculator/CalculatorApp";
 import Authenticate from "../pages/Authenticate/Authenticate";
 import SignOut from "../pages/Authenticate/SignOut";
 import Profile from "../pages/Profile/Profile";
@@ -44,10 +43,6 @@ export default function AppRoutes() {
           <Route
             path="/about"
             element={<About />}
-          />
-          <Route
-            path="/calculator"
-            element={<CalculatorApp />}
           />
           <Route
             path="/profile"
