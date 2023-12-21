@@ -5,6 +5,7 @@ import { AuthContext } from "../../../contexts/authContext";
 import { User } from "firebase/auth";
 import { DetailsContext } from "../context/DetailsContext";
 import { CategoryType } from "../campaignTypes";
+import { t } from "i18next";
 
 type AddCategoryDialogProps = {
   open: boolean;
@@ -64,31 +65,33 @@ const AddCategoryDialog: React.FC<AddCategoryDialogProps> = ({
           e.stopPropagation();
         }}
       >
-        <h2>Enter the new category name</h2>
+        <h2>{t("NEW_CATEGORY_PROMPT")}</h2>
         <form onSubmit={handleSubmit}>
           <label>
-            Category name*
+            {t("NEW_CATEGORY_LABEL")}*
             <input
               type="text"
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
             />
-            {error && <p className="error">You must enter a category name</p>}
+            {error && <p className="error">{t("NEW_CATEGORY_ERROR")}</p>}
           </label>
           {publicSelected && (
             <label>
-              Category type:
+              {t("NEW_CATEGORY_TYPE_LABEL")}:
               <select
                 value={categoryType}
                 onChange={(e) => setCategoryType(e.target.value)}
               >
-                <option value="normal">Normal</option>
-                <option value="inventory">Inventory</option>
+                <option value="normal">{t("CATEGORY_TYPE_NORMAL")}</option>
+                <option value="inventory">
+                  {t("CATEGORY_TYPE_INVENTORY")}
+                </option>
               </select>
             </label>
           )}
 
-          <button type="submit">Create</button>
+          <button type="submit">{t("CREATE_BTN")}</button>
         </form>
       </div>
     </div>

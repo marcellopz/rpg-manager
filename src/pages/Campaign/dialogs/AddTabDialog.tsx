@@ -6,6 +6,7 @@ import { User } from "firebase/auth";
 import { DetailsContext } from "../context/DetailsContext";
 import LoadImage from "../../../generic-components/load-image/LoadImage";
 import { initialCharSheet } from "../id/details/components/character-sheet/CharSheetType";
+import { t } from "i18next";
 
 type AddTabDialogProps = {
   open: boolean;
@@ -81,11 +82,14 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
         }}
       >
         <h2>
-          {isInventory ? "Enter character name" : "Enter the new Tab name"}
+          {isInventory
+            ? t("NEW_TAB_INVENTORY_PROMPT")
+            : t("NEW_TAB_NORMAL_PROMPT")}
         </h2>
         <form onSubmit={handleSubmit}>
           <label>
-            {isInventory ? "Character name*" : "Tab name*"}
+            {isInventory ? t("NEW_TAB_INVENTORY_LABEL") : t("NEW_TAB_LABEL")}
+            *
             <input
               type="text"
               value={TabName}
@@ -95,15 +99,15 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
             {error && (
               <p className="error">
                 {isInventory
-                  ? "You must enter a Character name"
-                  : "You must enter a Tab name"}
+                  ? t("NEW_TAB_INVENTORY_ERROR")
+                  : t("NEW_TAB_ERROR")}
               </p>
             )}
           </label>
           {isInventory ? (
             <>
               <label>
-                Character strength
+                {t("NEW_TAB_CHARACTER_STR")}
                 <input
                   type="number"
                   value={CharacterStrength}
@@ -111,7 +115,7 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
                 />
               </label>
               <label>
-                Character gold
+                {t("NEW_TAB_CHARACTER_GOLD")}
                 <input
                   type="number"
                   value={CharacterGold}
@@ -126,21 +130,21 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
             </>
           ) : (
             <label>
-              Tab type*
+              {t("NEW_TAB_TYPE_LABEL")}*
               <select
                 onChange={(e) => setTabType(e.target.value)}
                 value={TabType}
               >
-                <option value="text">Text</option>
+                <option value="text">{t("NEW_TAB_TYPE_TEXT")}</option>
                 {/* <option value="inventory">Inventory</option> */}
-                <option value="sheet">Character sheet</option>
+                <option value="sheet">{t("NEW_TAB_TYPE_SHEET")}</option>
                 {/* <option value="resource">Resource control</option> */}
                 {/* <option value="combat">Combat control</option> */}
               </select>
-              {error && <p className="error">You must enter a Tab name</p>}
+              {error && <p className="error">{t("NEW_TAB_ERROR")}</p>}
             </label>
           )}
-          <button type="submit">Create</button>
+          <button type="submit">{t("CREATE_BTN")}</button>
         </form>
       </div>
     </div>

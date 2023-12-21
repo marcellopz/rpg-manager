@@ -4,6 +4,7 @@ import { addNewCampaign } from "../../../contexts/firebase/database";
 import { CampaignType, PlayerType } from "../campaignTypes";
 import { AuthContext } from "../../../contexts/authContext";
 import LoadImage from "../../../generic-components/load-image/LoadImage";
+import { t } from "i18next";
 
 const saveCampaign = (name: string, description: string, imageURL: string) => {
   const newCampaign = {
@@ -65,9 +66,9 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
             e.stopPropagation();
           }}
         >
-          <h2>You have to log in to create a campaign</h2>
+          <h2>{t("CREATE_CAMPAIGN_NOT_LOGGED_IN")}</h2>
           <button>
-            <a href="/authenticate">Log in</a>
+            <a href="/authenticate">{t("CREATE_CAMPAIGN_NOT_LOGGED_IN_BTN")}</a>
           </button>
         </div>
       </div>
@@ -84,36 +85,34 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
           e.stopPropagation();
         }}
       >
-        <h2>Enter the new campaign details</h2>
+        <h2>{t("NEW_CAMPAIGN_PROMPT")}</h2>
         <form onSubmit={handleSubmit}>
           <label>
-            Campaign name*
+            {t("NEW_CAMPAIGN_LABEL")}*
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            {error && <p className="error">You must enter a campaign name</p>}
+            {error && <p className="error">{t("NEW_CAMPAIGN_ERROR")}</p>}
           </label>
           <label>
-            Campaign description*
+            {t("NEW_CAMPAIGN_DESCRIPTION")}*
             <textarea
               rows={4}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            {error && (
-              <p className="error">You must enter a campaign description</p>
-            )}
+            {error && <p className="error">{t("NEW_CAMPAIGN_ERROR")}</p>}
           </label>
           <LoadImage
             setImageBlob={setImageURL}
             sizeLimit={2000000}
           />
           <br />
-          <button type="submit">Save</button>
+          <button type="submit">{t("SAVE_BTN")}</button>
         </form>
-        <p style={{ marginTop: "5px" }}>Player invites get configured later</p>
+        <p style={{ marginTop: "5px" }}>{t("CREATE_CAMPAIGN_INVITES_INFO")}</p>
       </div>
     </div>
   );

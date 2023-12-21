@@ -1,8 +1,6 @@
 import { InventoryContent, TabType } from "../campaignTypes";
 import CharacterSheet from "./details/CharacterSheet";
-import CombatControl from "./details/CombatControl";
 import InventoryDetails from "./details/InventoryDetails";
-import ResourcesControl from "./details/ResourcesControl";
 import TextDetails from "./details/TextDetails";
 import { CharSheetType } from "./details/components/character-sheet/CharSheetType";
 

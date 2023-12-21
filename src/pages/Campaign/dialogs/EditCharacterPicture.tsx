@@ -3,6 +3,7 @@ import LoadImage from "../../../generic-components/load-image/LoadImage";
 import { DetailsContext } from "../context/DetailsContext";
 import { useParams } from "react-router-dom";
 import { saveCharImageInventory } from "../../../contexts/firebase/database";
+import { t } from "i18next";
 
 type EditCharacterPictureProps = {
   open: boolean;
@@ -41,7 +42,7 @@ const EditCharacterPicture = ({ open, onClose }: EditCharacterPictureProps) => {
           e.stopPropagation();
         }}
       >
-        <h2>Edit Character Picture</h2>
+        <h2>{t("EDIT_CHAR_PICTURE")}</h2>
         <LoadImage
           setImageBlob={setCharacterImage}
           aspectRatio={1}
@@ -49,7 +50,7 @@ const EditCharacterPicture = ({ open, onClose }: EditCharacterPictureProps) => {
         />
 
         <div className="save-btn">
-          <button onClick={onSave}>Save</button>
+          <button onClick={onSave}>{t("SAVE_BTN")}</button>
         </div>
       </div>
     </div>

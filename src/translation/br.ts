@@ -88,6 +88,48 @@ const br = {
   CHAR_SHEET_INTIMIDATION: "Intimidação",
   CHAR_SHEET_PERFORMANCE: "Atuação",
   CHAR_SHEET_PERSUASION: "Persuasão",
+  NEW_CATEGORY_PROMPT: "Digite o nome da nova categoria:",
+  NEW_CATEGORY_LABEL: "Nova categoria",
+  NEW_CATEGORY_ERROR: "Você deve digitar um nome para a categoria",
+  NEW_CATEGORY_TYPE_LABEL: "Tipo de categoria",
+  CATEGORY_TYPE_NORMAL: "Normal",
+  CATEGORY_TYPE_INVENTORY: "Inventário",
+  CREATE_BTN: "Criar",
+
+  NEW_TAB_INVENTORY_PROMPT: "Digite o nome do personagem",
+  NEW_TAB_NORMAL_PROMPT: "Digite o nome da aba",
+  NEW_TAB_LABEL: "Nome da aba",
+  NEW_TAB_INVENTORY_LABEL: "Nome do personagem",
+  NEW_TAB_ERROR: "Você deve digitar um nome e um tipo para a aba",
+  NEW_TAB_INVENTORY_ERROR: "Você deve digitar um nome para o personagem",
+  NEW_TAB_TYPE_LABEL: "Tipo da aba",
+  NEW_TAB_TYPE_TEXT: "Texto",
+  NEW_TAB_TYPE_SHEET: "Ficha de personagem",
+  NEW_TAB_CHARACTER_STR: "Força do personagem",
+  NEW_TAB_CHARACTER_GOLD: "Ouro do personagem",
+
+  NEW_CAMPAIGN_PROMPT: "Digite o nome e a descrição da campanha",
+  NEW_CAMPAIGN_LABEL: "Nome da campanha",
+  NEW_CAMPAIGN_ERROR: "Você deve digitar um nome para a campanha",
+  NEW_CAMPAIGN_DESCRIPTION: "Descrição da campanha",
+  CANCEL_BTN: "Cancelar",
+
+  DELETE_TAB_CATEGORY_CONFIRM: "Você tem certeza que deseja deletar ",
+  DELETE_BTN: "Deletar",
+
+  SAVE_BTN: "Savar",
+  EDIT_CHAR_PICTURE: "Editar foto do personagem",
+
+  INVITE_PROMPT: "Digite o email do jogador",
+  INVITE_LABEL: "Email do jogador",
+  INVITE_ERROR: "Não existe usuário cadastrado com este email",
+  INVITE_BTN: "Convidar",
+
+  CREATE_CAMPAIGN_NOT_LOGGED_IN:
+    "Você deve estar logado para criar uma campanha",
+  CREATE_CAMPAIGN_NOT_LOGGED_IN_BTN: "Entrar",
+  CREATE_CAMPAIGN_INVITES_INFO:
+    "Os convites de jogadores são configurados depois",
 };
 
 export default br;

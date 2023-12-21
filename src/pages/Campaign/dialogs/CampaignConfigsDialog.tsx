@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { DetailsContext } from "../context/DetailsContext";
 import { editCampaignNameDescription } from "../../../contexts/firebase/database";
+import { t } from "i18next";
 
 type CampaignConfigsDialogProps = {
   open: boolean;
@@ -50,10 +51,10 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
           e.stopPropagation();
         }}
       >
-        <h2>Campaign configs</h2>
+        <h2>{t("NEW_CAMPAIGN_PROMPT")}</h2>
         <div>
           <label>
-            Campaign name
+            {t("NEW_CAMPAIGN_LABEL")}
             <input
               type="text"
               value={campaignName}
@@ -61,7 +62,7 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
             />
           </label>
           <label>
-            Campaign description
+            {t("NEW_CAMPAIGN_DESCRIPTION")}
             <textarea
               rows={4}
               value={campaignDescription}
@@ -74,13 +75,13 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
             onClick={onClose}
             className="button-cancel"
           >
-            cancel
+            {t("CANCEL_BTN")}
           </button>
           <button
             onClick={saveCampaignConfigs}
             // className="button-save"
           >
-            save
+            {t("CREATE_BTN")}
           </button>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/authContext";
 import { User } from "firebase/auth";
 import { DetailsContext } from "../context/DetailsContext";
+import { t } from "i18next";
 
 type ConfirmDeleteDialogProps = {
   open: boolean;
@@ -60,20 +61,20 @@ const ConfirmDeleteDialog: React.FC<ConfirmDeleteDialogProps> = ({
         }}
       >
         <h2>
-          Are you sure you want to delete {tab ? tab.name : category.name}
+          {t("DELETE_TAB_CATEGORY_CONFIRM")} {tab ? tab.name : category.name}
         </h2>
         <div className="confirm-button-container">
           <button
             onClick={onClose}
             className="button-cancel"
           >
-            cancel
+            {t("CANCEL_BTN")}
           </button>
           <button
             onClick={deleteTabOrCategory}
             className="button-delete"
           >
-            delete
+            {t("DELETE_BTN")}
           </button>
         </div>
       </div>

@@ -3,6 +3,7 @@ import {
   getUidByEmail,
   invitePlayer,
 } from "../../../contexts/firebase/database";
+import { t } from "i18next";
 
 type InvitePlayerDialogProps = {
   campaignId: string;
@@ -50,18 +51,18 @@ const InvitePlayerDialog: React.FC<InvitePlayerDialogProps> = ({
           e.stopPropagation();
         }}
       >
-        <h2>Enter the new player email</h2>
+        <h2>{t("INVITE_PROMPT")}</h2>
         <form onSubmit={handleSubmit}>
           <label>
-            Player email*
+            {t("INVITE_PROMPT")}*
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {error && <p className="error">This player email doesn't exist</p>}
+            {error && <p className="error">{t("INVITE_ERROR")}</p>}
           </label>
-          <button type="submit">Invite</button>
+          <button type="submit">{t("INVITE_BTN")}</button>
         </form>
       </div>
     </div>
