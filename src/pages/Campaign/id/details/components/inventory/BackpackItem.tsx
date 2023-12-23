@@ -72,7 +72,16 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
 
   return (
     <div className="master_item_container">
-      <div className="item_container">
+      <div
+        className="item_container"
+        style={
+          item.item.type === "magic"
+            ? { color: "blueviolet", fontWeight: 700 }
+            : item.item.type === "consumable"
+            ? { color: "brown", fontWeight: 700 }
+            : {}
+        }
+      >
         <div
           className="number_of_items"
           onDoubleClick={() => setEditingNumberOfItems(true)}
@@ -153,9 +162,9 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
             typeToString(item.item.type)
           )}
         </div>
-        <div className="weight">{item.item.weight}</div>
+        <div className="weight">{item.item.weight.toFixed(1)}</div>
         <div className="total_weight">
-          {item.item.weight * item.numberOfItems}
+          {(item.item.weight * item.numberOfItems).toFixed(1)}
         </div>
         <div
           className="delete-item cursor-pointer"

@@ -153,6 +153,7 @@ const en = {
   NO_CAMPAIGNS_REGISTERED: "You don't have any campaigns registered",
   EMAIL: "Email",
   MEMBER_SINCE: "Member since",
+  SAVE_AUTO: "Save automatically",
 };
 
 export default en;

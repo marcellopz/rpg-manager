@@ -40,9 +40,19 @@ export default function CampaignDetails() {
     useState<boolean>(false);
 
   const handleCategoryChange = (catId: string) => {
+    console.log(campaignDetails);
+
+    let firstTab = "";
+    if (campaignDetails?.categories?.[catId].tabs) {
+      firstTab = Object.keys(
+        campaignDetails?.categories[catId].tabs as {
+          [key: string]: any;
+        }
+      )[0];
+    }
     setCatTab({
       categoryId: catId,
-      tabId: "",
+      tabId: firstTab,
     });
   };
 

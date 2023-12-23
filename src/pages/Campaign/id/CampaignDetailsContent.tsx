@@ -16,7 +16,7 @@ export default function CampaignDetailsContent({
   if (tab.type === "text") {
     return (
       <div className="tab-content">
-        <TextDetails content={(tab.content || "") as string} />
+        <TextDetails />
       </div>
     );
   }

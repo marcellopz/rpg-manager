@@ -1,4 +1,4 @@
-import { useEffect, useRef, useContext } from "react";
+import { useEffect, useRef, useContext, memo } from "react";
 import "@mdxeditor/editor/style.css";
 import { toolbarPlugin } from "@mdxeditor/editor/plugins/toolbar";
 import {
@@ -20,7 +20,6 @@ import {
   tablePlugin,
   thematicBreakPlugin,
   frontmatterPlugin,
-  InsertTable,
   InsertThematicBreak,
   InsertAdmonition,
   directivesPlugin,
@@ -35,18 +34,15 @@ import {
 import { useParams } from "react-router-dom";
 import auth from "../../../../contexts/firebase/firebase";
 
-interface TextDetailsProps {
-  content: string;
-}
-
-export default function TextDetails({ content }: TextDetailsProps) {
+function TextDetails() {
   const mdxRef = useRef<MDXEditorMethods>(null);
   const { id } = useParams();
-  const { catTab, publicSelected, fetchAll } = useContext(DetailsContext);
+  const { catTab, publicSelected } = useContext(DetailsContext);
 
   useEffect(() => {
-    mdxRef?.current?.setMarkdown?.(content);
-  }, [content]);
+    // mdxRef?.current?.setMarkdown?.(content);
+    loadMarkdown();
+  }, [catTab.tabId]);
 
   const loadMarkdown = () => {
     getTabContent(
@@ -55,8 +51,9 @@ export default function TextDetails({ content }: TextDetailsProps) {
       catTab.tabId,
       publicSelected ? "" : (auth.currentUser?.uid as string)
     ).then((res) => {
+      console.log(res);
       mdxRef?.current?.setMarkdown?.(res);
-      fetchAll();
+      // fetchAll();
     });
   };
 
@@ -68,15 +65,30 @@ export default function TextDetails({ content }: TextDetailsProps) {
       publicSelected ? "" : (auth.currentUser?.uid as string),
       mdxRef?.current?.getMarkdown?.() as string
     ).then(() => {
-      fetchAll();
+      // fetchAll();
     });
   };
+
+  useEffect(() => {
+    const handleSave = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === "s") {
+        event.preventDefault();
+        saveMarkdown();
+      }
+    };
+
+    window.addEventListener("keydown", handleSave);
+
+    return () => {
+      window.removeEventListener("keydown", handleSave);
+    };
+  }, []);
 
   return (
     <MDXEditor
       ref={mdxRef}
       className="markdown-editor"
-      markdown={content}
+      markdown=""
       plugins={[
         toolbarPlugin({
           toolbarContents: () => (
@@ -105,9 +117,10 @@ export default function TextDetails({ content }: TextDetailsProps) {
               <CreateLink />
               <InsertImage />
               <Separator />
-              <InsertTable />
+              {/* <InsertTable /> */}
               <InsertThematicBreak />
               <InsertAdmonition />
+              <Separator />
             </>
           ),
         }),
@@ -125,7 +138,11 @@ export default function TextDetails({ content }: TextDetailsProps) {
         frontmatterPlugin(),
         markdownShortcutPlugin(),
       ]}
-      // className='markdown-editor'
+      onBlur={() => {
+        saveMarkdown();
+      }}
     />
   );
 }
+
+export default memo(TextDetails);

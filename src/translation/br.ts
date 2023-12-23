@@ -153,6 +153,7 @@ const br = {
   NO_CAMPAIGNS_REGISTERED: "Você não possui nenhuma campanha registrada",
   EMAIL: "Email",
   MEMBER_SINCE: "Membro desde",
+  SAVE_AUTO: "Salvar automaticamente",
 };
 
 export default br;
