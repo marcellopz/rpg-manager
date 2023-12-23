@@ -5,6 +5,7 @@ import AddCategoryDialog from "../dialogs/AddCategoryDialog";
 import AddTabDialog from "../dialogs/AddTabDialog";
 import ConfirmDeleteDialog from "../dialogs/ConfirmDeleteDialog";
 import { DetailsContext } from "../context/DetailsContext";
+import { t } from "i18next";
 
 interface deleteCategoryTabDialogProps {
   open: boolean;
@@ -165,7 +166,7 @@ export default function CampaignContentSelection({
                 className="create-new"
                 onClick={() => setAddCategoryDialogOpen(true)}
               >
-                + Add category
+                {t("ADD_CATEGORY")}
               </div>
             </div>
           </Resizable>
@@ -204,8 +205,8 @@ export default function CampaignContentSelection({
                   onClick={() => setAddTabDialogOpen(true)}
                 >
                   {selectedCategory?.inventory
-                    ? "+ Add inventory"
-                    : "+ Add tab"}
+                    ? t("ADD_INVENTORY")
+                    : t("ADD_TAB")}
                 </div>
               )}
             </div>

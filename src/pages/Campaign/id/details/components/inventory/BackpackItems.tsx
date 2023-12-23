@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { BackpackItem } from ".";
 import { InventoryContent } from "../../../../campaignTypes";
 
@@ -13,9 +14,9 @@ export default function BackpackItems({
       <div className="items-header inventory-background">
         <div className="number_of_items">#</div>
         <div className="separator" />
-        <div className="item_name">Item name</div>
+        <div className="item_name">{t("NEW_ITEM_LABEL")}</div>
         <div className="separator" />
-        <div className="normal_magical_consumable">Type</div>
+        <div className="normal_magical_consumable">{t("BACKPACK_TYPE")}</div>
         <div className="separator" />
         <div className="weight">
           <img
@@ -25,7 +26,7 @@ export default function BackpackItems({
           />
         </div>
         <div className="separator" />
-        <div className="total_weight">Total</div>
+        <div className="total_weight">{t("BACKPACK_TOTAL")}</div>
         <div className="separator" />
         <div className="delete-item">❌</div>
       </div>
@@ -38,10 +39,10 @@ export default function BackpackItems({
           />
         ))
       ) : (
-        <h2 className="no-items">No items</h2>
+        <h2 className="no-items">{t("BACKPACK_NO_ITEMS")}</h2>
       )}
-      <div className="add-button-div" >
-        <button onClick={openDialog}>Add item</button>
+      <div className="add-button-div">
+        <button onClick={openDialog}>{t("BACKPACK_ADD_ITEM")}</button>
       </div>
     </div>
   );

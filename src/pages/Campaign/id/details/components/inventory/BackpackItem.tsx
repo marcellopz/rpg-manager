@@ -8,6 +8,7 @@ import {
 } from "../../../../../../contexts/firebase/database";
 import { InventoryItemType } from "../../../../campaignTypes";
 import { DetailsContext } from "../../../../context/DetailsContext";
+import { t } from "i18next";
 
 interface BackpackItemProps {
   item: InventoryItemType;
@@ -121,7 +122,6 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
                 }}
                 onBlur={() => setEditingName(false)}
               />
-
             </>
           ) : (
             item.item.name
@@ -143,9 +143,11 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
                 fetchAll();
               }}
             >
-              <option value="normal">Normal</option>
-              <option value="magic">Magic</option>
-              <option value="consumable">Consumable</option>
+              <option value="normal">{t("NEW_ITEM_TYPE_NORMAL")}</option>
+              <option value="magic">{t("NEW_ITEM_TYPE_MAGIC")}</option>
+              <option value="consumable">
+                {t("NEW_ITEM_TYPE_CONSUMABLE")}
+              </option>
             </select>
           ) : (
             typeToString(item.item.type)

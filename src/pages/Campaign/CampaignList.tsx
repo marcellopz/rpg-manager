@@ -79,7 +79,7 @@ export default function CampaignList() {
               </div>
             ) : (
               <div className="no-cards">
-                <p>You have no campaigns registered</p>
+                <p>{t("NO_CAMPAIGNS_REGISTERED")}</p>
                 <button onClick={handleNewCampaign}>{t("CAMPAIGN_NEW")}</button>
               </div>
             )}

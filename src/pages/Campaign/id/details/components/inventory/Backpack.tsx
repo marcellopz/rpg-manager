@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { updateGold } from "../../../../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
 import { DetailsContext } from "../../../../context/DetailsContext";
+import { t } from "i18next";
 
 const Backpack = ({
   strength_box,
@@ -46,11 +47,11 @@ const Backpack = ({
   return (
     <div className="backpack_container inventory_background">
       <div className="strength_box">
-        <h4>STR</h4>
+        <h4>{t("BACKPACK_STR")}</h4>
         <p>{strength_box}</p>
       </div>
       <div className="carrying-weight">
-        <h4>TOTAL</h4>
+        <h4>{t("BACKPACK_TOTAL")}</h4>
         <p>{carrying_weight.toFixed(1)}</p>
       </div>
       <p className="weightCheck">{weightCheck(carrying_weight)}</p>

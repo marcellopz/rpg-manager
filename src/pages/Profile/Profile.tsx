@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import "./profile.css";
 import LoadDelay from "../../generic-components/LoadDelay";
+import { t } from "i18next";
 
 const Profile: React.FC = () => {
   const { authUser } = useContext(AuthContext);
@@ -23,8 +24,12 @@ const Profile: React.FC = () => {
         </div>
         <div>
           <h2>{authUser?.displayName}</h2>
-          <p>Email: {authUser?.email}</p>
-          <p>Member since: {authUser?.metadata.creationTime}</p>
+          <p>
+            {t("EMAIL")}: {authUser?.email}
+          </p>
+          <p>
+            {t("MEMBER_SINCE")}: {authUser?.metadata.creationTime}
+          </p>
           {/* <p>Number of campaigns: X</p> */}
         </div>
       </div>

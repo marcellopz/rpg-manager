@@ -71,12 +71,6 @@ const NameDialog: React.FC<NameDialogProps> = ({ open, onSave, onClose }) => {
           </label>
           <br />
           <button type="submit">{t("SAVE")}</button>
-          {/* <button
-          type="button"
-          onClick={onClose}
-        >
-          Cancel
-        </button> */}
         </form>
       </div>
     </div>

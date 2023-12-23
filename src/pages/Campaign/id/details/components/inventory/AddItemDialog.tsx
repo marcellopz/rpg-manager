@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { DetailsContext } from "../../../../context/DetailsContext";
 import { InventoryItemType } from "../../../../campaignTypes";
 import { addItemToInventory } from "../../../../../../contexts/firebase/database";
+import { t } from "i18next";
 
 type AddItemDialogProps = {
   open: boolean;
@@ -13,7 +14,7 @@ type AddItemDialogProps = {
 const AddItemDialog: React.FC<AddItemDialogProps> = ({ open, onClose }) => {
   const [NumberOfItems, setNumberOfItems] = React.useState<number>(0);
   const [ItemName, setItemName] = React.useState<string>("");
-  const [ItemWeight, setItemWeight] = React.useState<number>(0);
+  const [ItemWeight, setItemWeight] = React.useState<string>("");
   const [ItemType, setItemType] = React.useState<
     "normal" | "magic" | "consumable"
   >("normal");
@@ -31,7 +32,7 @@ const AddItemDialog: React.FC<AddItemDialogProps> = ({ open, onClose }) => {
       item: {
         name: ItemName,
         type: ItemType,
-        weight: ItemWeight,
+        weight: parseFloat(ItemWeight) ?? 0,
       },
     };
 
@@ -49,7 +50,7 @@ const AddItemDialog: React.FC<AddItemDialogProps> = ({ open, onClose }) => {
     addItem();
     setItemName("");
     setItemType("normal");
-    setItemWeight(0);
+    setItemWeight("");
     onClose();
   };
 
@@ -64,39 +65,39 @@ const AddItemDialog: React.FC<AddItemDialogProps> = ({ open, onClose }) => {
           e.stopPropagation();
         }}
       >
-        <h2>Enter Item details</h2>
+        <h2>{t("NEW_ITEM_PROMPT")}</h2>
         <form onSubmit={handleSubmit}>
           <label>
-            Item name*
+            {t("NEW_ITEM_LABEL")}*
             <input
               type="text"
               value={ItemName}
               onChange={(e) => setItemName(e.target.value)}
             />
-            {error && <p className="error">You must enter an item name</p>}
+            {error && <p className="error">{t("NEW_ITEM_ERROR")}</p>}
           </label>
           <div className="item-weights">
             <label>
-              <p>Number of items*</p>
+              <p>{t("NEW_ITEM_NUMBER_LABEL")}*</p>
               <input
-                type="number"
+                type="text"
                 value={NumberOfItems}
                 onChange={(e) => setNumberOfItems(Number(e.target.value))}
               />
-              {error && <p className="error">You must enter an item name</p>}
+              {error && <p className="error">{t("NEW_ITEM_NUMBER_ERROR")}</p>}
             </label>
             <label>
-              Item weight*
+              {t("NEW_ITEM_WEIGHT_LABEL")}*
               <input
-                type="number"
+                type="text"
                 value={ItemWeight}
-                onChange={(e) => setItemWeight(Number(e.target.value))}
+                onChange={(e) => setItemWeight(e.target.value)}
               />
-              {error && <p className="error">You must enter an item weight</p>}
+              {error && <p className="error">{t("NEW_ITEM_WEIGHT_ERROR")}</p>}
             </label>
           </div>
           <label>
-            Item type*
+            {t("NEW_ITEM_TYPE_LABEL")}*
             <select
               onChange={(e) => {
                 if (
@@ -108,13 +109,12 @@ const AddItemDialog: React.FC<AddItemDialogProps> = ({ open, onClose }) => {
               }}
               value={ItemType}
             >
-              <option value="normal">Normal Item</option>
-              <option value="magic">Magic Item</option>
-              <option value="consumable">Consumable</option>
+              <option value="normal">{t("NEW_ITEM_TYPE_NORMAL")}</option>
+              <option value="magic">{t("NEW_ITEM_TYPE_MAGIC")}</option>
+              <option value="consumable">{t("NEW_ITEM_TYPE_MAGIC")}</option>
             </select>
-            {error && <p className="error">You must enter an item type</p>}
           </label>
-          <button type="submit">Add</button>
+          <button type="submit">{t("ADD_BTN")}</button>
         </form>
       </div>
     </div>

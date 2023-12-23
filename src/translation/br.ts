@@ -116,20 +116,43 @@ const br = {
 
   DELETE_TAB_CATEGORY_CONFIRM: "Você tem certeza que deseja deletar ",
   DELETE_BTN: "Deletar",
-
   SAVE_BTN: "Savar",
   EDIT_CHAR_PICTURE: "Editar foto do personagem",
-
   INVITE_PROMPT: "Digite o email do jogador",
   INVITE_LABEL: "Email do jogador",
   INVITE_ERROR: "Não existe usuário cadastrado com este email",
   INVITE_BTN: "Convidar",
-
   CREATE_CAMPAIGN_NOT_LOGGED_IN:
     "Você deve estar logado para criar uma campanha",
   CREATE_CAMPAIGN_NOT_LOGGED_IN_BTN: "Entrar",
   CREATE_CAMPAIGN_INVITES_INFO:
     "Os convites de jogadores são configurados depois",
+
+  NEW_ITEM_PROMPT: "Digite o nome do item",
+  NEW_ITEM_LABEL: "Nome do item",
+  NEW_ITEM_ERROR: "Você deve digitar um nome para o item",
+  NEW_ITEM_NUMBER_LABEL: "Número de itens",
+  NEW_ITEM_NUMBER_ERROR: "Você deve digitar um número válido",
+  NEW_ITEM_WEIGHT_LABEL: "Peso do item",
+  NEW_ITEM_WEIGHT_ERROR: "Você deve digitar um peso válido",
+  NEW_ITEM_TYPE_LABEL: "Tipo do item",
+  NEW_ITEM_TYPE_NORMAL: "Item normal",
+  NEW_ITEM_TYPE_MAGIC: "Item mágico",
+  NEW_ITEM_TYPE_CONSUMABLE: "Item consumível",
+  ADD_BTN: "Adicionar",
+  BACKPACK_STR: "FOR",
+  BACKPACK_TOTAL: "Total",
+  BACKPACK_TYPE: "Tipo",
+  BACKPACK_NO_ITEMS: "Sem itens",
+  BACKPACK_ADD_ITEM: "Adicionar item",
+  ADD_INVENTORY: "+ Adicionar inventário",
+  ADD_CATEGORY: "+ Adicionar categoria",
+  ADD_TAB: "+ Adicionar aba",
+  PUBLIC: "Público",
+  PRIVATE: "Privado",
+  NO_CAMPAIGNS_REGISTERED: "Você não possui nenhuma campanha registrada",
+  EMAIL: "Email",
+  MEMBER_SINCE: "Membro desde",
 };
 
 export default br;

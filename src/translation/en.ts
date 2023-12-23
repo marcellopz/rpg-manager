@@ -120,15 +120,39 @@ const en = {
 
   SAVE_BTN: "Save",
   EDIT_CHAR_PICTURE: "Edit character picture",
-
   INVITE_PROMPT: "Enter the player's email",
   INVITE_LABEL: "Player email",
   INVITE_ERROR: "This player email doesn't exist",
   INVITE_BTN: "Invite",
-
   CREATE_CAMPAIGN_NOT_LOGGED_IN: "You must be logged in to create a campaign",
   CREATE_CAMPAIGN_NOT_LOGGED_IN_BTN: "Login",
-  CREATE_CAMPAIGN_INVITES_INFO: "Player invites get configured later"
+  CREATE_CAMPAIGN_INVITES_INFO: "Player invites get configured later",
+
+  NEW_ITEM_PROMPT: "Enter the item name",
+  NEW_ITEM_LABEL: "Item name",
+  NEW_ITEM_ERROR: "You must enter an item name",
+  NEW_ITEM_NUMBER_LABEL: "Number items",
+  NEW_ITEM_NUMBER_ERROR: "You must enter a valid number",
+  NEW_ITEM_WEIGHT_LABEL: "Item weight",
+  NEW_ITEM_WEIGHT_ERROR: "You must enter a valid weight",
+  NEW_ITEM_TYPE_LABEL: "Item type",
+  NEW_ITEM_TYPE_NORMAL: "Normal",
+  NEW_ITEM_TYPE_MAGIC: "Magic",
+  NEW_ITEM_TYPE_CONSUMABLE: "Consumable",
+  ADD_BTN: "Add",
+  BACKPACK_STR: "STR",
+  BACKPACK_TOTAL: "Total",
+  BACKPACK_TYPE: "Type",
+  BACKPACK_NO_ITEMS: "No items",
+  BACKPACK_ADD_ITEM: "Add item",
+  ADD_INVENTORY: "+ Add inventory",
+  ADD_CATEGORY: "+ Add category",
+  ADD_TAB: "+ Add tab",
+  PUBLIC: "Public",
+  PRIVATE: "Private",
+  NO_CAMPAIGNS_REGISTERED: "You don't have any campaigns registered",
+  EMAIL: "Email",
+  MEMBER_SINCE: "Member since",
 };
 
 export default en;
