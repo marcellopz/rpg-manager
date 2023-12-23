@@ -51,7 +51,6 @@ function TextDetails() {
       catTab.tabId,
       publicSelected ? "" : (auth.currentUser?.uid as string)
     ).then((res) => {
-      console.log(res);
       mdxRef?.current?.setMarkdown?.(res);
       // fetchAll();
     });
