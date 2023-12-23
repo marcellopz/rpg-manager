@@ -111,7 +111,9 @@ const AddItemDialog: React.FC<AddItemDialogProps> = ({ open, onClose }) => {
             >
               <option value="normal">{t("NEW_ITEM_TYPE_NORMAL")}</option>
               <option value="magic">{t("NEW_ITEM_TYPE_MAGIC")}</option>
-              <option value="consumable">{t("NEW_ITEM_TYPE_MAGIC")}</option>
+              <option value="consumable">
+                {t("NEW_ITEM_TYPE_CONSUMABLE")}
+              </option>
             </select>
           </label>
           <button type="submit">{t("ADD_BTN")}</button>
