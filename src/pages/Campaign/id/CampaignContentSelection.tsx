@@ -149,12 +149,14 @@ export default function CampaignContentSelection({
               {categories &&
                 Object.entries(categories).map(([cat_id, cat]) => (
                   <div
+                    role="item"
                     className={categoryId === cat_id ? "tab-selected" : ""}
                     onClick={() => handleCategoryChange(cat_id)}
                     key={cat_id}
                   >
                     <p>{cat.name}</p>
                     <p
+                      role="delete"
                       onClick={() => handleDeleteCategory(cat_id)}
                       className="smaller-button"
                     >
@@ -184,12 +186,14 @@ export default function CampaignContentSelection({
               {tabs &&
                 Object.entries(tabs).map(([tab_id, tab]) => (
                   <div
+                    role="item"
                     className={tabId === tab_id ? "tab-selected" : ""}
                     onClick={() => setTabId(tab_id)}
                     key={tab_id}
                   >
-                    <p>{tab.name}</p>
+                    <p role="item-text">{tab.name}</p>
                     <p
+                      role="delete"
                       className="smaller-button"
                       onClick={() => {
                         handleDeleteTab(categoryId, tab_id);

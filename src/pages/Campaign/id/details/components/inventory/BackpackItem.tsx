@@ -133,7 +133,7 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
               />
             </>
           ) : (
-            item.item.name
+            <p>{item.item.name}</p>
           )}
         </div>
         <div

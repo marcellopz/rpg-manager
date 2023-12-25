@@ -1,4 +1,4 @@
-import { useEffect, useRef, useContext, memo } from "react";
+import React, { useEffect, useRef, useContext, memo } from "react";
 import "@mdxeditor/editor/style.css";
 import { toolbarPlugin } from "@mdxeditor/editor/plugins/toolbar";
 import {
@@ -33,16 +33,57 @@ import {
 } from "../../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
 import auth from "../../../../contexts/firebase/firebase";
+import SaveIsNeededDialog from "../../dialogs/SaveIsNeededDialog";
 
 function TextDetails() {
   const mdxRef = useRef<MDXEditorMethods>(null);
   const { id } = useParams();
   const { catTab, publicSelected } = useContext(DetailsContext);
+  const [originalContent, setOriginalContent] = React.useState<string>("");
+  const [currentContent, setCurrentContent] = React.useState<string>("");
+  const [needSaveDialogOpen, setNeedSaveDialogOpen] =
+    React.useState<boolean>(false);
 
   useEffect(() => {
     // mdxRef?.current?.setMarkdown?.(content);
     loadMarkdown();
   }, [catTab.tabId]);
+
+  useEffect(() => {
+    if (needSaveDialogOpen) {
+      setNeedSaveDialogOpen(originalContent !== currentContent);
+    }
+
+    const handleClick = (event: MouseEvent) => {
+      if (
+        event.target instanceof HTMLElement &&
+        !event.target.closest(".markdown-editor")
+      ) {
+        setNeedSaveDialogOpen(originalContent !== currentContent);
+      }
+    };
+
+    window.addEventListener("click", handleClick);
+
+    return () => {
+      window.removeEventListener("click", handleClick);
+    };
+  }, [currentContent, originalContent]);
+
+  // useeffect with event listeners
+  useEffect(() => {
+    const handleSave = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === "s") {
+        event.preventDefault();
+        saveMarkdown();
+      }
+    };
+    window.addEventListener("keydown", handleSave);
+
+    return () => {
+      window.removeEventListener("keydown", handleSave);
+    };
+  }, []);
 
   const loadMarkdown = () => {
     getTabContent(
@@ -52,6 +93,7 @@ function TextDetails() {
       publicSelected ? "" : (auth.currentUser?.uid as string)
     ).then((res) => {
       mdxRef?.current?.setMarkdown?.(res);
+      setOriginalContent(res);
       // fetchAll();
     });
   };
@@ -64,83 +106,82 @@ function TextDetails() {
       publicSelected ? "" : (auth.currentUser?.uid as string),
       mdxRef?.current?.getMarkdown?.() as string
     ).then(() => {
+      setOriginalContent(currentContent);
       // fetchAll();
     });
   };
 
-  useEffect(() => {
-    const handleSave = (event: KeyboardEvent) => {
-      if ((event.ctrlKey || event.metaKey) && event.key === "s") {
-        event.preventDefault();
-        saveMarkdown();
-      }
-    };
-
-    window.addEventListener("keydown", handleSave);
-
-    return () => {
-      window.removeEventListener("keydown", handleSave);
-    };
-  }, []);
-
   return (
-    <MDXEditor
-      ref={mdxRef}
-      className="markdown-editor"
-      markdown=""
-      plugins={[
-        toolbarPlugin({
-          toolbarContents: () => (
-            <>
-              <UndoRedo />
-              <Separator />
-              <div className="flex">
-                <span
-                  onClick={saveMarkdown}
-                  className="small-button"
-                >
-                  💾
-                </span>
-                <span
-                  onClick={loadMarkdown}
-                  className="small-button"
-                >
-                  🔄
-                </span>
-              </div>
-              <Separator />
-              <BoldItalicUnderlineToggles />
-              <ListsToggle />
-              <Separator />
-              <BlockTypeSelect />
-              <CreateLink />
-              <InsertImage />
-              <Separator />
-              {/* <InsertTable /> */}
-              <InsertThematicBreak />
-              <InsertAdmonition />
-              <Separator />
-            </>
-          ),
-        }),
-        directivesPlugin({
-          directiveDescriptors: [AdmonitionDirectiveDescriptor],
-        }),
-        listsPlugin(),
-        quotePlugin(),
-        headingsPlugin(),
-        linkPlugin(),
-        linkDialogPlugin(),
-        imagePlugin(),
-        tablePlugin(),
-        thematicBreakPlugin(),
-        frontmatterPlugin(),
-        markdownShortcutPlugin(),
-      ]}
-      onBlur={() => {
-        saveMarkdown();
-      }}
-    />
+    <>
+      <MDXEditor
+        ref={mdxRef}
+        className="markdown-editor"
+        markdown=""
+        plugins={[
+          toolbarPlugin({
+            toolbarContents: () => (
+              <>
+                <UndoRedo />
+                <Separator />
+                <div className="flex">
+                  <span
+                    onClick={saveMarkdown}
+                    className="small-button"
+                  >
+                    💾
+                  </span>
+                  <span
+                    onClick={loadMarkdown}
+                    className="small-button"
+                  >
+                    🔄
+                  </span>
+                </div>
+                <Separator />
+                <BoldItalicUnderlineToggles />
+                <ListsToggle />
+                <Separator />
+                <BlockTypeSelect />
+                <CreateLink />
+                <InsertImage />
+                <Separator />
+                {/* <InsertTable /> */}
+                <InsertThematicBreak />
+                <InsertAdmonition />
+                <Separator />
+              </>
+            ),
+          }),
+          directivesPlugin({
+            directiveDescriptors: [AdmonitionDirectiveDescriptor],
+          }),
+          listsPlugin(),
+          quotePlugin(),
+          headingsPlugin(),
+          linkPlugin(),
+          linkDialogPlugin(),
+          imagePlugin(),
+          tablePlugin(),
+          thematicBreakPlugin(),
+          frontmatterPlugin(),
+          markdownShortcutPlugin(),
+        ]}
+        onChange={setCurrentContent}
+        // onBlur={(e) => {
+        //   if (originalContent !== currentContent && e.relatedTarget === null) {
+        //     setNeedSaveDialogOpen(true);
+        //   }
+        // }}
+      />
+      <SaveIsNeededDialog
+        open={needSaveDialogOpen}
+        onClose={() => setNeedSaveDialogOpen(false)}
+        save={saveMarkdown}
+        discard={() => {
+          mdxRef?.current?.setMarkdown?.(originalContent);
+        }}
+      />
+    </>
   );
 }
 

@@ -147,6 +147,21 @@
   justify-content: space-between;
 }
 
+.item-list [role=item]{
+  position: relative;
+}
+
+.item-list [role=item-text]{
+  width: calc(100% - 20px);
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.item-list [role=delete] {
+  position: absolute;
+  right: 0;
+}
+
 .category-selection {
   border-right: 1px solid rgb(170, 170, 170);
   background-color: rgba(0, 0, 0, 0.08);
@@ -344,6 +359,11 @@ span.react-resizable-handle {
   padding: 4px;
   /* border-radius: 5px; */
   /* border: 1px solid #e4e4e4; */
+}
+
+.unsaved-changes-dialog-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media only screen and (max-width: 800px) {
