@@ -14,12 +14,16 @@ interface DetailsContextProps {
   categoryId: string;
   setCategoryId: (id: string) => void;
   resetIds: () => void;
-  selectedData: CampaignType | PlayerType | null; // Added selectedData state
+  selectedData: CampaignType | PlayerType | null;
   setSelectedData: React.Dispatch<
     React.SetStateAction<CampaignType | PlayerType | null>
-  >; // Added setSelectedData state
-  publicSelected: boolean; // Added publicSelected state
-  setPublicSelected: React.Dispatch<React.SetStateAction<boolean>>; // Added setPublicSelected state
+  >;
+  publicSelected: boolean;
+  setPublicSelected: React.Dispatch<React.SetStateAction<boolean>>;
+  needSaveDialogOpen: boolean;
+  setNeedSaveDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  canTabChange: boolean;
+  setCanTabChange: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface DetailsProviderProps {
@@ -42,6 +46,10 @@ export const DetailsContext = createContext<DetailsContextProps>({
   setSelectedData: () => {},
   publicSelected: true,
   setPublicSelected: () => {},
+  needSaveDialogOpen: false,
+  setNeedSaveDialogOpen: () => {},
+  canTabChange: true,
+  setCanTabChange: () => {},
 });
 
 const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }) => {
@@ -55,6 +63,9 @@ const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }) => {
     CampaignType | PlayerType | null
   >(null);
   const [publicSelected, setPublicSelected] = React.useState<boolean>(true);
+  const [needSaveDialogOpen, setNeedSaveDialogOpen] =
+    React.useState<boolean>(false);
+  const [canTabChange, setCanTabChange] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     resetIds();
@@ -122,6 +133,10 @@ const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }) => {
         setSelectedData,
         publicSelected,
         setPublicSelected,
+        needSaveDialogOpen,
+        setNeedSaveDialogOpen,
+        canTabChange,
+        setCanTabChange,
       }}
     >
       {children}

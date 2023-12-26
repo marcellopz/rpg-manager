@@ -30,6 +30,7 @@ export default function CampaignDetails() {
     categoryId,
     tabId,
     publicSelected,
+    canTabChange,
   } = useContext(DetailsContext);
   const { authUser } = useContext(AuthContext);
 
@@ -40,6 +41,7 @@ export default function CampaignDetails() {
     useState<boolean>(false);
 
   const handleCategoryChange = (catId: string) => {
+    if (!canTabChange) return;
 
     let firstTab = "";
     if (campaignDetails?.categories?.[catId].tabs) {

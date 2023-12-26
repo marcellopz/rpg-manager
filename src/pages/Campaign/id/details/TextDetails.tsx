@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext, memo } from "react";
+import React, { useEffect, useRef, useContext, memo, useCallback } from "react";
 import "@mdxeditor/editor/style.css";
 import { toolbarPlugin } from "@mdxeditor/editor/plugins/toolbar";
 import {
@@ -38,11 +38,15 @@ import SaveIsNeededDialog from "../../dialogs/SaveIsNeededDialog";
 function TextDetails() {
   const mdxRef = useRef<MDXEditorMethods>(null);
   const { id } = useParams();
-  const { catTab, publicSelected } = useContext(DetailsContext);
+  const {
+    catTab,
+    publicSelected,
+    needSaveDialogOpen,
+    setNeedSaveDialogOpen,
+    setCanTabChange,
+  } = useContext(DetailsContext);
   const [originalContent, setOriginalContent] = React.useState<string>("");
   const [currentContent, setCurrentContent] = React.useState<string>("");
-  const [needSaveDialogOpen, setNeedSaveDialogOpen] =
-    React.useState<boolean>(false);
 
   useEffect(() => {
     // mdxRef?.current?.setMarkdown?.(content);
@@ -50,6 +54,7 @@ function TextDetails() {
   }, [catTab.tabId]);
 
   useEffect(() => {
+    setCanTabChange(originalContent === currentContent);
     if (needSaveDialogOpen) {
       setNeedSaveDialogOpen(originalContent !== currentContent);
     }
@@ -98,18 +103,19 @@ function TextDetails() {
     });
   };
 
-  const saveMarkdown = () => {
+  const saveMarkdown = useCallback(() => {
+    const content = mdxRef?.current?.getMarkdown?.();
     saveTabContent(
       id as string,
       catTab.categoryId,
       catTab.tabId,
       publicSelected ? "" : (auth.currentUser?.uid as string),
-      mdxRef?.current?.getMarkdown?.() as string
+      content as string
     ).then(() => {
-      setOriginalContent(currentContent);
+      setOriginalContent(content ?? "");
       // fetchAll();
     });
-  };
+  }, [currentContent, catTab, publicSelected, id]);
 
   return (
     <>
@@ -125,17 +131,17 @@ function TextDetails() {
                 <Separator />
                 <div className="flex">
                   <span
-                    onClick={saveMarkdown}
+                    onClick={() => saveMarkdown()}
                     className="small-button"
                   >
                     💾
                   </span>
-                  <span
+                  {/* <span
                     onClick={loadMarkdown}
                     className="small-button"
                   >
                     🔄
-                  </span>
+                  </span> */}
                 </div>
                 <Separator />
                 <BoldItalicUnderlineToggles />

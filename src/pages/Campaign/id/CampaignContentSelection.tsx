@@ -38,6 +38,7 @@ export default function CampaignContentSelection({
     selectedData,
     publicSelected,
     setPublicSelected,
+    canTabChange,
   } = useContext(DetailsContext);
 
   // resizable states
@@ -188,14 +189,18 @@ export default function CampaignContentSelection({
                   <div
                     role="item"
                     className={tabId === tab_id ? "tab-selected" : ""}
-                    onClick={() => setTabId(tab_id)}
+                    onClick={() => {
+                      if (!canTabChange) return;
+                      setTabId(tab_id);
+                    }}
                     key={tab_id}
                   >
                     <p role="item-text">{tab.name}</p>
                     <p
                       role="delete"
                       className="smaller-button"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         handleDeleteTab(categoryId, tab_id);
                       }}
                     >
