@@ -31,7 +31,7 @@ export const addNewCampaign = async (campaign: Partial<CampaignType>) => {
 
 export const getCampaignInvites = async (email: string) => {
   const invites = await get(
-    child(dbRef, `campaign-invites/players/${email.replace(".", "|")}`)
+    child(dbRef, `campaign-invites/players/${email.replaceAll(".", "|")}`)
   );
   if (invites.exists()) {
     return invites.val();
@@ -80,7 +80,7 @@ export const invitePlayer = async (
     child(dbRef, `campaign-invites/campaigns/${campaignId}/${playerId}`),
     email
   );
-  push(child(dbRef, `campaign-invites/players/${email.replace(".", "|")}`), {
+  push(child(dbRef, `campaign-invites/players/${email.replaceAll(".", "|")}`), {
     campaignId,
     campaignName,
   });
@@ -268,13 +268,13 @@ export const acceptInvite = async (campaignId: string) => {
 
 export const saveEmailUid = async () => {
   set(
-    child(dbRef, `user-emails/${auth.currentUser?.email?.replace(".", "|")}`),
+    child(dbRef, `user-emails/${auth.currentUser?.email?.replaceAll(".", "|")}`),
     auth.currentUser?.uid
   );
 };
 
 export const getUidByEmail = async (email: string) => {
-  const uid = await get(child(dbRef, `user-emails/${email.replace(".", "|")}`));
+  const uid = await get(child(dbRef, `user-emails/${email.replaceAll(".", "|")}`));
   if (uid.exists()) {
     return uid.val();
   } else {
