@@ -1,0 +1,50 @@
+/* Reset CSS */
+
+/* Box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Remove default margin and padding */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove list styles */
+ol,
+ul {
+    list-style: none;
+}
+
+/* Remove default anchor styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Remove default button styles */
+button {
+    border: none;
+    background: black;
+    color: white;
+    /* padding: 0; */
+    cursor: pointer;
+}
+
+/* Add more reset styles as needed */
+
+/* BEGIN: Your custom styles */
+
+/* END: Your custom styles */

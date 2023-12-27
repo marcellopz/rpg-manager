@@ -68,6 +68,23 @@ const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }) => {
   const [canTabChange, setCanTabChange] = React.useState<boolean>(true);
 
   React.useEffect(() => {
+    if (!selectedData) return;
+    if (!selectedData?.categories?.[catTab.categoryId]) {
+      resetIds();
+      return;
+    }
+    if (!selectedData?.categories?.[catTab.categoryId]?.tabs?.[catTab.tabId]) {
+      if (!selectedData?.categories?.[catTab.categoryId]?.tabs) return;
+      const firstTab = Object.keys(
+        selectedData?.categories?.[catTab.categoryId]?.tabs as {
+          [key: string]: any;
+        }
+      )[0];
+      setCatTab({ ...catTab, tabId: firstTab });
+    }
+  }, [selectedData]);
+
+  React.useEffect(() => {
     resetIds();
   }, [publicSelected]);
 
