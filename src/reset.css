@@ -22,12 +22,6 @@ ul {
     padding: 0;
 }
 
-/* Remove list styles */
-ol,
-ul {
-    list-style: none;
-}
-
 /* Remove default anchor styles */
 a {
     text-decoration: none;

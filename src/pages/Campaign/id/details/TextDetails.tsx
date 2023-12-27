@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext, memo, useCallback } from "react";
+import React, { useEffect, useRef, useContext, memo } from "react";
 import "@mdxeditor/editor/style.css";
 import { toolbarPlugin } from "@mdxeditor/editor/plugins/toolbar";
 import {
@@ -48,10 +48,22 @@ function TextDetails() {
   const [originalContent, setOriginalContent] = React.useState<string>("");
   const [currentContent, setCurrentContent] = React.useState<string>("");
 
+  const latestId = useRef<string>(id as string);
+  const latestCategoryId = useRef<string>(catTab.categoryId);
+  const latestTabId = useRef<string>(catTab.tabId);
+  const latestPublicSelected = useRef(publicSelected);
+
   useEffect(() => {
     // mdxRef?.current?.setMarkdown?.(content);
     loadMarkdown();
   }, [catTab.tabId]);
+
+  useEffect(() => {
+    latestId.current = id as string;
+    latestCategoryId.current = catTab.categoryId;
+    latestTabId.current = catTab.tabId;
+    latestPublicSelected.current = publicSelected;
+  }, [id, catTab.categoryId, catTab.tabId, publicSelected]);
 
   useEffect(() => {
     setCanTabChange(originalContent === currentContent);
@@ -103,19 +115,32 @@ function TextDetails() {
     });
   };
 
-  const saveMarkdown = useCallback(() => {
+  const loadMarkdownWithRefs = () => {
+    getTabContent(
+      latestId.current,
+      latestCategoryId.current,
+      latestTabId.current,
+      latestPublicSelected.current ? "" : (auth.currentUser?.uid as string)
+    ).then((res) => {
+      mdxRef?.current?.setMarkdown?.(res);
+      setOriginalContent(res);
+      // fetchAll();
+    });
+  };
+
+  const saveMarkdown = () => {
     const content = mdxRef?.current?.getMarkdown?.();
     saveTabContent(
-      id as string,
-      catTab.categoryId,
-      catTab.tabId,
-      publicSelected ? "" : (auth.currentUser?.uid as string),
+      latestId.current,
+      latestCategoryId.current,
+      latestTabId.current,
+      latestPublicSelected.current ? "" : (auth.currentUser?.uid as string),
       content as string
     ).then(() => {
       setOriginalContent(content ?? "");
       // fetchAll();
     });
-  }, [currentContent, catTab, publicSelected, id]);
+  };
 
   return (
     <>
@@ -131,17 +156,17 @@ function TextDetails() {
                 <Separator />
                 <div className="flex">
                   <span
-                    onClick={() => saveMarkdown()}
+                    onClick={saveMarkdown}
                     className="small-button"
                   >
                     💾
                   </span>
-                  {/* <span
-                    onClick={loadMarkdown}
+                  <span
+                    onClick={loadMarkdownWithRefs}
                     className="small-button"
                   >
                     🔄
-                  </span> */}
+                  </span>
                 </div>
                 <Separator />
                 <BoldItalicUnderlineToggles />
@@ -184,7 +209,7 @@ function TextDetails() {
         onClose={() => setNeedSaveDialogOpen(false)}
         save={saveMarkdown}
         discard={() => {
-          mdxRef?.current?.setMarkdown?.(originalContent);
+          loadMarkdown();
         }}
       />
     </>
