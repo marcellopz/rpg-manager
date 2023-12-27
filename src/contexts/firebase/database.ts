@@ -327,6 +327,22 @@ export const updateGold = async (
   );
 };
 
+export const updateUniqueItemWeight = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  itemId: string,
+  weight: number
+) => {
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/inventory/${itemId}/item/weight`
+    ),
+    weight
+  );
+}
+
 export const updateNumberOfItems = async (
   campaignId: string,
   categoryId: string,

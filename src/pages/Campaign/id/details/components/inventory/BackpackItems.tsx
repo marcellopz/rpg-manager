@@ -31,11 +31,11 @@ export default function BackpackItems({
         <div className="delete-item">❌</div>
       </div>
       {!!inventory ? (
-        Object.entries(inventory).map(([itemId, item], i) => (
+        Object.entries(inventory).map(([itemId, item]) => (
           <BackpackItem
             itemId={itemId}
             item={item}
-            key={i}
+            key={itemId}
           />
         ))
       ) : (

@@ -5,6 +5,7 @@ import {
   updateItemType,
   updateNameOfItem,
   updateNumberOfItems,
+  updateUniqueItemWeight,
 } from "../../../../../../contexts/firebase/database";
 import { InventoryItemType } from "../../../../campaignTypes";
 import { DetailsContext } from "../../../../context/DetailsContext";
@@ -26,6 +27,9 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
   );
   const [name, setName] = useState<string>(item.item.name);
   const [editingType, setEditingType] = useState<boolean>(false);
+  const [uniqueWeight, setUniqueWeight] = useState<string>("");
+  const [editingUniqueWeight, setEditingUniqueWeight] =
+    useState<boolean>(false);
 
   const handleDeleteItem = () => {
     deleteItemCampaign(id as string, catTab.categoryId, catTab.tabId, itemId);
@@ -52,6 +56,17 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
       numberOfItems
     );
     setEditingNumberOfItems(false);
+  };
+
+  const handleUpdateWeight = () => {
+    updateUniqueItemWeight(
+      id as string,
+      catTab.categoryId,
+      catTab.tabId,
+      itemId,
+      parseFloat(uniqueWeight)
+    );
+    setEditingUniqueWeight(false);
   };
 
   const handleUpdateItemType = (type: "normal" | "magic" | "consumable") => {
@@ -162,7 +177,31 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
             typeToString(item.item.type)
           )}
         </div>
-        <div className="weight">{item.item.weight.toFixed(1)}</div>
+        <div
+          className="weight"
+          onDoubleClick={() => setEditingUniqueWeight(true)}
+        >
+          {editingUniqueWeight ? (
+            <input
+              type="text"
+              value={uniqueWeight}
+              autoFocus
+              onChange={(e) => {
+                setUniqueWeight(e.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleUpdateWeight();
+                  setEditingUniqueWeight(false);
+                  fetchAll();
+                }
+              }}
+              onBlur={() => setEditingUniqueWeight(false)}
+            />
+          ) : (
+            item.item.weight.toFixed(1)
+          )}
+        </div>
         <div className="total_weight">
           {(item.item.weight * item.numberOfItems).toFixed(1)}
         </div>
