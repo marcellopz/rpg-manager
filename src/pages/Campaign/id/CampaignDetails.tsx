@@ -31,6 +31,7 @@ export default function CampaignDetails() {
     tabId,
     publicSelected,
     canTabChange,
+    selectedData,
   } = useContext(DetailsContext);
   const { authUser } = useContext(AuthContext);
 
@@ -44,9 +45,9 @@ export default function CampaignDetails() {
     if (!canTabChange) return;
 
     let firstTab = "";
-    if (campaignDetails?.categories?.[catId].tabs) {
+    if (selectedData?.categories?.[catId].tabs) {
       firstTab = Object.keys(
-        campaignDetails?.categories[catId].tabs as {
+        selectedData?.categories[catId].tabs as {
           [key: string]: any;
         }
       )[0];
