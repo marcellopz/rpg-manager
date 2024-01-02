@@ -8,6 +8,7 @@ import {
   TabType,
 } from "../../pages/Campaign/campaignTypes";
 import { CharSheetType } from "../../pages/Campaign/id/details/components/character-sheet/CharSheetType";
+import { ListItemWithId } from "../../pages/Campaign/id/ContentSelectionDragND";
 
 export async function checkIsAdmin(userId: string) {
   return get(child(dbRef, `users/${userId}/isAdmin`))
@@ -268,13 +269,18 @@ export const acceptInvite = async (campaignId: string) => {
 
 export const saveEmailUid = async () => {
   set(
-    child(dbRef, `user-emails/${auth.currentUser?.email?.replaceAll(".", "|")}`),
+    child(
+      dbRef,
+      `user-emails/${auth.currentUser?.email?.replaceAll(".", "|")}`
+    ),
     auth.currentUser?.uid
   );
 };
 
 export const getUidByEmail = async (email: string) => {
-  const uid = await get(child(dbRef, `user-emails/${email.replaceAll(".", "|")}`));
+  const uid = await get(
+    child(dbRef, `user-emails/${email.replaceAll(".", "|")}`)
+  );
   if (uid.exists()) {
     return uid.val();
   } else {
@@ -341,7 +347,7 @@ export const updateUniqueItemWeight = async (
     ),
     weight
   );
-}
+};
 
 export const updateNumberOfItems = async (
   campaignId: string,
@@ -413,4 +419,60 @@ export const saveCharImageInventory = async (
     ),
     image
   );
+};
+
+export const updateCategoryListOrder = async (
+  campaignId: string,
+  playerId: string,
+  content: ListItemWithId[]
+) => {
+  if (playerId === "") {
+    content.forEach((item, i) => {
+      set(
+        child(dbRef, `campaigns/${campaignId}/categories/${item.id}/listIndex`),
+        i
+      );
+      return;
+    });
+  }
+  content.forEach((item, i) => {
+    set(
+      child(
+        dbRef,
+        `campaigns/${campaignId}/players/${playerId}/categories/${item.id}/listIndex`
+      ),
+      i
+    );
+  });
+  return;
+};
+
+export const updateTabListOrder = async (
+  campaignId: string,
+  categoryId: string,
+  playerId: string,
+  content: ListItemWithId[]
+) => {
+  if (playerId === "") {
+    content.forEach((item, i) => {
+      set(
+        child(
+          dbRef,
+          `campaigns/${campaignId}/categories/${categoryId}/tabs/${item.id}/listIndex`
+        ),
+        i
+      );
+      return;
+    });
+  }
+  content.forEach((item, i) => {
+    set(
+      child(
+        dbRef,
+        `campaigns/${campaignId}/players/${playerId}/categories/${categoryId}/tabs/${item.id}/listIndex`
+      ),
+      i
+    );
+  });
+  return;
 };

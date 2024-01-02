@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import CampaignPublicPrivateDropdown from "./CampaignPublicPrivateDropdown";
-import { Resizable, ResizeCallbackData } from "react-resizable";
+import { ResizeCallbackData } from "react-resizable";
 import AddCategoryDialog from "../dialogs/AddCategoryDialog";
 import AddTabDialog from "../dialogs/AddTabDialog";
 import ConfirmDeleteDialog from "../dialogs/ConfirmDeleteDialog";
 import { DetailsContext } from "../context/DetailsContext";
+import ContentSelectionDragND from "./ContentSelectionDragND";
 import { t } from "i18next";
 
 interface deleteCategoryTabDialogProps {
@@ -136,90 +137,35 @@ export default function CampaignContentSelection({
             hideSelection ? { display: "none", height: 0, minHeight: 0 } : {}
           }
         >
-          <Resizable
+          <ContentSelectionDragND
             width={categoryWidth}
-            axis="x"
-            minConstraints={[40, 40]}
-            maxConstraints={[400, 400]}
+            content={categories}
+            selectedId={categoryId}
+            onItemClick={(cat_id) => {
+              handleCategoryChange(cat_id);
+            }}
+            onDeleteClick={(cat_id) => handleDeleteCategory(cat_id)}
+            setAddItemDialogOpen={setAddCategoryDialogOpen}
+            textAddItem={t("ADD_CATEGORY")}
+            type="category"
             onResize={handleCategoryResize}
-          >
-            <div
-              style={{ width: categoryWidth }}
-              className="category-selection item-list"
-            >
-              {categories &&
-                Object.entries(categories).map(([cat_id, cat]) => (
-                  <div
-                    role="item"
-                    className={categoryId === cat_id ? "tab-selected" : ""}
-                    onClick={() => handleCategoryChange(cat_id)}
-                    key={cat_id}
-                  >
-                    <p>{cat.name}</p>
-                    <p
-                      role="delete"
-                      onClick={() => handleDeleteCategory(cat_id)}
-                      className="smaller-button"
-                    >
-                      🗑️
-                    </p>
-                  </div>
-                ))}
-              <div
-                className="create-new"
-                onClick={() => setAddCategoryDialogOpen(true)}
-              >
-                {t("ADD_CATEGORY")}
-              </div>
-            </div>
-          </Resizable>
-          <Resizable
+          />
+          <ContentSelectionDragND
             width={tabWidth}
-            axis="x"
-            minConstraints={[40, 40]}
-            maxConstraints={[400, 400]}
+            content={tabs}
+            selectedId={tabId}
+            onItemClick={(tab_id) => {
+              if (!canTabChange) return;
+              setTabId(tab_id);
+            }}
+            onDeleteClick={(tab_id) => handleDeleteTab(categoryId, tab_id)}
+            setAddItemDialogOpen={setAddTabDialogOpen}
+            textAddItem={
+              selectedCategory?.inventory ? t("ADD_INVENTORY") : t("ADD_TAB")
+            }
+            type="tab"
             onResize={handleTabResize}
-          >
-            <div
-              style={{ width: tabWidth }}
-              className="tab-selection item-list"
-            >
-              {tabs &&
-                Object.entries(tabs).map(([tab_id, tab]) => (
-                  <div
-                    role="item"
-                    className={tabId === tab_id ? "tab-selected" : ""}
-                    onClick={() => {
-                      if (!canTabChange) return;
-                      setTabId(tab_id);
-                    }}
-                    key={tab_id}
-                  >
-                    <p role="item-text">{tab.name}</p>
-                    <p
-                      role="delete"
-                      className="smaller-button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDeleteTab(categoryId, tab_id);
-                      }}
-                    >
-                      🗑️
-                    </p>
-                  </div>
-                ))}
-              {categories && (
-                <div
-                  className="create-new"
-                  onClick={() => setAddTabDialogOpen(true)}
-                >
-                  {selectedCategory?.inventory
-                    ? t("ADD_INVENTORY")
-                    : t("ADD_TAB")}
-                </div>
-              )}
-            </div>
-          </Resizable>
+          />
         </div>
       </div>
       <AddCategoryDialog

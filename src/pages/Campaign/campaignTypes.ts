@@ -18,6 +18,7 @@ export interface CampaignType {
 export interface CategoryType {
   name: string;
   inventory?: boolean;
+  listIndex?: number;
   tabs?: {
     [key: string]: TabType;
   };
@@ -35,6 +36,7 @@ export interface PlayerType {
 export interface TabType {
   name: string;
   type: string;
+  listIndex?: number;
   content: string | InventoryContent | CharSheetType;
 }
 

@@ -74,7 +74,10 @@ const MoreItemOptions: React.FC<MoreItemOptionsProps> = ({
                       playerId
                     ]?.name ?? "";
                   return (
-                    <li onClick={() => sendToFunc(playerId)}>
+                    <li
+                      key={playerId}
+                      onClick={() => sendToFunc(playerId)}
+                    >
                       <p className="ml-10">{playerName}</p>
                     </li>
                   );

@@ -109,13 +109,24 @@ const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }) => {
   const resetCatTabIds = (obj: CampaignType | PlayerType | null) => {
     if (!obj?.categories) return;
     let firstTab = "";
-    const firstCategory = Object.keys(obj.categories)[0];
+    const firstCategory =
+      Object.entries(obj.categories).find(
+        ([_, categ]) => categ.listIndex === 0
+      )?.[0] ?? Object.keys(obj.categories)[0];
+
     if (obj.categories[firstCategory].tabs) {
-      firstTab = Object.keys(
-        obj.categories[firstCategory].tabs as {
-          [key: string]: any;
-        }
-      )[0];
+      firstTab =
+        Object.entries(
+          obj.categories[firstCategory].tabs as {
+            [key: string]: any;
+          }
+        ).find(([_, ta]) => ta.listIndex === 0)?.[0] ||
+        Object.keys(
+          obj.categories[firstCategory].tabs as {
+            [key: string]: any;
+          }
+        )[0] ||
+        "";
     }
     setCatTab({ categoryId: firstCategory ?? "", tabId: firstTab });
   };

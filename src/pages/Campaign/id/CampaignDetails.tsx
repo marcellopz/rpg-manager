@@ -46,11 +46,18 @@ export default function CampaignDetails() {
 
     let firstTab = "";
     if (selectedData?.categories?.[catId].tabs) {
-      firstTab = Object.keys(
-        selectedData?.categories[catId].tabs as {
-          [key: string]: any;
-        }
-      )[0];
+      firstTab =
+        Object.entries(
+          selectedData.categories[catId].tabs as {
+            [key: string]: any;
+          }
+        ).find(([_, ta]) => ta.listIndex === 0)?.[0] ||
+        Object.keys(
+          selectedData.categories[catId].tabs as {
+            [key: string]: any;
+          }
+        )[0] ||
+        "";
     }
     setCatTab({
       categoryId: catId,
