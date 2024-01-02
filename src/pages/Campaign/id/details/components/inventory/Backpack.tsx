@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { updateGold } from "../../../../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
 import { DetailsContext } from "../../../../context/DetailsContext";
@@ -43,6 +43,10 @@ const Backpack = ({
     updateGold(id as string, catTab.categoryId, catTab.tabId, editingGoldValue);
     setEditingGold(false);
   };
+
+  useEffect(() => {
+    setEditingGoldValue(gold_box);
+  }, [gold_box]);
 
   return (
     <div className="backpack_container inventory_background">

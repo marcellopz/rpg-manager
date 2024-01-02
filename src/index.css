@@ -66,6 +66,11 @@ button:focus-visible {
   box-shadow: inset 10px -10px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
+input {
+  background-color: rgb(59, 59, 59);
+  color: white;
+}
+
 /* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -240,4 +245,8 @@ input::-webkit-inner-spin-button {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #8b8b8b;
+}
+
+.ml-10 {
+  margin-left: 10px;
 }

@@ -154,6 +154,7 @@ const en = {
   EMAIL: "Email",
   MEMBER_SINCE: "Member since",
   SAVE_AUTO: "Save automatically",
+  SEND_TO: "Send to",
 };
 
 export default en;

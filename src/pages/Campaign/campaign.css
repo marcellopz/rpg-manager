@@ -283,9 +283,9 @@ div[data-radix-popper-content-wrapper] {
   max-width: 100%;
 }
 
-.markdown-editor p {
+/* .markdown-editor p {
   font-size: 16px;
-}
+} */
 
 .public-private-selection p {
   display: none;

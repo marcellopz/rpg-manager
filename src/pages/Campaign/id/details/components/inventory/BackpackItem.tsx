@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
+  addItemToInventory,
   deleteItemCampaign,
   updateItemType,
   updateNameOfItem,
@@ -10,6 +11,7 @@ import {
 import { InventoryItemType } from "../../../../campaignTypes";
 import { DetailsContext } from "../../../../context/DetailsContext";
 import { t } from "i18next";
+import MoreItemOptions from "./MoreItemOptions";
 
 interface BackpackItemProps {
   item: InventoryItemType;
@@ -34,6 +36,22 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
   const handleDeleteItem = () => {
     deleteItemCampaign(id as string, catTab.categoryId, catTab.tabId, itemId);
     fetchAll();
+  };
+
+  const handleSendTo = (playerTabId: string) => {
+    deleteItemCampaign(
+      id as string,
+      catTab.categoryId,
+      catTab.tabId,
+      itemId
+    ).then(() => {
+      addItemToInventory(
+        id as string,
+        catTab.categoryId,
+        playerTabId,
+        item
+      ).then(fetchAll);
+    });
   };
 
   const handleUpdateName = () => {
@@ -205,12 +223,10 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
         <div className="total_weight">
           {(item.item.weight * item.numberOfItems).toFixed(1)}
         </div>
-        <div
-          className="delete-item cursor-pointer"
-          onClick={handleDeleteItem}
-        >
-          ❌
-        </div>
+        <MoreItemOptions
+          deleteFunc={handleDeleteItem}
+          sendToFunc={handleSendTo}
+        />
       </div>
     </div>
   );

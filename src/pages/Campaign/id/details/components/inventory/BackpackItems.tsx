@@ -28,7 +28,13 @@ export default function BackpackItems({
         <div className="separator" />
         <div className="total_weight">{t("BACKPACK_TOTAL")}</div>
         <div className="separator" />
-        <div className="delete-item">❌</div>
+        <div className="delete-item">
+          <img
+            src="/assets/three-dots.png"
+            alt="more"
+            height={18}
+          />
+        </div>
       </div>
       {!!inventory ? (
         Object.entries(inventory).map(([itemId, item]) => (

@@ -154,6 +154,7 @@ const br = {
   EMAIL: "Email",
   MEMBER_SINCE: "Membro desde",
   SAVE_AUTO: "Salvar automaticamente",
+  SEND_TO: "Enviar para",
 };
 
 export default br;
