@@ -89,16 +89,16 @@ const ContentSelectionDragND = ({
   const className = type === "tab" ? "tab-selection" : "category-selection";
 
   return (
-    <Resizable
-      width={width}
-      axis="x"
-      minConstraints={[40, 40]}
-      maxConstraints={[400, 400]}
-      onResize={onResize}
-    >
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided) => (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="droppable">
+        {(provided) => (
+          <Resizable
+            width={width}
+            axis="x"
+            minConstraints={[40, 40]}
+            maxConstraints={[400, 400]}
+            onResize={onResize}
+          >
             <div
               {...provided.droppableProps}
               ref={provided.innerRef}
@@ -141,10 +141,10 @@ const ContentSelectionDragND = ({
                 {textAddItem}
               </div>
             </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-    </Resizable>
+          </Resizable>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 };
 

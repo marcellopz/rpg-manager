@@ -66,9 +66,10 @@ button:focus-visible {
   box-shadow: inset 10px -10px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
-input {
+input, textarea {
   background-color: rgb(59, 59, 59);
   color: white;
+  resize: none;
 }
 
 /* @media (prefers-color-scheme: light) {

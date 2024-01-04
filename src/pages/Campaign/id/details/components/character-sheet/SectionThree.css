@@ -375,7 +375,7 @@ textarea:focus {
   flex-direction: column;
 }
 
-textarea {
+.char-sheet textarea {
   resize: none;
   background-color: rgba(128, 128, 128, 0.393);
 }
