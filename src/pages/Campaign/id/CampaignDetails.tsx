@@ -1,15 +1,13 @@
 import { useParams } from "react-router-dom";
-// import campaignData, { playerMock as playerData } from "./campaignMock";
 import { CampaignType, PlayerType } from "../campaignTypes";
 import { useState, useContext } from "react";
 import CampaignDetailsContent from "./CampaignDetailsContent";
 import CampaignContentSelection from "./CampaignContentSelection";
-import { useTranslation } from "react-i18next";
 import InvitePlayerDialog from "../dialogs/InvitePlayerDialog";
 import LoadWithFlag from "../../../generic-components/LoadWithFlag";
 import { DetailsContext } from "../context/DetailsContext";
-import { AuthContext } from "../../../contexts/authContext";
 import CampaignConfigsDialog from "../dialogs/CampaignConfigsDialog";
+import CampaignDetailsHeader from "./CampaignDetailsHeader";
 
 export const getTab = (
   category: string,
@@ -20,7 +18,6 @@ export const getTab = (
 };
 
 export default function CampaignDetails() {
-  const { t } = useTranslation();
   const { id } = useParams();
   const {
     campaignDetails,
@@ -33,7 +30,6 @@ export default function CampaignDetails() {
     canTabChange,
     selectedData,
   } = useContext(DetailsContext);
-  const { authUser } = useContext(AuthContext);
 
   const [invitePlayerDialogOpen, setInvitePlayerDialogOpen] =
     useState<boolean>(false);
@@ -75,36 +71,10 @@ export default function CampaignDetails() {
   return (
     <>
       <main className="campaign__main h-full">
-        <section
-          className="campaign__header header_inset"
-          style={
-            campaignDetails?.backdropImage
-              ? { backgroundImage: `url(${campaignDetails?.backdropImage})` }
-              : {}
-          }
-        >
-          <div className="campaign__backdrop">
-            <h1>{campaignDetails?.name}</h1>
-            {authUser?.uid === campaignDetails?.creatorId && (
-              <div>
-                <button
-                  onClick={() => {
-                    setInvitePlayerDialogOpen(true);
-                  }}
-                >
-                  {t("CAMPAIGN_INVITE_PLAYER")}
-                </button>
-                <button
-                  onClick={() => {
-                    setEditCampaignDialogOpen(true);
-                  }}
-                >
-                  {t("CAMPAIGN_CONFIG")}
-                </button>
-              </div>
-            )}
-          </div>
-        </section>
+        <CampaignDetailsHeader
+          setInvitePlayerDialogOpen={setInvitePlayerDialogOpen}
+          setEditCampaignDialogOpen={setEditCampaignDialogOpen}
+        />
         <section className="campaign__details">
           <LoadWithFlag loading={loading}>
             <CampaignContentSelection

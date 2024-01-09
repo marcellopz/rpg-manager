@@ -1,0 +1,30 @@
+.combat{
+    width: 90vw;
+    height: 90vh;
+    color: black;
+}
+
+.combat-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+.combat-header button {
+    background-color: transparent;
+    color: gray;
+    padding: 10px;
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.combat-header button:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.combat-header h2 {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}

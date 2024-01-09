@@ -37,11 +37,12 @@ export default function BackpackItems({
         </div>
       </div>
       {!!inventory ? (
-        Object.entries(inventory).map(([itemId, item]) => (
+        Object.entries(inventory).map(([itemId, item], index) => (
           <BackpackItem
             itemId={itemId}
             item={item}
             key={itemId}
+            index={index}
           />
         ))
       ) : (

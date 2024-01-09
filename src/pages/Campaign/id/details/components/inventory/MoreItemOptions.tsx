@@ -5,11 +5,13 @@ import { DetailsContext } from "../../../../context/DetailsContext";
 interface MoreItemOptionsProps {
   deleteFunc: () => void;
   sendToFunc: (playerId: string) => void;
+  reverse: boolean;
 }
 
 const MoreItemOptions: React.FC<MoreItemOptionsProps> = ({
   deleteFunc,
   sendToFunc,
+  reverse,
 }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -49,6 +51,7 @@ const MoreItemOptions: React.FC<MoreItemOptionsProps> = ({
       {isOpen && (
         <div
           className="item-options"
+          style={reverse ? { top: "unset", bottom: 0 } : {}}
           ref={menuRef}
         >
           <ul>

@@ -16,9 +16,10 @@ import MoreItemOptions from "./MoreItemOptions";
 interface BackpackItemProps {
   item: InventoryItemType;
   itemId: string;
+  index: number;
 }
 
-const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
+const BackpackItem = ({ item, itemId, index }: BackpackItemProps) => {
   const { id } = useParams<{ id: string }>();
   const { catTab, fetchAll } = useContext(DetailsContext);
   const [editingName, setEditingName] = useState<boolean>(false);
@@ -106,7 +107,9 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
   return (
     <div className="master_item_container">
       <div
-        className="item_container"
+        className={`item_container ${
+          index % 2 === 0 ? "item-even" : "item-odd"
+        }`}
         style={
           item.item.type === "magic"
             ? { color: "blueviolet", fontWeight: 700 }
@@ -226,6 +229,7 @@ const BackpackItem = ({ item, itemId }: BackpackItemProps) => {
         <MoreItemOptions
           deleteFunc={handleDeleteItem}
           sendToFunc={handleSendTo}
+          reverse={index > 8}
         />
       </div>
     </div>

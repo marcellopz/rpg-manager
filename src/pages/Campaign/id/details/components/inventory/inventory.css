@@ -117,8 +117,12 @@
     width: 100%;
 }
 
-.item_container > div {
-    background-color: rgb(228, 228, 228);
+.item-even > div {
+    background-color: rgb(212, 212, 212);
+}
+
+.item-odd > div {
+    background-color: rgb(224, 224, 224);
 }
 
 .number_of_items {
