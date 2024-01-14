@@ -366,6 +366,27 @@ span.react-resizable-handle {
   justify-content: space-between;
 }
 
+.past-versions-dialog-container {
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+
+.past-version {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid rgb(170, 170, 170);
+  background-color: #eeeeee;
+  margin-bottom: 10px;
+}
+
+.view-more {
+  margin-top: 5px;
+  color: blue;
+  text-decoration: underline;
+}
+
 @media only screen and (max-width: 800px) {
   .campaign__backdrop {
     flex-direction: column;

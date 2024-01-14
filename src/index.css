@@ -170,6 +170,9 @@ input, textarea {
     padding: 20px;
     border-radius: 5px;
     max-width: 100vw;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .dialog h2 {
@@ -250,4 +253,16 @@ input::-webkit-inner-spin-button {
 
 .ml-10 {
   margin-left: 10px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+pre {
+  background-color: #dddddd;
+  padding: 10px;
+  border-radius: 5px;
+  border: #8b8b8b 1px solid;
+  /* margin: 10px 0; */
 }

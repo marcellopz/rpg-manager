@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext, memo } from "react";
 import "@mdxeditor/editor/style.css";
 import { toolbarPlugin } from "@mdxeditor/editor/plugins/toolbar";
 import {
@@ -34,16 +34,6 @@ import {
 import { useParams } from "react-router-dom";
 import auth from "../../../../contexts/firebase/firebase";
 import SaveIsNeededDialog from "../../dialogs/SaveIsNeededDialog";
-import SeePastVersionsDialog from "../../dialogs/SeePastVersionsDialog";
-
-type StatesRef = {
-  id: string;
-  originalContent: string;
-  currentContent: string;
-  tabId: string;
-  categoryId: string;
-  publicSelected: boolean;
-};
 
 function TextDetails() {
   const mdxRef = useRef<MDXEditorMethods>(null);
@@ -54,37 +44,26 @@ function TextDetails() {
     needSaveDialogOpen,
     setNeedSaveDialogOpen,
     setCanTabChange,
-    selectedData,
   } = useContext(DetailsContext);
   const [originalContent, setOriginalContent] = React.useState<string>("");
   const [currentContent, setCurrentContent] = React.useState<string>("");
-  const [pastVersionsOpen, setPastVersionsOpen] =
-    React.useState<boolean>(false);
 
-  const currentStatesRef = useRef<StatesRef>();
+  const latestId = useRef<string>(id as string);
+  const latestCategoryId = useRef<string>(catTab.categoryId);
+  const latestTabId = useRef<string>(catTab.tabId);
+  const latestPublicSelected = useRef(publicSelected);
 
   useEffect(() => {
     // mdxRef?.current?.setMarkdown?.(content);
     loadMarkdown();
-  }, [catTab.tabId, selectedData]);
+  }, [catTab.tabId]);
 
   useEffect(() => {
-    currentStatesRef.current = {
-      id: id as string,
-      originalContent,
-      currentContent,
-      tabId: catTab.tabId,
-      categoryId: catTab.categoryId,
-      publicSelected,
-    };
-  }, [
-    id,
-    catTab.categoryId,
-    catTab.tabId,
-    publicSelected,
-    originalContent,
-    currentContent,
-  ]);
+    latestId.current = id as string;
+    latestCategoryId.current = catTab.categoryId;
+    latestTabId.current = catTab.tabId;
+    latestPublicSelected.current = publicSelected;
+  }, [id, catTab.categoryId, catTab.tabId, publicSelected]);
 
   useEffect(() => {
     setCanTabChange(originalContent === currentContent);
@@ -136,32 +115,30 @@ function TextDetails() {
     });
   };
 
-  // const loadMarkdownWithRefs = () => {
-  //   getTabContent(
-  //     latestId.current,
-  //     latestCategoryId.current,
-  //     latestTabId.current,
-  //     latestPublicSelected.current ? "" : (auth.currentUser?.uid as string)
-  //   ).then((res) => {
-  //     mdxRef?.current?.setMarkdown?.(res);
-  //     setOriginalContent(res);
-  //     // fetchAll();
-  //   });
-  // };
+  const loadMarkdownWithRefs = () => {
+    getTabContent(
+      latestId.current,
+      latestCategoryId.current,
+      latestTabId.current,
+      latestPublicSelected.current ? "" : (auth.currentUser?.uid as string)
+    ).then((res) => {
+      mdxRef?.current?.setMarkdown?.(res);
+      setOriginalContent(res);
+      // fetchAll();
+    });
+  };
 
   const saveMarkdown = () => {
     const content = mdxRef?.current?.getMarkdown?.();
-    if (!currentStatesRef.current) return;
     saveTabContent(
-      currentStatesRef.current.id,
-      currentStatesRef.current.categoryId,
-      currentStatesRef.current.tabId,
-      currentStatesRef.current.publicSelected
-        ? ""
-        : (auth.currentUser?.uid as string),
-      currentStatesRef.current.currentContent as string
+      latestId.current,
+      latestCategoryId.current,
+      latestTabId.current,
+      latestPublicSelected.current ? "" : (auth.currentUser?.uid as string),
+      content as string
     ).then(() => {
       setOriginalContent(content ?? "");
+      // fetchAll();
     });
   };
 
@@ -179,25 +156,17 @@ function TextDetails() {
                 <Separator />
                 <div className="flex">
                   <span
-                    onClick={() => {
-                      saveMarkdown();
-                    }}
+                    onClick={saveMarkdown}
                     className="small-button"
                   >
                     💾
                   </span>
                   <span
-                    className="small-button"
-                    onClick={() => setPastVersionsOpen(true)}
-                  >
-                    📜
-                  </span>
-                  {/* <span
                     onClick={loadMarkdownWithRefs}
                     className="small-button"
                   >
                     🔄
-                  </span> */}
+                  </span>
                 </div>
                 <Separator />
                 <BoldItalicUnderlineToggles />
@@ -243,12 +212,8 @@ function TextDetails() {
           loadMarkdown();
         }}
       />
-      <SeePastVersionsDialog
-        open={pastVersionsOpen}
-        onClose={() => setPastVersionsOpen(false)}
-      />
     </>
   );
 }
 
-export default TextDetails;
+export default memo(TextDetails);

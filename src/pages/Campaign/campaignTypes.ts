@@ -33,11 +33,20 @@ export interface PlayerType {
   };
 }
 
+export interface ContentHistoryType<T> {
+  content: T;
+  timestamp: number;
+  author: string;
+}
+
 export interface TabType {
   name: string;
   type: string;
   listIndex?: number;
   content: string | InventoryContent | CharSheetType;
+  contentHistory?: ContentHistoryType<
+    string | InventoryContent | CharSheetType
+  >[];
 }
 
 export interface InventoryContent {

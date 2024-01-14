@@ -201,6 +201,17 @@ export const saveTabContent = async (
       ),
       content
     );
+    push(
+      child(
+        dbRef,
+        `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/contentHistory`
+      ),
+      {
+        content,
+        timestamp: Date.now(),
+        author: auth.currentUser?.displayName,
+      }
+    );
     return;
   }
   set(
@@ -209,6 +220,16 @@ export const saveTabContent = async (
       `campaigns/${campaignId}/players/${playerId}/categories/${categoryId}/tabs/${tabId}/content`
     ),
     content
+  );
+  push(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/players/${playerId}/categories/${categoryId}/tabs/${tabId}/contentHistory`
+    ),
+    {
+      content,
+      timestamp: Date.now(),
+    }
   );
   return;
 };
@@ -475,4 +496,36 @@ export const updateTabListOrder = async (
     );
   });
   return;
+};
+
+export const getPastVersions = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  playerId: string
+) => {
+  if (playerId === "") {
+    const content = await get(
+      child(
+        dbRef,
+        `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/contentHistory`
+      )
+    );
+    if (content.exists()) {
+      return content.val();
+    } else {
+      return null;
+    }
+  }
+  const content = await get(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/players/${playerId}/categories/${categoryId}/tabs/${tabId}/contentHistory`
+    )
+  );
+  if (content.exists()) {
+    return content.val();
+  } else {
+    return null;
+  }
 };
