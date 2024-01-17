@@ -13,6 +13,43 @@ export interface CampaignType {
     [key: string]: CategoryType;
   };
   backdropImage?: string;
+  combat?: CombatType;
+}
+
+export interface CombatType {
+  dmId: string;
+  dmName: string;
+  active: boolean;
+  turn: number;
+  round: number;
+  currentTurn: string;
+  turnOrder: string[];
+  combatants: {
+    [key: string]: CombatantType;
+  };
+  // log: CombatLogType[];
+}
+
+export interface CombatantType {
+  name: string;
+  initiative: number;
+  hp: number;
+  maxHp: number;
+  ac: number;
+  avatar?: string;
+  type: "player" | "enemy" | "ally";
+  orderIndex?: number;
+  isTurn: boolean;
+  activeEffects?: {
+    [key: string]: ActiveEffectType;
+  };
+}
+
+export interface ActiveEffectType {
+  name: string;
+  description: string;
+  duration: number;
+  durationRemaining: number;
 }
 
 export interface CategoryType {

@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/authContext";
 import { useTranslation } from "react-i18next";
 import { DetailsContext } from "../context/DetailsContext";
-import CombatTrackerDialog from "../dialogs/CombatTrackerDialog";
+import CombatTrackerDialog from "./details/components/cambat-tracker/CombatTrackerDialog";
 
 type CampaignDetailsHeaderProps = {
   setInvitePlayerDialogOpen: (open: boolean) => void;

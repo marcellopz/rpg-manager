@@ -4,11 +4,14 @@ import auth, { dbRef } from "./firebase";
 import {
   CampaignType,
   CategoryType,
+  CombatType,
+  CombatantType,
   InventoryItemType,
   TabType,
 } from "../../pages/Campaign/campaignTypes";
 import { CharSheetType } from "../../pages/Campaign/id/details/components/character-sheet/CharSheetType";
 import { ListItemWithId } from "../../pages/Campaign/id/ContentSelectionDragND";
+import { CombatantTypeWithID } from "../../pages/Campaign/id/details/components/cambat-tracker/CombatTrackerRowsDragNDrop";
 
 export async function checkIsAdmin(userId: string) {
   return get(child(dbRef, `users/${userId}/isAdmin`))
@@ -59,6 +62,7 @@ export const getCampaign = async (campaignId: string) => {
     get(child(dbRef, `campaigns/${campaignId}/description`)),
     get(child(dbRef, `campaigns/${campaignId}/name`)),
     get(child(dbRef, `campaigns/${campaignId}/categories`)),
+    get(child(dbRef, `campaigns/${campaignId}/combat`)),
   ]).then((values) => {
     const campaign = {
       backdropImage: values[0].val(),
@@ -66,6 +70,7 @@ export const getCampaign = async (campaignId: string) => {
       description: values[2].val(),
       name: values[3].val(),
       categories: values[4].val(),
+      combat: values[5].val(),
     } as CampaignType;
     return campaign;
   });
@@ -529,3 +534,65 @@ export const getPastVersions = async (
     return null;
   }
 };
+
+export const getCombatDetails = async (campaignId: string) => {
+  const combat = await get(child(dbRef, `campaigns/${campaignId}/combat`));
+  if (combat.exists()) {
+    return combat.val();
+  } else {
+    return null;
+  }
+
+}
+
+export const updateCombatDetails = async (
+  campaignId: string,
+  combat: CombatType
+) => {
+  set(child(dbRef, `campaigns/${campaignId}/combat`), combat);
+};
+
+export const addCombatant = async (
+  campaignId: string,
+  combatant: CombatantType
+) => {
+  push(child(dbRef, `campaigns/${campaignId}/combat/combatants`), combatant);
+};
+
+export const updateCombatantListOrder = async (
+  campaignId: string,
+  combatants: CombatantTypeWithID[]
+) => {
+  combatants.forEach((combatant, i) => {
+    set(
+      child(
+        dbRef,
+        `campaigns/${campaignId}/combat/combatants/${combatant.id}/orderIndex`
+      ),
+      i
+    );
+    return;
+  });
+};
+
+export const updateCombatTurn = async (
+  campaignId: string,
+  turn: number
+) => {
+  set(child(dbRef, `campaigns/${campaignId}/combat/turn`), turn);
+}
+
+export const updateCombatRound = async (
+  campaignId: string,
+  round: number
+) => {
+  set(child(dbRef, `campaigns/${campaignId}/combat/round`), round);
+}
+
+export const updateCombatantHp = async (
+  campaignId: string,
+  combatantId: string,
+  hp: number
+) => {
+  set(child(dbRef, `campaigns/${campaignId}/combat/combatants/${combatantId}/hp`), hp);
+}

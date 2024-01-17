@@ -12,6 +12,7 @@ const useDetails = () => {
     campaignDetails,
     loading: campaignLoading,
     fetchCampaignDetails,
+    fetchCombatDetails,
   } = useCampaignDetails(id);
   const {
     playerDetails,
@@ -31,6 +32,7 @@ const useDetails = () => {
     playerDetails,
     detailsLoading,
     fetchAll,
+    fetchCombatDetails,
   };
 };
 

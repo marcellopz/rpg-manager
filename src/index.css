@@ -176,7 +176,7 @@ input, textarea {
 }
 
 .dialog h2 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 1.5em;
     font-weight: 400;
 }
@@ -265,4 +265,8 @@ pre {
   border-radius: 5px;
   border: #8b8b8b 1px solid;
   /* margin: 10px 0; */
+}
+
+.grow {
+  flex-grow: 1;
 }

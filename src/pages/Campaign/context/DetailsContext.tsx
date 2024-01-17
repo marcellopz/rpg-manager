@@ -1,6 +1,7 @@
 import React, { createContext } from "react";
-import { CampaignType, PlayerType } from "../campaignTypes";
+import { CampaignType, CombatType, PlayerType } from "../campaignTypes";
 import useDetails from "../hooks/useDetails";
+import auth from "../../../contexts/firebase/firebase";
 
 interface DetailsContextProps {
   campaignDetails: CampaignType | null;
@@ -24,6 +25,9 @@ interface DetailsContextProps {
   setNeedSaveDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
   canTabChange: boolean;
   setCanTabChange: React.Dispatch<React.SetStateAction<boolean>>;
+  combatDetails: CombatType | undefined;
+  isCombatDm: boolean;
+  fetchCombatDetails: () => void;
 }
 
 interface DetailsProviderProps {
@@ -50,11 +54,19 @@ export const DetailsContext = createContext<DetailsContextProps>({
   setNeedSaveDialogOpen: () => {},
   canTabChange: true,
   setCanTabChange: () => {},
+  combatDetails: undefined,
+  isCombatDm: false,
+  fetchCombatDetails: () => {},
 });
 
 const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }) => {
-  const { campaignDetails, playerDetails, detailsLoading, fetchAll } =
-    useDetails();
+  const {
+    campaignDetails,
+    playerDetails,
+    detailsLoading,
+    fetchAll,
+    fetchCombatDetails,
+  } = useDetails();
   const [catTab, setCatTab] = React.useState<{
     categoryId: string;
     tabId: string;
@@ -165,6 +177,9 @@ const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }) => {
         setNeedSaveDialogOpen,
         canTabChange,
         setCanTabChange,
+        combatDetails: campaignDetails?.combat,
+        isCombatDm: campaignDetails?.combat?.dmId === auth.currentUser?.uid,
+        fetchCombatDetails,
       }}
     >
       {children}
