@@ -298,3 +298,86 @@
 .combat .context-menu li:hover {
     background-color: rgb(235, 235, 235);
 }
+
+.combat #delete {
+    background-color: rgb(170, 0, 0);
+}
+
+.edit-combatant {
+    font-weight: 400;
+}
+
+.rounds-duration {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.rounds-duration input {
+    margin-top: 10px;
+    height: 25px;
+}
+
+.rounds-duration span {
+    display: flex;
+    gap: 5px;
+}
+
+.showcase-chip {
+    margin-top: 5px;
+    height: 30px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  margin: 2px;
+}
+
+.chip .closeButton {
+  margin-right: 5px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.chip .title {
+  margin-right: 5px;
+}
+
+.chip .number {
+  font-weight: bold;
+}
+
+.color-option {
+    color: black;
+}
+
+.a-section {
+    display: flex;
+    gap: 30px;
+    /* justify-content: space-between; */
+}
+
+.tracker-table-name {
+    display: flex;
+    justify-content: space-between;
+    gap:20px;
+}
+
+.tracker-table-name p {
+    display: flex;
+    align-items: center;
+}

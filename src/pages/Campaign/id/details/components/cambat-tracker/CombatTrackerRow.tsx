@@ -1,10 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { CombatantType } from "../../../../campaignTypes";
-import { updateCombatantHp } from "../../../../../../contexts/firebase/database";
+import {
+  updateCombatantCondition,
+  updateCombatantHp,
+} from "../../../../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
 import { CombatantTypeWithID } from "./CombatTrackerRowsDragNDrop";
 import { DetailsContext } from "../../../../context/DetailsContext";
 import CombatTrackerRowContextMenu from "./CombatTrackerRowContextMenu";
+import EditCombatantDialog from "./dialogs/EditCombatantDialog";
+import ConfirmDeleteCombatantDialog from "./dialogs/ConfirmDeleteCombatant";
+import AddConditionDialog from "./dialogs/AddConditionDialog";
+import ConditionChip from "./ConditionChip";
 
 const getRowClassName = (combatent: CombatantType) => {
   const x = (combatent.hp / combatent.maxHp) * 100;
@@ -47,9 +54,11 @@ const getRowEmoji = (combatent: CombatantType) => {
 export default function CombatTrackerRow({
   combatant,
   turn,
+  setSomeDialogOpen,
 }: {
   combatant: CombatantTypeWithID;
   turn: number;
+  setSomeDialogOpen: (a: boolean) => void;
 }) {
   const { id } = useParams<{ id: string }>();
   const { fetchCombatDetails } = useContext(DetailsContext);
@@ -62,12 +71,40 @@ export default function CombatTrackerRow({
   const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
   const [contextMenuOpen, setContextMenuOpen] = useState(false);
 
+  const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [openAddConditionDialog, setOpenAddConditionDialog] = useState(false);
+
   useEffect(() => {
     setHp(combatant.hp);
   }, [combatant.hp]);
 
   return (
     <>
+      <AddConditionDialog
+        combatant={combatant}
+        open={openAddConditionDialog}
+        onClose={() => {
+          setOpenAddConditionDialog(false);
+          setSomeDialogOpen(false);
+        }}
+      />
+      <EditCombatantDialog
+        combatant={combatant}
+        open={openEditDialog}
+        onClose={() => {
+          setOpenEditDialog(false);
+          setSomeDialogOpen(false);
+        }}
+      />
+      <ConfirmDeleteCombatantDialog
+        combatant={combatant}
+        open={openDeleteDialog}
+        onClose={() => {
+          setOpenDeleteDialog(false);
+          setSomeDialogOpen(false);
+        }}
+      />
       <div
         onContextMenu={(e) => {
           e.preventDefault();
@@ -82,15 +119,47 @@ export default function CombatTrackerRow({
           open={contextMenuOpen}
           x={contextMenuCoords.x}
           y={contextMenuCoords.y}
-          onClose={() => setContextMenuOpen(false)}
-          onMenuSelect={(option) => {
-            console.log(option);
+          onOpenEditDialog={() => {
+            setOpenEditDialog(true);
+            setSomeDialogOpen(true);
           }}
+          onOpenDeleteDialog={() => {
+            setOpenDeleteDialog(true);
+            setSomeDialogOpen(true);
+          }}
+          onOpenAddConditionDialog={() => {
+            setOpenAddConditionDialog(true);
+            setSomeDialogOpen(true);
+          }}
+          onClose={() => setContextMenuOpen(false)}
         />
         <div className="tracker-table-initiative">{combatant.initiative}</div>
         <span className="separator" />
         <div className="tracker-table-name">
-          {`${getRowEmoji(combatant)} ${combatant.name}`}
+          <p>{`${getRowEmoji(combatant)} ${combatant.name}`}</p>
+          {Object.keys(combatant.activeEffects ?? {}).length > 0 && (
+            <div>
+              {Object.entries(combatant.activeEffects ?? {}).map(
+                ([effectId, effect]) => (
+                  <ConditionChip
+                    title={effect.name}
+                    number={effect.duration}
+                    color={effect.color}
+                    indefinite={effect.duration === -1}
+                    onClose={() => {
+                      updateCombatantCondition(
+                        id as string,
+                        combatant.id,
+                        effectId,
+                        null
+                      );
+                      fetchCombatDetails();
+                    }}
+                  />
+                )
+              )}
+            </div>
+          )}
           {/* {combatant.name} */}
         </div>
         <span className="separator" />

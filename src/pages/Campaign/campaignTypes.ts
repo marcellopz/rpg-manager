@@ -47,9 +47,8 @@ export interface CombatantType {
 
 export interface ActiveEffectType {
   name: string;
-  description: string;
   duration: number;
-  durationRemaining: number;
+  color: string;
 }
 
 export interface CategoryType {

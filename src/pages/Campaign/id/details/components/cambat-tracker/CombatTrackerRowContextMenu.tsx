@@ -1,17 +1,20 @@
 import { useEffect, useRef } from "react";
-
 const CombatTrackerRowContextMenu = ({
   x,
   y,
-  onMenuSelect,
   open,
   onClose,
+  onOpenEditDialog,
+  onOpenDeleteDialog,
+  onOpenAddConditionDialog,
 }: {
   onClose: () => void;
   open: boolean;
   x: number;
   y: number;
-  onMenuSelect: (option: string) => void;
+  onOpenEditDialog: () => void;
+  onOpenDeleteDialog: () => void;
+  onOpenAddConditionDialog: () => void;
 }) => {
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -32,42 +35,44 @@ const CombatTrackerRowContextMenu = ({
   }
 
   return (
-    <div
-      className="context-menu"
-      style={{
-        top: y,
-        left: x,
-        position: "absolute",
-      }}
-      ref={menuRef}
-    >
-      <ul>
-        <li
-          onClick={() => {
-            onMenuSelect("Option 1");
-            onClose();
-          }}
-        >
-          Add condition
-        </li>
-        <li
-          onClick={() => {
-            onMenuSelect("Option 2");
-            onClose();
-          }}
-        >
-          Edit
-        </li>
-        <li
-          onClick={() => {
-            onMenuSelect("Option 3");
-            onClose();
-          }}
-        >
-          Delete
-        </li>
-      </ul>
-    </div>
+    <>
+      <div
+        className="context-menu"
+        style={{
+          top: y,
+          left: x,
+          position: "absolute",
+        }}
+        ref={menuRef}
+      >
+        <ul>
+          <li
+            onClick={() => {
+              onClose();
+              onOpenAddConditionDialog();
+            }}
+          >
+            Add condition
+          </li>
+          <li
+            onClick={() => {
+              onOpenEditDialog();
+              onClose();
+            }}
+          >
+            Edit
+          </li>
+          <li
+            onClick={() => {
+              onClose();
+              onOpenDeleteDialog();
+            }}
+          >
+            Delete
+          </li>
+        </ul>
+      </div>
+    </>
   );
 };
 

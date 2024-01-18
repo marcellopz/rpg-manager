@@ -2,6 +2,7 @@ import { get, child, push, set } from "firebase/database";
 import auth, { dbRef } from "./firebase";
 
 import {
+  ActiveEffectType,
   CampaignType,
   CategoryType,
   CombatType,
@@ -542,12 +543,11 @@ export const getCombatDetails = async (campaignId: string) => {
   } else {
     return null;
   }
-
-}
+};
 
 export const updateCombatDetails = async (
   campaignId: string,
-  combat: CombatType
+  combat: CombatType | null
 ) => {
   set(child(dbRef, `campaigns/${campaignId}/combat`), combat);
 };
@@ -575,24 +575,61 @@ export const updateCombatantListOrder = async (
   });
 };
 
-export const updateCombatTurn = async (
-  campaignId: string,
-  turn: number
-) => {
+export const updateCombatTurn = async (campaignId: string, turn: number) => {
   set(child(dbRef, `campaigns/${campaignId}/combat/turn`), turn);
-}
+};
 
-export const updateCombatRound = async (
-  campaignId: string,
-  round: number
-) => {
+export const updateCombatRound = async (campaignId: string, round: number) => {
   set(child(dbRef, `campaigns/${campaignId}/combat/round`), round);
-}
+};
 
 export const updateCombatantHp = async (
   campaignId: string,
   combatantId: string,
   hp: number
 ) => {
-  set(child(dbRef, `campaigns/${campaignId}/combat/combatants/${combatantId}/hp`), hp);
-}
+  set(
+    child(dbRef, `campaigns/${campaignId}/combat/combatants/${combatantId}/hp`),
+    hp
+  );
+};
+
+export const updateCombatant = async (
+  campaignId: string,
+  combatantId: string,
+  combatant: CombatantType | null
+) => {
+  set(
+    child(dbRef, `campaigns/${campaignId}/combat/combatants/${combatantId}`),
+    combatant
+  );
+};
+
+export const addConditionToCombatant = async (
+  campaignId: string,
+  combatantId: string,
+  condition: ActiveEffectType
+) => {
+  push(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/combat/combatants/${combatantId}/activeEffects`
+    ),
+    condition
+  );
+};
+
+export const updateCombatantCondition = async (
+  campaignId: string,
+  combatantId: string,
+  conditionId: string,
+  condition: ActiveEffectType | null
+) => {
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/combat/combatants/${combatantId}/activeEffects/${conditionId}`
+    ),
+    condition
+  );
+};

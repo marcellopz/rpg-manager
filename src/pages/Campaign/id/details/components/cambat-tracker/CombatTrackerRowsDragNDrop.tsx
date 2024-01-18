@@ -15,13 +15,16 @@ function CombatTrackerRowsDragNDrop({
 }) {
   const { id } = useParams<{ id: string }>();
   const [items, setItems] = useState<CombatantTypeWithID[]>([]);
-  const { isCombatDm, combatDetails } = useContext(DetailsContext);
+  const { isCombatDm, combatDetails, fetchCombatDetails } =
+    useContext(DetailsContext);
+  const [someDialogOpen, setSomeDialogOpen] = useState(false);
 
   useEffect(() => {
     if (!combatants) {
       setItems([]);
       return;
     }
+
     setItems(
       Object.entries(combatants)
         .map(([id, item]) => ({ ...item, id }))
@@ -40,6 +43,7 @@ function CombatTrackerRowsDragNDrop({
 
     setItems(reorderedItems);
     updateCombatantListOrder(id as string, reorderedItems);
+    fetchCombatDetails();
   };
 
   return (
@@ -57,7 +61,7 @@ function CombatTrackerRowsDragNDrop({
                   key={item.id}
                   draggableId={item.id}
                   index={index}
-                  isDragDisabled={!isCombatDm}
+                  isDragDisabled={!isCombatDm || someDialogOpen}
                 >
                   {(provided) => (
                     <div
@@ -66,6 +70,7 @@ function CombatTrackerRowsDragNDrop({
                       {...provided.dragHandleProps}
                     >
                       <CombatTrackerRow
+                        setSomeDialogOpen={setSomeDialogOpen}
                         combatant={item}
                         turn={combatDetails?.turn ?? -1}
                       />

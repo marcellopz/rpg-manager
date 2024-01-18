@@ -1,8 +1,8 @@
 import { FormEventHandler, useContext, useState } from "react";
-import { CombatantType } from "../../../../campaignTypes";
-import { addCombatant } from "../../../../../../contexts/firebase/database";
+import { CombatantType } from "../../../../../campaignTypes";
+import { addCombatant } from "../../../../../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
-import { DetailsContext } from "../../../../context/DetailsContext";
+import { DetailsContext } from "../../../../../context/DetailsContext";
 
 type Props = {
   open: boolean;

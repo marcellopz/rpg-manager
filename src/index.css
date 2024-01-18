@@ -179,6 +179,7 @@ input, textarea {
     margin-bottom: 10px;
     font-size: 1.5em;
     font-weight: 400;
+    color: black;
 }
 
 .dialog form {
@@ -269,4 +270,12 @@ pre {
 
 .grow {
   flex-grow: 1;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.w-full {
+  width: 100%;
 }

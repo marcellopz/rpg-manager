@@ -7,11 +7,15 @@ import {
   updateCombatDetails,
   updateCombatRound,
   updateCombatTurn,
+  updateCombatantCondition,
   updateCombatantListOrder,
 } from "../../../../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
-import AddCombatantDialog from "./AddCombatantDialog";
-import CombatTrackerRowsDragNDrop from "./CombatTrackerRowsDragNDrop";
+import CombatTrackerRowsDragNDrop, {
+  CombatantTypeWithID,
+} from "./CombatTrackerRowsDragNDrop";
+import AddCombatantDialog from "./dialogs/AddCombatantDialog";
+import ConfirmEndCombatDialog from "./dialogs/ConfirmEndCombatDialog";
 
 type CombatTrackerDialogProps = {
   open: boolean;
@@ -22,6 +26,7 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
   const { combatDetails, fetchCombatDetails } = useContext(DetailsContext);
   const { id } = useParams<{ id: string }>();
   const [openAddCombatant, setOpenAddCombatant] = useState(false);
+  const [openConfirmEndCombat, setOpenConfirmEndCombat] = useState(false);
 
   const handleStartCombat = () => {
     if (!auth.currentUser?.uid) {
@@ -52,10 +57,51 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
     fetchCombatDetails();
   };
 
+  const updateConditions = () => {
+    if (!combatDetails) return;
+
+    const arrIdPlayer = Object.entries(combatDetails.combatants).find(
+      ([_i, c]) => c.orderIndex === combatDetails.turn
+    );
+
+    if (!arrIdPlayer) return;
+
+    const playerInTurn: CombatantTypeWithID = {
+      id: arrIdPlayer[0],
+      ...arrIdPlayer[1],
+    };
+
+    if (playerInTurn?.activeEffects) {
+      Object.entries(playerInTurn.activeEffects).forEach(
+        ([effectId, effect]) => {
+          if (effect.duration === -1) {
+            return;
+          }
+          if (effect.duration === 1) {
+            updateCombatantCondition(
+              id as string,
+              playerInTurn.id,
+              effectId,
+              null
+            );
+            return;
+          }
+          updateCombatantCondition(id as string, playerInTurn.id, effectId, {
+            ...effect,
+            duration: effect.duration - 1,
+          });
+        }
+      );
+    }
+  };
+
   const handleNext = () => {
     if (!combatDetails) {
       return;
     }
+
+    updateConditions();
+
     const newTurn = combatDetails.turn + 1;
     if (newTurn + 1 > Object.keys(combatDetails.combatants).length) {
       updateCombatRound(id as string, combatDetails.round + 1);
@@ -142,7 +188,7 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
                 </div>
                 <div className="tracker-actions">
                   <div id="actions-1">
-                    {combatDetails.round > 0 ? (
+                    {combatDetails.round > 0 && (
                       <>
                         <span
                           onClick={handlePrev}
@@ -157,16 +203,13 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
                           Next
                         </span>
                       </>
-                    ) : (
-                      <span
-                        onClick={handleSort}
-                        className="cursor-pointer"
-                      >
-                        Sort
-                      </span>
                     )}
-
-                    {/* <span className="separator" /> */}
+                    <span
+                      onClick={handleSort}
+                      className="cursor-pointer"
+                    >
+                      Sort
+                    </span>
                   </div>
                   <div id="actions-2">
                     {combatDetails.round === 0 ? (
@@ -180,7 +223,14 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
                       <>
                         <span>Round {combatDetails.round}</span>
                         <span className="separator" />
-                        <span className="cursor-pointer">End</span>
+                        <span
+                          className="cursor-pointer"
+                          onClick={() => {
+                            setOpenConfirmEndCombat(true);
+                          }}
+                        >
+                          End
+                        </span>
                       </>
                     )}
                     <span className="separator" />
@@ -203,6 +253,13 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
       <AddCombatantDialog
         open={openAddCombatant}
         onClose={() => setOpenAddCombatant(false)}
+      />
+      <ConfirmEndCombatDialog
+        open={openConfirmEndCombat}
+        onClose={() => {
+          setOpenConfirmEndCombat(false);
+        }}
+        closeAll={onClose}
       />
     </>
   );
