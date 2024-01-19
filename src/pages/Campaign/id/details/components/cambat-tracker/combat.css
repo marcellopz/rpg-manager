@@ -100,6 +100,28 @@
     text-align: center;
 }
 
+.tracker-table-reaction {
+    width: 60px;
+    text-align: center;
+}
+
+.tracker-table-reaction input {
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #646464;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.tracker-table-reaction input:checked {
+    background-color: rgb(49, 88, 172);
+}
+
 .tracker-actions {
     display: flex;
     justify-content: space-between;
@@ -271,6 +293,7 @@
 
 .combat .turn {
     border-width: 4px;
+    padding: 10px 12px; 
 }
 
 .combat .context-menu {

@@ -13,6 +13,7 @@ const useDetails = () => {
     loading: campaignLoading,
     fetchCampaignDetails,
     fetchCombatDetails,
+    setCampaignDetails,
   } = useCampaignDetails(id);
   const {
     playerDetails,
@@ -33,6 +34,7 @@ const useDetails = () => {
     detailsLoading,
     fetchAll,
     fetchCombatDetails,
+    setCampaignDetails,
   };
 };
 

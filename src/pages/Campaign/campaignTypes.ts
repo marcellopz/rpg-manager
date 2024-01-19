@@ -40,6 +40,7 @@ export interface CombatantType {
   type: "player" | "enemy" | "ally";
   orderIndex?: number;
   isTurn: boolean;
+  usedReaction?: boolean;
   activeEffects?: {
     [key: string]: ActiveEffectType;
   };

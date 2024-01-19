@@ -30,4 +30,4 @@ const dbRef = ref(db);
 
 export default auth;
 
-export { dbRef };
+export { dbRef, db };

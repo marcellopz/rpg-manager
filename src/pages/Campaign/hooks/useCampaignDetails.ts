@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { CampaignType } from "../campaignTypes";
-import {
-  getCampaign,
-  getCombatDetails,
-} from "../../../contexts/firebase/database";
+import { getCampaign } from "../../../contexts/firebase/database";
 
 const useCampaignDetails = (campaignId?: string) => {
   const [campaignDetails, setCampaignDetails] = useState<CampaignType | null>(
@@ -24,19 +21,26 @@ const useCampaignDetails = (campaignId?: string) => {
   };
 
   const fetchCombatDetails = () => {
-    if (!campaignId) return;
-    getCombatDetails(campaignId).then((combat) => {
-      setCampaignDetails((prev) => {
-        if (!prev) return prev;
-        return {
-          ...prev,
-          combat,
-        };
-      });
-    });
+    // legacy code
+    // if (!campaignId) return;
+    // getCombatDetails(campaignId).then((combat) => {
+    //   setCampaignDetails((prev) => {
+    //     if (!prev) return prev;
+    //     return {
+    //       ...prev,
+    //       combat,
+    //     };
+    //   });
+    // });
   };
 
-  return { campaignDetails, loading, fetchCampaignDetails, fetchCombatDetails };
+  return {
+    campaignDetails,
+    loading,
+    fetchCampaignDetails,
+    fetchCombatDetails,
+    setCampaignDetails,
+  };
 };
 
 export default useCampaignDetails;
