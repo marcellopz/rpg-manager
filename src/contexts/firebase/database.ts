@@ -633,3 +633,10 @@ export const updateCombatantCondition = async (
     condition
   );
 };
+
+export const updateCombatDmNotes = async (
+  campaignId: string,
+  notes: string
+) => {
+  set(child(dbRef, `campaigns/${campaignId}/combat/dmNotes`), notes);
+};

@@ -4,6 +4,7 @@
     color: black;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .combat-header {
@@ -403,4 +404,37 @@
 .tracker-table-name p {
     display: flex;
     align-items: center;
+}
+
+.dm-notes {
+    margin: 10px 4px;
+}
+
+.dm-notes p{
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+#dm-notes { 
+    display: flex;
+    width: 100%;
+}
+
+#dm-notes textarea {
+    flex-grow: 1;
+    min-height: 50px;
+    height: 100px;
+    resize: vertical; 
+    margin:0;
+    font-size: 1rem;
+    font-family: inherit;
+    color: inherit;
+    background-color: inherit;
+}
+
+#no-combatants {
+    padding: 10px;
+    background-color: #ececec;
+    color: gray;
+    text-align: center;
 }

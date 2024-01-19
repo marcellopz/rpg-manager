@@ -79,7 +79,7 @@ function CombatTrackerRowsDragNDrop({
                 </Draggable>
               ))
             ) : (
-              <div>No combatants</div>
+              <div id="no-combatants">No combatants</div>
             )}
             {provided.placeholder}
           </div>

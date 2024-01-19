@@ -24,6 +24,7 @@ export interface CombatType {
   round: number;
   currentTurn: string;
   turnOrder: string[];
+  dmNotes?: string;
   combatants: {
     [key: string]: CombatantType;
   };

@@ -3,7 +3,10 @@ import "./combat.css";
 import { DetailsContext } from "../../../../context/DetailsContext";
 import { startCombatDefaultValue } from "./combatDefaultValue";
 import auth, { db } from "../../../../../../contexts/firebase/firebase";
-import { updateCombatDetails } from "../../../../../../contexts/firebase/database";
+import {
+  updateCombatDetails,
+  updateCombatDmNotes,
+} from "../../../../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
 import CombatTrackerRowsDragNDrop from "./CombatTrackerRowsDragNDrop";
 import AddCombatantDialog from "./dialogs/AddCombatantDialog";
@@ -95,7 +98,19 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
                   setOpenAddCombatant={setOpenAddCombatant}
                   setOpenConfirmEndCombat={setOpenConfirmEndCombat}
                 />
-                {/* <div>notes</div> */}
+                {isCombatDm && (
+                  <div className="dm-notes">
+                    <p>DM notes:</p>
+                    <div id="dm-notes">
+                      <textarea
+                        value={combatDetails.dmNotes ?? ""}
+                        onChange={(e) => {
+                          updateCombatDmNotes(id as string, e.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
