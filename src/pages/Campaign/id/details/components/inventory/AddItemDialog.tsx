@@ -87,7 +87,7 @@ const AddItemDialog: React.FC<AddItemDialogProps> = ({ open, onClose }) => {
               {error && <p className="error">{t("NEW_ITEM_NUMBER_ERROR")}</p>}
             </label>
             <label>
-              {t("NEW_ITEM_WEIGHT_LABEL")}*
+              {t("NEW_ITEM_WEIGHT_LABEL")}* (lb)
               <input
                 type="text"
                 value={ItemWeight}

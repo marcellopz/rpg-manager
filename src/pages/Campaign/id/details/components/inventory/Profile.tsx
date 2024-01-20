@@ -38,10 +38,10 @@ const Profile = ({
         </div>
         <Backpack
           strength_box={character_strength}
-          weightless_box={Math.round((character_strength * 5) / 2.2)}
-          little_heavy_box={Math.round((character_strength * 10) / 2.2)}
-          very_heavy_box={Math.round((character_strength * 15) / 2.2)}
-          total_weight_box={Math.round((character_strength * 30) / 2.2)}
+          weightless_box={Math.round(character_strength * 5)}
+          little_heavy_box={Math.round(character_strength * 10)}
+          very_heavy_box={Math.round(character_strength * 15)}
+          total_weight_box={Math.round(character_strength * 30)}
           gold_box={character_gold}
           carrying_weight={carrying_weight}
         />
