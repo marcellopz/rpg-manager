@@ -74,7 +74,7 @@ export interface PlayerType {
 export interface ContentHistoryType<T> {
   content: T;
   timestamp: number;
-  author: string;
+  author?: string;
 }
 
 export interface TabType {
@@ -82,9 +82,11 @@ export interface TabType {
   type: string;
   listIndex?: number;
   content: string | InventoryContent | CharSheetType;
-  contentHistory?: ContentHistoryType<
-    string | InventoryContent | CharSheetType
-  >[];
+  contentHistory?: {
+    [key: string]: ContentHistoryType<
+      string | InventoryContent | CharSheetType
+    >;
+  };
 }
 
 export interface InventoryContent {

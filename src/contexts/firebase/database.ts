@@ -1,6 +1,6 @@
-import { get, child, push, set } from "firebase/database";
+import { child } from "firebase/database";
+import { get, push, set } from "./databaseSetup";
 import auth, { dbRef } from "./firebase";
-
 import {
   ActiveEffectType,
   CampaignType,
@@ -30,6 +30,7 @@ export async function checkIsAdmin(userId: string) {
 
 export const addNewCampaign = async (campaign: Partial<CampaignType>) => {
   return push(child(dbRef, "campaigns"), campaign).then((ref) => {
+    // @ts-ignore
     push(child(dbRef, `users/${campaign.creatorId}/campaigns`), ref.key);
   });
 };
@@ -459,8 +460,8 @@ export const updateCategoryListOrder = async (
         child(dbRef, `campaigns/${campaignId}/categories/${item.id}/listIndex`),
         i
       );
-      return;
     });
+    return;
   }
   content.forEach((item, i) => {
     set(

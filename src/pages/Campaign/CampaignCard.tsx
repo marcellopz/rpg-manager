@@ -6,6 +6,7 @@ interface CampaignCardProps {
   title: string;
   description: string;
   id: string;
+  isDemo?: boolean;
 }
 
 const CampaignCard: React.FC<CampaignCardProps> = ({
@@ -13,9 +14,10 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
   title,
   description,
   id,
+  isDemo,
 }) => {
   return (
-    <Link to={`/campaign/${id}/${title}`}>
+    <Link to={isDemo ? `/demo-campaign/${id}` : `/campaign/${id}/${title}`}>
       <div className="campaign__card">
         <div
           className="card-image"

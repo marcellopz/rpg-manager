@@ -19,7 +19,7 @@ const useDetails = () => {
     playerDetails,
     loading: playerLoading,
     fetchPlayerDetails,
-  } = usePlayerDetails(id, authUser?.uid);
+  } = usePlayerDetails(id, authUser?.uid ?? "guest");
 
   const detailsLoading = campaignLoading || playerLoading;
 

@@ -61,7 +61,7 @@ const ConfirmDialogRestore: React.FC<{
 const VersionComponent: React.FC<{
   timestamp: number;
   content: string;
-  author: string;
+  author: string | undefined;
   onCloseAll: () => void;
 }> = ({ timestamp, content, onCloseAll, author }) => {
   const [showAll, setShowAll] = React.useState<boolean>(false);
@@ -72,9 +72,11 @@ const VersionComponent: React.FC<{
     <>
       <div className="past-version">
         <h4>{new Date(timestamp).toString()}</h4>
-        <span>
-          <b>Author:</b> {author}
-        </span>
+        {author && (
+          <span>
+            <b>Author:</b> {author}
+          </span>
+        )}
         <pre className="past-version-content">
           {content.length > 100 && !showAll ? (
             <>

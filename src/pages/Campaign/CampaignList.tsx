@@ -64,6 +64,13 @@ export default function CampaignList() {
           </div>
         </section>
         <section className="cards__section">
+          <CampaignCard
+            description={"Demo campaign description"}
+            title={"Demo Campaign"}
+            imageSrc={""}
+            id={"1"}
+            isDemo
+          />
           <LoadWithFlag loading={loading}>
             {campaigns.length > 0 ? (
               <div className="campaign__cards">

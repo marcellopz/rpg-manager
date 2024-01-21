@@ -41,6 +41,10 @@ export default function AppRoutes() {
             element={<CampaignApp />}
           />
           <Route
+            path="/demo-campaign/:id"
+            element={<CampaignApp />}
+          />
+          <Route
             path="/about"
             element={<About />}
           />

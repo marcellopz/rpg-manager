@@ -64,7 +64,6 @@ function TextDetails() {
   const currentStatesRef = useRef<StatesRef>();
 
   useEffect(() => {
-    // mdxRef?.current?.setMarkdown?.(content);
     loadMarkdown();
   }, [catTab.tabId, selectedData]);
 
@@ -128,26 +127,13 @@ function TextDetails() {
       id as string,
       catTab.categoryId,
       catTab.tabId,
-      publicSelected ? "" : (auth.currentUser?.uid as string)
+      publicSelected ? "" : (auth.currentUser?.uid as string) ?? "guest"
     ).then((res) => {
       mdxRef?.current?.setMarkdown?.(res);
       setOriginalContent(res);
       // fetchAll();
     });
   };
-
-  // const loadMarkdownWithRefs = () => {
-  //   getTabContent(
-  //     latestId.current,
-  //     latestCategoryId.current,
-  //     latestTabId.current,
-  //     latestPublicSelected.current ? "" : (auth.currentUser?.uid as string)
-  //   ).then((res) => {
-  //     mdxRef?.current?.setMarkdown?.(res);
-  //     setOriginalContent(res);
-  //     // fetchAll();
-  //   });
-  // };
 
   const saveMarkdown = () => {
     const content = mdxRef?.current?.getMarkdown?.();
@@ -207,7 +193,6 @@ function TextDetails() {
                 <CreateLink />
                 <InsertImage />
                 <Separator />
-                {/* <InsertTable /> */}
                 <InsertThematicBreak />
                 <InsertAdmonition />
                 <Separator />
