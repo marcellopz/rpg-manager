@@ -1,4 +1,10 @@
 import { CampaignType } from "../../pages/Campaign/campaignTypes";
+import {
+  aidenImage,
+  bellaImage,
+  caelumImage,
+  daraImage,
+} from "./characterImages";
 import auth from "./firebase";
 
 const campaign1Mock: CampaignType = {
@@ -109,7 +115,7 @@ const campaign1Mock: CampaignType = {
                 numberOfItems: 5,
               },
             },
-            playerAvatar: "",
+            playerAvatar: aidenImage,
             playerGold: 100,
             playerName: "Aiden",
             playerStrength: 13,
@@ -233,7 +239,7 @@ const campaign1Mock: CampaignType = {
                 numberOfItems: 10,
               },
             },
-            playerAvatar: "",
+            playerAvatar: bellaImage,
             playerGold: 50,
             playerName: "Bella",
             playerStrength: 8,
@@ -325,7 +331,7 @@ const campaign1Mock: CampaignType = {
                 numberOfItems: 5,
               },
             },
-            playerAvatar: "",
+            playerAvatar: caelumImage,
             playerGold: 75,
             playerName: "Caelum",
             playerStrength: 18,
@@ -449,7 +455,7 @@ const campaign1Mock: CampaignType = {
                 numberOfItems: 2,
               },
             },
-            playerAvatar: "",
+            playerAvatar: daraImage,
             playerGold: 69,
             playerName: "Dara",
             playerStrength: 10,
