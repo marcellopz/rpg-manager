@@ -1,5 +1,6 @@
 import { CampaignType } from "../../pages/Campaign/campaignTypes";
 import {
+  backgroundImage,
   aidenImage,
   bellaImage,
   caelumImage,
@@ -8,7 +9,7 @@ import {
 import auth from "./firebase";
 
 const campaign1Mock: CampaignType = {
-  backdropImage: "",
+  backdropImage: `data:image/png;base64,${backgroundImage}`,
   categories: {
     "-NoZiHW5aeqMxTaUIjsT": {
       inventory: true,

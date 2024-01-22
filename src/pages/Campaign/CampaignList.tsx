@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/authContext";
 import { CampaignType } from "./campaignTypes";
 import { getCampaign } from "../../contexts/firebase/database";
 import LoadWithFlag from "../../generic-components/LoadWithFlag";
+import { backgroundImage } from "../../contexts/firebase/characterImages";
 
 type CampaignWithId = CampaignType & { id: string };
 
@@ -57,7 +58,7 @@ export default function CampaignList() {
       <div className="campaign">
         <section className="campaign__header header_inset">
           <div className="campaign__backdrop">
-            <h1>{t("CAMPAIGN_TITLE")}</h1>
+            <h1 id="campaigns">{t("CAMPAIGN_TITLE")}</h1>
             <div>
               <button onClick={handleNewCampaign}>{t("CAMPAIGN_NEW")}</button>
             </div>
@@ -65,9 +66,11 @@ export default function CampaignList() {
         </section>
         <section className="cards__section">
           <CampaignCard
-            description={"Demo campaign description"}
+            description={
+              "Demo campaign used for showcasing, edits made here will not be saved."
+            }
             title={"Demo Campaign"}
-            imageSrc={""}
+            imageSrc={`data:image/png;base64,${backgroundImage}`}
             id={"1"}
             isDemo
           />

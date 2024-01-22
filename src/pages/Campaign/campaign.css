@@ -9,6 +9,7 @@
 
 .campaign__header h1 {
   font-size: 2rem;
+  text-shadow: 3px 3px 6px black;
 }
 
 .campaign__backdrop {
@@ -22,6 +23,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+#demo-warning {
+  margin: 0;
+  padding: 10px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+#demo-warning > div {
+  background-color: rgb(255, 138, 138);
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  border: 2px solid rgb(155, 0, 0);
+  color: rgb(49, 0, 0);
+  /* font-size: large; */
+  font-weight: 500;
 }
 
 .campaign__backdrop > * {

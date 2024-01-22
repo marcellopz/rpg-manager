@@ -32,7 +32,7 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
           <h5
             className="card-text"
             style={{
-              textAlign: description.length > 50 ? "justify" : "center",
+              textAlign: description.length > 100 ? "justify" : "center",
             }}
           >
             {description}
