@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { DetailsContext } from "../../../../../context/DetailsContext";
 import { CombatantTypeWithID } from "../CombatTrackerRowsDragNDrop";
 import { updateCombatant } from "../../../../../../../contexts/firebase/database";
+import { t } from "i18next";
 
 type Props = {
   open: boolean;
@@ -36,14 +37,16 @@ const ConfirmDeleteCombatantDialog = ({ open, onClose, combatant }: Props) => {
             e.stopPropagation();
           }}
         >
-          <h2>Delete {combatant.name}?</h2>
+          <h2>
+            {t("DELETE_BTN")} {combatant.name}?
+          </h2>
           <div className="flex gap-10">
-            <button onClick={onClose}>Cancel</button>
+            <button onClick={onClose}>{t("CANCEL_BTN")}</button>
             <button
               onClick={handleDeleteCombatant}
               id="delete"
             >
-              Delete
+              {t("DELETE_BTN")}
             </button>
           </div>
         </div>

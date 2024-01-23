@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { updateCombatDetails } from "../../../../../../../contexts/firebase/database";
 import { useContext } from "react";
 import { DetailsContext } from "../../../../../context/DetailsContext";
+import { t } from "i18next";
 
 type Props = {
   open: boolean;
@@ -34,9 +35,9 @@ const ConfirmEndCombatDialog = ({ open, onClose, closeAll }: Props) => {
             e.stopPropagation();
           }}
         >
-          <h2>End combat?</h2>
+          <h2>{t("COMBAT_END_CONFIRM")}</h2>
           <div className="flex gap-10">
-            <button onClick={onClose}>Cancel</button>
+            <button onClick={onClose}>{t("CANCEL_BTN")}</button>
             <button
               onClick={() => {
                 handleEndCombat().then(() => {
@@ -46,7 +47,7 @@ const ConfirmEndCombatDialog = ({ open, onClose, closeAll }: Props) => {
               }}
               id="end-combat"
             >
-              End combat
+              {t("COMBAT_END")}
             </button>
           </div>
         </div>

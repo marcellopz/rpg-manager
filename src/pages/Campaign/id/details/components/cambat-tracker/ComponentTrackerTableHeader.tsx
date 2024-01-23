@@ -1,3 +1,5 @@
+import { t } from "i18next";
+
 function COmbatTrackerTableHeader({ isCombatDm }: { isCombatDm: boolean }) {
   return (
     <div className="tracker-table-header">
@@ -8,13 +10,13 @@ function COmbatTrackerTableHeader({ isCombatDm }: { isCombatDm: boolean }) {
         Init
       </div>
       <span className="separator" />
-      <div className="tracker-table-name">Name</div>
+      <div className="tracker-table-name">{t("NAME")}</div>
       {isCombatDm && (
         <>
           <span className="separator" />
-          <div className="tracker-table-ac">AC</div>
+          <div className="tracker-table-ac">{t("COMBAT_AC")}</div>
           <span className="separator" />
-          <div className="tracker-table-hp">HP</div>
+          <div className="tracker-table-hp">{t("COMBAT_HP")}</div>
         </>
       )}
       <span className="separator" />
@@ -22,7 +24,7 @@ function COmbatTrackerTableHeader({ isCombatDm }: { isCombatDm: boolean }) {
         className="tracker-table-reaction"
         title="Used reaction?"
       >
-        Reaction
+        {t("COMBAT_REACTION")}
       </div>
     </div>
   );

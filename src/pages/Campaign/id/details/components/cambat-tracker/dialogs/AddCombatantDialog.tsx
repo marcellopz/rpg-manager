@@ -3,6 +3,7 @@ import { CombatantType } from "../../../../../campaignTypes";
 import { addCombatant } from "../../../../../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
 import { DetailsContext } from "../../../../../context/DetailsContext";
+import { t } from "i18next";
 
 type Props = {
   open: boolean;
@@ -70,9 +71,9 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
           e.stopPropagation();
         }}
       >
-        <h2>Add combatant</h2>
+        <h2>{t("COMBAT_ADD_COMBATANT")}</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="cname">Name</label>
+          <label htmlFor="cname">{t("NAME")}</label>
           <input
             type="text"
             id="cname"
@@ -80,7 +81,7 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
           />
           <div className="p-section">
             <div>
-              <label htmlFor="initiative">Initiative</label>
+              <label htmlFor="initiative">{t("CHAR_SHEET_INITIATIVE")}</label>
               <input
                 type="number"
                 id="initiative"
@@ -89,7 +90,7 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
               />
             </div>
             <div>
-              <label htmlFor="ac">AC</label>
+              <label htmlFor="ac">{t("COMBAT_AC")}</label>
               <input
                 type="number"
                 id="ac"
@@ -101,7 +102,7 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
           <div className="p-section">
             <div>
               <div className="max-hp-check">
-                <label htmlFor="max-hp">Max HP</label>
+                <label htmlFor="max-hp">{t("CHAR_SHEET_MAX_HP")}</label>
                 <span className="flex">
                   <input
                     type="checkbox"
@@ -110,7 +111,7 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
                     checked={fullHp}
                     onChange={() => setFullHp(!fullHp)}
                   />
-                  <label htmlFor="full-hp">Full HP</label>
+                  <label htmlFor="full-hp">{t("COMBAT_FULL_HP")}</label>
                 </span>
               </div>
               <input
@@ -124,7 +125,7 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
                 className={fullHp ? "disabled" : ""}
                 htmlFor="curr-hp"
               >
-                Current HP
+                {t("CHAR_SHEET_CURRENT_HP")}
               </label>
               <input
                 type="number"
@@ -135,23 +136,21 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
               />
             </div>
           </div>
-          <label htmlFor="type">Combatant Type</label>
+          <label htmlFor="type">{t("COMBAT_COMBATANT_TYPE")}</label>
           <div className="combatant-type-form">
             <select
               name="type"
               id="type"
             >
-              <option value="player">Player</option>
-              <option value="enemy">Enemy</option>
+              <option value="player">{t("COMBAT_PLAYER")}</option>
+              <option value="enemy">{t("COMBAT_ENEMY")}</option>
               {/* <option value="npc">Npc</option> */}
-              <option value="ally">Ally</option>
+              <option value="ally">{t("COMBAT_ALLY")}</option>
             </select>
           </div>
-          <button type="submit">Add</button>
+          <button type="submit">{t("COMBAT_ADD")}</button>
         </form>
-        {error && (
-          <p className="error">You must provide the combatant details</p>
-        )}
+        {error && <p className="error">{t("COMBAT_ERROR")}</p>}
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import COmbatTrackerTableHeader from "./ComponentTrackerTableHeader";
 import CombatTrackerTableFooter from "./CombatTrackerTableFooter";
 import { onValue, ref } from "firebase/database";
 import { CampaignType, CombatType } from "../../../../campaignTypes";
+import { t } from "i18next";
 
 type CombatTrackerDialogProps = {
   open: boolean;
@@ -71,9 +72,9 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
         >
           {!combatDetails && (
             <div className="no-combat">
-              <p>No combat started</p>
+              <p>{t("COMBAT_NO_COMBAT")}</p>
               <div>
-                <button onClick={handleStartCombat}>Start combat</button>
+                <button onClick={handleStartCombat}>{t("COMBAT_START")}</button>
               </div>
             </div>
           )}
@@ -81,8 +82,10 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
             <div className="combat">
               <div className="combat-header">
                 <div>
-                  <h2>Combat Tracker</h2>
-                  <h4>DM: {combatDetails?.dmName ?? ""}</h4>
+                  <h2>{t("COMBAT_TRACKER_TITLE")}</h2>
+                  <h4>
+                    {t("COMBAT_DM")}: {combatDetails?.dmName ?? ""}
+                  </h4>
                 </div>
 
                 {/* <button>Add characters from Inventory</button> */}
@@ -100,7 +103,7 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
                 />
                 {isCombatDm && (
                   <div className="dm-notes">
-                    <p>DM notes:</p>
+                    <p>{t("COMBAT_DM_NOTES")}:</p>
                     <div id="dm-notes">
                       <textarea
                         value={combatDetails.dmNotes ?? ""}

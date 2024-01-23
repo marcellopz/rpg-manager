@@ -30,12 +30,14 @@ const CampaignDetailsHeader = ({
       <div className="campaign__backdrop">
         {window.location.pathname.startsWith("/demo-campaign") && (
           <div id="demo-warning">
-            <div>Changes made here will not persist</div>
+            <div>{t("CAMPAIGN_DEMO_WARNING")}</div>
           </div>
         )}
         <h1>{campaignDetails?.name}</h1>
         <div>
-          <button onClick={() => setOpen(true)}>Combat Tracker</button>
+          <button onClick={() => setOpen(true)}>
+            {t("COMBAT_TRACKER_TITLE")}
+          </button>
           {authUser?.uid === campaignDetails?.creatorId && (
             <>
               <button

@@ -4,6 +4,7 @@ import { DetailsContext } from "../../../../../context/DetailsContext";
 import { CombatantTypeWithID } from "../CombatTrackerRowsDragNDrop";
 import ConditionChip from "../ConditionChip";
 import { addConditionToCombatant } from "../../../../../../../contexts/firebase/database";
+import { t } from "i18next";
 const colors = [
   { name: "gray", color: "#A9A9A9" }, // Lighter gray
   { name: "red", color: "#FF6B6B" }, // Soft red
@@ -69,9 +70,12 @@ const AddConditionDialog = ({ open, onClose, combatant }: Props) => {
           e.stopPropagation();
         }}
       >
-        <h2>Add condition to {combatant.name}</h2>
+        <h2>
+          {t("COMBAT_ADD_CONDITION_TO")}
+          {combatant.name}
+        </h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="cname">Condition name</label>
+          <label htmlFor="cname">{t("COMBAT_CONDITION_NAME")}</label>
           <input
             type="text"
             id="cname"
@@ -82,7 +86,7 @@ const AddConditionDialog = ({ open, onClose, combatant }: Props) => {
           />
           <div>
             <div className="rounds-duration">
-              <label htmlFor="duration">Duration in rounds</label>
+              <label htmlFor="duration">{t("COMBAT_DURATION_TURNS")}</label>
               <span className="flex">
                 <input
                   type="checkbox"
@@ -93,7 +97,7 @@ const AddConditionDialog = ({ open, onClose, combatant }: Props) => {
                     setIndefinite(e.target.checked);
                   }}
                 />
-                <label htmlFor="indefinite">Indefinite</label>
+                <label htmlFor="indefinite">{t("INDEFINITE")}</label>
               </span>
             </div>
             <input
@@ -107,7 +111,7 @@ const AddConditionDialog = ({ open, onClose, combatant }: Props) => {
           </div>
           <div className="a-section">
             <div>
-              <label htmlFor="cname">Color</label>
+              <label htmlFor="cname">{t("COLOR")}</label>
               <select
                 name="color"
                 id="color"
@@ -128,7 +132,7 @@ const AddConditionDialog = ({ open, onClose, combatant }: Props) => {
               </select>
             </div>
             <div>
-              <label>Preview</label>
+              <label>{t("PREVIEW")}</label>
               <div className="showcase-chip">
                 <ConditionChip
                   color={color}
@@ -140,11 +144,9 @@ const AddConditionDialog = ({ open, onClose, combatant }: Props) => {
               </div>
             </div>
           </div>
-          <button type="submit">Add</button>
+          <button type="submit">{t("COMBAT_ADD")}</button>
         </form>
-        {error && (
-          <p className="error">You must provide the condition details</p>
-        )}
+        {error && <p className="error">{t("COMBAT_CONDITION_ERROR")}</p>}
       </div>
     </div>
   );

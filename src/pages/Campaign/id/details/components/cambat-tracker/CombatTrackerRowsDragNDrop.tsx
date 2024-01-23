@@ -5,6 +5,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { DetailsContext } from "../../../../context/DetailsContext";
 import { updateCombatantListOrder } from "../../../../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
+import { t } from "i18next";
 
 export type CombatantTypeWithID = CombatantType & { id: string };
 
@@ -79,7 +80,7 @@ function CombatTrackerRowsDragNDrop({
                 </Draggable>
               ))
             ) : (
-              <div id="no-combatants">No combatants</div>
+              <div id="no-combatants">{t("COMBAT_NO_COMBATANTS")}</div>
             )}
             {provided.placeholder}
           </div>

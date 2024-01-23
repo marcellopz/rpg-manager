@@ -9,6 +9,7 @@ import {
 } from "../../../../../../contexts/firebase/database";
 import { CombatantTypeWithID } from "./CombatTrackerRowsDragNDrop";
 import { useParams } from "react-router-dom";
+import { t } from "i18next";
 
 function CombatTrackerTableFooter({
   setOpenConfirmEndCombat,
@@ -141,13 +142,13 @@ function CombatTrackerTableFooter({
                 onClick={handlePrev}
                 className="cursor-pointer"
               >
-                Prev
+                {t("PREV")}
               </span>
               <span
                 className="cursor-pointer"
                 onClick={handleNext}
               >
-                Next
+                {t("NEXT")}
               </span>
             </>
           )}
@@ -155,7 +156,7 @@ function CombatTrackerTableFooter({
             onClick={handleSort}
             className="cursor-pointer"
           >
-            Sort
+            {t("SORT")}
           </span>
         </div>
       ) : (
@@ -168,11 +169,13 @@ function CombatTrackerTableFooter({
               className="cursor-pointer"
               onClick={handleStart}
             >
-              Start
+              {t("START")}
             </span>
           ) : (
             <>
-              <span>Round {combatDetails.round}</span>
+              <span>
+                {t("ROUND")} {combatDetails.round}
+              </span>
               <span className="separator" />
               <span
                 className="cursor-pointer"
@@ -180,7 +183,7 @@ function CombatTrackerTableFooter({
                   setOpenConfirmEndCombat(true);
                 }}
               >
-                End
+                {t("END")}
               </span>
             </>
           )}
@@ -189,11 +192,13 @@ function CombatTrackerTableFooter({
             className="cursor-pointer"
             onClick={() => setOpenAddCombatant(true)}
           >
-            Add player
+            {t("COMBAT_ADD_PLAYER")}
           </span>
         </div>
       ) : (
-        <span>Round {combatDetails.round}</span>
+        <span>
+          {t("ROUND")} {combatDetails.round}
+        </span>
       )}
     </div>
   );

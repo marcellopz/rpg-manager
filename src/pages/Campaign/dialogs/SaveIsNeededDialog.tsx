@@ -1,4 +1,5 @@
 import React from "react";
+import { t } from "i18next";
 
 interface Props {
   open: boolean;
@@ -30,17 +31,16 @@ const SaveIsNeededDialog: React.FC<Props> = ({
           e.stopPropagation();
         }}
       >
-        <h2>You have unsaved changes to this page</h2>
+        <h2>{t("CAMPAIGN_UNSAVED_CHANGES")}</h2>
         <div className="unsaved-changes-dialog-container">
-          <button onClick={onClose}>Cancel</button>
+          <button onClick={onClose}>{t("CANCEL")}</button>
           <button
-            // style={{ backgroundColor: "red" }}
             onClick={() => {
               discard();
               onClose();
             }}
           >
-            Discard changes
+            {t("CANCEL")}
           </button>
           <button
             onClick={() => {
@@ -49,7 +49,7 @@ const SaveIsNeededDialog: React.FC<Props> = ({
             }}
             style={{ backgroundColor: "green" }}
           >
-            Save
+            {t("SAVE")}
           </button>
         </div>
       </div>

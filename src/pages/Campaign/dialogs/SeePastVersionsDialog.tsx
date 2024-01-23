@@ -7,6 +7,7 @@ import {
 } from "../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
 import { ContentHistoryType } from "../campaignTypes";
+import { t } from "i18next";
 
 const ConfirmDialogRestore: React.FC<{
   open: boolean;
@@ -74,7 +75,7 @@ const VersionComponent: React.FC<{
         <h4>{new Date(timestamp).toString()}</h4>
         {author && (
           <span>
-            <b>Author:</b> {author}
+            <b>{t("AUTHOR")}:</b> {author}
           </span>
         )}
         <pre className="past-version-content">
@@ -85,7 +86,7 @@ const VersionComponent: React.FC<{
                 className="view-more cursor-pointer"
                 onClick={() => setShowAll(true)}
               >
-                view more
+                {t("VIEW_MORE")}
               </p>
             </>
           ) : (
@@ -96,7 +97,7 @@ const VersionComponent: React.FC<{
           className="bold cursor-pointer"
           onClick={() => setConfirmDialogOpen(true)}
         >
-          Restore version
+          {t("RESTORE_VERSION")}
         </span>
       </div>
       <ConfirmDialogRestore
@@ -156,9 +157,9 @@ const SeePastVersionsDialog: React.FC<Props> = ({ open, onClose }) => {
           e.stopPropagation();
         }}
       >
-        <h2>Past versions of this tab:</h2>
+        <h2>{t("CAMPAIGN_PAST_VERSIONS_TAB")}:</h2>
         <div className="past-versions-dialog-container">
-          {loading ? <div>Loading...</div> : null}
+          {loading ? <div>{t("LOADING")}...</div> : null}
           {versions && !loading ? (
             Object.entries(versions)
               .sort(([_k1, v1], [_k2, v2]) => v2.timestamp - v1.timestamp)
@@ -176,7 +177,7 @@ const SeePastVersionsDialog: React.FC<Props> = ({ open, onClose }) => {
                 />
               ))
           ) : (
-            <div>No past versions found.</div>
+            <div>{t("NO_PAST_VERSIONS")}.</div>
           )}
         </div>
       </div>

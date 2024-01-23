@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { useEffect, useRef } from "react";
 const CombatTrackerRowContextMenu = ({
   x,
@@ -52,7 +53,7 @@ const CombatTrackerRowContextMenu = ({
               onOpenAddConditionDialog();
             }}
           >
-            Add condition
+            {t("COMBAT_ADD_CONDITION")}
           </li>
           <li
             onClick={() => {
@@ -60,7 +61,7 @@ const CombatTrackerRowContextMenu = ({
               onClose();
             }}
           >
-            Edit
+            {t("EDIT")}
           </li>
           <li
             onClick={() => {
@@ -68,7 +69,7 @@ const CombatTrackerRowContextMenu = ({
               onOpenDeleteDialog();
             }}
           >
-            Delete
+            {t("DELETE_BTN")}
           </li>
         </ul>
       </div>
