@@ -35,13 +35,13 @@
 }
 
 #demo-warning > div {
-  background-color: rgb(255, 138, 138);
+  background-color: rgb(255, 237, 138);
   border-radius: 5px;
   width: 100%;
   text-align: center;
   padding: 5px;
-  border: 2px solid rgb(155, 0, 0);
-  color: rgb(49, 0, 0);
+  border: 2px solid rgb(155, 119, 0);
+  color: rgb(58, 44, 0);
   /* font-size: large; */
   font-weight: 500;
 }
