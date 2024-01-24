@@ -34,11 +34,11 @@ const EditCharacterPicture = ({ open, onClose }: EditCharacterPictureProps) => {
   return (
     <div
       className="dialog-background"
-      onClick={onClose}
+      onMouseDown={onClose}
     >
       <div
         className="dialog"
-        onClick={(e) => {
+        onMouseDown={(e) => {
           e.stopPropagation();
         }}
       >

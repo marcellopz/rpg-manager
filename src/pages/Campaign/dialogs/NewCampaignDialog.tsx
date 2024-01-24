@@ -130,6 +130,7 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
           </label>
           <label>{t("CAMPAIGN_CARD_IMAGE")}</label>
           <LoadImage
+            aspectRatio={2}
             setImageActualBlob={setCardImageBlob}
             sizeLimit={8000000}
           />

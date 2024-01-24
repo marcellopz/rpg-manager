@@ -73,11 +73,11 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
   return (
     <div
       className="dialog-background"
-      onClick={onClose}
+      onMouseDown={onClose}
     >
       <div
         className="dialog"
-        onClick={(e) => {
+        onMouseDown={(e) => {
           e.stopPropagation();
         }}
       >

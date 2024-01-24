@@ -60,12 +60,11 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
   return (
     <div
       className="dialog-background"
-      onClick={onClose}
+      onMouseDown={onClose}
     >
       <div
         className="dialog"
-        style={{ width: "500px" }}
-        onClick={(e) => {
+        onMouseDown={(e) => {
           e.stopPropagation();
         }}
       >
@@ -90,6 +89,7 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
         </div>
         <label>{t("CAMPAIGN_CARD_IMAGE")}</label>
         <LoadImage
+          aspectRatio={2}
           setImageActualBlob={setCardImageBlob}
           sizeLimit={8000000}
         />
