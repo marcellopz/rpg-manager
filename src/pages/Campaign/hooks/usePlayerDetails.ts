@@ -11,7 +11,12 @@ const usePlayerDetails = (campaignId?: string, playerId?: string) => {
   }, [campaignId, playerId]);
 
   const fetchPlayerDetails = async () => {
-    if (!campaignId || !playerId) return;
+    if (
+      !campaignId ||
+      !playerId ||
+      (playerId === "guest" && campaignId !== "1")
+    )
+      return;
     getPlayerCampaign(campaignId, playerId).then((player) => {
       setPlayerDetails(player);
     });

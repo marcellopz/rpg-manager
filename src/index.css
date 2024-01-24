@@ -173,6 +173,7 @@ input, textarea {
     max-height: 95vh;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .dialog h2 {

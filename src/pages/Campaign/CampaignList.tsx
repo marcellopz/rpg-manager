@@ -81,7 +81,7 @@ export default function CampaignList() {
                   <CampaignCard
                     description={campaign.description}
                     title={campaign.name}
-                    imageSrc={campaign.backdropImage}
+                    imageSrc={campaign.campaignCardImage}
                     id={campaign.id}
                     key={campaign.id}
                   />

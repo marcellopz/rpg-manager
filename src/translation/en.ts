@@ -203,6 +203,9 @@ const en = {
   COMBAT_HP: "HP",
   CAMPAIGN_DEMO_WARNING:
     "You are viewing a demo campaign. Changes will not be saved.",
+  CONFIRM: "Confirm",
+  CAMPAIGN_CARD_IMAGE: "Campaign card image",
+  CAMPAIGN_BANNER_IMAGE: "Campaign banner image",
 };
 
 export default en;

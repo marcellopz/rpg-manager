@@ -203,6 +203,9 @@ const br = {
   COMBAT_HP: "PV",
   CAMPAIGN_DEMO_WARNING:
     "Você está visualizando uma campanha de demonstração. Mudanças não serão salvas.",
+  CONFIRM: "Confirmar",
+  CAMPAIGN_CARD_IMAGE: "Imagem do cartão da campanha",
+  CAMPAIGN_BANNER_IMAGE: "Imagem do banner da campanha",
 };
 
 export default br;

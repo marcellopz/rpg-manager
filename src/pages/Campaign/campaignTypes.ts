@@ -13,6 +13,7 @@ export interface CampaignType {
     [key: string]: CategoryType;
   };
   backdropImage?: string;
+  campaignCardImage?: string;
   combat?: CombatType;
 }
 

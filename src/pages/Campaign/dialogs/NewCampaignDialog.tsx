@@ -5,12 +5,19 @@ import { CampaignType, PlayerType } from "../campaignTypes";
 import { AuthContext } from "../../../contexts/authContext";
 import LoadImage from "../../../generic-components/load-image/LoadImage";
 import { t } from "i18next";
+import { uploadImage } from "../../../contexts/firebase/storage";
 
-const saveCampaign = (name: string, description: string, imageURL: string) => {
+const saveCampaign = (
+  name: string,
+  description: string
+  // imageURL: string,
+  // backdropImage: string
+) => {
   const newCampaign = {
     name,
     description,
-    backdropImage: imageURL,
+    // backdropImage: backdropImage,
+    // campaignCardImage: imageURL,
     creatorId: auth.currentUser?.uid,
     players: {
       [auth.currentUser?.uid as string]: {
@@ -20,9 +27,10 @@ const saveCampaign = (name: string, description: string, imageURL: string) => {
       } as PlayerType,
     },
   } as CampaignType;
-  addNewCampaign(newCampaign).then(() => {
-    window.location.reload();
-  });
+  return addNewCampaign(newCampaign);
+  //.then(() => {
+  //   window.location.reload();
+  // });
 };
 
 type NewCampaignDialogProps = {
@@ -36,7 +44,12 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
 }) => {
   const [name, setName] = React.useState<string>("");
   const [description, setDescription] = React.useState<string>("");
-  const [imageURL, setImageURL] = React.useState<string>("");
+  // const [imageURL, setImageURL] = React.useState<string>("");
+  // const [backdropImage, setBackdropImage] = React.useState<string>("");
+  const [cardImageBlob, setCardImageBlob] = React.useState<Blob | null>(null);
+  const [backdropImageBlob, setBackdropImageBlob] = React.useState<Blob | null>(
+    null
+  );
   const [error, setError] = React.useState<boolean>(false);
   const { authUser } = useContext(AuthContext);
 
@@ -50,7 +63,17 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
       setError(true);
       return;
     }
-    saveCampaign(name, description, imageURL);
+    saveCampaign(name, description).then((ref) => {
+      if (!ref) return;
+      if (cardImageBlob) {
+        // @ts-ignore
+        uploadImage(cardImageBlob, `campaign/cardImage/${ref.key}`);
+      }
+      if (backdropImageBlob) {
+        // @ts-ignore
+        uploadImage(backdropImageBlob, `campaign/backdropImage/${ref.key}`);
+      }
+    });
     onClose();
   };
 
@@ -77,11 +100,11 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
   return (
     <div
       className="dialog-background"
-      onClick={onClose}
+      onMouseDown={onClose}
     >
       <div
         className="dialog"
-        onClick={(e) => {
+        onMouseDown={(e) => {
           e.stopPropagation();
         }}
       >
@@ -105,9 +128,16 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
             />
             {error && <p className="error">{t("NEW_CAMPAIGN_ERROR")}</p>}
           </label>
+          <label>{t("CAMPAIGN_CARD_IMAGE")}</label>
           <LoadImage
-            setImageBlob={setImageURL}
-            sizeLimit={2000000}
+            setImageActualBlob={setCardImageBlob}
+            sizeLimit={8000000}
+          />
+          <label>{t("CAMPAIGN_BANNER_IMAGE")}</label>
+          <LoadImage
+            aspectRatio={5}
+            setImageActualBlob={setBackdropImageBlob}
+            sizeLimit={8000000}
           />
           <br />
           <button type="submit">{t("SAVE_BTN")}</button>

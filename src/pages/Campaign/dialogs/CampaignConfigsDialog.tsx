@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { DetailsContext } from "../context/DetailsContext";
 import { editCampaignNameDescription } from "../../../contexts/firebase/database";
 import { t } from "i18next";
+import LoadImage from "../../../generic-components/load-image/LoadImage";
+import { uploadImage } from "../../../contexts/firebase/storage";
 
 type CampaignConfigsDialogProps = {
   open: boolean;
@@ -18,6 +20,10 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
   const [campaignName, setCampaignName] = React.useState<string>("");
   const [campaignDescription, setCampaignDescription] =
     React.useState<string>("");
+  const [cardImageBlob, setCardImageBlob] = React.useState<Blob | null>(null);
+  const [backdropImageBlob, setBackdropImageBlob] = React.useState<Blob | null>(
+    null
+  );
 
   useEffect(() => {
     setCampaignName(campaignDetails?.name || "");
@@ -36,6 +42,18 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
     ).then(() => {
       fetchAll();
     });
+    if (cardImageBlob) {
+      // @ts-ignore
+      uploadImage(cardImageBlob, `campaign/cardImage/${id}`);
+    }
+    if (backdropImageBlob) {
+      // @ts-ignore
+      uploadImage(backdropImageBlob, `campaign/backdropImage/${id}`).then(
+        () => {
+          window.location.reload();
+        }
+      );
+    }
     onClose();
   };
 
@@ -70,6 +88,17 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
             />
           </label>
         </div>
+        <label>{t("CAMPAIGN_CARD_IMAGE")}</label>
+        <LoadImage
+          setImageActualBlob={setCardImageBlob}
+          sizeLimit={8000000}
+        />
+        <label>{t("CAMPAIGN_BANNER_IMAGE")}</label>
+        <LoadImage
+          aspectRatio={5}
+          setImageActualBlob={setBackdropImageBlob}
+          sizeLimit={8000000}
+        />
         <div className="confirm-button-container">
           <button
             onClick={onClose}
@@ -81,7 +110,7 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
             onClick={saveCampaignConfigs}
             // className="button-save"
           >
-            {t("CREATE_BTN")}
+            {t("CONFIRM")}
           </button>
         </div>
       </div>

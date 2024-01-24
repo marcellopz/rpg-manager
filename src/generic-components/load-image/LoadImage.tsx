@@ -47,14 +47,16 @@ const getBase64Size = (base64String: string) => {
 
 interface LoadImageProps {
   aspectRatio?: number;
-  setImageBlob: (imageblob: string) => void;
+  setImageBlob?: (imageblob: string) => void;
   sizeLimit: number;
+  setImageActualBlob?: (imageblob: Blob) => void;
 }
 
 const LoadImage = ({
   aspectRatio,
   setImageBlob,
   sizeLimit,
+  setImageActualBlob,
 }: LoadImageProps) => {
   const [imgSrc, setImgSrc] = useState("");
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -66,6 +68,9 @@ const LoadImage = ({
   const [oversized, setOversized] = useState(false);
   const scale = 1;
   const rotate = 0;
+  if (!setImageBlob && !setImageActualBlob) {
+    throw new Error("setImageBlob or setImageActualBlob must be defined");
+  }
   //   const [scale, setScale] = useState(1);
   //   const [rotate, setRotate] = useState(0);
   //   const [aspect, setAspect] = useState<number | undefined>(
@@ -158,6 +163,10 @@ const LoadImage = ({
           rotate
         );
         createBlob().then(async (a) => {
+          if (setImageActualBlob) {
+            setImageActualBlob(a);
+          }
+          if (!setImageBlob) return;
           const b64 = await blobToBase64(a);
           const size = getBase64Size(b64 as string);
           if (size > sizeLimit) {
