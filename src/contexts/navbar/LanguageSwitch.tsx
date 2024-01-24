@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { setLanguage } from "../firebase/database";
+import auth from "../firebase/firebase";
 
 const languages = [
   {
@@ -35,25 +37,45 @@ export default function LanguageSwitch() {
       onClick={() => setIsMenuOpen((prev) => !prev)}
     >
       <div id="language-toggle">
-        {
-          languages.filter((language) => language.code === i18n.language).map((lang) => (
-            <img src={lang.flag} id="language-flag" key={lang.code} />
-          ))
-        }
-        <img id="language-toggle-arrow" src="/assets/arrow.svg" />
+        {languages
+          .filter((language) => language.code === i18n.language)
+          .map((lang) => (
+            <img
+              src={lang.flag}
+              id="language-flag"
+              key={lang.code}
+            />
+          ))}
+        <img
+          id="language-toggle-arrow"
+          src="/assets/arrow.svg"
+        />
       </div>
       {isMenuOpen &&
-        languages.filter((language) => language.code !== i18n.language).map((lang) => (
-          <div className="language-menu" ref={menuRef} key={lang.code}>
-            <ul>
-              <li onClick={() => i18n.changeLanguage(lang.code)}>
-                <img src={lang.flag} width={30} />
-                {lang.code}
-              </li>
-            </ul>
-          </div>
-        ))
-      }
+        languages
+          .filter((language) => language.code !== i18n.language)
+          .map((lang) => (
+            <div
+              className="language-menu"
+              ref={menuRef}
+              key={lang.code}
+            >
+              <ul>
+                <li
+                  onClick={() => {
+                    setLanguage(auth.currentUser?.uid as string, lang.code);
+                    i18n.changeLanguage(lang.code);
+                  }}
+                >
+                  <img
+                    src={lang.flag}
+                    width={30}
+                  />
+                  {lang.code}
+                </li>
+              </ul>
+            </div>
+          ))}
     </div>
   );
 }

@@ -16,9 +16,11 @@ import {
   checkIsAdmin,
   getCampaignInvites,
   getCampaigns,
+  getLanguage,
   getUidByEmail,
   saveEmailUid,
 } from "./firebase/database";
+import { useTranslation } from "react-i18next";
 
 interface InviteType {
   campaignId: string;
@@ -66,6 +68,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [campaignIds, setCampaignIds] = useState<string[] | null>(null);
   const [invites, setInvites] = useState<InviteType[]>([]);
   const [authLoading, setAuthLoading] = useState<boolean>(true);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
@@ -80,6 +83,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     if (authUser) {
+      getLanguage(authUser.uid).then((res) => {
+        if (res === null) return;
+        i18n.changeLanguage(res);
+      });
       checkIsAdmin(authUser.uid).then((res) => {
         setIsAdmin(res);
       });
