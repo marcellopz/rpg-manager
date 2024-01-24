@@ -4,7 +4,6 @@ import {
   getCampaign,
   getCombatDetails,
 } from "../../../contexts/firebase/database";
-import { useParams } from "react-router-dom";
 import { isDemo } from "../../../contexts/firebase/databaseSetup";
 
 const useCampaignDetails = (campaignId?: string) => {
@@ -12,7 +11,6 @@ const useCampaignDetails = (campaignId?: string) => {
     null
   );
   const [loading, setLoading] = useState<boolean>(true);
-  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     fetchCampaignDetails();
