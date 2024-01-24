@@ -98,3 +98,7 @@ export const set = (dbRef: any, obj: any) => {
   }
   return firebaseSet(dbRef, obj);
 };
+
+export const isDemo = () => {
+  return window.location.pathname.startsWith("/demo-campaign");
+}

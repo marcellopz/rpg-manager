@@ -24,7 +24,6 @@ export interface CombatType {
   turn: number;
   round: number;
   currentTurn: string;
-  turnOrder: string[];
   dmNotes?: string;
   combatants: {
     [key: string]: CombatantType;
@@ -43,6 +42,8 @@ export interface CombatantType {
   orderIndex?: number;
   isTurn: boolean;
   usedReaction?: boolean;
+  id?: string;
+  turnOrder?: number;
   activeEffects?: {
     [key: string]: ActiveEffectType;
   };

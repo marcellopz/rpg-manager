@@ -8,6 +8,7 @@ import LoadWithFlag from "../../../generic-components/LoadWithFlag";
 import { DetailsContext } from "../context/DetailsContext";
 import CampaignConfigsDialog from "../dialogs/CampaignConfigsDialog";
 import CampaignDetailsHeader from "./CampaignDetailsHeader";
+import allCampaignsMocks from "../../../contexts/firebase/campaignMock";
 
 export const getTab = (
   category: string,
@@ -30,6 +31,9 @@ export default function CampaignDetails() {
     canTabChange,
     selectedData,
   } = useContext(DetailsContext);
+
+  console.log({ campaignDetails, playerDetails });
+  console.log(allCampaignsMocks);
 
   const [invitePlayerDialogOpen, setInvitePlayerDialogOpen] =
     useState<boolean>(false);

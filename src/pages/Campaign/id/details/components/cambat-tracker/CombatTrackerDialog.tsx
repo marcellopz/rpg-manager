@@ -30,6 +30,7 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
   const [openConfirmEndCombat, setOpenConfirmEndCombat] = useState(false);
 
   useEffect(() => {
+    if (id === "1") return;
     onValue(ref(db, `campaigns/${id}/combat`), (snapshot) => {
       const newCombat = snapshot.val() as CombatType;
       setCampaignDetails(

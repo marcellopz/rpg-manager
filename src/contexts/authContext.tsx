@@ -21,6 +21,7 @@ import {
   saveEmailUid,
 } from "./firebase/database";
 import { useTranslation } from "react-i18next";
+import allCampaignsMocks from "./firebase/campaignMock";
 
 interface InviteType {
   campaignId: string;
@@ -100,6 +101,19 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       getUidByEmail(authUser.email as string).then((res) => {
         if (res === null) saveEmailUid();
       });
+    }
+    if (
+      auth.currentUser?.uid &&
+      allCampaignsMocks.campaigns["1"].players &&
+      !(auth.currentUser?.uid in allCampaignsMocks.campaigns["1"].players)
+    ) {
+      allCampaignsMocks.campaigns["1"].players[auth.currentUser?.uid] =
+        allCampaignsMocks.campaigns["1"].players["guest"];
+      if (allCampaignsMocks.campaigns["1"].combat) {
+        allCampaignsMocks.campaigns["1"].combat!.dmId = auth.currentUser?.uid;
+        allCampaignsMocks.campaigns["1"].combat!.dmName = auth.currentUser
+          ?.displayName as string;
+      }
     }
   }, [authUser]);
 

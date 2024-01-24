@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import { CampaignType } from "../campaignTypes";
-import { getCampaign } from "../../../contexts/firebase/database";
+import {
+  getCampaign,
+  getCombatDetails,
+} from "../../../contexts/firebase/database";
+import { useParams } from "react-router-dom";
+import { isDemo } from "../../../contexts/firebase/databaseSetup";
 
 const useCampaignDetails = (campaignId?: string) => {
   const [campaignDetails, setCampaignDetails] = useState<CampaignType | null>(
     null
   );
   const [loading, setLoading] = useState<boolean>(true);
+  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     fetchCampaignDetails();
@@ -21,17 +27,17 @@ const useCampaignDetails = (campaignId?: string) => {
   };
 
   const fetchCombatDetails = () => {
-    // legacy code
-    // if (!campaignId) return;
-    // getCombatDetails(campaignId).then((combat) => {
-    //   setCampaignDetails((prev) => {
-    //     if (!prev) return prev;
-    //     return {
-    //       ...prev,
-    //       combat,
-    //     };
-    //   });
-    // });
+    if (!campaignId) return;
+    if (!isDemo()) return;
+    getCombatDetails(campaignId).then((combat) => {
+      setCampaignDetails((prev) => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          combat,
+        };
+      });
+    });
   };
 
   return {
