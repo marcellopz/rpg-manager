@@ -36,7 +36,7 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
         <img
           className="card-image"
           id={`card-image-${id}`}
-          src="https://i.imgur.com/vngQgSh.png"
+          src="https://i.imgur.com/nC8krIf.png"
         />
         <div className="card-body">
           <h4 className="card-title">{title}</h4>
