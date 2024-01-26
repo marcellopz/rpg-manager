@@ -8,7 +8,6 @@ import LoadWithFlag from "../../../generic-components/LoadWithFlag";
 import { DetailsContext } from "../context/DetailsContext";
 import CampaignConfigsDialog from "../dialogs/CampaignConfigsDialog";
 import CampaignDetailsHeader from "./CampaignDetailsHeader";
-import allCampaignsMocks from "../../../contexts/firebase/campaignMock";
 
 export const getTab = (
   category: string,
