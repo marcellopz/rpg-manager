@@ -20,25 +20,36 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => {
 
   useEffect(() => {
     const navbar = document.querySelector("nav");
-    document.addEventListener("scroll", () => {
+    const scrollCallback = () => {
       if (window.scrollY > 0) {
         // If page is scrolled down, add the shadow class
         navbar?.classList.add("navbar-shadow");
+        navbar?.classList.remove("navbar-shadow-top");
       } else {
         // If page is at the top, remove the shadow class
         navbar?.classList.remove("navbar-shadow");
+        navbar?.classList.add("navbar-shadow-top");
       }
-    });
+    };
+    document.addEventListener("scroll", scrollCallback);
+    scrollCallback();
   }, []);
 
   return (
     <nav>
-      <button id="nav-btn-black">
-        <Link to="/">{t('APP_NAME')}</Link>
-      </button>
+      <div id="nav-btn-black">
+        <img
+          src="/assets/dado2.svg"
+          alt="logo"
+        />
+        <Link to="/">{t("APP_NAME")}</Link>
+      </div>
       <ul>
         {links.map((link) => (
-          <li key={link.to} role={link.role}>
+          <li
+            key={link.to}
+            role={link.role}
+          >
             <Link to={link.to}>{t(link.label)}</Link>
           </li>
         ))}

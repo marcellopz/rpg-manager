@@ -32,9 +32,6 @@ export default function CampaignDetails() {
     selectedData,
   } = useContext(DetailsContext);
 
-  console.log({ campaignDetails, playerDetails });
-  console.log(allCampaignsMocks);
-
   const [invitePlayerDialogOpen, setInvitePlayerDialogOpen] =
     useState<boolean>(false);
 

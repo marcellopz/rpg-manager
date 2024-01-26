@@ -1,6 +1,6 @@
 .campaign__header {
   background-image: url("https://i.imgur.com/Z7nLXKH.png");
-  height: 200px;
+  height: 350px;
   background-size: cover;
   background-position: center;
   /* background-position-y: bottom; */
@@ -31,7 +31,7 @@
   padding: 10px;
   width: 100%;
   position: absolute;
-  top: 0;
+  top: 70px;
 }
 
 #demo-warning > div {

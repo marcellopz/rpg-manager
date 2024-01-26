@@ -9,3 +9,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <App />
   // </React.StrictMode>,
 );
+
+if (window.location.pathname === "/newhome") {
+  document.getElementById("root")!.classList.add("root-home");
+}

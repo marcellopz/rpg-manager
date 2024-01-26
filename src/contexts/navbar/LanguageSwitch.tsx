@@ -37,15 +37,16 @@ export default function LanguageSwitch() {
       onClick={() => setIsMenuOpen((prev) => !prev)}
     >
       <div id="language-toggle">
-        {languages
-          .filter((language) => language.code === i18n.language)
-          .map((lang) => (
-            <img
-              src={lang.flag}
-              id="language-flag"
-              key={lang.code}
-            />
-          ))}
+        <div id="language-flag">
+          {languages
+            .filter((language) => language.code === i18n.language)
+            .map((lang) => (
+              <img
+                src={lang.flag}
+                key={lang.code}
+              />
+            ))}
+        </div>
         <img
           id="language-toggle-arrow"
           src="/assets/arrow.svg"

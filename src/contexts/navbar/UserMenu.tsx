@@ -48,7 +48,7 @@ const UserMenu: React.FC = () => {
         {authUser.displayName === "" ? "undefined" : authUser.displayName}
       </div>
       <div className="relative">
-        <div
+        {/* <div
           id="img"
           onClick={() => setIsOpen((prev) => !prev)}
         >
@@ -59,7 +59,7 @@ const UserMenu: React.FC = () => {
                 : "https://img.freepik.com/vetores-gratis/design-de-vetores-coloridos-de-maca_341269-1123.jpg?w=2000"
             }
           />
-        </div>
+        </div> */}
         {invites.length > 0 && (
           <p className="img-notif circled-red">{invites.length}</p>
         )}
