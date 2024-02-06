@@ -1,5 +1,9 @@
 import { useState, useContext, useEffect } from "react";
-import { updateGold } from "../../../../../../contexts/firebase/database";
+import {
+  updateCopper,
+  updateGold,
+  updateSilver,
+} from "../../../../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
 import { DetailsContext } from "../../../../context/DetailsContext";
 import { t } from "i18next";
@@ -11,6 +15,8 @@ const Backpack = ({
   very_heavy_box,
   total_weight_box,
   gold_box,
+  silver_box,
+  copper_box,
   carrying_weight,
 }: {
   strength_box: number;
@@ -19,12 +25,20 @@ const Backpack = ({
   very_heavy_box: number;
   total_weight_box: number;
   gold_box: number;
+  silver_box: number;
+  copper_box: number;
   carrying_weight: number;
 }) => {
   const { id } = useParams();
   const { catTab, fetchAll } = useContext(DetailsContext);
   const [editingGoldValue, setEditingGoldValue] = useState<number>(gold_box);
   const [editingGold, setEditingGold] = useState(false);
+  const [editingSilverValue, setEditingSilverValue] =
+    useState<number>(silver_box);
+  const [editingSilver, setEditingSilver] = useState(false);
+  const [editingCopperValue, setEditingCopperValue] =
+    useState<number>(copper_box);
+  const [editingCopper, setEditingCopper] = useState(false);
 
   const weightCheck = (weight: number) => {
     if (weight <= weightless_box) {
@@ -42,6 +56,26 @@ const Backpack = ({
   const handleSaveGold = () => {
     updateGold(id as string, catTab.categoryId, catTab.tabId, editingGoldValue);
     setEditingGold(false);
+  };
+
+  const handleSaveSilver = () => {
+    updateSilver(
+      id as string,
+      catTab.categoryId,
+      catTab.tabId,
+      editingSilverValue
+    );
+    setEditingGold(false);
+  };
+
+  const handleSaveCopper = () => {
+    updateCopper(
+      id as string,
+      catTab.categoryId,
+      catTab.tabId,
+      editingCopperValue
+    );
+    setEditingCopper(false);
   };
 
   useEffect(() => {
@@ -74,35 +108,97 @@ const Backpack = ({
         </div>
       </div>
 
-      <div className="gold_box">
-        {editingGold ? (
-          <input
-            autoFocus
-            value={editingGoldValue}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSaveGold();
-                setEditingGold(false);
-                fetchAll();
-              }
-            }}
-            onChange={(e) => setEditingGoldValue(Number(e.target.value))}
-            onBlur={() => setEditingGold(false)}
+      <div className="money_container">
+        <div className="gold_box">
+          {editingGold ? (
+            <input
+              autoFocus
+              value={editingGoldValue}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSaveGold();
+                  setEditingGold(false);
+                  fetchAll();
+                }
+              }}
+              onChange={(e) => setEditingGoldValue(Number(e.target.value))}
+              onBlur={() => setEditingGold(false)}
+            />
+          ) : (
+            <p
+              onDoubleClick={() => {
+                setEditingGold(true);
+              }}
+            >
+              {gold_box}
+            </p>
+          )}
+          <img
+            src="/assets/coins.png"
+            alt="gold"
+            width={10}
           />
-        ) : (
-          <p
-            onDoubleClick={() => {
-              setEditingGold(true);
-            }}
-          >
-            {gold_box}
-          </p>
-        )}
-        <img
-          src="/assets/coins.png"
-          alt="gold"
-          width={20}
-        />
+        </div>
+        <div className="silver_box">
+          {editingSilver ? (
+            <input
+              autoFocus
+              value={editingSilverValue}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSaveSilver();
+                  setEditingSilver(false);
+                  fetchAll();
+                }
+              }}
+              onChange={(e) => setEditingSilverValue(Number(e.target.value))}
+              onBlur={() => setEditingSilver(false)}
+            />
+          ) : (
+            <p
+              onDoubleClick={() => {
+                setEditingSilver(true);
+              }}
+            >
+              {silver_box}
+            </p>
+          )}
+          <img
+            src="/assets/coins.png"
+            alt="silver"
+            width={10}
+          />
+        </div>
+        <div className="copper_box">
+          {editingCopper ? (
+            <input
+              autoFocus
+              value={editingCopperValue}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSaveCopper();
+                  setEditingCopper(false);
+                  fetchAll();
+                }
+              }}
+              onChange={(e) => setEditingCopperValue(Number(e.target.value))}
+              onBlur={() => setEditingCopper(false)}
+            />
+          ) : (
+            <p
+              onDoubleClick={() => {
+                setEditingCopper(true);
+              }}
+            >
+              {copper_box}
+            </p>
+          )}
+          <img
+            src="/assets/coins.png"
+            alt="copper"
+            width={10}
+          />
+        </div>
       </div>
     </div>
   );

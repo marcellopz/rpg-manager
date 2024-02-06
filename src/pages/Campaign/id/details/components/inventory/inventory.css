@@ -73,7 +73,12 @@
     color: white;
 }
 
-.gold_box {
+.money_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.money_container > div{
     border-radius: 5px;
     padding: 3px;
     display: flex;
@@ -81,6 +86,20 @@
     align-items: center;
     gap: 10px;
     font-weight: 700;
+    height: 22px;
+}
+
+.silver_box img {
+    filter: drop-shadow(1px 1px 0 black)
+            drop-shadow(-1px 1px 0 black)
+            drop-shadow(1px -1px 0 black)
+            drop-shadow(-1px -1px 0 black)
+            grayscale(1);
+    -webkit-filter: drop-shadow(1px 1px 0 black)
+                    drop-shadow(-1px 1px 0 black)
+                    drop-shadow(1px -1px 0 black)
+                    drop-shadow(-1px -1px 0 black)
+                    grayscale(1);
 }
 
 .gold_box img {
@@ -92,6 +111,19 @@
                     drop-shadow(-1px 1px 0 black)
                     drop-shadow(1px -1px 0 black)
                     drop-shadow(-1px -1px 0 black);
+}
+
+.copper_box img {
+    filter: drop-shadow(1px 1px 0 black)
+            drop-shadow(-1px 1px 0 black)
+            drop-shadow(1px -1px 0 black)
+            drop-shadow(-1px -1px 0 black)
+            sepia(1) brightness(0.8);
+    -webkit-filter: drop-shadow(1px 1px 0 black)
+                    drop-shadow(-1px 1px 0 black)
+                    drop-shadow(1px -1px 0 black)
+                    drop-shadow(-1px -1px 0 black)
+                    sepia(1) brightness(0.8);
 }
 
 .display_flex_container {
@@ -308,7 +340,7 @@
     background-color: rgb(222, 222, 222);
 }
 
-.gold_box input {
+.money_container div input {
     height: 100%;
     border: none;
     background-color: transparent;

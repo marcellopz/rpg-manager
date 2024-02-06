@@ -96,6 +96,8 @@ export interface InventoryContent {
   playerStrength: number;
   playerAvatar: string;
   playerGold: number;
+  playerSilver?: number;
+  playerCopper?: number;
   inventory: {
     [key: string]: InventoryItemType;
   };

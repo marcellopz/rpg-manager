@@ -375,6 +375,36 @@ export const updateGold = async (
   );
 };
 
+export const updateSilver = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  silver: number
+) => {
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/playerSilver`
+    ),
+    silver
+  );
+}
+
+export const updateCopper = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  copper: number
+) => {
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/playerCopper`
+    ),
+    copper
+  );
+}
+
 export const updateUniqueItemWeight = async (
   campaignId: string,
   categoryId: string,

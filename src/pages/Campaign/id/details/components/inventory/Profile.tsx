@@ -7,6 +7,8 @@ interface ProfileProps {
   character_avatar: string;
   character_strength: number;
   character_gold: number;
+  character_silver: number;
+  character_copper: number;
   carrying_weight: number;
 }
 
@@ -15,6 +17,8 @@ const Profile = ({
   character_avatar,
   character_strength,
   character_gold,
+  character_copper,
+  character_silver,
   carrying_weight,
 }: ProfileProps) => {
   const [editingPicture, setEditingPicture] = useState<boolean>(false);
@@ -43,6 +47,8 @@ const Profile = ({
           very_heavy_box={Math.round(character_strength * 15)}
           total_weight_box={Math.round(character_strength * 30)}
           gold_box={character_gold}
+          silver_box={character_silver}
+          copper_box={character_copper}
           carrying_weight={carrying_weight}
         />
       </div>
