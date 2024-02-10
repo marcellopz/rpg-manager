@@ -3,6 +3,7 @@ import { updateCombatDetails } from "../../../../../../../contexts/firebase/data
 import { useContext } from "react";
 import { DetailsContext } from "../../../../../context/DetailsContext";
 import { t } from "i18next";
+import { motion } from "framer-motion";
 
 type Props = {
   open: boolean;
@@ -29,7 +30,10 @@ const ConfirmEndCombatDialog = ({ open, onClose, closeAll }: Props) => {
         className="dialog-background"
         onClick={onClose}
       >
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
           className="dialog relative"
           onClick={(e) => {
             e.stopPropagation();
@@ -50,7 +54,7 @@ const ConfirmEndCombatDialog = ({ open, onClose, closeAll }: Props) => {
               {t("COMBAT_END")}
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </>
   );

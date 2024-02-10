@@ -157,7 +157,7 @@ const br = {
   SEND_TO: "Enviar para",
   CAMPAIGN_UNSAVED_CHANGES: "Você possui alterações não salvas",
   CANCEL: "Cancelar",
-  DISCARD_CHANGEs: "Descartar alterações",
+  DISCARD_CHANGES: "Descartar alterações",
   AUTHOR: "Autor",
   VIEW_MORE: "Ver mais",
   RESTORE_VERSION: "Restaurar versão",

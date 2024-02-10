@@ -5,6 +5,7 @@ import { DetailsContext } from "../../../../../context/DetailsContext";
 import { CombatantTypeWithID } from "../CombatTrackerRowsDragNDrop";
 import { CombatantType } from "../../../../../campaignTypes";
 import { t } from "i18next";
+import { motion } from "framer-motion";
 
 type Props = {
   open: boolean;
@@ -67,7 +68,10 @@ const EditCombatantDialog = ({ open, onClose, combatant }: Props) => {
       className="dialog-background edit-combatant"
       onClick={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog add-combatant"
         onClick={(e) => {
           e.stopPropagation();
@@ -158,7 +162,7 @@ const EditCombatantDialog = ({ open, onClose, combatant }: Props) => {
           <button type="submit">{t("SAVE_BTN")}</button>
         </form>
         {error && <p className="error">{t("COMBAT_ERROR")}</p>}
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -12,6 +12,7 @@
   "dependencies": {
     "@mdxeditor/editor": "^1.8.1",
     "firebase": "^10.6.0",
+    "framer-motion": "^11.0.3",
     "i18next": "^23.7.6",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",

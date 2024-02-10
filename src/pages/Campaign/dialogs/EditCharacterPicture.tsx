@@ -4,6 +4,7 @@ import { DetailsContext } from "../context/DetailsContext";
 import { useParams } from "react-router-dom";
 import { saveCharImageInventory } from "../../../contexts/firebase/database";
 import { t } from "i18next";
+import { motion } from "framer-motion";
 
 type EditCharacterPictureProps = {
   open: boolean;
@@ -36,7 +37,10 @@ const EditCharacterPicture = ({ open, onClose }: EditCharacterPictureProps) => {
       className="dialog-background"
       onMouseDown={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog"
         onMouseDown={(e) => {
           e.stopPropagation();
@@ -52,7 +56,7 @@ const EditCharacterPicture = ({ open, onClose }: EditCharacterPictureProps) => {
         <div className="save-btn">
           <button onClick={onSave}>{t("SAVE_BTN")}</button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

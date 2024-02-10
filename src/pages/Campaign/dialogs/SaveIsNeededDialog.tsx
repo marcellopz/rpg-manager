@@ -1,5 +1,6 @@
 import React from "react";
 import { t } from "i18next";
+import { motion } from "framer-motion";
 
 interface Props {
   open: boolean;
@@ -25,7 +26,10 @@ const SaveIsNeededDialog: React.FC<Props> = ({
       className="dialog-background"
       onClick={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog"
         onClick={(e) => {
           e.stopPropagation();
@@ -40,7 +44,7 @@ const SaveIsNeededDialog: React.FC<Props> = ({
               onClose();
             }}
           >
-            {t("CANCEL")}
+            {t("DISCARD_CHANGES")}
           </button>
           <button
             onClick={() => {
@@ -52,7 +56,7 @@ const SaveIsNeededDialog: React.FC<Props> = ({
             {t("SAVE")}
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

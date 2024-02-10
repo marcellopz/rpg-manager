@@ -16,6 +16,7 @@ import CombatTrackerTableFooter from "./CombatTrackerTableFooter";
 import { onValue, ref } from "firebase/database";
 import { CampaignType, CombatType } from "../../../../campaignTypes";
 import { t } from "i18next";
+import { motion } from "framer-motion";
 
 type CombatTrackerDialogProps = {
   open: boolean;
@@ -65,7 +66,10 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
         className="dialog-background"
         onClick={onClose}
       >
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
           className="dialog relative"
           onClick={(e) => {
             e.stopPropagation();
@@ -118,7 +122,7 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
               </div>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
       <AddCombatantDialog
         open={openAddCombatant}

@@ -4,6 +4,7 @@ import { addCombatant } from "../../../../../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
 import { DetailsContext } from "../../../../../context/DetailsContext";
 import { t } from "i18next";
+import { motion } from "framer-motion";
 
 type Props = {
   open: boolean;
@@ -65,7 +66,10 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
       className="dialog-background"
       onClick={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog add-combatant"
         onClick={(e) => {
           e.stopPropagation();
@@ -151,7 +155,7 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
           <button type="submit">{t("COMBAT_ADD")}</button>
         </form>
         {error && <p className="error">{t("COMBAT_ERROR")}</p>}
-      </div>
+      </motion.div>
     </div>
   );
 };

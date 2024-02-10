@@ -3,6 +3,7 @@ import {
   updateCopper,
   updateGold,
   updateSilver,
+  updateStrength,
 } from "../../../../../../contexts/firebase/database";
 import { useParams } from "react-router-dom";
 import { DetailsContext } from "../../../../context/DetailsContext";
@@ -39,6 +40,8 @@ const Backpack = ({
   const [editingCopperValue, setEditingCopperValue] =
     useState<number>(copper_box);
   const [editingCopper, setEditingCopper] = useState(false);
+  const [editingStr, setEditingStr] = useState(false);
+  const [editingStrValue, setEditingStrValue] = useState<number>(strength_box);
 
   const weightCheck = (weight: number) => {
     if (weight <= weightless_box) {
@@ -78,6 +81,16 @@ const Backpack = ({
     setEditingCopper(false);
   };
 
+  const handleSaveStr = () => {
+    updateStrength(
+      id as string,
+      catTab.categoryId,
+      catTab.tabId,
+      editingStrValue
+    );
+    setEditingStr(false);
+  };
+
   useEffect(() => {
     setEditingGoldValue(gold_box);
   }, [gold_box]);
@@ -86,7 +99,29 @@ const Backpack = ({
     <div className="backpack_container inventory_background">
       <div className="strength_box">
         <h4>{t("BACKPACK_STR")}</h4>
-        <p>{strength_box}</p>
+        {editingStr ? (
+          <input
+            autoFocus
+            value={editingStrValue}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSaveStr();
+                setEditingStr(false);
+                fetchAll();
+              }
+            }}
+            onChange={(e) => setEditingStrValue(Number(e.target.value))}
+            onBlur={() => setEditingStr(false)}
+          />
+        ) : (
+          <p
+            onDoubleClick={() => {
+              setEditingStr(true);
+            }}
+          >
+            {strength_box}
+          </p>
+        )}
       </div>
       <div className="carrying-weight">
         <h4>{t("BACKPACK_TOTAL")}</h4>

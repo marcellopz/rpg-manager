@@ -7,6 +7,7 @@ import { DetailsContext } from "../context/DetailsContext";
 import LoadImage from "../../../generic-components/load-image/LoadImage";
 import { initialCharSheet } from "../id/details/components/character-sheet/CharSheetType";
 import { t } from "i18next";
+import { motion } from "framer-motion";
 
 type AddTabDialogProps = {
   open: boolean;
@@ -75,7 +76,10 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
       className="dialog-background"
       onMouseDown={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog"
         onMouseDown={(e) => {
           e.stopPropagation();
@@ -146,7 +150,7 @@ const AddTabDialog: React.FC<AddTabDialogProps> = ({ open, onClose }) => {
           )}
           <button type="submit">{t("CREATE_BTN")}</button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

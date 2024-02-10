@@ -4,6 +4,7 @@ import {
   invitePlayer,
 } from "../../../contexts/firebase/database";
 import { t } from "i18next";
+import { motion } from "framer-motion";
 
 type InvitePlayerDialogProps = {
   campaignId: string;
@@ -45,7 +46,10 @@ const InvitePlayerDialog: React.FC<InvitePlayerDialogProps> = ({
       className="dialog-background"
       onClick={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog"
         onClick={(e) => {
           e.stopPropagation();
@@ -64,7 +68,7 @@ const InvitePlayerDialog: React.FC<InvitePlayerDialogProps> = ({
           </label>
           <button type="submit">{t("INVITE_BTN")}</button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

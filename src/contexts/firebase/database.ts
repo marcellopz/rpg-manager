@@ -405,6 +405,21 @@ export const updateCopper = async (
   );
 }
 
+export const updateStrength = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  strength: number
+) => {
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/playerStrength`
+    ),
+    strength
+  );
+}
+
 export const updateUniqueItemWeight = async (
   campaignId: string,
   categoryId: string,

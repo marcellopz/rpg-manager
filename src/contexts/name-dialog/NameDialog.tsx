@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 // import "./nameDialog.css";
 
 interface NameDialogProps {
@@ -43,7 +44,10 @@ const NameDialog: React.FC<NameDialogProps> = ({ open, onSave, onClose }) => {
       className="dialog-background"
       onClick={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog"
         onClick={(e) => {
           e.stopPropagation();
@@ -72,7 +76,7 @@ const NameDialog: React.FC<NameDialogProps> = ({ open, onSave, onClose }) => {
           <br />
           <button type="submit">{t("SAVE")}</button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

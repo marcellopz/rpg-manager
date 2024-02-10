@@ -5,6 +5,7 @@ import { DetailsContext } from "../context/DetailsContext";
 import CombatTrackerDialog from "./details/components/cambat-tracker/CombatTrackerDialog";
 import { getImage } from "../../../contexts/firebase/storage";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 type CampaignDetailsHeaderProps = {
   setInvitePlayerDialogOpen: (open: boolean) => void;
@@ -43,8 +44,18 @@ const CampaignDetailsHeader = ({
             <div>{t("CAMPAIGN_DEMO_WARNING")}</div>
           </div>
         )}
-        <h1>{campaignDetails?.name}</h1>
-        <div>
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {campaignDetails?.name}
+        </motion.h1>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <button onClick={() => setOpen(true)}>
             {t("COMBAT_TRACKER_TITLE")}
           </button>
@@ -66,7 +77,7 @@ const CampaignDetailsHeader = ({
               </button>
             </>
           )}
-        </div>
+        </motion.div>
       </div>
       <CombatTrackerDialog
         open={open}

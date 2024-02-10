@@ -173,17 +173,17 @@ function TextDetails() {
                     💾
                   </span>
                   <span
+                    onClick={loadMarkdown}
+                    className="small-button"
+                  >
+                    🔄
+                  </span>
+                  <span
                     className="small-button"
                     onClick={() => setPastVersionsOpen(true)}
                   >
                     📜
                   </span>
-                  {/* <span
-                    onClick={loadMarkdownWithRefs}
-                    className="small-button"
-                  >
-                    🔄
-                  </span> */}
                 </div>
                 <Separator />
                 <BoldItalicUnderlineToggles />

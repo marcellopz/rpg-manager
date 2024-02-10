@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getImage } from "../../contexts/firebase/storage";
+import { motion } from "framer-motion";
 
 interface CampaignCardProps {
   imageSrc?: string;
@@ -32,7 +33,13 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
 
   return (
     <Link to={isDemo ? `/demo-campaign/${id}` : `/campaign/${id}/${title}`}>
-      <div className="campaign__card">
+      <motion.div
+        className="campaign__card"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        // viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
         <img
           className="card-image"
           id={`card-image-${id}`}
@@ -49,7 +56,7 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
             {description}
           </h5>
         </div>
-      </div>
+      </motion.div>
     </Link>
   );
 };

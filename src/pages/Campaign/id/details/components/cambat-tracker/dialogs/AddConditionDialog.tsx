@@ -5,6 +5,8 @@ import { CombatantTypeWithID } from "../CombatTrackerRowsDragNDrop";
 import ConditionChip from "../ConditionChip";
 import { addConditionToCombatant } from "../../../../../../../contexts/firebase/database";
 import { t } from "i18next";
+import { motion } from "framer-motion";
+
 const colors = [
   { name: "gray", color: "#A9A9A9" }, // Lighter gray
   { name: "red", color: "#FF6B6B" }, // Soft red
@@ -64,7 +66,10 @@ const AddConditionDialog = ({ open, onClose, combatant }: Props) => {
       className="dialog-background add-combatant"
       onClick={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog"
         onClick={(e) => {
           e.stopPropagation();
@@ -147,7 +152,7 @@ const AddConditionDialog = ({ open, onClose, combatant }: Props) => {
           <button type="submit">{t("COMBAT_ADD")}</button>
         </form>
         {error && <p className="error">{t("COMBAT_CONDITION_ERROR")}</p>}
-      </div>
+      </motion.div>
     </div>
   );
 };

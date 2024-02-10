@@ -8,6 +8,7 @@ import { CampaignType } from "./campaignTypes";
 import { getCampaign } from "../../contexts/firebase/database";
 import LoadWithFlag from "../../generic-components/LoadWithFlag";
 import { backgroundImage } from "../../contexts/firebase/characterImages";
+import { motion } from "framer-motion";
 
 type CampaignWithId = CampaignType & { id: string };
 
@@ -58,10 +59,21 @@ export default function CampaignList() {
       <div className="campaign">
         <section className="campaign__header header_inset">
           <div className="campaign__backdrop">
-            <h1 id="campaigns">{t("CAMPAIGN_TITLE")}</h1>
-            <div>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              id="campaigns"
+            >
+              {t("CAMPAIGN_TITLE")}
+            </motion.h1>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
               <button onClick={handleNewCampaign}>{t("CAMPAIGN_NEW")}</button>
-            </div>
+            </motion.div>
           </div>
         </section>
         <section className="cards__section">

@@ -6,6 +6,7 @@ import { User } from "firebase/auth";
 import { DetailsContext } from "../context/DetailsContext";
 import { CategoryType } from "../campaignTypes";
 import { t } from "i18next";
+import { motion } from "framer-motion";
 
 type AddCategoryDialogProps = {
   open: boolean;
@@ -59,7 +60,10 @@ const AddCategoryDialog: React.FC<AddCategoryDialogProps> = ({
       className="dialog-background"
       onClick={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog"
         onClick={(e) => {
           e.stopPropagation();
@@ -93,7 +97,7 @@ const AddCategoryDialog: React.FC<AddCategoryDialogProps> = ({
 
           <button type="submit">{t("CREATE_BTN")}</button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

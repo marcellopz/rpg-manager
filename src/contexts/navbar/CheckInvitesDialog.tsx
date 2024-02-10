@@ -2,6 +2,7 @@ import React from "react";
 import { AuthContext } from "../authContext";
 import { acceptInvite } from "../firebase/database";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 
 type CheckInvitesDialogProps = {
   open: boolean;
@@ -24,7 +25,10 @@ const CheckInvitesDialog: React.FC<CheckInvitesDialogProps> = ({
       className="dialog-background"
       onClick={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog dialog-width"
         onClick={(e) => {
           e.stopPropagation();
@@ -60,7 +64,7 @@ const CheckInvitesDialog: React.FC<CheckInvitesDialogProps> = ({
             ))
           )}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

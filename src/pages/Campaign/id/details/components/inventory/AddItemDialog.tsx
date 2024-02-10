@@ -5,6 +5,7 @@ import { DetailsContext } from "../../../../context/DetailsContext";
 import { InventoryItemType } from "../../../../campaignTypes";
 import { addItemToInventory } from "../../../../../../contexts/firebase/database";
 import { t } from "i18next";
+import { motion } from "framer-motion";
 
 type AddItemDialogProps = {
   open: boolean;
@@ -59,7 +60,10 @@ const AddItemDialog: React.FC<AddItemDialogProps> = ({ open, onClose }) => {
       className="dialog-background"
       onClick={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog"
         onClick={(e) => {
           e.stopPropagation();
@@ -118,7 +122,7 @@ const AddItemDialog: React.FC<AddItemDialogProps> = ({ open, onClose }) => {
           </label>
           <button type="submit">{t("ADD_BTN")}</button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import {
 import { useParams } from "react-router-dom";
 import { ContentHistoryType } from "../campaignTypes";
 import { t } from "i18next";
+import { motion } from "framer-motion";
 
 const ConfirmDialogRestore: React.FC<{
   open: boolean;
@@ -26,7 +27,10 @@ const ConfirmDialogRestore: React.FC<{
         onClose();
       }}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog"
         onClick={(e) => {
           e.stopPropagation();
@@ -54,7 +58,7 @@ const ConfirmDialogRestore: React.FC<{
             Confirm
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
@@ -151,7 +155,10 @@ const SeePastVersionsDialog: React.FC<Props> = ({ open, onClose }) => {
         setVersions(null);
       }}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog"
         onClick={(e) => {
           e.stopPropagation();
@@ -180,7 +187,7 @@ const SeePastVersionsDialog: React.FC<Props> = ({ open, onClose }) => {
             <div>{t("NO_PAST_VERSIONS")}.</div>
           )}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

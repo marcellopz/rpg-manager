@@ -5,6 +5,7 @@ import { editCampaignNameDescription } from "../../../contexts/firebase/database
 import { t } from "i18next";
 import LoadImage from "../../../generic-components/load-image/LoadImage";
 import { uploadImage } from "../../../contexts/firebase/storage";
+import { motion } from "framer-motion";
 
 type CampaignConfigsDialogProps = {
   open: boolean;
@@ -62,7 +63,10 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
       className="dialog-background"
       onMouseDown={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog"
         onMouseDown={(e) => {
           e.stopPropagation();
@@ -113,7 +117,7 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
             {t("CONFIRM")}
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

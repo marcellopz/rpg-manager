@@ -6,6 +6,7 @@ import { AuthContext } from "../../../contexts/authContext";
 import LoadImage from "../../../generic-components/load-image/LoadImage";
 import { t } from "i18next";
 import { uploadImage } from "../../../contexts/firebase/storage";
+import { motion } from "framer-motion";
 
 const saveCampaign = (
   name: string,
@@ -83,7 +84,10 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
         className="dialog-background"
         onClick={onClose}
       >
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
           className="dialog"
           onClick={(e) => {
             e.stopPropagation();
@@ -93,7 +97,7 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
           <button>
             <a href="/authenticate">{t("CREATE_CAMPAIGN_NOT_LOGGED_IN_BTN")}</a>
           </button>
-        </div>
+        </motion.div>
       </div>
     );
   }
@@ -102,7 +106,10 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
       className="dialog-background"
       onMouseDown={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="dialog"
         onMouseDown={(e) => {
           e.stopPropagation();
@@ -144,7 +151,7 @@ const NewCampaignDialog: React.FC<NewCampaignDialogProps> = ({
           <button type="submit">{t("SAVE_BTN")}</button>
         </form>
         <p style={{ marginTop: "5px" }}>{t("CREATE_CAMPAIGN_INVITES_INFO")}</p>
-      </div>
+      </motion.div>
     </div>
   );
 };
