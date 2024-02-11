@@ -1,13 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
   <meta charset="UTF-8" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
-  <link rel="manifest" href="/assets/favicon/site.webmanifest">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/assets/favicon/apple-touch-icon.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/assets/favicon/favicon-32x32.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/assets/favicon/favicon-16x16.png"
+  />
+  <link
+    rel="manifest"
+    href="/assets/favicon/site.webmanifest"
+  />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"
     rel="stylesheet"
@@ -15,6 +42,51 @@
   <title>RPG Manager</title>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script
+      type="module"
+      src="/src/main.tsx"
+    ></script>
   </body>
+  <script>
+    // Function to apply the fade-in effect to images
+    function applyFadeInEffectToImages() {
+      const images = document.querySelectorAll("img:not(.img-loaded)"); // Select all images without the 'img-loaded' class
+
+      images.forEach((img) => {
+        if (img.complete) {
+          img.classList.add("img-loaded"); // Apply the class immediately if the image is already loaded
+        } else {
+          img.addEventListener("load", () => img.classList.add("img-loaded"), {
+            once: true,
+          }); // Apply the class once the image loads
+        }
+      });
+    }
+
+    // Create a MutationObserver to observe changes in the DOM
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.addedNodes.length) {
+          applyFadeInEffectToImages(); // Check for new images and apply the effect whenever new nodes are added to the DOM
+        }
+      });
+    });
+
+    // Start observing the body for changes in the child list
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Initial application of the effect to images present at page load
+    document.addEventListener("DOMContentLoaded", applyFadeInEffectToImages);
+  </script>
+  <style>
+    img {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Class to be added once images are loaded */
+    .img-loaded {
+      opacity: 1;
+    }
+  </style>
 </html>

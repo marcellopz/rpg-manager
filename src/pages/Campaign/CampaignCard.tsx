@@ -24,10 +24,14 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
       const img = document.getElementById(
         `card-image-${id}`
       ) as HTMLImageElement;
-      img.src = url;
-      img.onload = () => {
-        URL.revokeObjectURL(url);
-      };
+      img.style.opacity = "0";
+      setTimeout(() => {
+        img.src = url;
+        img.onload = () => {
+          URL.revokeObjectURL(url);
+          img.style.opacity = "1";
+        };
+      }, 200);
     });
   }, []);
 

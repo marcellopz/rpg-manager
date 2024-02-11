@@ -16,7 +16,13 @@ const ManageInventorySection = () => {
             id="inventory-picture"
           />
         </div>
-        <div className="inventory-text">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="inventory-text"
+        >
           <h2>Manage the party's inventory</h2>
           <p>
             Manage the whole party's inventory. With it you can:
@@ -31,7 +37,7 @@ const ManageInventorySection = () => {
               </li>
             </ul>
           </p>
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );

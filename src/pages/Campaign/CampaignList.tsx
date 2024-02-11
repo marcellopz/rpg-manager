@@ -57,7 +57,12 @@ export default function CampaignList() {
   return (
     <>
       <div className="campaign">
-        <section className="campaign__header header_inset">
+        <motion.section
+          initial={{ opacity: 0.8 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
+          className="campaign__header header_inset"
+        >
           <div className="campaign__backdrop">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -75,7 +80,7 @@ export default function CampaignList() {
               <button onClick={handleNewCampaign}>{t("CAMPAIGN_NEW")}</button>
             </motion.div>
           </div>
-        </section>
+        </motion.section>
         <section className="cards__section">
           <div className="campaign__cards">
             <CampaignCard

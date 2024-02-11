@@ -412,6 +412,10 @@ span.react-resizable-handle {
   text-decoration: underline;
 }
 
+.campaign__header {
+  transition: background-image 0.2s;
+}
+
 @media only screen and (max-width: 800px) {
   .card-image {
     object-fit: cover;
