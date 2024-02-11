@@ -186,6 +186,10 @@ header {
 }
 
 .manage-inventory-content .inventory-text ul {
+  text-align: left !important;
+}
+
+.manage-inventory-content .inventory-text ul {
   padding-left: 30px;
   margin-top: 20px;
 }
@@ -246,10 +250,12 @@ header {
   #home h2 {
     margin-bottom: 25px;
     font-size: 30px;
+    text-align: center;
   }
 
   #home p {
     font-size: 18px;
+    text-align: center;
   }
 
   #inventory-picture {
