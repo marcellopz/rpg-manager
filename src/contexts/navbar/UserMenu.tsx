@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../authContext";
 import { useTranslation } from "react-i18next";
 import CheckInvitesDialog from "./CheckInvitesDialog";
+import { motion } from "framer-motion";
 
 const UserMenu: React.FC = () => {
   const { t } = useTranslation();
@@ -53,7 +54,10 @@ const UserMenu: React.FC = () => {
         </div>
       )}
       {isOpen && (
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.1 }}
           className="navbar-user-dropdown"
           ref={menuRef}
         >
@@ -86,7 +90,7 @@ const UserMenu: React.FC = () => {
               <li>{t("NAV_LOGOUT")}</li>
             </Link>
           </ul>
-        </div>
+        </motion.div>
       )}
       <CheckInvitesDialog
         open={openInvites}

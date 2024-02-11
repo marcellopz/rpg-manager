@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { setLanguage } from "../firebase/database";
 import auth from "../firebase/firebase";
+import { motion } from "framer-motion";
 
 const languages = [
   {
@@ -56,7 +57,10 @@ export default function LanguageSwitch() {
         languages
           .filter((language) => language.code !== i18n.language)
           .map((lang) => (
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.1 }}
               className="language-menu"
               ref={menuRef}
               key={lang.code}
@@ -75,7 +79,7 @@ export default function LanguageSwitch() {
                   {lang.code}
                 </li>
               </ul>
-            </div>
+            </motion.div>
           ))}
     </div>
   );
