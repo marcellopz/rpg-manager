@@ -206,6 +206,7 @@ header {
   margin: 30px 5% 60px 5%;
   justify-content: center;
   gap: 30px;
+  flex-wrap: wrap;
   /* background-color: red; */
 }
 
