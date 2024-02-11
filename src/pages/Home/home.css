@@ -158,14 +158,14 @@ header {
   display: flex;
   flex-wrap: wrap;
   margin: 30px 5% 60px 5%;
-  gap: 100px;
+  gap: 0 100px;
   justify-content: center;
   /* background-color: red; */
 }
 
 .manage-inventory-content .inventory-text {
   padding: 20px;
-  max-width: 40%;
+  max-width: 60%;
   /* background-color: #c4c4c498; */
 }
 
