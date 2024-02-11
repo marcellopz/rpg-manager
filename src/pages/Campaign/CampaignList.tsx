@@ -77,15 +77,17 @@ export default function CampaignList() {
           </div>
         </section>
         <section className="cards__section">
-          <CampaignCard
-            description={
-              "Demo campaign used for showcasing, edits made here will not be saved."
-            }
-            title={"Demo Campaign"}
-            imageSrc={`data:image/png;base64,${backgroundImage}`}
-            id={"1"}
-            isDemo
-          />
+          <div className="campaign__cards">
+            <CampaignCard
+              description={
+                "Demo campaign used for showcasing, edits made here will not be saved."
+              }
+              title={"Demo Campaign"}
+              imageSrc={`data:image/png;base64,${backgroundImage}`}
+              id={"1"}
+              isDemo
+            />
+          </div>
           <LoadWithFlag loading={loading}>
             {campaigns.length > 0 ? (
               <div className="campaign__cards">

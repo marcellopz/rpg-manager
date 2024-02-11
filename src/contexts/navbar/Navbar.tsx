@@ -49,6 +49,11 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => {
           <li
             key={link.to}
             role={link.role}
+            className={
+              window.location.pathname.startsWith("/campaign")
+                ? "campaign-nav-link"
+                : ""
+            }
           >
             <Link to={link.to}>{t(link.label)}</Link>
           </li>
