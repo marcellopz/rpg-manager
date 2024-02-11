@@ -47,23 +47,11 @@ const UserMenu: React.FC = () => {
       >
         {authUser.displayName === "" ? "undefined" : authUser.displayName}
       </div>
-      <div className="relative">
-        {/* <div
-          id="img"
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          <img
-            src={
-              authUser.photoURL
-                ? authUser.photoURL
-                : "https://img.freepik.com/vetores-gratis/design-de-vetores-coloridos-de-maca_341269-1123.jpg?w=2000"
-            }
-          />
-        </div> */}
-        {invites.length > 0 && (
+      {invites.length > 0 && (
+        <div className="relative">
           <p className="img-notif circled-red">{invites.length}</p>
-        )}
-      </div>
+        </div>
+      )}
       {isOpen && (
         <div
           className="navbar-user-dropdown"

@@ -37,20 +37,23 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => {
 
   return (
     <nav>
-      <div id="nav-btn-black">
+      <Link
+        to="/"
+        id="nav-btn-black"
+      >
         <img
           src="/assets/dado2.svg"
           alt="logo"
         />
-        <Link to="/">{t("APP_NAME")}</Link>
-      </div>
+        <span>{t("APP_NAME")}</span>
+      </Link>
       <ul>
         {links.map((link) => (
           <li
             key={link.to}
             role={link.role}
             className={
-              window.location.pathname.startsWith("/campaign")
+              window.location.pathname.startsWith("/campaigns")
                 ? "campaign-nav-link"
                 : ""
             }
