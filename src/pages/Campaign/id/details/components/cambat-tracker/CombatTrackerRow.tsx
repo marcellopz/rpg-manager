@@ -143,6 +143,7 @@ export default function CombatTrackerRow({
               {Object.entries(combatant.activeEffects ?? {}).map(
                 ([effectId, effect]) => (
                   <ConditionChip
+                    isDm={isCombatDm}
                     title={effect.name}
                     number={effect.duration}
                     color={effect.color}
