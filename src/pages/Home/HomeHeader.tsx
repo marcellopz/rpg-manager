@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const HomeHeader = () => {
   return (
     <header>
-      <div id="dark-gradient"></div>
+      {/* <div id="dark-gradient"></div> */}
       <div className="header-content">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
