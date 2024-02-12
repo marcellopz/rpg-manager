@@ -9,16 +9,10 @@ import Profile from "../pages/Profile/Profile";
 
 const About = () => <h1>About</h1>;
 
-const links = [
-  // { to: "/", label: "NAV_HOME", role: "home" },
-  { to: "/campaign", label: "NAV_CAMPAIGNS", role: "campaigns" },
-  // { to: "/calculator", label: "NAV_CALCULATOR", role: "calculator" },
-];
-
 export default function AppRoutes() {
   return (
     <BrowserRouter>
-      <NavbarProvider links={links}>
+      <NavbarProvider>
         <Routes>
           <Route
             path="/"

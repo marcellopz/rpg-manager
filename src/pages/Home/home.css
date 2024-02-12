@@ -235,6 +235,10 @@ header {
 }
 
 @media only screen and (max-width: 800px) {
+  .mobile-section {
+    gap: 0px;
+  }
+
   .header-content {
     background-position: center;
   }

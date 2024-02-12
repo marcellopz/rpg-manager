@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import Navbar, { NavbarLink } from "./navbar/Navbar";
+import Navbar from "./navbar/Navbar";
 import Footer from "./navbar/Footer";
 import { useLocation } from "react-router-dom";
 
@@ -24,14 +24,10 @@ export const useNavbarContext = () => {
 
 interface NavbarContextProviderProps {
   children: React.ReactNode;
-  links: NavbarLink[];
   // Define any properties you want to pass down to children components here
 }
 
-export const NavbarProvider = ({
-  children,
-  links,
-}: NavbarContextProviderProps) => {
+export const NavbarProvider = ({ children }: NavbarContextProviderProps) => {
   const [count, setCount] = useState<number>(0);
   const location = useLocation();
 
@@ -50,7 +46,7 @@ export const NavbarProvider = ({
 
   return (
     <NavbarContext.Provider value={navbarContextValue}>
-      <Navbar links={links} />
+      <Navbar />
       {children}
       <Footer />
     </NavbarContext.Provider>

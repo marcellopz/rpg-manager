@@ -5,17 +5,7 @@ import LanguageSwitch from "./LanguageSwitch";
 import UserMenu from "./UserMenu";
 import { useTranslation } from "react-i18next";
 
-export interface NavbarLink {
-  to: string;
-  label: string;
-  role: string;
-}
-
-export interface NavbarProps {
-  links: NavbarLink[];
-}
-
-const Navbar: React.FC<NavbarProps> = ({ links }) => {
+const Navbar: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -48,19 +38,16 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => {
         <span>{t("APP_NAME")}</span>
       </Link>
       <ul>
-        {links.map((link) => (
-          <li
-            key={link.to}
-            role={link.role}
-            className={
-              window.location.pathname.startsWith("/campaigns")
-                ? "campaign-nav-link"
-                : ""
-            }
-          >
-            <Link to={link.to}>{t(link.label)}</Link>
-          </li>
-        ))}
+        <li
+          role={"campaign"}
+          className={
+            window.location.pathname.startsWith("/campaigns")
+              ? "campaign-nav-link"
+              : ""
+          }
+        >
+          <Link to={"campaign"}>{t("NAV_CAMPAIGNS")}</Link>
+        </li>
       </ul>
       <div id="name-and-icon-container">
         <LanguageSwitch />
