@@ -206,6 +206,8 @@ const br = {
   CONFIRM: "Confirmar",
   CAMPAIGN_CARD_IMAGE: "Imagem do cartão da campanha",
   CAMPAIGN_BANNER_IMAGE: "Imagem do banner da campanha",
+  CAMPAIGN_IMAGES: "Editar imagens",
+  CAMPAIGN_PLAYERS: "Jogadores",
 };
 
 export default br;

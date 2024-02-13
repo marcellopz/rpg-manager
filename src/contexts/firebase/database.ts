@@ -79,6 +79,7 @@ export const getCampaign = async (campaignId: string) => {
     get(child(dbRef, `campaigns/${campaignId}/name`)),
     get(child(dbRef, `campaigns/${campaignId}/categories`)),
     get(child(dbRef, `campaigns/${campaignId}/combat`)),
+    get(child(dbRef, `campaigns/${campaignId}/player-list`)),
   ]).then((values) => {
     const campaign = {
       backdropImage: values[0].val(),
@@ -87,6 +88,7 @@ export const getCampaign = async (campaignId: string) => {
       name: values[3].val(),
       categories: values[4].val(),
       combat: values[5].val(),
+      playerList: values[6].val(),
     } as CampaignType;
     return campaign;
   });
@@ -289,6 +291,16 @@ export const getTabContent = async (
 
 export const acceptInvite = async (campaignId: string) => {
   set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/player-list/${auth.currentUser?.uid}`
+    ),
+    {
+      id: auth.currentUser?.uid,
+      name: auth.currentUser?.displayName,
+    }
+  );
+  set(
     child(dbRef, `campaigns/${campaignId}/players/${auth.currentUser?.uid}`),
     {
       id: auth.currentUser?.uid,
@@ -388,7 +400,7 @@ export const updateSilver = async (
     ),
     silver
   );
-}
+};
 
 export const updateCopper = async (
   campaignId: string,
@@ -403,7 +415,7 @@ export const updateCopper = async (
     ),
     copper
   );
-}
+};
 
 export const updateStrength = async (
   campaignId: string,
@@ -418,7 +430,7 @@ export const updateStrength = async (
     ),
     strength
   );
-}
+};
 
 export const updateUniqueItemWeight = async (
   campaignId: string,

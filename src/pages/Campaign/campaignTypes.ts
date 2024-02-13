@@ -15,6 +15,12 @@ export interface CampaignType {
   backdropImage?: string;
   campaignCardImage?: string;
   combat?: CombatType;
+  playerList?: {
+    [key: string]: {
+      id: string;
+      name: string;
+    };
+  };
 }
 
 export interface CombatType {

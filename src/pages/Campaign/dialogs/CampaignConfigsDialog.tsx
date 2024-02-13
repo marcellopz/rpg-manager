@@ -6,6 +6,7 @@ import { t } from "i18next";
 import LoadImage from "../../../generic-components/load-image/LoadImage";
 import { uploadImage } from "../../../contexts/firebase/storage";
 import { motion } from "framer-motion";
+import auth from "../../../contexts/firebase/firebase";
 
 type CampaignConfigsDialogProps = {
   open: boolean;
@@ -25,6 +26,8 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
   const [backdropImageBlob, setBackdropImageBlob] = React.useState<Blob | null>(
     null
   );
+  const [imagesOpen, setImagesOpen] = React.useState<boolean>(false);
+  const [playerListOpen, setPlayerListOpen] = React.useState<boolean>(false);
 
   useEffect(() => {
     setCampaignName(campaignDetails?.name || "");
@@ -91,18 +94,44 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
             />
           </label>
         </div>
-        <label>{t("CAMPAIGN_CARD_IMAGE")}</label>
-        <LoadImage
-          aspectRatio={2}
-          setImageActualBlob={setCardImageBlob}
-          sizeLimit={8000000}
-        />
-        <label>{t("CAMPAIGN_BANNER_IMAGE")}</label>
-        <LoadImage
-          aspectRatio={5}
-          setImageActualBlob={setBackdropImageBlob}
-          sizeLimit={8000000}
-        />
+        <span
+          onClick={() => setImagesOpen(!imagesOpen)}
+          className="cursor-pointer toggle-content"
+        >
+          {t("CAMPAIGN_IMAGES")}
+        </span>
+        {imagesOpen && (
+          <>
+            <label>{t("CAMPAIGN_CARD_IMAGE")}</label>
+            <LoadImage
+              aspectRatio={2}
+              setImageActualBlob={setCardImageBlob}
+              sizeLimit={8000000}
+            />
+            <label>{t("CAMPAIGN_BANNER_IMAGE")}</label>
+            <LoadImage
+              aspectRatio={5}
+              setImageActualBlob={setBackdropImageBlob}
+              sizeLimit={8000000}
+            />
+          </>
+        )}
+        {campaignDetails?.playerList && (
+          <span
+            className="cursor-pointer toggle-content"
+            onClick={() => setPlayerListOpen(!playerListOpen)}
+          >
+            {t("CAMPAIGN_PLAYERS")}
+          </span>
+        )}
+        {playerListOpen && campaignDetails?.playerList && (
+          <ul className="player-list">
+            <li>{auth.currentUser?.displayName}</li>
+            {Object.entries(campaignDetails?.playerList).map(([key, value]) => (
+              <li key={key}>{value.name}</li>
+            ))}
+          </ul>
+        )}
         <div className="confirm-button-container">
           <button
             onClick={onClose}

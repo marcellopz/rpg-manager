@@ -206,6 +206,8 @@ const en = {
   CONFIRM: "Confirm",
   CAMPAIGN_CARD_IMAGE: "Campaign card image",
   CAMPAIGN_BANNER_IMAGE: "Campaign banner image",
+  CAMPAIGN_IMAGES: "Edit images",
+  CAMPAIGN_PLAYERS: "Players",
 };
 
 export default en;

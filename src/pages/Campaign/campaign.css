@@ -416,6 +416,19 @@ span.react-resizable-handle {
   transition: background-image 0.2s;
 }
 
+.toggle-content {
+  margin-bottom: 10px;
+  text-decoration: underline;
+}
+
+.player-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
 @media only screen and (max-width: 800px) {
   .card-image {
     object-fit: cover;
