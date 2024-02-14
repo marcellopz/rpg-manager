@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const ManageInfoItem = ({ title, text, icon }: any) => {
   return (
@@ -37,6 +38,14 @@ const ManageInfoSection = () => {
             that every detail of your journey is just a click away, enabling you
             and your fellow adventurers to focus on the story ahead.
           </p>
+          <div className="info-content-buttons">
+            <Link to="/campaign">
+              <button>Manage Your Campaigns</button>
+            </Link>
+            <Link to="/demo-campaign/1">
+              <button>Explore Demo Campaign</button>
+            </Link>
+          </div>
         </div>
         <div className="items-right">
           <ManageInfoItem

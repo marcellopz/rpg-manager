@@ -473,3 +473,11 @@
   font-size: 14px;
   font-weight: 500;
 }
+
+@media only screen and (max-width: 1300px) {
+  .combat-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}

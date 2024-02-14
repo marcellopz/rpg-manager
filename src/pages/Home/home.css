@@ -236,9 +236,34 @@ header {
   max-width: 500px;
 }
 
+.info-content-buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .manage-info-content {
+    flex-wrap: wrap;
+  }
+
+  .manage-info-content .items-right {
+    justify-content: center;
+  }
+
+  .manage-info-content > div {
+    max-width: 100% !important;
+  }
+}
+
 @media only screen and (max-width: 800px) {
   .mobile-section {
     gap: 0px;
+  }
+
+  .info-content-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .header-content {
@@ -268,20 +293,8 @@ header {
     width: 100%;
   }
 
-  .manage-info-content {
-    flex-wrap: wrap;
-  }
-
-  .manage-info-content > div {
-    max-width: 100% !important;
-  }
-
   .manage-inventory-content > div {
     max-width: 100% !important;
-  }
-
-  .manage-info-content .items-right {
-    justify-content: center;
   }
 
   .header-text {
