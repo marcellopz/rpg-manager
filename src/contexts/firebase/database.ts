@@ -47,6 +47,17 @@ export const getCampaignInvites = async (email: string) => {
   }
 };
 
+export const getInvitedPlayers = async (campaignId: string) => {
+  const invites = await get(
+    child(dbRef, `campaign-invites/campaigns/${campaignId}`)
+  );
+  if (invites.exists()) {
+    return invites.val();
+  } else {
+    return null;
+  }
+};
+
 export const getLanguage = async (userId: string) => {
   const language = await get(child(dbRef, `users/${userId}/language`));
   if (language.exists()) {

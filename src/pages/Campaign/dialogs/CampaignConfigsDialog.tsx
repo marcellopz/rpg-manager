@@ -1,7 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { DetailsContext } from "../context/DetailsContext";
-import { editCampaignNameDescription } from "../../../contexts/firebase/database";
+import {
+  editCampaignNameDescription,
+  getInvitedPlayers,
+} from "../../../contexts/firebase/database";
 import { t } from "i18next";
 import LoadImage from "../../../generic-components/load-image/LoadImage";
 import { uploadImage } from "../../../contexts/firebase/storage";
@@ -28,11 +31,38 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
   );
   const [imagesOpen, setImagesOpen] = React.useState<boolean>(false);
   const [playerListOpen, setPlayerListOpen] = React.useState<boolean>(false);
+  const [playerList, setPlayerList] = React.useState<
+    {
+      id: string;
+      name: string;
+      email: string;
+    }[]
+  >([]);
 
   useEffect(() => {
     setCampaignName(campaignDetails?.name || "");
     setCampaignDescription(campaignDetails?.description || "");
   }, [campaignDetails]);
+
+  useEffect(() => {
+    if (!open) return;
+    getInvitedPlayers(id as string).then(
+      (invitedPlayers: { [id in string]: string }) => {
+        const p = campaignDetails?.playerList || {};
+        const invitedPlayersArray = Object.entries(invitedPlayers).map(
+          ([key, value]) => {
+            return {
+              id: key,
+              name: p[key]?.name ?? "",
+              email: value,
+              accepted: key in p,
+            };
+          }
+        );
+        setPlayerList(invitedPlayersArray);
+      }
+    );
+  }, [open]);
 
   if (!open) {
     return null;
@@ -127,8 +157,8 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
         {playerListOpen && campaignDetails?.playerList && (
           <ul className="player-list">
             <li>{auth.currentUser?.displayName}</li>
-            {Object.entries(campaignDetails?.playerList).map(([key, value]) => (
-              <li key={key}>{value.name}</li>
+            {playerList.map((value) => (
+              <li key={value.id}>{`${value.name} - ${value.email}`}</li>
             ))}
           </ul>
         )}
