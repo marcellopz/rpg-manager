@@ -145,6 +145,7 @@ const AddConditionDialog = ({ open, onClose, combatant }: Props) => {
                   number={duration}
                   indefinite={indefinite}
                   onClose={() => {}}
+                  isDm={true}
                 />
               </div>
             </div>
