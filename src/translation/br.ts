@@ -186,7 +186,7 @@ const br = {
   COMBAT_EDIT_COMBATANT: "Editar combatente",
   COMBAT_NO_COMBAT: "Não existe combate em andamento",
   COMBAT_START: "Iniciar combate",
-  COMBAT_TRACKER_TITLE: "Rastreador de combate",
+  COMBAT_TRACKER_TITLE: "Gerenciador de combate",
   COMBAT_DM_NOTES: "Notas do mestre",
   COMBAT_DM: "Mestre",
   COMBAT_ADD_CONDITION: "Adicionar condição",
@@ -208,6 +208,7 @@ const br = {
   CAMPAIGN_BANNER_IMAGE: "Imagem do banner da campanha",
   CAMPAIGN_IMAGES: "Editar imagens",
   CAMPAIGN_PLAYERS: "Jogadores",
+  COMBAT_COLOR_SCHEME_LABEL: "Esquema de cores (% PV)",
 };
 
 export default br;

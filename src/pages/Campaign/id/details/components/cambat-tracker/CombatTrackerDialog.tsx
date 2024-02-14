@@ -18,6 +18,17 @@ import { CampaignType, CombatType } from "../../../../campaignTypes";
 import { t } from "i18next";
 import { motion } from "framer-motion";
 
+const CombatColorSystemBar = () => {
+  return (
+    <div className="combat-color-system-bar">
+      <div className="preto">0% - 25%</div>
+      <div className="vermelho">25% - 50%</div>
+      <div className="amarelo">50% - 75%</div>
+      <div className="verde">75% - 100%</div>
+    </div>
+  );
+};
+
 type CombatTrackerDialogProps = {
   open: boolean;
   onClose: () => void;
@@ -92,7 +103,10 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
                     {t("COMBAT_DM")}: {combatDetails?.dmName ?? ""}
                   </h4>
                 </div>
-
+                <div className="center-bar">
+                  <span>{t("COMBAT_COLOR_SCHEME_LABEL")}</span>
+                  <CombatColorSystemBar />
+                </div>
                 {/* <button>Add characters from Inventory</button> */}
               </div>
               <div className="combat-content">

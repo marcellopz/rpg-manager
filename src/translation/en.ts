@@ -208,6 +208,7 @@ const en = {
   CAMPAIGN_BANNER_IMAGE: "Campaign banner image",
   CAMPAIGN_IMAGES: "Edit images",
   CAMPAIGN_PLAYERS: "Players",
+  COMBAT_COLOR_SCHEME_LABEL: "Color scheme (% HP)",
 };
 
 export default en;
