@@ -146,15 +146,13 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
             />
           </>
         )}
-        {campaignDetails?.playerList && (
-          <span
-            className="cursor-pointer toggle-content"
-            onClick={() => setPlayerListOpen(!playerListOpen)}
-          >
-            {t("CAMPAIGN_PLAYERS")}
-          </span>
-        )}
-        {playerListOpen && campaignDetails?.playerList && (
+        <span
+          className="cursor-pointer toggle-content"
+          onClick={() => setPlayerListOpen(!playerListOpen)}
+        >
+          {t("CAMPAIGN_PLAYERS")}
+        </span>
+        {playerListOpen && (
           <ul className="player-list">
             <li>{auth.currentUser?.displayName}</li>
             {playerList.map((value) => (
