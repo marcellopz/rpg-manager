@@ -43,6 +43,10 @@ const Backpack = ({
   const [editingStr, setEditingStr] = useState(false);
   const [editingStrValue, setEditingStrValue] = useState<number>(strength_box);
 
+  useEffect(() => {
+    setEditingStrValue(strength_box);
+  }, [strength_box]);
+
   const weightCheck = (weight: number) => {
     if (weight <= weightless_box) {
       return "✅";
@@ -94,6 +98,14 @@ const Backpack = ({
   useEffect(() => {
     setEditingGoldValue(gold_box);
   }, [gold_box]);
+
+  useEffect(() => {
+    setEditingSilverValue(silver_box);
+  }, [silver_box]);
+
+  useEffect(() => {
+    setEditingCopperValue(copper_box);
+  }, [copper_box]);
 
   return (
     <div className="backpack_container inventory_background">
