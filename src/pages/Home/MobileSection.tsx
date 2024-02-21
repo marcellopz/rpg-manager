@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const MobileSection = () => {
+  const { t } = useTranslation();
   return (
     <motion.section
       initial={{ opacity: 0, y: 50 }}
@@ -10,8 +12,8 @@ const MobileSection = () => {
     >
       <div className="mobile-section">
         <div>
-          <h2>Mobile support</h2>
-          <p>Enjoy all features in your campaign with your phone or tablet!</p>
+          <h2>{t("HOME_MOBILE_SUPPORT_TITLE")}</h2>
+          <p>{t("HOME_MOBILE_SUPPORT_TEXT")}</p>
         </div>
         <div className="mobile-image-div">
           <img

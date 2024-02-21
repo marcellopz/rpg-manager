@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const HomeHeader = () => {
+  const { t } = useTranslation();
   return (
     <header>
       {/* <div id="dark-gradient"></div> */}
@@ -19,10 +21,7 @@ const HomeHeader = () => {
             />
             <h1>RPG Manager</h1>
           </span>
-          <p>
-            RPG Manager is a tool for managing your RPG campaigns. It allows you
-            to create and manage your characters, campaigns, and more.
-          </p>
+          <p>{t("HOME_SUBTITLE")}</p>
           {/* <div className="header-buttons">
             <button>Sign Up</button>
             <button>Try the demo Campaign</button>

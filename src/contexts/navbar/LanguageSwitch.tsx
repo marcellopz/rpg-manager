@@ -76,7 +76,7 @@ export default function LanguageSwitch() {
                     src={lang.flag}
                     width={30}
                   />
-                  {lang.code}
+                  <p>{lang.code}</p>
                 </li>
               </ul>
             </motion.div>

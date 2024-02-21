@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const ManageInventorySection = () => {
+  const { t } = useTranslation();
   return (
     <motion.section
       initial={{ opacity: 0, y: 50 }}
@@ -23,18 +25,13 @@ const ManageInventorySection = () => {
           transition={{ duration: 0.5 }}
           className="inventory-text"
         >
-          <h2>Manage the party's inventory</h2>
+          <h2>{t("HOME_MANAGE_PARTY_INVENTORY_TITLE")}</h2>
           <p>
-            Manage the whole party's inventory. With it you can:
+            {t("HOME_MANAGE_PARTY_INVENTORY_TEXT_INTRO")}
             <ul>
-              <li>Add, remove, edit and move items around characters.</li>
-              <li>
-                Keep track of characters gold, silver and copper pieces at any
-                time
-              </li>
-              <li>
-                Keep track of items weight and characters' carrying capacity.
-              </li>
+              <li>{t("HOME_MANAGE_PARTY_INVENTORY_TEXT_1")}</li>
+              <li>{t("HOME_MANAGE_PARTY_INVENTORY_TEXT_2")}</li>
+              <li>{t("HOME_MANAGE_PARTY_INVENTORY_TEXT_3")}</li>
             </ul>
           </p>
         </motion.div>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const ManageInfoItem = ({ title, text, icon }: any) => {
@@ -19,6 +20,7 @@ const ManageInfoItem = ({ title, text, icon }: any) => {
 };
 
 const ManageInfoSection = () => {
+  const { t } = useTranslation();
   return (
     <motion.section
       initial={{ opacity: 0, y: 50 }}
@@ -29,53 +31,46 @@ const ManageInfoSection = () => {
     >
       <div className="manage-info-content">
         <div className="left-text">
-          <h2>Master Your Campaign</h2>
-          <p>
-            Streamline your adventure with our comprehensive tools designed for
-            table RPG enthusiasts. Organize your campaign information
-            effortlessly with customizable categories, manage character sheets,
-            and collaborate seamlessly with your party. Our platform ensures
-            that every detail of your journey is just a click away, enabling you
-            and your fellow adventurers to focus on the story ahead.
-          </p>
+          <h2>{t("HOME_MANAGE_INFO_TITLE")}</h2>
+          <p>{t("HOME_MANAGE_INFO_DESC")}</p>
           <div className="info-content-buttons">
             <Link to="/campaign">
-              <button>Manage Your Campaigns</button>
+              <button>{t("HOME_MANAGE_INFO_BUTTON_1")}</button>
             </Link>
             <Link to="/demo-campaign/1">
-              <button>Explore Demo Campaign</button>
+              <button>{t("HOME_MANAGE_INFO_BUTTON_2")}</button>
             </Link>
           </div>
         </div>
         <div className="items-right">
           <ManageInfoItem
-            title="Categories & Subcategories"
-            text="Organize your campaign's lore, quests, and NPCs with ease. Use categories and subcategories to keep your information structured and accessible."
+            title={t("HOME_MANAGE_INFO_ITEM_1_TITLE")}
+            text={t("HOME_MANAGE_INFO_ITEM_1_TEXT")}
             icon="/assets/home/diagram.png"
           />
           <ManageInfoItem
-            title="Character Sheet Management"
-            text="Keep your character's journey at your fingertips. Store and update character sheets with all the crucial stats and backstory details."
+            title={t("HOME_MANAGE_INFO_ITEM_2_TITLE")}
+            text={t("HOME_MANAGE_INFO_ITEM_2_TEXT")}
             icon="/assets/home/file.png"
           />
           <ManageInfoItem
-            title="Rich Text Editing"
-            text="Bring your campaign to life with rich text features. Highlight important details, use bullet points for quests, and italicize magical items."
+            title={t("HOME_MANAGE_INFO_ITEM_3_TITLE")}
+            text={t("HOME_MANAGE_INFO_ITEM_3_TEXT")}
             icon="/assets/home/text-formatting.png"
           />
           <ManageInfoItem
-            title="Player Invitations"
-            text="Expand your adventure by inviting players directly via email. Seamless integration allows for quick access to the campaign for all invited members."
+            title={t("HOME_MANAGE_INFO_ITEM_4_TITLE")}
+            text={t("HOME_MANAGE_INFO_ITEM_4_TEXT")}
             icon="/assets/home/email.png"
           />
           <ManageInfoItem
-            title="Public & Private Sections"
-            text="Share information with your party through public categories, or keep personal notes and strategies hidden in your private section."
+            title={t("HOME_MANAGE_INFO_ITEM_5_TITLE")}
+            text={t("HOME_MANAGE_INFO_ITEM_5_TEXT")}
             icon="/assets/home/visibility.png"
           />
           <ManageInfoItem
-            title="Collaboration Made Easy"
-            text="Collaborate in real-time with your party. Share updates, plan your next move, and navigate your campaign together."
+            title={t("HOME_MANAGE_INFO_ITEM_6_TITLE")}
+            text={t("HOME_MANAGE_INFO_ITEM_6_TEXT")}
             icon="/assets/home/partnership.png"
           />
         </div>

@@ -209,6 +209,44 @@ const en = {
   CAMPAIGN_IMAGES: "Edit images",
   CAMPAIGN_PLAYERS: "Players",
   COMBAT_COLOR_SCHEME_LABEL: "Color scheme (% HP)",
+  HOME_SUBTITLE:
+    "RPG Manager is a tool for managing your RPG campaigns. It allows you to create and manage your characters, campaigns, and more.",
+  HOME_MANAGE_INFO_TITLE: "Master Your Campaign",
+  HOME_MANAGE_INFO_DESC:
+    "Enhance your adventure with our all-in-one toolkit crafted for tabletop RPG lovers. Arrange your campaign's lore and logistics using our flexible categorization, keep tabs on character sheets with ease, and work together with your group without any hitches. Our platform puts every aspect of your adventure within easy reach, freeing you and your companions to dive into the narrative that awaits.",
+  HOME_MANAGE_INFO_BUTTON_1: "Organize Your Adventure",
+  HOME_MANAGE_INFO_BUTTON_2: "Explore Demo Campaign",
+  HOME_MANAGE_INFO_ITEM_1_TITLE: "Categories & Subcategories",
+  HOME_MANAGE_INFO_ITEM_1_TEXT:
+    "Organize your campaign's lore, quests, and NPCs with ease. Use categories and subcategories to keep your information structured and accessible.",
+  HOME_MANAGE_INFO_ITEM_2_TITLE: "Character Sheet Management",
+  HOME_MANAGE_INFO_ITEM_2_TEXT:
+    "Keep your character's journey at your fingertips. Store and update character sheets with all the crucial stats and backstory details.",
+  HOME_MANAGE_INFO_ITEM_3_TITLE: "Rich Text Editing",
+  HOME_MANAGE_INFO_ITEM_3_TEXT:
+    "Bring your campaign to life with rich text features. Highlight important details, use bullet points, bold, italics and more.",
+  HOME_MANAGE_INFO_ITEM_4_TITLE: "Player Invitations",
+  HOME_MANAGE_INFO_ITEM_4_TEXT:
+    "Expand your adventure by inviting players accounts. Integration allows for quick access to the campaign for all invited members.",
+  HOME_MANAGE_INFO_ITEM_5_TITLE: "Public & Private Sections",
+  HOME_MANAGE_INFO_ITEM_5_TEXT:
+    "Share information with your party through public categories, or keep personal notes and strategies hidden in your private section.",
+  HOME_MANAGE_INFO_ITEM_6_TITLE: "Collaboration Made Easy",
+  HOME_MANAGE_INFO_ITEM_6_TEXT:
+    "Collaborate in real-time with your party. Share updates, plan your next move, and navigate your campaign together.",
+  HOME_MANAGE_PARTY_INVENTORY_TITLE: "Manage the party's inventory",
+  HOME_MANAGE_PARTY_INVENTORY_TEXT_INTRO:
+    "Manage the whole party's inventory. With it you can:",
+  HOME_MANAGE_PARTY_INVENTORY_TEXT_1:
+    "Add, remove, edit and move items around characters.",
+  HOME_MANAGE_PARTY_INVENTORY_TEXT_2:
+    "Keep track of characters gold, silver and copper pieces at any time.",
+  HOME_MANAGE_PARTY_INVENTORY_TEXT_3:
+    "Keep track of items weight and characters' carrying capacity.",
+  HOME_MOBILE_SUPPORT_TITLE: "Mobile support",
+  HOME_MOBILE_SUPPORT_TEXT:
+    "Enjoy all features in your campaign with your phone or tablet!",
+  HOME_COMBAT_TITLE: "Track the combat stats",
 };
 
 export default en;

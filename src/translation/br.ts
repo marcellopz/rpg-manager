@@ -209,6 +209,44 @@ const br = {
   CAMPAIGN_IMAGES: "Editar imagens",
   CAMPAIGN_PLAYERS: "Jogadores",
   COMBAT_COLOR_SCHEME_LABEL: "Esquema de cores (% PV)",
+  HOME_SUBTITLE:
+    "RPG Manager é uma ferramenta para gerenciar suas campanhas de RPG. Permite criar e gerenciar seus personagens, campanhas e mais.",
+  HOME_MANAGE_INFO_TITLE: "Organize Sua Aventura",
+  HOME_MANAGE_INFO_DESC:
+    "Potencialize sua aventura com nosso conjunto de ferramentas feito sob medida para entusiastas por RPG de mesa. Simplifique a organização da sua campanha com categorias adaptáveis, gerencie as fichas dos personagens com simplicidade e colabore com seu grupo de maneira fluida. Nossa plataforma oferece acesso rápido a todos os detalhes da sua jornada, permitindo que você e seus companheiros se concentrem totalmente na história que se desenrola.",
+  HOME_MANAGE_INFO_BUTTON_1: "Gerencie Suas Campanhas",
+  HOME_MANAGE_INFO_BUTTON_2: "Explore Campanha Demonstrativa",
+  HOME_MANAGE_INFO_ITEM_1_TITLE: "Categorias & Subcategorias",
+  HOME_MANAGE_INFO_ITEM_1_TEXT:
+    "Organize a lore, missões e NPCs de sua campanha com facilidade. Use categorias e subcategorias para manter suas informações estruturadas e acessíveis.",
+  HOME_MANAGE_INFO_ITEM_2_TITLE: "Gerenciamento de Ficha",
+  HOME_MANAGE_INFO_ITEM_2_TEXT:
+    "Mantenha a jornada de seu personagem ao seu alcance. Acesse e atualize fichas de personagem com todas as estatísticas cruciais e detalhes da história.",
+  HOME_MANAGE_INFO_ITEM_3_TITLE: "Edição de Texto Enriquecido",
+  HOME_MANAGE_INFO_ITEM_3_TEXT:
+    "Dê vida à sua campanha com recursos de texto avançados. Destaque detalhes importantes, utilize marcadores, negrito, itálico e muito mais.",
+  HOME_MANAGE_INFO_ITEM_4_TITLE: "Convites para Jogadores",
+  HOME_MANAGE_INFO_ITEM_4_TEXT:
+    "Expanda sua aventura convidando contas de jogadores. A integração permite acesso rápido à campanha para todos os membros convidados.",
+  HOME_MANAGE_INFO_ITEM_5_TITLE: "Seções Públicas & Privadas",
+  HOME_MANAGE_INFO_ITEM_5_TEXT:
+    "Compartilhe informações com seu grupo através de categorias públicas, ou mantenha notas pessoais e estratégias ocultas em sua seção privada.",
+  HOME_MANAGE_INFO_ITEM_6_TITLE: "Colaboração Facilitada",
+  HOME_MANAGE_INFO_ITEM_6_TEXT:
+    "Colabore em tempo real com seu grupo. Compartilhe atualizações, planeje seu próximo movimento e navegue pela sua campanha juntos.",
+  HOME_MANAGE_PARTY_INVENTORY_TITLE: "Gerencie o inventário do grupo",
+  HOME_MANAGE_PARTY_INVENTORY_TEXT_INTRO:
+    "Gerencie todo o inventário do grupo. Com isso você pode:",
+  HOME_MANAGE_PARTY_INVENTORY_TEXT_1:
+    "Adicionar, remover, editar e mover itens entre personagens.",
+  HOME_MANAGE_PARTY_INVENTORY_TEXT_2:
+    "Manter controle das peças de ouro, prata e cobre dos personagens a qualquer momento.",
+  HOME_MANAGE_PARTY_INVENTORY_TEXT_3:
+    "Monitorar o peso dos itens e a capacidade de carga dos personagens.",
+  HOME_MOBILE_SUPPORT_TITLE: "Suporte Móvel",
+  HOME_MOBILE_SUPPORT_TEXT:
+    "Aproveite todas as funcionalidades de sua campanha com seu telefone ou tablet!",
+  HOME_COMBAT_TITLE: "Acompanhe as estatísticas de combate",
 };
 
 export default br;
