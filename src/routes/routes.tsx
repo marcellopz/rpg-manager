@@ -27,15 +27,15 @@ export default function AppRoutes() {
             element={<SignOut />}
           />
           <Route
-            path="/campaign"
+            path="/campaign/*"
             element={<CampaignApp />}
           />
           <Route
-            path="/campaign/:id/:name?"
+            path="/campaign/:id/:name?/:public?/:catId?/:tabId?"
             element={<CampaignApp />}
           />
           <Route
-            path="/demo-campaign/:id"
+            path="/demo-campaign/:id/:name?/:public?/:catId?/:tabId?"
             element={<CampaignApp />}
           />
           <Route

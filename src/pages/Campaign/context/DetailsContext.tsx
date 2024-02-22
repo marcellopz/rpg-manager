@@ -2,6 +2,8 @@ import React, { createContext } from "react";
 import { CampaignType, CombatType, PlayerType } from "../campaignTypes";
 import useDetails from "../hooks/useDetails";
 import auth from "../../../contexts/firebase/firebase";
+import { useNavigate, useParams } from "react-router-dom";
+import { isDemo } from "../../../contexts/firebase/databaseSetup";
 
 interface DetailsContextProps {
   campaignDetails: CampaignType | null;
@@ -81,6 +83,25 @@ const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }) => {
   const [needSaveDialogOpen, setNeedSaveDialogOpen] =
     React.useState<boolean>(false);
   const [canTabChange, setCanTabChange] = React.useState<boolean>(true);
+  const {
+    id,
+    name,
+    catId: routeCatId,
+    tabId: routeTabId,
+  } = useParams<{ id: string; name: string; catId: string; tabId: string }>();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    // if (!catTab.categoryId || !catTab.tabId) return;
+    const demo = isDemo();
+    navigate(
+      `/${demo ? "demo-campaign" : "campaign"}/${id}/${demo ? "demo" : name}/${
+        publicSelected ? "public" : "private"
+      }${catTab.categoryId ? "/" + catTab.categoryId : ""}${
+        catTab.tabId ? "/" + catTab.tabId : ""
+      }`
+    );
+  }, [catTab, publicSelected]);
 
   React.useEffect(() => {
     if (!selectedData) return;
@@ -100,7 +121,11 @@ const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }) => {
   }, [selectedData]);
 
   React.useEffect(() => {
-    resetIds();
+    if (routeCatId) {
+      setCatTab({ categoryId: routeCatId, tabId: routeTabId ?? "" });
+    } else {
+      resetIds();
+    }
   }, [publicSelected]);
 
   React.useEffect(() => {
@@ -109,7 +134,11 @@ const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }) => {
       catTab.tabId === "" &&
       campaignDetails?.categories
     ) {
-      resetIds();
+      if (routeCatId) {
+        setCatTab({ categoryId: routeCatId, tabId: routeTabId ?? "" });
+      } else {
+        resetIds();
+      }
     }
   }, [campaignDetails, playerDetails]);
 
