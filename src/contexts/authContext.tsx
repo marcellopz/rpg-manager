@@ -131,15 +131,21 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   }, [authUser, campaignIds]);
 
   const signInGoogle = async () => {
-    signInWithPopup(auth, provider);
+    signInWithPopup(auth, provider).catch((error) => {
+      alert(error.message);
+    });
   };
 
   const signInEmailPwd = async (email: string, password: string) => {
-    signInWithEmailAndPassword(auth, email, password);
+    signInWithEmailAndPassword(auth, email, password).catch((error) => {
+      alert(error.message);
+    });
   };
 
   const signUpEmailPwd = (email: string, password: string) => {
-    createUserWithEmailAndPassword(auth, email, password);
+    createUserWithEmailAndPassword(auth, email, password).catch((error) => {
+      alert(error.message);
+    });
   };
 
   const signOutRpg = () => {
