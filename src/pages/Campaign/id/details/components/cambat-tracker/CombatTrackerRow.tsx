@@ -41,7 +41,8 @@ const getRowEmoji = (combatent: CombatantType) => {
 };
 
 const getDisplayName = (combatant: CombatantType, isCombatDm: boolean) => {
-  let displayName = getRowEmoji(combatant) + " ";
+  let displayName =
+    (combatant.hp === 0 ? "💀" : "") + getRowEmoji(combatant) + " ";
   if (isCombatDm) {
     if (combatant.nameHidden) {
       displayName += `${combatant.alias} (${combatant.name})`;
