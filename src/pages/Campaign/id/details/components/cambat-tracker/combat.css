@@ -200,6 +200,21 @@
   gap: 5px;
 }
 
+.label-with-checkbox {
+  display: flex;
+  gap: 10px;
+}
+
+.label-with-checkbox input {
+  margin-top: 10px;
+  height: 25px;
+}
+
+.label-with-checkbox span {
+  display: flex;
+  gap: 5px;
+}
+
 .tracker-table-body > div {
   margin: 5px 0;
 }
@@ -296,8 +311,13 @@
   padding: 10px 12px;
 }
 
+.combat .invisible {
+  opacity: 0.7;
+  filter: brightness(0.7) grayscale(0.1);
+}
+
 .combat .context-menu {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -333,7 +353,6 @@
 .rounds-duration {
   display: flex;
   gap: 10px;
-  justify-content: space-between;
 }
 
 .rounds-duration input {

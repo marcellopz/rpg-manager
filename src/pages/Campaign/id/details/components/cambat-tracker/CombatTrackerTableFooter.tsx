@@ -192,7 +192,7 @@ function CombatTrackerTableFooter({
             className="cursor-pointer"
             onClick={() => setOpenAddCombatant(true)}
           >
-            {t("COMBAT_ADD_PLAYER")}
+            {t("COMBAT_ADD_COMBATANT")}
           </span>
         </div>
       ) : (

@@ -6,7 +6,6 @@ export const combatDefaultValue: CombatType = {
   dmName: "",
   turn: 0,
   round: 0,
-  currentTurn: "",
   combatants: {},
 };
 

@@ -1,4 +1,6 @@
 const en = {
+  YES: "Yes",
+  NO: "No",
   APP_NAME: "RPG Manager",
   HOME_START_NOW: "Start now!",
   HOME_DESCRIPTION:
@@ -168,6 +170,10 @@ const en = {
   NAME: "Name",
   COMBAT_AC: "AC",
   COMBAT_FULL_HP: "Full HP",
+  COMBAT_COMBATANT_VISIBLE: "Visible",
+  COMBAT_HIDE_NAME: "Hide name",
+  COMBAT_VISIBLE_NAME: "Name visible to players",
+  COMBAT_KEEP_PLAYERS: "Keep players in the Combat Tracker?",
   COMBAT_COMBATANT_TYPE: "Combatant type",
   COMBAT_PLAYER: "Player",
   COMBAT_ENEMY: "Enemy",

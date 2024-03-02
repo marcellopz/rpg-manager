@@ -129,9 +129,8 @@ function TextDetails() {
       catTab.tabId,
       publicSelected ? "" : (auth.currentUser?.uid as string) ?? "guest"
     ).then((res) => {
-      mdxRef?.current?.setMarkdown?.(res);
+      mdxRef?.current?.setMarkdown?.(res.replace(/<!---->/g, ""));
       setOriginalContent(res);
-      // fetchAll();
     });
   };
 

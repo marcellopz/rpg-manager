@@ -1,4 +1,6 @@
 const br = {
+  YES: "Sim",
+  NO: "Não",
   APP_NAME: "RPG Manager",
   HOME_START_NOW: "Comece Agora!",
   HOME_DESCRIPTION:
@@ -43,7 +45,7 @@ const br = {
   CHAR_SHEET_ARMOR_CLASS: "Classe de Armadura",
   CHAR_SHEET_INITIATIVE: "Iniciativa",
   CHAR_SHEET_SPEED: "Velocidade",
-  CHAR_SHEET_MAX_HP: "PV Máximos",
+  CHAR_SHEET_MAX_HP: "Max PV",
   CHAR_SHEET_CURRENT_HP: "PV Atuais",
   CHAR_SHEET_TEMPORARY_HP: "PV Temporários",
   CHAR_SHEET_TOTAL_HP: "PV Totais",
@@ -168,6 +170,9 @@ const br = {
   NAME: "Nome",
   COMBAT_AC: "CA",
   COMBAT_FULL_HP: "Vida cheia",
+  COMBAT_COMBATANT_VISIBLE: "Visível",
+  COMBAT_HIDE_NAME: "Esconder nome",
+  COMBAT_VISIBLE_NAME: "Nome visível aos jogadores",
   COMBAT_COMBATANT_TYPE: "Tipo de combatente",
   COMBAT_PLAYER: "Jogador",
   COMBAT_ENEMY: "Inimigo",
@@ -175,6 +180,7 @@ const br = {
   COMBAT_ADD: "Adicionar",
   COMBAT_ERROR: "Você deve digitar os detalhes do combatente",
   COMBAT_ADD_CONDITION_TO: "Adicionar condição a ",
+  COMBAT_KEEP_PLAYERS: "Manter jogadores no gerenciador de combate?",
   COMBAT_CONDITION_NAME: "Nome da condição",
   COMBAT_DURATION_TURNS: "Duração em turnos",
   INDEFINITE: "Indefinido",

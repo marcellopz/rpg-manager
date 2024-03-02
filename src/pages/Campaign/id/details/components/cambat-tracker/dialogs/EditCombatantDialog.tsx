@@ -17,7 +17,9 @@ const EditCombatantDialog = ({ open, onClose, combatant }: Props) => {
   const { fetchCombatDetails } = useContext(DetailsContext);
   const { id } = useParams<{ id: string }>();
   const [error, setError] = useState(false);
-  const [fullHp, setFullHp] = useState(true);
+  const [fullHp, setFullHp] = useState(combatant.hp === combatant.maxHp);
+  const [visible, setVisible] = useState(combatant.visible);
+  const [nameHidden, setNameHidden] = useState(combatant.nameHidden);
 
   if (!open || !combatant) {
     return null;
@@ -55,7 +57,9 @@ const EditCombatantDialog = ({ open, onClose, combatant }: Props) => {
       hp: Number(values.hp),
       ac: Number(values.ac),
       type: values.type.toString() as CombatantType["type"],
-      isTurn: false,
+      alias: formData.get("visible-name")?.toString(),
+      visible: visible,
+      nameHidden: nameHidden,
     };
 
     updateCombatant(id as string, combatant.id, newCombatant);
@@ -79,12 +83,37 @@ const EditCombatantDialog = ({ open, onClose, combatant }: Props) => {
       >
         <h2>{t("COMBAT_EDIT_COMBATANT")}</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="cname">{t("NAME")}</label>
+          <div className="label-with-checkbox">
+            <label htmlFor="cname">{t("NAME")}</label>
+            <span className="flex">
+              <input
+                type="checkbox"
+                id="name-hidden"
+                name="name-hidden"
+                checked={nameHidden}
+                onChange={() => setNameHidden(!nameHidden)}
+              />
+              <label htmlFor="name-hidden">{t("COMBAT_HIDE_NAME")}</label>
+            </span>
+          </div>
           <input
             type="text"
             id="cname"
             name="cname"
             defaultValue={combatant.name}
+          />
+          <label
+            htmlFor="visible-name"
+            className={nameHidden ? `` : "disabled"}
+          >
+            {t("COMBAT_VISIBLE_NAME")}
+          </label>
+          <input
+            type="text"
+            id="visible-name"
+            name="visible-name"
+            className={nameHidden ? `` : "disabled"}
+            defaultValue={combatant.alias}
           />
           <div className="p-section">
             <div>
@@ -147,11 +176,24 @@ const EditCombatantDialog = ({ open, onClose, combatant }: Props) => {
               />
             </div>
           </div>
-          <label htmlFor="type">{t("COMBAT_COMBATANT_TYPE")}</label>
+          <div className="label-with-checkbox">
+            <label htmlFor="type">{t("COMBAT_COMBATANT_TYPE")}</label>
+            <span className="flex">
+              <input
+                type="checkbox"
+                id="visible"
+                name="visible"
+                checked={visible}
+                onChange={() => setVisible(!visible)}
+              />
+              <label htmlFor="visible">{t("COMBAT_COMBATANT_VISIBLE")}</label>
+            </span>
+          </div>
           <div className="combatant-type-form">
             <select
               name="type"
               id="type"
+              defaultValue={combatant.type}
             >
               <option value="player">{t("COMBAT_PLAYER")}</option>
               <option value="enemy">{t("COMBAT_ENEMY")}</option>

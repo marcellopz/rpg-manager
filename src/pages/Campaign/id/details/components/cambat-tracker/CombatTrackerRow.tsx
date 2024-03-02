@@ -25,18 +25,6 @@ const getRowClassName = (combatent: CombatantType) => {
   } else {
     return "preto";
   }
-  //   switch (combatent.type) {
-  //     case "player":
-  //       return "player";
-  //     case "npc":
-  //       return "npc";
-  //     case "enemy":
-  //       return "enemy";
-  //     case "ally":
-  //       return "ally";
-  //     default:
-  //       return "";
-  //   }
 };
 
 const getRowEmoji = (combatent: CombatantType) => {
@@ -50,6 +38,24 @@ const getRowEmoji = (combatent: CombatantType) => {
     default:
       return "";
   }
+};
+
+const getDisplayName = (combatant: CombatantType, isCombatDm: boolean) => {
+  let displayName = getRowEmoji(combatant) + " ";
+  if (isCombatDm) {
+    if (combatant.nameHidden) {
+      displayName += `${combatant.alias} (${combatant.name})`;
+    } else {
+      displayName += combatant.name;
+    }
+    if (combatant.visible === false) {
+      displayName += " 🐱‍👤";
+    }
+  } else {
+    displayName += combatant.nameHidden ? combatant.alias : combatant.name;
+  }
+
+  return displayName;
 };
 
 export default function CombatTrackerRow({
@@ -80,6 +86,8 @@ export default function CombatTrackerRow({
     setHp(combatant.hp);
   }, [combatant.hp]);
 
+  if (!isCombatDm && combatant.visible === false) return null;
+
   return (
     <>
       <AddConditionDialog
@@ -106,38 +114,39 @@ export default function CombatTrackerRow({
           setSomeDialogOpen(false);
         }}
       />
+      <CombatTrackerRowContextMenu
+        open={contextMenuOpen}
+        x={contextMenuCoords.x}
+        y={contextMenuCoords.y}
+        onOpenEditDialog={() => {
+          setOpenEditDialog(true);
+          setSomeDialogOpen(true);
+        }}
+        onOpenDeleteDialog={() => {
+          setOpenDeleteDialog(true);
+          setSomeDialogOpen(true);
+        }}
+        onOpenAddConditionDialog={() => {
+          setOpenAddConditionDialog(true);
+          setSomeDialogOpen(true);
+        }}
+        onClose={() => setContextMenuOpen(false)}
+      />
       <div
         onContextMenu={(e) => {
           e.preventDefault();
-          setContextMenuCoords({ x: e.clientX - 50, y: 30 });
+          if (!isCombatDm) return;
+          setContextMenuCoords({ x: e.clientX, y: e.clientY });
           setContextMenuOpen(true);
         }}
         className={`tracker-table-body-row ${getRowClassName(combatant)} ${
           combatant.orderIndex === turn ? "turn" : ""
-        }`}
+        } ${combatant.visible === false ? "invisible" : ""}`}
       >
-        <CombatTrackerRowContextMenu
-          open={contextMenuOpen}
-          x={contextMenuCoords.x}
-          y={contextMenuCoords.y}
-          onOpenEditDialog={() => {
-            setOpenEditDialog(true);
-            setSomeDialogOpen(true);
-          }}
-          onOpenDeleteDialog={() => {
-            setOpenDeleteDialog(true);
-            setSomeDialogOpen(true);
-          }}
-          onOpenAddConditionDialog={() => {
-            setOpenAddConditionDialog(true);
-            setSomeDialogOpen(true);
-          }}
-          onClose={() => setContextMenuOpen(false)}
-        />
         <div className="tracker-table-initiative">{combatant.initiative}</div>
         <span className="separator" />
         <div className="tracker-table-name">
-          <p>{`${getRowEmoji(combatant)} ${combatant.name}`}</p>
+          <p>{getDisplayName(combatant, isCombatDm)}</p>
           {Object.keys(combatant.activeEffects ?? {}).length > 0 && (
             <div>
               {Object.entries(combatant.activeEffects ?? {}).map(
@@ -162,7 +171,6 @@ export default function CombatTrackerRow({
               )}
             </div>
           )}
-          {/* {combatant.name} */}
         </div>
         {isCombatDm && (
           <>

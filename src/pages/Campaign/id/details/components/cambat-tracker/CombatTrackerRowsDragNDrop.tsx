@@ -9,6 +9,33 @@ import { t } from "i18next";
 
 export type CombatantTypeWithID = CombatantType & { id: string };
 
+const getTurnRecursive = (
+  turn: number,
+  combatants: CombatantType[]
+): number => {
+  const nextTurn = combatants.find((c) => c.orderIndex === turn);
+  if (typeof nextTurn === "undefined") {
+    return -1;
+  }
+  if (nextTurn.visible === false) {
+    if (turn === 0) {
+      return getTurnRecursive(combatants.length - 1, combatants);
+    }
+    return getTurnRecursive(turn - 1, combatants);
+  }
+  return turn;
+};
+
+const getTurn = (
+  combatDetails: CombatType | undefined,
+  isCombatDm: boolean
+) => {
+  if (combatDetails?.turn !== 0 && !combatDetails?.turn) return -1;
+  if (isCombatDm) return combatDetails.turn;
+  const combatants = Object.values(combatDetails.combatants);
+  return getTurnRecursive(combatDetails.turn, combatants);
+};
+
 function CombatTrackerRowsDragNDrop({
   combatants,
 }: {
@@ -47,6 +74,8 @@ function CombatTrackerRowsDragNDrop({
     fetchCombatDetails();
   };
 
+  const turn = getTurn(combatDetails, isCombatDm);
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable">
@@ -73,7 +102,7 @@ function CombatTrackerRowsDragNDrop({
                       <CombatTrackerRow
                         setSomeDialogOpen={setSomeDialogOpen}
                         combatant={item}
-                        turn={combatDetails?.turn ?? -1}
+                        turn={turn}
                       />
                     </div>
                   )}

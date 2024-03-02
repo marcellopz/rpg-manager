@@ -42,7 +42,6 @@ const CombatTrackerRowContextMenu = ({
         style={{
           top: y,
           left: x,
-          position: "absolute",
         }}
         ref={menuRef}
       >

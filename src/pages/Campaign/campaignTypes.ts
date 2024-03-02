@@ -29,7 +29,6 @@ export interface CombatType {
   active: boolean;
   turn: number;
   round: number;
-  currentTurn: string;
   dmNotes?: string;
   combatants: {
     [key: string]: CombatantType;
@@ -46,10 +45,12 @@ export interface CombatantType {
   avatar?: string;
   type: "player" | "enemy" | "ally";
   orderIndex?: number;
-  isTurn: boolean;
   usedReaction?: boolean;
   id?: string;
   turnOrder?: number;
+  visible?: boolean;
+  nameHidden?: boolean;
+  alias?: string;
   activeEffects?: {
     [key: string]: ActiveEffectType;
   };
