@@ -1,27 +1,21 @@
-# React + TypeScript + Vite
+# RPG Campaign Manager: A Solution for Tabletop RPG Campaign Management
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project Website: [https://campaign-hub.vercel.app/](https://campaign-hub.vercel.app/)
 
-Currently, two official plugins are available:
+I created the 'RPG Campaign Manager', a practical solution for managing tabletop RPG campaigns. This project, developed using React and TypeScript and hosted on Vercel, is designed to provide a user-friendly, mobile-friendly and efficient experience. It leverages a robust Firebase backend and GitLab for version control.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The 'RPG Campaign Manager' is structured to support a collaborative environment for RPG players and game masters. It features a dual-section campaign area: a public section for all registered campaign players, and a private section for individual player information. The layout, inspired by Microsoft OneNote, divides the interface into categories and subcategories for straightforward organization.
 
-## Expanding the ESLint configuration
+Each subcategory in the system is versatile, accommodating text drafting with Markdown formatting, character inventory management, and character sheet creation and editing. A significant aspect of this project is its responsive design, ensuring that users can view and edit content easily on any device, which is particularly important during RPG sessions.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The 'RPG Campaign Manager' is crafted to streamline the RPG gameplay experience and assist in efficient campaign management.
 
-- Configure the top-level `parserOptions` property like this:
+Screenshots:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+![s1](https://i.imgur.com/qSVosaF.png)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+![s2](https://i.imgur.com/fTu7ped.png)
+
+![s3](https://i.imgur.com/y1V8mex.png)
+
+![s4](https://i.imgur.com/asyBxPm.png)
