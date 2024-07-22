@@ -256,6 +256,8 @@ const br = {
   COMBAT_UNDEAD: "Morto-vivo",
   INVENTORY_LOG_TITLE: "Registro de inventário",
   NO_LOGS: "Não existem registros de inventário",
+  SEARCH: "Buscar na campanha",
+  NO_RESULTS: "Nenhum resultado encontrado",
 };
 
 export default br;

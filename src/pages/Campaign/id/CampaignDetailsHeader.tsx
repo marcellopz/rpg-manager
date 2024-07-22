@@ -7,6 +7,7 @@ import { getImage } from "../../../contexts/firebase/storage";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import InventoryLogDialog from "./details/components/inventory/InventoryLogDialog";
+import SearchDialog from "./details/SearchDialog";
 
 type CampaignDetailsHeaderProps = {
   setInvitePlayerDialogOpen: (open: boolean) => void;
@@ -23,6 +24,7 @@ const CampaignDetailsHeader = ({
   const { campaignDetails } = useContext(DetailsContext);
   const [open, setOpen] = useState<boolean>(false);
   const [inventoryOpen, setInventoryOpen] = useState<boolean>(false);
+  const [searchOpen, setSearchOpen] = useState<boolean>(false);
 
   useEffect(() => {
     getImage(`campaign/backdropImage/${id}`).then((res) => {
@@ -61,6 +63,7 @@ const CampaignDetailsHeader = ({
           <button onClick={() => setInventoryOpen(true)}>
             {t("INVENTORY_LOG_TITLE")}
           </button>
+          <button onClick={() => setSearchOpen(true)}>{t("SEARCH")}</button>
           {authUser?.uid === campaignDetails?.creatorId && (
             <>
               <button
@@ -81,6 +84,12 @@ const CampaignDetailsHeader = ({
           )}
         </motion.div>
       </div>
+      <SearchDialog
+        open={searchOpen}
+        onClose={() => {
+          setSearchOpen(false);
+        }}
+      />
       <InventoryLogDialog
         open={inventoryOpen}
         onClose={() => {

@@ -256,6 +256,8 @@ const en = {
   COMBAT_UNDEAD: "Undead",
   INVENTORY_LOG_TITLE: "Inventory log",
   NO_LOGS: "There are no logs in the inventory",
+  SEARCH: "Search in campaign",
+  NO_RESULTS: "No results found",
 };
 
 export default en;
