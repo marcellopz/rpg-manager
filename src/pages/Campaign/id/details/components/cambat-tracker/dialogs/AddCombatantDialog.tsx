@@ -70,10 +70,7 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
   };
 
   return (
-    <div
-      className="dialog-background"
-      onClick={onClose}
-    >
+    <div className="dialog-background" onClick={onClose}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -98,11 +95,7 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
               <label htmlFor="name-hidden">{t("COMBAT_HIDE_NAME")}</label>
             </span>
           </div>
-          <input
-            type="text"
-            id="cname"
-            name="cname"
-          />
+          <input type="text" id="cname" name="cname" />
           <label
             htmlFor="visible-name"
             className={nameHidden ? `` : "disabled"}
@@ -127,12 +120,7 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
             </div>
             <div>
               <label htmlFor="ac">{t("COMBAT_AC")}</label>
-              <input
-                type="number"
-                id="ac"
-                name="ac"
-                maxLength={2}
-              />
+              <input type="number" id="ac" name="ac" maxLength={2} />
             </div>
           </div>
           <div className="p-section">
@@ -150,17 +138,10 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
                   <label htmlFor="full-hp">{t("COMBAT_FULL_HP")}</label>
                 </span>
               </div>
-              <input
-                type="number"
-                id="max-hp"
-                name="max-hp"
-              />
+              <input type="number" id="max-hp" name="max-hp" />
             </div>
             <div>
-              <label
-                className={fullHp ? "disabled" : ""}
-                htmlFor="curr-hp"
-              >
+              <label className={fullHp ? "disabled" : ""} htmlFor="curr-hp">
                 {t("CHAR_SHEET_CURRENT_HP")}
               </label>
               <input
@@ -186,13 +167,10 @@ const AddCombatantDialog = ({ open, onClose }: Props) => {
             </span>
           </div>
           <div className="combatant-type-form">
-            <select
-              name="type"
-              id="type"
-            >
+            <select name="type" id="type">
               <option value="player">{t("COMBAT_PLAYER")}</option>
               <option value="enemy">{t("COMBAT_ENEMY")}</option>
-              {/* <option value="npc">Npc</option> */}
+              <option value="undead">{t("COMBAT_UNDEAD")}</option>
               <option value="ally">{t("COMBAT_ALLY")}</option>
             </select>
           </div>

@@ -253,6 +253,7 @@ const en = {
   HOME_MOBILE_SUPPORT_TEXT:
     "Enjoy all features in your campaign with your phone or tablet!",
   HOME_COMBAT_TITLE: "Track the combat stats",
+  COMBAT_UNDEAD: "Undead",
 };
 
 export default en;

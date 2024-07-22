@@ -43,7 +43,7 @@ export interface CombatantType {
   maxHp: number;
   ac: number;
   avatar?: string;
-  type: "player" | "enemy" | "ally";
+  type: "player" | "enemy" | "ally" | "undead";
   orderIndex?: number;
   usedReaction?: boolean;
   id?: string;

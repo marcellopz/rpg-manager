@@ -15,6 +15,9 @@ import AddConditionDialog from "./dialogs/AddConditionDialog";
 import ConditionChip from "./ConditionChip";
 
 const getRowClassName = (combatent: CombatantType) => {
+  if (combatent.type === "undead") {
+    return "undead";
+  }
   const x = (combatent.hp / combatent.maxHp) * 100;
   if (x > 75) {
     return "verde";
@@ -35,6 +38,8 @@ const getRowEmoji = (combatent: CombatantType) => {
       return "⚔️";
     case "ally":
       return "🤝";
+    case "undead":
+      return "☠️";
     default:
       return "";
   }
@@ -42,7 +47,7 @@ const getRowEmoji = (combatent: CombatantType) => {
 
 const getDisplayName = (combatant: CombatantType, isCombatDm: boolean) => {
   let displayName =
-    (combatant.hp === 0 ? "💀" : "") + getRowEmoji(combatant) + " ";
+    (combatant.hp <= 0 ? "💀" : "") + getRowEmoji(combatant) + " ";
   if (isCombatDm) {
     if (combatant.nameHidden) {
       displayName += `${combatant.alias} (${combatant.name})`;
@@ -153,6 +158,7 @@ export default function CombatTrackerRow({
               {Object.entries(combatant.activeEffects ?? {}).map(
                 ([effectId, effect]) => (
                   <ConditionChip
+                    key={effectId}
                     isDm={isCombatDm}
                     title={effect.name}
                     number={effect.duration}
@@ -201,10 +207,7 @@ export default function CombatTrackerRow({
                   }}
                 />
               ) : (
-                <p
-                  id="heal"
-                  onClick={() => setOpenPlus(true)}
-                >
+                <p id="heal" onClick={() => setOpenPlus(true)}>
                   ➕
                 </p>
               )}
@@ -225,10 +228,7 @@ export default function CombatTrackerRow({
                   }}
                 />
               ) : (
-                <p
-                  id="hp"
-                  onDoubleClick={() => setEditingHp(true)}
-                >
+                <p id="hp" onDoubleClick={() => setEditingHp(true)}>
                   {hp} / {combatant.maxHp}
                 </p>
               )}
@@ -255,10 +255,7 @@ export default function CombatTrackerRow({
                   }}
                 />
               ) : (
-                <p
-                  id="damage"
-                  onClick={() => setOpenMinus(true)}
-                >
+                <p id="damage" onClick={() => setOpenMinus(true)}>
                   ➖
                 </p>
               )}

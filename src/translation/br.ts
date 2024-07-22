@@ -253,6 +253,7 @@ const br = {
   HOME_MOBILE_SUPPORT_TEXT:
     "Aproveite todas as funcionalidades de sua campanha com seu telefone ou tablet!",
   HOME_COMBAT_TITLE: "Acompanhe as estatísticas de combate",
+  COMBAT_UNDEAD: "Morto-vivo",
 };
 
 export default br;
