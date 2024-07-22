@@ -254,6 +254,8 @@ const br = {
     "Aproveite todas as funcionalidades de sua campanha com seu telefone ou tablet!",
   HOME_COMBAT_TITLE: "Acompanhe as estatísticas de combate",
   COMBAT_UNDEAD: "Morto-vivo",
+  INVENTORY_LOG_TITLE: "Registro de inventário",
+  NO_LOGS: "Não existem registros de inventário",
 };
 
 export default br;

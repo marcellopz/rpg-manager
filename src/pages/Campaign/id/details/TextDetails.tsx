@@ -61,8 +61,6 @@ function TextDetails() {
   const [pastVersionsOpen, setPastVersionsOpen] =
     React.useState<boolean>(false);
 
-  console.log("refresh");
-
   const currentStatesRef = useRef<StatesRef>();
 
   useEffect(() => {

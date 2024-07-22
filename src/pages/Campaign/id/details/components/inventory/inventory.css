@@ -420,3 +420,43 @@
   transform: translateY(-50%);
   cursor: pointer;
 }
+
+.inventory-log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inventory-log-row {
+  background-color: rgb(212, 212, 212);
+  padding: 10px;
+  color: black;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.151);
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.inventory-log-row span {
+  margin-right: 16px;
+}
+
+.inventory-log-row-details {
+  background-color: #ececec;
+  padding: 10px;
+  border-radius: 0 0 5px 5px;
+  border: 1px solid rgba(0, 0, 0, 0.151);
+  border-top: none;
+  color: rgb(75, 75, 75);
+}
+
+.log-description {
+  font-weight: 500;
+  margin-bottom: 4px;
+  font-size: 18px;
+}
+
+.log-time {
+  font-size: 14px;
+}

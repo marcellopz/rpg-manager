@@ -254,6 +254,8 @@ const en = {
     "Enjoy all features in your campaign with your phone or tablet!",
   HOME_COMBAT_TITLE: "Track the combat stats",
   COMBAT_UNDEAD: "Undead",
+  INVENTORY_LOG_TITLE: "Inventory log",
+  NO_LOGS: "There are no logs in the inventory",
 };
 
 export default en;

@@ -31,7 +31,7 @@ const Backpack = ({
   carrying_weight: number;
 }) => {
   const { id } = useParams();
-  const { catTab, fetchAll } = useContext(DetailsContext);
+  const { catTab, fetchAll, campaignDetails } = useContext(DetailsContext);
   const [editingGoldValue, setEditingGoldValue] = useState<number>(gold_box);
   const [editingGold, setEditingGold] = useState(false);
   const [editingSilverValue, setEditingSilverValue] =
@@ -42,6 +42,10 @@ const Backpack = ({
   const [editingCopper, setEditingCopper] = useState(false);
   const [editingStr, setEditingStr] = useState(false);
   const [editingStrValue, setEditingStrValue] = useState<number>(strength_box);
+
+  const charName =
+    campaignDetails?.categories?.[catTab.categoryId]?.tabs?.[catTab.tabId]
+      ?.name ?? "";
 
   useEffect(() => {
     setEditingStrValue(strength_box);
@@ -61,7 +65,14 @@ const Backpack = ({
   };
 
   const handleSaveGold = () => {
-    updateGold(id as string, catTab.categoryId, catTab.tabId, editingGoldValue);
+    updateGold(
+      id as string,
+      catTab.categoryId,
+      catTab.tabId,
+      editingGoldValue,
+      charName,
+      gold_box
+    );
     setEditingGold(false);
   };
 
@@ -70,7 +81,9 @@ const Backpack = ({
       id as string,
       catTab.categoryId,
       catTab.tabId,
-      editingSilverValue
+      editingSilverValue,
+      charName,
+      silver_box
     );
     setEditingGold(false);
   };
@@ -80,7 +93,9 @@ const Backpack = ({
       id as string,
       catTab.categoryId,
       catTab.tabId,
-      editingCopperValue
+      editingCopperValue,
+      charName,
+      copper_box
     );
     setEditingCopper(false);
   };
@@ -90,7 +105,9 @@ const Backpack = ({
       id as string,
       catTab.categoryId,
       catTab.tabId,
-      editingStrValue
+      editingStrValue,
+      charName,
+      strength_box
     );
     setEditingStr(false);
   };
@@ -180,11 +197,7 @@ const Backpack = ({
               {gold_box}
             </p>
           )}
-          <img
-            src="/assets/coins.png"
-            alt="gold"
-            width={10}
-          />
+          <img src="/assets/coins.png" alt="gold" width={10} />
         </div>
         <div className="silver_box">
           {editingSilver ? (
@@ -210,11 +223,7 @@ const Backpack = ({
               {silver_box}
             </p>
           )}
-          <img
-            src="/assets/coins.png"
-            alt="silver"
-            width={10}
-          />
+          <img src="/assets/coins.png" alt="silver" width={10} />
         </div>
         <div className="copper_box">
           {editingCopper ? (
@@ -240,11 +249,7 @@ const Backpack = ({
               {copper_box}
             </p>
           )}
-          <img
-            src="/assets/coins.png"
-            alt="copper"
-            width={10}
-          />
+          <img src="/assets/coins.png" alt="copper" width={10} />
         </div>
       </div>
     </div>

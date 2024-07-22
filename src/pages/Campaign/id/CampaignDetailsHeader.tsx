@@ -6,6 +6,7 @@ import CombatTrackerDialog from "./details/components/cambat-tracker/CombatTrack
 import { getImage } from "../../../contexts/firebase/storage";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import InventoryLogDialog from "./details/components/inventory/InventoryLogDialog";
 
 type CampaignDetailsHeaderProps = {
   setInvitePlayerDialogOpen: (open: boolean) => void;
@@ -21,6 +22,7 @@ const CampaignDetailsHeader = ({
   const { authUser } = useContext(AuthContext);
   const { campaignDetails } = useContext(DetailsContext);
   const [open, setOpen] = useState<boolean>(false);
+  const [inventoryOpen, setInventoryOpen] = useState<boolean>(false);
 
   useEffect(() => {
     getImage(`campaign/backdropImage/${id}`).then((res) => {
@@ -34,10 +36,7 @@ const CampaignDetailsHeader = ({
   }, []);
 
   return (
-    <section
-      className="campaign__header header_inset"
-      id="campaign__header"
-    >
+    <section className="campaign__header header_inset" id="campaign__header">
       <div className="campaign__backdrop">
         {window.location.pathname.startsWith("/demo-campaign") && (
           <div id="demo-warning">
@@ -59,6 +58,9 @@ const CampaignDetailsHeader = ({
           <button onClick={() => setOpen(true)}>
             {t("COMBAT_TRACKER_TITLE")}
           </button>
+          <button onClick={() => setInventoryOpen(true)}>
+            {t("INVENTORY_LOG_TITLE")}
+          </button>
           {authUser?.uid === campaignDetails?.creatorId && (
             <>
               <button
@@ -79,6 +81,12 @@ const CampaignDetailsHeader = ({
           )}
         </motion.div>
       </div>
+      <InventoryLogDialog
+        open={inventoryOpen}
+        onClose={() => {
+          setInventoryOpen(false);
+        }}
+      />
       <CombatTrackerDialog
         open={open}
         onClose={() => {

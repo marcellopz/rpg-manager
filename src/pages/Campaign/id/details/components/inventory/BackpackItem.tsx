@@ -21,7 +21,7 @@ interface BackpackItemProps {
 
 const BackpackItem = ({ item, itemId, index }: BackpackItemProps) => {
   const { id } = useParams<{ id: string }>();
-  const { catTab, fetchAll } = useContext(DetailsContext);
+  const { catTab, fetchAll, campaignDetails } = useContext(DetailsContext);
   const [editingName, setEditingName] = useState<boolean>(false);
   const [editingNumberOfItems, setEditingNumberOfItems] =
     useState<boolean>(false);
@@ -34,8 +34,19 @@ const BackpackItem = ({ item, itemId, index }: BackpackItemProps) => {
   const [editingUniqueWeight, setEditingUniqueWeight] =
     useState<boolean>(false);
 
+  const charName =
+    campaignDetails?.categories?.[catTab.categoryId]?.tabs?.[catTab.tabId]
+      ?.name ?? "";
+
   const handleDeleteItem = () => {
-    deleteItemCampaign(id as string, catTab.categoryId, catTab.tabId, itemId);
+    deleteItemCampaign(
+      id as string,
+      catTab.categoryId,
+      catTab.tabId,
+      itemId,
+      item,
+      charName
+    );
     fetchAll();
   };
 
@@ -44,13 +55,17 @@ const BackpackItem = ({ item, itemId, index }: BackpackItemProps) => {
       id as string,
       catTab.categoryId,
       catTab.tabId,
-      itemId
+      itemId,
+      item,
+      charName
     ).then(() => {
       addItemToInventory(
         id as string,
         catTab.categoryId,
         playerTabId,
-        item
+        item,
+        campaignDetails?.categories?.[catTab.categoryId]?.tabs?.[playerTabId]
+          ?.name ?? ""
       ).then(fetchAll);
     });
   };
@@ -61,7 +76,9 @@ const BackpackItem = ({ item, itemId, index }: BackpackItemProps) => {
       catTab.categoryId,
       catTab.tabId,
       itemId,
-      name
+      name,
+      charName,
+      item.item.name
     );
     setEditingName(false);
   };
@@ -72,7 +89,10 @@ const BackpackItem = ({ item, itemId, index }: BackpackItemProps) => {
       catTab.categoryId,
       catTab.tabId,
       itemId,
-      numberOfItems
+      numberOfItems,
+      charName,
+      name,
+      item.numberOfItems
     );
     setEditingNumberOfItems(false);
   };
@@ -83,13 +103,25 @@ const BackpackItem = ({ item, itemId, index }: BackpackItemProps) => {
       catTab.categoryId,
       catTab.tabId,
       itemId,
-      parseFloat(uniqueWeight)
+      parseFloat(uniqueWeight),
+      charName,
+      name,
+      item.item.weight.toFixed(1)
     );
     setEditingUniqueWeight(false);
   };
 
   const handleUpdateItemType = (type: "normal" | "magic" | "consumable") => {
-    updateItemType(id as string, catTab.categoryId, catTab.tabId, itemId, type);
+    updateItemType(
+      id as string,
+      catTab.categoryId,
+      catTab.tabId,
+      itemId,
+      type,
+      charName,
+      name,
+      item.item.type
+    );
     setEditingNumberOfItems(false);
   };
 

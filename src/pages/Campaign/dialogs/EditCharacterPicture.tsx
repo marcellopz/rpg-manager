@@ -12,7 +12,8 @@ type EditCharacterPictureProps = {
 };
 
 const EditCharacterPicture = ({ open, onClose }: EditCharacterPictureProps) => {
-  const { fetchAll, categoryId, tabId } = useContext(DetailsContext);
+  const { fetchAll, categoryId, tabId, campaignDetails } =
+    useContext(DetailsContext);
   const [characterImage, setCharacterImage] = useState<string>("");
   const { id } = useParams();
 
@@ -26,17 +27,15 @@ const EditCharacterPicture = ({ open, onClose }: EditCharacterPictureProps) => {
       id as string,
       categoryId,
       tabId,
-      characterImage
+      characterImage,
+      campaignDetails?.categories?.[categoryId]?.tabs?.[tabId]?.name ?? ""
     ).then(() => {
       fetchAll();
     });
   };
 
   return (
-    <div
-      className="dialog-background"
-      onMouseDown={onClose}
-    >
+    <div className="dialog-background" onMouseDown={onClose}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

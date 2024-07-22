@@ -7,6 +7,7 @@ import {
   CategoryType,
   CombatType,
   CombatantType,
+  InventoryChangeType,
   InventoryItemType,
   TabType,
 } from "../../pages/Campaign/campaignTypes";
@@ -91,6 +92,7 @@ export const getCampaign = async (campaignId: string) => {
     get(child(dbRef, `campaigns/${campaignId}/categories`)),
     get(child(dbRef, `campaigns/${campaignId}/combat`)),
     get(child(dbRef, `campaigns/${campaignId}/player-list`)),
+    get(child(dbRef, `campaigns/${campaignId}/inventoryLog`)),
   ]).then((values) => {
     const campaign = {
       backdropImage: values[0].val(),
@@ -100,6 +102,7 @@ export const getCampaign = async (campaignId: string) => {
       categories: values[4].val(),
       combat: values[5].val(),
       playerList: values[6].val(),
+      inventoryLog: values[7].val(),
     } as CampaignType;
     return campaign;
   });
@@ -353,12 +356,26 @@ export const getUidByEmail = async (email: string) => {
   }
 };
 
+// inventory
 export const addItemToInventory = async (
   campaignId: string,
   categoryId: string,
   tabId: string,
-  Item: InventoryItemType
+  Item: InventoryItemType,
+  characterName: string
 ) => {
+  const username = auth.currentUser?.displayName as string;
+  const newItemLog: InventoryChangeType = {
+    timestamp: Date.now(),
+    username: username,
+    item: Item,
+    changeType: "add",
+    description: `Added ${Item.numberOfItems} "${Item.item.name}"${
+      Item.numberOfItems > 1 ? "s" : ""
+    } to ${characterName}'s inventory`,
+  };
+  push(child(dbRef, `campaigns/${campaignId}/inventoryLog`), newItemLog);
+
   push(
     child(
       dbRef,
@@ -368,12 +385,26 @@ export const addItemToInventory = async (
   );
 };
 
+// inventory
 export const deleteItemCampaign = async (
   campaignId: string,
   categoryId: string,
   tabId: string,
-  itemId: string
+  itemId: string,
+  Item: InventoryItemType,
+  characterName: string
 ) => {
+  const username = auth.currentUser?.displayName as string;
+  const deletedItemLog: InventoryChangeType = {
+    timestamp: Date.now(),
+    username: username,
+    item: Item,
+    changeType: "delete",
+    description: `Deleted ${Item.numberOfItems} "${Item.item.name}"${
+      Item.numberOfItems > 1 ? "s" : ""
+    } from ${characterName}'s inventory`,
+  };
+  push(child(dbRef, `campaigns/${campaignId}/inventoryLog`), deletedItemLog);
   set(
     child(
       dbRef,
@@ -383,12 +414,22 @@ export const deleteItemCampaign = async (
   );
 };
 
+// inventory
 export const updateGold = async (
   campaignId: string,
   categoryId: string,
   tabId: string,
-  gold: number
+  gold: number,
+  characterName: string,
+  oldGold: number
 ) => {
+  const updateGoldLog: InventoryChangeType = {
+    timestamp: Date.now(),
+    username: auth.currentUser?.displayName as string,
+    changeType: "update_gold",
+    description: `Changed ${characterName}'s gold from "${oldGold}" to "${gold}"`,
+  };
+  push(child(dbRef, `campaigns/${campaignId}/inventoryLog`), updateGoldLog);
   set(
     child(
       dbRef,
@@ -398,12 +439,22 @@ export const updateGold = async (
   );
 };
 
+// inventory
 export const updateSilver = async (
   campaignId: string,
   categoryId: string,
   tabId: string,
-  silver: number
+  silver: number,
+  characterName: string,
+  oldSilver: number
 ) => {
+  const updateSilverLog: InventoryChangeType = {
+    timestamp: Date.now(),
+    username: auth.currentUser?.displayName as string,
+    changeType: "update_silver",
+    description: `Changed ${characterName}'s silver from "${oldSilver}" to "${silver}"`,
+  };
+  push(child(dbRef, `campaigns/${campaignId}/inventoryLog`), updateSilverLog);
   set(
     child(
       dbRef,
@@ -413,12 +464,22 @@ export const updateSilver = async (
   );
 };
 
+// inventory
 export const updateCopper = async (
   campaignId: string,
   categoryId: string,
   tabId: string,
-  copper: number
+  copper: number,
+  characterName: string,
+  oldCopper: number
 ) => {
+  const updateCopperLog: InventoryChangeType = {
+    timestamp: Date.now(),
+    username: auth.currentUser?.displayName as string,
+    changeType: "update_copper",
+    description: `Changed ${characterName}'s copper from "${oldCopper}" to "${copper}"`,
+  };
+  push(child(dbRef, `campaigns/${campaignId}/inventoryLog`), updateCopperLog);
   set(
     child(
       dbRef,
@@ -428,12 +489,22 @@ export const updateCopper = async (
   );
 };
 
+// inventory
 export const updateStrength = async (
   campaignId: string,
   categoryId: string,
   tabId: string,
-  strength: number
+  strength: number,
+  characterName: string,
+  oldStrength: number
 ) => {
+  const updateStrengthLog: InventoryChangeType = {
+    timestamp: Date.now(),
+    username: auth.currentUser?.displayName as string,
+    changeType: "update_strength",
+    description: `Changed ${characterName}'s strength from "${oldStrength}" to "${strength}"`,
+  };
+  push(child(dbRef, `campaigns/${campaignId}/inventoryLog`), updateStrengthLog);
   set(
     child(
       dbRef,
@@ -443,13 +514,24 @@ export const updateStrength = async (
   );
 };
 
+// inventory
 export const updateUniqueItemWeight = async (
   campaignId: string,
   categoryId: string,
   tabId: string,
   itemId: string,
-  weight: number
+  weight: number,
+  characterName: string,
+  itemName: string,
+  oldWeight: string
 ) => {
+  const updateWeightLog: InventoryChangeType = {
+    timestamp: Date.now(),
+    username: auth.currentUser?.displayName as string,
+    changeType: "update_weight",
+    description: `Changed ${characterName}'s ${itemName}'s weight from "${oldWeight}" to "${weight}"`,
+  };
+  push(child(dbRef, `campaigns/${campaignId}/inventoryLog`), updateWeightLog);
   set(
     child(
       dbRef,
@@ -459,13 +541,27 @@ export const updateUniqueItemWeight = async (
   );
 };
 
+// inventory
 export const updateNumberOfItems = async (
   campaignId: string,
   categoryId: string,
   tabId: string,
   itemId: string,
-  numberOfItems: number
+  numberOfItems: number,
+  characterName: string,
+  itemName: string,
+  oldNumberOfItems: number
 ) => {
+  const updateNumberOfItemsLog: InventoryChangeType = {
+    timestamp: Date.now(),
+    username: auth.currentUser?.displayName as string,
+    changeType: "update_number_of_items",
+    description: `Changed ${characterName}'s "${itemName}"'s number of items from "${oldNumberOfItems}" to "${numberOfItems}"`,
+  };
+  push(
+    child(dbRef, `campaigns/${campaignId}/inventoryLog`),
+    updateNumberOfItemsLog
+  );
   set(
     child(
       dbRef,
@@ -475,13 +571,23 @@ export const updateNumberOfItems = async (
   );
 };
 
+// inventory
 export const updateNameOfItem = async (
   campaignId: string,
   categoryId: string,
   tabId: string,
   itemId: string,
-  name: string
+  name: string,
+  characterName: string,
+  oldName: string
 ) => {
+  const updateNameLog: InventoryChangeType = {
+    timestamp: Date.now(),
+    username: auth.currentUser?.displayName as string,
+    changeType: "update_item_name",
+    description: `Changed ${characterName}'s item name from "${oldName}" to "${name}"`,
+  };
+  push(child(dbRef, `campaigns/${campaignId}/inventoryLog`), updateNameLog);
   set(
     child(
       dbRef,
@@ -491,19 +597,54 @@ export const updateNameOfItem = async (
   );
 };
 
+// inventory
 export const updateItemType = async (
   campaignId: string,
   categoryId: string,
   tabId: string,
   itemId: string,
-  type: string
+  type: string,
+  characterName: string,
+  itemName: string,
+  oldType: string
 ) => {
+  const updateTypeLog: InventoryChangeType = {
+    timestamp: Date.now(),
+    username: auth.currentUser?.displayName as string,
+    changeType: "update_item_type",
+    description: `Changed ${characterName}'s "${itemName}"'s type from "${oldType}" to "${type}"`,
+  };
+  push(child(dbRef, `campaigns/${campaignId}/inventoryLog`), updateTypeLog);
   set(
     child(
       dbRef,
       `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/inventory/${itemId}/item/type`
     ),
     type
+  );
+};
+
+// inventory
+export const saveCharImageInventory = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  image: string,
+  charName: string
+) => {
+  const updateImageLog: InventoryChangeType = {
+    timestamp: Date.now(),
+    username: auth.currentUser?.displayName as string,
+    changeType: "update_char_image",
+    description: `Changed ${charName}'s image`,
+  };
+  push(child(dbRef, `campaigns/${campaignId}/inventoryLog`), updateImageLog);
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/playerAvatar`
+    ),
+    image
   );
 };
 
@@ -514,21 +655,6 @@ export const editCampaignNameDescription = async (
 ) => {
   set(child(dbRef, `campaigns/${campaignId}/name`), name);
   set(child(dbRef, `campaigns/${campaignId}/description`), description);
-};
-
-export const saveCharImageInventory = async (
-  campaignId: string,
-  categoryId: string,
-  tabId: string,
-  image: string
-) => {
-  set(
-    child(
-      dbRef,
-      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/playerAvatar`
-    ),
-    image
-  );
 };
 
 export const updateCategoryListOrder = async (

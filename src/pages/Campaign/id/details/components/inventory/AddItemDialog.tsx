@@ -21,7 +21,8 @@ const AddItemDialog: React.FC<AddItemDialogProps> = ({ open, onClose }) => {
   >("normal");
   const [error, setError] = React.useState<boolean>(false);
   const { id } = useParams();
-  const { fetchAll, catTab } = React.useContext(DetailsContext);
+  const { fetchAll, catTab, campaignDetails } =
+    React.useContext(DetailsContext);
 
   if (!open) {
     return null;
@@ -37,7 +38,16 @@ const AddItemDialog: React.FC<AddItemDialogProps> = ({ open, onClose }) => {
       },
     };
 
-    addItemToInventory(id as string, catTab.categoryId, catTab.tabId, newItem);
+    const charName =
+      campaignDetails?.categories?.[catTab.categoryId]?.tabs?.[catTab.tabId]
+        ?.name ?? "";
+    addItemToInventory(
+      id as string,
+      catTab.categoryId,
+      catTab.tabId,
+      newItem,
+      charName
+    );
 
     fetchAll();
   };
@@ -56,10 +66,7 @@ const AddItemDialog: React.FC<AddItemDialogProps> = ({ open, onClose }) => {
   };
 
   return (
-    <div
-      className="dialog-background"
-      onClick={onClose}
-    >
+    <div className="dialog-background" onClick={onClose}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -15,12 +15,34 @@ export interface CampaignType {
   backdropImage?: string;
   campaignCardImage?: string;
   combat?: CombatType;
+  inventoryLog?: {
+    [key: string]: InventoryChangeType;
+  };
   playerList?: {
     [key: string]: {
       id: string;
       name: string;
     };
   };
+}
+
+export interface InventoryChangeType {
+  timestamp: number;
+  username: string;
+  item?: InventoryItemType;
+  changeType:
+    | "add"
+    | "delete"
+    | "update_gold"
+    | "update_silver"
+    | "update_copper"
+    | "update_strength"
+    | "update_weight"
+    | "update_number_of_items"
+    | "update_item_name"
+    | "update_item_type"
+    | "update_char_image";
+  description: string;
 }
 
 export interface CombatType {
