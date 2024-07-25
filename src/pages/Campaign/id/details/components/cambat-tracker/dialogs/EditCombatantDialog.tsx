@@ -198,6 +198,7 @@ const EditCombatantDialog = ({ open, onClose, combatant }: Props) => {
               <option value="player">{t("COMBAT_PLAYER")}</option>
               <option value="enemy">{t("COMBAT_ENEMY")}</option>
               {/* <option value="npc">Npc</option> */}
+              <option value="undead">{t("COMBAT_UNDEAD")}</option>
               <option value="ally">{t("COMBAT_ALLY")}</option>
             </select>
           </div>
