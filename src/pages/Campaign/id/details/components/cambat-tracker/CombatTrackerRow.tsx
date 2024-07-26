@@ -141,7 +141,7 @@ export default function CombatTrackerRow({
       <div
         onContextMenu={(e) => {
           e.preventDefault();
-          if (!isCombatDm) return;
+          // if (!isCombatDm) return;
           setContextMenuCoords({ x: e.clientX, y: e.clientY });
           setContextMenuOpen(true);
         }}
