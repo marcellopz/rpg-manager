@@ -1,5 +1,6 @@
 import { t } from "i18next";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
+import { DetailsContext } from "../../../../context/DetailsContext";
 const CombatTrackerRowContextMenu = ({
   x,
   y,
@@ -18,6 +19,7 @@ const CombatTrackerRowContextMenu = ({
   onOpenAddConditionDialog: () => void;
 }) => {
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const { isCombatDm } = useContext(DetailsContext);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -54,22 +56,26 @@ const CombatTrackerRowContextMenu = ({
           >
             {t("COMBAT_ADD_CONDITION")}
           </li>
-          <li
-            onClick={() => {
-              onOpenEditDialog();
-              onClose();
-            }}
-          >
-            {t("EDIT")}
-          </li>
-          <li
-            onClick={() => {
-              onClose();
-              onOpenDeleteDialog();
-            }}
-          >
-            {t("DELETE_BTN")}
-          </li>
+          {isCombatDm && (
+            <>
+              <li
+                onClick={() => {
+                  onOpenEditDialog();
+                  onClose();
+                }}
+              >
+                {t("EDIT")}
+              </li>
+              <li
+                onClick={() => {
+                  onClose();
+                  onOpenDeleteDialog();
+                }}
+              >
+                {t("DELETE_BTN")}
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </>
