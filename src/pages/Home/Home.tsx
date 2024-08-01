@@ -8,6 +8,7 @@ import "./home.css";
 
 const Home = () => {
   // const { t } = useTranslation();
+  document.title = "RPG Manager";
 
   return (
     <main id="home">

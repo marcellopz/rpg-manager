@@ -14,22 +14,10 @@ export default function AppRoutes() {
     <BrowserRouter>
       <NavbarProvider>
         <Routes>
-          <Route
-            path="/"
-            element={<Home />}
-          />
-          <Route
-            path="/authenticate"
-            element={<Authenticate />}
-          />
-          <Route
-            path="/signout"
-            element={<SignOut />}
-          />
-          <Route
-            path="/campaign/*"
-            element={<CampaignApp />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/authenticate" element={<Authenticate />} />
+          <Route path="/signout" element={<SignOut />} />
+          <Route path="/campaign/*" element={<CampaignApp />} />
           <Route
             path="/campaign/:id/:name?/:public?/:catId?/:tabId?"
             element={<CampaignApp />}
@@ -38,18 +26,9 @@ export default function AppRoutes() {
             path="/demo-campaign/:id/:name?/:public?/:catId?/:tabId?"
             element={<CampaignApp />}
           />
-          <Route
-            path="/about"
-            element={<About />}
-          />
-          <Route
-            path="/profile"
-            element={<Profile />}
-          />
-          <Route
-            path="*"
-            element={<PageNotFound />}
-          />
+          <Route path="/about" element={<About />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </NavbarProvider>
     </BrowserRouter>

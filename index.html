@@ -81,6 +81,11 @@
 
     // Initial application of the effect to images present at page load
     document.addEventListener("DOMContentLoaded", applyFadeInEffectToImages);
+
+    if (!Object.hasOwn) {
+      Object.hasOwn = (obj, prop) =>
+        Object.prototype.hasOwnProperty.call(obj, prop);
+    }
   </script>
   <style>
     img {

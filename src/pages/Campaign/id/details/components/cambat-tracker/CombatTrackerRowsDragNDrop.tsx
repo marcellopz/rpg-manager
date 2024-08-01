@@ -32,6 +32,7 @@ const getTurn = (
 ) => {
   if (combatDetails?.turn !== 0 && !combatDetails?.turn) return -1;
   if (isCombatDm) return combatDetails.turn;
+  if (!combatDetails?.combatants) return -1;
   const combatants = Object.values(combatDetails.combatants);
   return getTurnRecursive(combatDetails.turn, combatants);
 };

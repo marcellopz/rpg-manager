@@ -6,6 +6,7 @@ import { t } from "i18next";
 
 const Profile: React.FC = () => {
   const { authUser } = useContext(AuthContext);
+  document.title = "RPG - Profile";
 
   return (
     <div className="profile-background">

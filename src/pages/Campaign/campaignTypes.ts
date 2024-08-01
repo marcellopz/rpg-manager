@@ -52,7 +52,7 @@ export interface CombatType {
   turn: number;
   round: number;
   dmNotes?: string;
-  combatants: {
+  combatants?: {
     [key: string]: CombatantType;
   };
   // log: CombatLogType[];

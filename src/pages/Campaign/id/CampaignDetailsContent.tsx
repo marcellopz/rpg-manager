@@ -11,7 +11,12 @@ interface CampaignDetailsContentProps {
 export default function CampaignDetailsContent({
   tab,
 }: CampaignDetailsContentProps) {
-  if (!tab) return null;
+  if (!tab) {
+    document.title = "RPG Manager";
+    return null;
+  }
+
+  document.title = `RPG - ${tab.name}`;
 
   if (tab.type === "text") {
     return (

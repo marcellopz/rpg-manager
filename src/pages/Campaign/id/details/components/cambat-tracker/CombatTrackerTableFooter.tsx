@@ -40,7 +40,7 @@ function CombatTrackerTableFooter({
   };
 
   const updateConditions = () => {
-    if (!combatDetails) return;
+    if (!combatDetails || !combatDetails.combatants) return;
 
     const arrIdPlayer = Object.entries(combatDetails.combatants).find(
       ([_i, c]) => c.orderIndex === combatDetails.turn
@@ -78,7 +78,7 @@ function CombatTrackerTableFooter({
   };
 
   const updateReaction = (newTurnValue: number) => {
-    if (!combatDetails) return;
+    if (!combatDetails || !combatDetails.combatants) return;
 
     const arrIdNextPlayer = Object.entries(combatDetails.combatants).find(
       ([_i, c]) => c.orderIndex === newTurnValue
@@ -92,7 +92,7 @@ function CombatTrackerTableFooter({
   };
 
   const handleNext = () => {
-    if (!combatDetails) {
+    if (!combatDetails || !combatDetails.combatants) {
       return;
     }
 
@@ -112,7 +112,7 @@ function CombatTrackerTableFooter({
   };
 
   const handlePrev = () => {
-    if (!combatDetails) {
+    if (!combatDetails || !combatDetails.combatants) {
       return;
     }
     const newTurn = combatDetails.turn - 1;
@@ -138,24 +138,15 @@ function CombatTrackerTableFooter({
         <div id="actions-1">
           {combatDetails.round > 0 && (
             <>
-              <span
-                onClick={handlePrev}
-                className="cursor-pointer"
-              >
+              <span onClick={handlePrev} className="cursor-pointer">
                 {t("PREV")}
               </span>
-              <span
-                className="cursor-pointer"
-                onClick={handleNext}
-              >
+              <span className="cursor-pointer" onClick={handleNext}>
                 {t("NEXT")}
               </span>
             </>
           )}
-          <span
-            onClick={handleSort}
-            className="cursor-pointer"
-          >
+          <span onClick={handleSort} className="cursor-pointer">
             {t("SORT")}
           </span>
         </div>
@@ -165,10 +156,7 @@ function CombatTrackerTableFooter({
       {isCombatDm ? (
         <div id="actions-2">
           {combatDetails.round === 0 ? (
-            <span
-              className="cursor-pointer"
-              onClick={handleStart}
-            >
+            <span className="cursor-pointer" onClick={handleStart}>
               {t("START")}
             </span>
           ) : (

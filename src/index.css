@@ -1,5 +1,6 @@
 :root {
-  font-family: "Rubik", sans-serif;
+  font-family: "Rubik", "Arial", "Noto Color Emoji", "Segoe UI Emoji",
+    sans-serif;
 
   line-height: 1.5;
   font-weight: 400;

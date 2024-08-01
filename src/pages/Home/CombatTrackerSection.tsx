@@ -13,7 +13,16 @@ const CombatTrackerSection: React.FC = () => {
     >
       <div className="combat-tracker-section">
         <h2>{t("HOME_COMBAT_TITLE")}</h2>
-        <div className="combat-video">EM BREVE</div>
+        <div className="combat-video">
+          <iframe
+            width="853"
+            height="480"
+            src={`https://www.youtube.com/embed/F3G9QNWOwb8`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title="Embedded youtube"
+          />
+        </div>
       </div>
     </motion.section>
   );

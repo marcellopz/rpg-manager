@@ -23,10 +23,7 @@ const EndCombatKeepPlayersDialog = ({
 
   return (
     <>
-      <div
-        className="dialog-background"
-        onClick={onClose}
-      >
+      <div className="dialog-background" onClick={onClose}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -63,7 +60,7 @@ const ConfirmEndCombatDialog = ({ open, onClose, closeAll }: Props) => {
   }
 
   const handleEndCombatKeepPlayers = () => {
-    if (!combatDetails) return;
+    if (!combatDetails || !combatDetails.combatants) return;
     const newCombatants: CombatType["combatants"] = {};
     Object.entries(combatDetails.combatants).forEach(([id, c]) => {
       if (c.type === "player") {
@@ -96,10 +93,7 @@ const ConfirmEndCombatDialog = ({ open, onClose, closeAll }: Props) => {
 
   return (
     <>
-      <div
-        className="dialog-background"
-        onClick={onClose}
-      >
+      <div className="dialog-background" onClick={onClose}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

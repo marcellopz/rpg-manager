@@ -7,8 +7,10 @@ import DetailsProvider from "./context/DetailsContext";
 export default function CampaignApp() {
   const { id } = useParams();
   if (!id) {
+    document.title = "RPG Manager";
     return <CampaignList />;
   }
+
   return (
     <DetailsProvider>
       <CampaignDetails />

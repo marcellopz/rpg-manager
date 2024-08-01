@@ -14,15 +14,9 @@ const ConditionChip = ({
   isDm: boolean;
 }) => {
   return (
-    <div
-      className="chip"
-      style={{ backgroundColor: color }}
-    >
+    <div className="chip" style={{ backgroundColor: color }}>
       {isDm && (
-        <span
-          onClick={onClose}
-          className="closeButton"
-        >
+        <span onClick={onClose} className="closeButton">
           ✖
         </span>
       )}
