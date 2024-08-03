@@ -28,6 +28,7 @@ export default function CampaignDetailsContent({
       ),
       (snapshot) => {
         const newTab = snapshot.val() as TabType;
+        if (!newTab) return;
         setContent(newTab.content);
       }
     );
