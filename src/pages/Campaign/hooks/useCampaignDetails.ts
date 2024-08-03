@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CampaignType } from "../campaignTypes";
+import { CampaignType, CombatType } from "../campaignTypes";
 import {
   getCampaign,
   getCombatDetails,
@@ -9,6 +9,9 @@ import { isDemo } from "../../../contexts/firebase/databaseSetup";
 const useCampaignDetails = (campaignId?: string) => {
   const [campaignDetails, setCampaignDetails] = useState<CampaignType | null>(
     null
+  );
+  const [combatDetails, setCombatDetails] = useState<CombatType | undefined>(
+    undefined
   );
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -28,22 +31,18 @@ const useCampaignDetails = (campaignId?: string) => {
     if (!campaignId) return;
     if (!isDemo()) return;
     getCombatDetails(campaignId).then((combat) => {
-      setCampaignDetails((prev) => {
-        if (!prev) return prev;
-        return {
-          ...prev,
-          combat,
-        };
-      });
+      setCombatDetails(combat);
     });
   };
 
   return {
     campaignDetails,
+    combatDetails,
     loading,
     fetchCampaignDetails,
     fetchCombatDetails,
     setCampaignDetails,
+    setCombatDetails,
   };
 };
 

@@ -31,6 +31,9 @@ interface DetailsContextProps {
   isCombatDm: boolean;
   fetchCombatDetails: () => void;
   setCampaignDetails: React.Dispatch<React.SetStateAction<CampaignType | null>>;
+  setCombatDetails: React.Dispatch<
+    React.SetStateAction<CombatType | undefined>
+  >;
 }
 
 interface DetailsProviderProps {
@@ -61,16 +64,19 @@ export const DetailsContext = createContext<DetailsContextProps>({
   isCombatDm: false,
   fetchCombatDetails: () => {},
   setCampaignDetails: () => {},
+  setCombatDetails: () => {},
 });
 
 const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }) => {
   const {
+    combatDetails,
     campaignDetails,
     playerDetails,
     detailsLoading,
     fetchAll,
     fetchCombatDetails,
     setCampaignDetails,
+    setCombatDetails,
   } = useDetails();
   const [catTab, setCatTab] = React.useState<{
     categoryId: string;
@@ -209,10 +215,11 @@ const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }) => {
         setNeedSaveDialogOpen,
         canTabChange,
         setCanTabChange,
-        combatDetails: campaignDetails?.combat,
-        isCombatDm: campaignDetails?.combat?.dmId === auth.currentUser?.uid,
+        combatDetails,
+        isCombatDm: combatDetails?.dmId === auth.currentUser?.uid,
         fetchCombatDetails,
         setCampaignDetails,
+        setCombatDetails,
       }}
     >
       {children}

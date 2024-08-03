@@ -14,7 +14,7 @@ import ConfirmEndCombatDialog from "./dialogs/ConfirmEndCombatDialog";
 import COmbatTrackerTableHeader from "./ComponentTrackerTableHeader";
 import CombatTrackerTableFooter from "./CombatTrackerTableFooter";
 import { onValue, ref } from "firebase/database";
-import { CampaignType, CombatType } from "../../../../campaignTypes";
+import { CombatType } from "../../../../campaignTypes";
 import { t } from "i18next";
 import { motion } from "framer-motion";
 
@@ -35,7 +35,7 @@ type CombatTrackerDialogProps = {
 };
 
 const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
-  const { combatDetails, fetchCombatDetails, isCombatDm, setCampaignDetails } =
+  const { combatDetails, fetchCombatDetails, isCombatDm, setCombatDetails } =
     useContext(DetailsContext);
   const { id } = useParams<{ id: string }>();
   const [openAddCombatant, setOpenAddCombatant] = useState(false);
@@ -45,13 +45,7 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
     if (id === "1") return;
     onValue(ref(db, `campaigns/${id}/combat`), (snapshot) => {
       const newCombat = snapshot.val() as CombatType;
-      setCampaignDetails(
-        (prev) =>
-          ({
-            ...prev,
-            combat: newCombat,
-          } as CampaignType)
-      );
+      setCombatDetails(newCombat);
     });
   }, [id]);
 
@@ -73,10 +67,7 @@ const CombatTrackerDialog = ({ open, onClose }: CombatTrackerDialogProps) => {
 
   return (
     <>
-      <div
-        className="dialog-background"
-        onClick={onClose}
-      >
+      <div className="dialog-background" onClick={onClose}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

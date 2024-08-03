@@ -10,10 +10,12 @@ const useDetails = () => {
   const { authUser } = useContext(AuthContext);
   const {
     campaignDetails,
+    combatDetails,
     loading: campaignLoading,
     fetchCampaignDetails,
     fetchCombatDetails,
     setCampaignDetails,
+    setCombatDetails,
   } = useCampaignDetails(id);
   const {
     playerDetails,
@@ -29,12 +31,14 @@ const useDetails = () => {
   };
 
   return {
+    combatDetails,
     campaignDetails,
     playerDetails,
     detailsLoading,
     fetchAll,
     fetchCombatDetails,
     setCampaignDetails,
+    setCombatDetails,
   };
 };
 
