@@ -849,3 +849,13 @@ export const updateCombatDmNotes = async (
 ) => {
   set(child(dbRef, `campaigns/${campaignId}/combat/dmNotes`), notes);
 };
+
+export const uploadError = async (error: {
+  message?: string | Event;
+  source?: string;
+  lineno?: number;
+  colno?: number;
+  error?: Error;
+}) => {
+  set(child(dbRef, `error-logs/${Date.now()}`), error);
+};
