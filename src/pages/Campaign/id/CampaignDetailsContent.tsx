@@ -1,8 +1,13 @@
+import { useContext, useEffect, useState } from "react";
 import { InventoryContent, TabType } from "../campaignTypes";
 import CharacterSheet from "./details/CharacterSheet";
 import InventoryDetails from "./details/InventoryDetails";
 import TextDetails from "./details/TextDetails";
 import { CharSheetType } from "./details/components/character-sheet/CharSheetType";
+import { onValue, ref } from "firebase/database";
+import { useParams } from "react-router-dom";
+import { DetailsContext } from "../context/DetailsContext";
+import { db } from "../../../contexts/firebase/firebase";
 
 interface CampaignDetailsContentProps {
   tab?: TabType;
@@ -11,6 +16,26 @@ interface CampaignDetailsContentProps {
 export default function CampaignDetailsContent({
   tab,
 }: CampaignDetailsContentProps) {
+  const { id } = useParams();
+  const { catTab } = useContext(DetailsContext);
+  const [content, setContent] = useState<any>("");
+
+  useEffect(() => {
+    const unsubscribe = onValue(
+      ref(
+        db,
+        `campaigns/${id}/categories/${catTab.categoryId}/tabs/${catTab.tabId}`
+      ),
+      (snapshot) => {
+        const newTab = snapshot.val() as TabType;
+        setContent(newTab.content);
+      }
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, [tab]);
+
   if (!tab) {
     document.title = "RPG Manager";
     return null;
@@ -29,7 +54,7 @@ export default function CampaignDetailsContent({
   if (tab.type === "inventory") {
     return (
       <div className="tab-content">
-        <InventoryDetails content={(tab.content || "") as InventoryContent} />
+        <InventoryDetails content={(content || "") as InventoryContent} />
       </div>
     );
   }
@@ -37,7 +62,7 @@ export default function CampaignDetailsContent({
   if (tab.type === "sheet") {
     return (
       <div className="tab-content">
-        <CharacterSheet content={tab.content as CharSheetType} />
+        <CharacterSheet content={content as CharSheetType} />
       </div>
     );
   }

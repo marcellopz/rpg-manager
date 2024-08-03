@@ -6,7 +6,7 @@ import AppRoutes from "./routes/routes";
 function App() {
   useEffect(() => {
     window.onerror = (message, source, lineno, colno, error) => {
-      console.log("error", { message, source, lineno, colno, error });
+      console.warn("error", { message, source, lineno, colno, error });
       uploadError({
         message,
         source,

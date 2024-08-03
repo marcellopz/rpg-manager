@@ -276,7 +276,7 @@ export const getTabContent = async (
   categoryId: string,
   tabId: string,
   playerId: string
-) => {
+): Promise<TabType["content"] | null> => {
   if (playerId === "") {
     const content = await get(
       child(
