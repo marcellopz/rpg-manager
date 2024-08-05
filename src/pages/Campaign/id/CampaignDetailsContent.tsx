@@ -63,7 +63,7 @@ export default function CampaignDetailsContent({
   if (tab.type === "sheet") {
     return (
       <div className="tab-content">
-        <CharacterSheet content={content as CharSheetType} />
+        <CharacterSheet content={tab.content as CharSheetType} />
       </div>
     );
   }
