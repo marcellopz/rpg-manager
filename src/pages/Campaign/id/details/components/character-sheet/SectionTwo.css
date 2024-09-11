@@ -232,10 +232,13 @@
 
 .bonus-box {
   position: relative;
+}
+
+.bonus-box > img {
   opacity: 0.5;
 }
 
-.bonus-box:hover {
+.bonus-box > img:hover {
   opacity: 1;
 }
 
