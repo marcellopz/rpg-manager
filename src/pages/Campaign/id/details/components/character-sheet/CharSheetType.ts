@@ -45,6 +45,33 @@ export type CharSheetType = {
   fail1: boolean;
   fail2: boolean;
   fail3: boolean;
+  bonus?: {
+    strength: number;
+    atletics: number;
+    dexterity: number;
+    constitution: number;
+    intelligence: number;
+    wisdom: number;
+    charisma: number;
+    acrobatics: number;
+    animalHandling: number;
+    arcana: number;
+    athletics: number;
+    deception: number;
+    history: number;
+    insight: number;
+    intimidation: number;
+    investigation: number;
+    medicine: number;
+    nature: number;
+    perception: number;
+    performance: number;
+    persuasion: number;
+    religion: number;
+    sleightOfHand: number;
+    stealth: number;
+    survival: number;
+  };
   proficiencies: {
     strength: boolean;
     atletics: boolean;
@@ -126,6 +153,33 @@ export const initialCharSheet: CharSheetType = {
     name: "",
     bonus: "",
     damage: "",
+  },
+  bonus: {
+    strength: 0,
+    atletics: 0,
+    dexterity: 0,
+    constitution: 0,
+    intelligence: 0,
+    wisdom: 0,
+    charisma: 0,
+    acrobatics: 0,
+    animalHandling: 0,
+    arcana: 0,
+    athletics: 0,
+    deception: 0,
+    history: 0,
+    insight: 0,
+    intimidation: 0,
+    investigation: 0,
+    medicine: 0,
+    nature: 0,
+    perception: 0,
+    performance: 0,
+    persuasion: 0,
+    religion: 0,
+    sleightOfHand: 0,
+    stealth: 0,
+    survival: 0,
   },
   proficiencies: {
     strength: false,

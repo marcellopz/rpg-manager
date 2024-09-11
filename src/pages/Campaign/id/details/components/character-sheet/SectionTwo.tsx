@@ -1,6 +1,7 @@
 import { t } from "i18next";
 import { useCharSheetContext } from "./CharSheetContext";
 import "./SectionTwo.css";
+import BonusBox from "./BonusBox";
 
 const attributes: {
   label: string;
@@ -83,10 +84,7 @@ const SectionTwo = () => {
         <div className="all_attributes_container">
           <div className="stats">
             {attributes.map((atributo) => (
-              <div
-                className="stats_container"
-                key={atributo.key}
-              >
+              <div className="stats_container" key={atributo.key}>
                 <input
                   type="number"
                   name=""
@@ -141,11 +139,13 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.strength) +
                     (charSheetData.proficiencies.strength
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.strength ?? 0)
                   }
                   maxLength={2}
                 />
                 <p>{t("CHAR_SHEET_SAVING_THROWS")}</p>
+                <BonusBox skillName="strength" />
               </div>
               <div className="mini_container">
                 <input
@@ -172,10 +172,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.strength) +
                     (charSheetData.proficiencies.atletics
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.athletics ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_ATLETHICS")}</p>
+                <BonusBox skillName="athletics" />
               </div>
             </div>
             <div>
@@ -204,10 +206,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.dexterity) +
                     (charSheetData.proficiencies.dexterity
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.dexterity ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_SAVING_THROWS")}</p>
+                <BonusBox skillName="dexterity" />
               </div>
               <div className="mini_container">
                 <input
@@ -234,10 +238,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.dexterity) +
                     (charSheetData.proficiencies.acrobatics
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.acrobatics ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_ACROBATICS")}</p>
+                <BonusBox skillName="acrobatics" />
               </div>
               <div className="mini_container">
                 <input
@@ -264,10 +270,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.dexterity) +
                     (charSheetData.proficiencies.stealth
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.stealth ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_STEALTH")}</p>
+                <BonusBox skillName="stealth" />
               </div>
               <div className="mini_container">
                 <input
@@ -294,10 +302,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.dexterity) +
                     (charSheetData.proficiencies.sleightOfHand
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.sleightOfHand ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_SLEIGHT_OF_HAND")}</p>
+                <BonusBox skillName="sleightOfHand" />
               </div>
             </div>
             <div>
@@ -326,10 +336,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.constitution) +
                     (charSheetData.proficiencies.constitution
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.constitution ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_SAVING_THROWS")}</p>
+                <BonusBox skillName="constitution" />
               </div>
             </div>
             <div>
@@ -358,10 +370,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.intelligence) +
                     (charSheetData.proficiencies.intelligence
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.intelligence ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_SAVING_THROWS")}</p>
+                <BonusBox skillName="intelligence" />
               </div>
               <div className="mini_container">
                 <input
@@ -388,10 +402,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.intelligence) +
                     (charSheetData.proficiencies.arcana
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.arcana ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_ARCANA")}</p>
+                <BonusBox skillName="arcana" />
               </div>
               <div className="mini_container">
                 <input
@@ -418,10 +434,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.intelligence) +
                     (charSheetData.proficiencies.history
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.history ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_HISTORY")}</p>
+                <BonusBox skillName="history" />
               </div>
               <div className="mini_container">
                 <input
@@ -448,10 +466,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.intelligence) +
                     (charSheetData.proficiencies.investigation
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.investigation ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_INVESTIGATION")}</p>
+                <BonusBox skillName="investigation" />
               </div>
               <div className="mini_container">
                 <input
@@ -478,10 +498,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.intelligence) +
                     (charSheetData.proficiencies.nature
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.nature ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_NATURE")}</p>
+                <BonusBox skillName="nature" />
               </div>
               <div className="mini_container">
                 <input
@@ -508,10 +530,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.intelligence) +
                     (charSheetData.proficiencies.religion
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.religion ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_RELIGION")}</p>
+                <BonusBox skillName="religion" />
               </div>
             </div>
             <div>
@@ -540,10 +564,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.wisdom) +
                     (charSheetData.proficiencies.wisdom
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.wisdom ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_SAVING_THROWS")}</p>
+                <BonusBox skillName="wisdom" />
               </div>
               <div className="mini_container">
                 <input
@@ -570,10 +596,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.wisdom) +
                     (charSheetData.proficiencies.animalHandling
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.animalHandling ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_ANIMAL_HANDLING")}</p>
+                <BonusBox skillName="animalHandling" />
               </div>
               <div className="mini_container">
                 <input
@@ -600,10 +628,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.wisdom) +
                     (charSheetData.proficiencies.insight
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.insight ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_INSIGHT")}</p>
+                <BonusBox skillName="insight" />
               </div>
               <div className="mini_container">
                 <input
@@ -630,10 +660,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.wisdom) +
                     (charSheetData.proficiencies.medicine
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.medicine ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_MEDICINE")}</p>
+                <BonusBox skillName="medicine" />
               </div>
               <div className="mini_container">
                 <input
@@ -660,10 +692,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.wisdom) +
                     (charSheetData.proficiencies.perception
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.perception ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_PERCEPTION")}</p>
+                <BonusBox skillName="perception" />
               </div>
               <div className="mini_container">
                 <input
@@ -690,10 +724,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.wisdom) +
                     (charSheetData.proficiencies.survival
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.survival ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_SURVIVAL")}</p>
+                <BonusBox skillName="survival" />
               </div>
             </div>
             <div>
@@ -722,10 +758,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.charisma) +
                     (charSheetData.proficiencies.charisma
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.charisma ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_SAVING_THROWS")}</p>
+                <BonusBox skillName="charisma" />
               </div>
               <div className="mini_container">
                 <input
@@ -752,10 +790,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.charisma) +
                     (charSheetData.proficiencies.deception
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.deception ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_DECEPTION")}</p>
+                <BonusBox skillName="deception" />
               </div>
               <div className="mini_container">
                 <input
@@ -782,10 +822,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.charisma) +
                     (charSheetData.proficiencies.intimidation
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.intimidation ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_INTIMIDATION")}</p>
+                <BonusBox skillName="intimidation" />
               </div>
               <div className="mini_container">
                 <input
@@ -812,10 +854,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.charisma) +
                     (charSheetData.proficiencies.performance
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.performance ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_PERFORMANCE")}</p>
+                <BonusBox skillName="performance" />
               </div>
               <div className="mini_container">
                 <input
@@ -842,10 +886,12 @@ const SectionTwo = () => {
                     convertToModifier(charSheetData.charisma) +
                     (charSheetData.proficiencies.persuasion
                       ? charSheetData.proficiencyBonus
-                      : 0)
+                      : 0) +
+                    (charSheetData.bonus?.persuasion ?? 0)
                   }
                 />
                 <p>{t("CHAR_SHEET_PERSUASION")}</p>
+                <BonusBox skillName="persuasion" />
               </div>
             </div>
           </div>
