@@ -14,6 +14,7 @@ import {
 import { CharSheetType } from "../../pages/Campaign/id/details/components/character-sheet/CharSheetType";
 import { ListItemWithId } from "../../pages/Campaign/id/ContentSelectionDragND";
 import { CombatantTypeWithID } from "../../pages/Campaign/id/details/components/cambat-tracker/CombatTrackerRowsDragNDrop";
+import { inventoryItemWithId } from "../../pages/Campaign/id/details/components/inventory/ItemsDragND";
 
 export async function checkIsAdmin(userId: string) {
   return get(child(dbRef, `users/${userId}/isAdmin`))
@@ -711,6 +712,23 @@ export const updateTabListOrder = async (
     );
   });
   return;
+};
+
+export const updateItemListOrder = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  items: inventoryItemWithId[]
+) => {
+  items.forEach((item, i) => {
+    set(
+      child(
+        dbRef,
+        `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/inventory/${item.id}/orderIndex`
+      ),
+      i
+    );
+  });
 };
 
 export const getPastVersions = async (

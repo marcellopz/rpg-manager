@@ -460,3 +460,8 @@
 .log-time {
   font-size: 14px;
 }
+
+.item-list-container {
+  display: flex;
+  flex-direction: column;
+}

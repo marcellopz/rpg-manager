@@ -133,6 +133,7 @@ export interface InventoryContent {
 }
 
 export interface InventoryItemType {
+  orderIndex?: number;
   numberOfItems: number;
   item: ItemType;
 }
