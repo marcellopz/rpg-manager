@@ -8,6 +8,7 @@ import { onValue, ref } from "firebase/database";
 import { useParams } from "react-router-dom";
 import { DetailsContext } from "../context/DetailsContext";
 import { db } from "../../../contexts/firebase/firebase";
+import { isDemo } from "../../../contexts/firebase/databaseSetup";
 
 interface CampaignDetailsContentProps {
   tab?: TabType;
@@ -21,6 +22,13 @@ export default function CampaignDetailsContent({
   const [content, setContent] = useState<any>("");
 
   useEffect(() => {
+    if (tab?.type !== "inventory") {
+      return;
+    }
+    if (isDemo()) {
+      setContent(tab.content);
+      return;
+    }
     const unsubscribe = onValue(
       ref(
         db,

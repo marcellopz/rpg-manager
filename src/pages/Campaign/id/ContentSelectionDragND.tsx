@@ -106,11 +106,7 @@ const ContentSelectionDragND = ({
               className={`${className} item-list react-resizable`}
             >
               {items.map((item, index) => (
-                <Draggable
-                  key={item.id}
-                  draggableId={item.id}
-                  index={index}
-                >
+                <Draggable key={item.id} draggableId={item.id} index={index}>
                   {(provided) => (
                     <div
                       role="item"
@@ -134,12 +130,14 @@ const ContentSelectionDragND = ({
                 </Draggable>
               ))}
               {provided.placeholder}
-              <div
-                className="create-new"
-                onClick={() => setAddItemDialogOpen(true)}
-              >
-                {textAddItem}
-              </div>
+              {!(type === "tab" && !categoryId) && ( // if it's a tab and there's no category selected, don't show the add tab button
+                <div
+                  className="create-new"
+                  onClick={() => setAddItemDialogOpen(true)}
+                >
+                  {textAddItem}
+                </div>
+              )}
             </div>
           </Resizable>
         )}
