@@ -1,6 +1,6 @@
 .campaign__header {
   background-image: url("https://i.imgur.com/Z7nLXKH.png");
-  height: 350px;
+  min-height: 350px;
   background-size: cover;
   background-position: center;
   /* background-position-y: bottom; */
@@ -14,7 +14,7 @@
 
 .campaign__backdrop {
   padding-top: 75px;
-  height: 100%;
+  min-height: 350px;
   width: 100%;
   background-image: linear-gradient(
     to right,
@@ -430,6 +430,9 @@ span.react-resizable-handle {
 }
 
 @media only screen and (max-width: 800px) {
+  #demo-warning {
+    position: unset;
+  }
   .card-image {
     object-fit: cover;
   }
@@ -442,7 +445,10 @@ span.react-resizable-handle {
   }
 
   .campaign__backdrop > div {
+    flex-wrap: wrap;
+    flex-direction: column;
     margin: 0;
+    margin-bottom: 15px;
   }
 
   .campaign__cards a {
