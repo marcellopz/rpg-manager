@@ -20,6 +20,7 @@ export default function InventoryDetails({ content }: InventoryDetailsProps) {
     let carryingWeight = 0;
     carryingWeight +=
       content.playerGold * 0.02 +
+      (content.playerPlatinum ?? 0) * 0.02 +
       (content.playerSilver ?? 0) * 0.02 +
       (content.playerCopper ?? 0) * 0.02;
 
@@ -40,6 +41,7 @@ export default function InventoryDetails({ content }: InventoryDetailsProps) {
         character_gold={content.playerGold}
         character_silver={content.playerSilver ?? 0}
         character_copper={content.playerCopper ?? 0}
+        character_platinum={content.playerPlatinum ?? 0}
         carrying_weight={getCarryingWeight()}
       />
       <BackpackItems

@@ -416,6 +416,31 @@ export const deleteItemCampaign = async (
 };
 
 // inventory
+export const updatePlat = async (
+  campaignId: string,
+  categoryId: string,
+  tabId: string,
+  plat: number,
+  characterName: string,
+  oldPlat: number
+) => {
+  const updatePlatLog: InventoryChangeType = {
+    timestamp: Date.now(),
+    username: auth.currentUser?.displayName as string,
+    changeType: "update_platinum",
+    description: `Changed ${characterName}'s platinum from "${oldPlat}" to "${plat}"`,
+  };
+  push(child(dbRef, `campaigns/${campaignId}/inventoryLog`), updatePlatLog);
+  set(
+    child(
+      dbRef,
+      `campaigns/${campaignId}/categories/${categoryId}/tabs/${tabId}/content/playerPlatinum`
+    ),
+    plat
+  );
+};
+
+// inventory
 export const updateGold = async (
   campaignId: string,
   categoryId: string,

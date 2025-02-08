@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import {
   updateCopper,
   updateGold,
+  updatePlat,
   updateSilver,
   updateStrength,
 } from "../../../../../../contexts/firebase/database";
@@ -15,6 +16,7 @@ const Backpack = ({
   little_heavy_box,
   very_heavy_box,
   total_weight_box,
+  platinum_box,
   gold_box,
   silver_box,
   copper_box,
@@ -25,6 +27,7 @@ const Backpack = ({
   little_heavy_box: number;
   very_heavy_box: number;
   total_weight_box: number;
+  platinum_box: number;
   gold_box: number;
   silver_box: number;
   copper_box: number;
@@ -40,6 +43,10 @@ const Backpack = ({
   const [editingCopperValue, setEditingCopperValue] =
     useState<number>(copper_box);
   const [editingCopper, setEditingCopper] = useState(false);
+  const [editingPlat, setEditingPlat] = useState(false);
+  const [editingPlatValue, setEditingPlatValue] =
+    useState<number>(platinum_box);
+
   const [editingStr, setEditingStr] = useState(false);
   const [editingStrValue, setEditingStrValue] = useState<number>(strength_box);
 
@@ -62,6 +69,18 @@ const Backpack = ({
       return "❌❌";
     }
     return "❌❌❌";
+  };
+
+  const handleSavePlat = () => {
+    updatePlat(
+      id as string,
+      catTab.categoryId,
+      catTab.tabId,
+      editingPlatValue,
+      charName,
+      platinum_box
+    );
+    setEditingPlat(false);
   };
 
   const handleSaveGold = () => {
@@ -173,6 +192,32 @@ const Backpack = ({
       </div>
 
       <div className="money_container">
+        <div className="plat_box">
+          {editingPlat ? (
+            <input
+              autoFocus
+              value={editingPlatValue}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSavePlat();
+                  setEditingPlat(false);
+                  fetchAll();
+                }
+              }}
+              onChange={(e) => setEditingPlatValue(Number(e.target.value))}
+              onBlur={() => setEditingPlat(false)}
+            />
+          ) : (
+            <p
+              onDoubleClick={() => {
+                setEditingPlat(true);
+              }}
+            >
+              {platinum_box}
+            </p>
+          )}
+          <img src="/assets/coins.png" alt="platinum" width={10} />
+        </div>
         <div className="gold_box">
           {editingGold ? (
             <input

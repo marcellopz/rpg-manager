@@ -33,6 +33,7 @@ export interface InventoryChangeType {
   changeType:
     | "add"
     | "delete"
+    | "update_platinum"
     | "update_gold"
     | "update_silver"
     | "update_copper"
@@ -125,6 +126,7 @@ export interface InventoryContent {
   playerStrength: number;
   playerAvatar: string;
   playerGold: number;
+  playerPlatinum?: number;
   playerSilver?: number;
   playerCopper?: number;
   inventory: {
