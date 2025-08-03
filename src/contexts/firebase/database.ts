@@ -32,7 +32,6 @@ export async function checkIsAdmin(userId: string) {
 
 export const addNewCampaign = async (campaign: Partial<CampaignType>) => {
   return push(child(dbRef, "campaigns"), campaign).then((ref) => {
-    // @ts-ignore
     push(child(dbRef, `users/${campaign.creatorId}/campaigns`), ref.key);
     return ref;
   });

@@ -22,7 +22,7 @@ const CampaignDetailsHeader = ({
   const { t } = useTranslation();
   const { authUser } = useContext(AuthContext);
   const { campaignDetails } = useContext(DetailsContext);
-  const [open, setOpen] = useState<boolean>(false);
+  const [combatTrackerOpen, setCombatTrackerOpen] = useState<boolean>(false);
   const [inventoryOpen, setInventoryOpen] = useState<boolean>(false);
   const [searchOpen, setSearchOpen] = useState<boolean>(false);
 
@@ -57,7 +57,8 @@ const CampaignDetailsHeader = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <button onClick={() => setOpen(true)}>
+          {/* <button>Handouts</button> */}
+          <button onClick={() => setCombatTrackerOpen(true)}>
             {t("COMBAT_TRACKER_TITLE")}
           </button>
           <button onClick={() => setInventoryOpen(true)}>
@@ -97,9 +98,9 @@ const CampaignDetailsHeader = ({
         }}
       />
       <CombatTrackerDialog
-        open={open}
+        open={combatTrackerOpen}
         onClose={() => {
-          setOpen(false);
+          setCombatTrackerOpen(false);
         }}
       />
     </section>

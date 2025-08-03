@@ -9,7 +9,7 @@ import { DetailsContext } from "../context/DetailsContext";
 import CampaignConfigsDialog from "../dialogs/CampaignConfigsDialog";
 import CampaignDetailsHeader from "./CampaignDetailsHeader";
 
-export const getTab = (
+const getTab = (
   category: string,
   tabId: string,
   data: CampaignType | PlayerType
@@ -47,7 +47,7 @@ export default function CampaignDetails() {
           selectedData.categories[catId].tabs as {
             [key: string]: any;
           }
-        ).find(([_, ta]) => ta.listIndex === 0)?.[0] ||
+        ).find(([, ta]) => ta.listIndex === 0)?.[0] ||
         Object.keys(
           selectedData.categories[catId].tabs as {
             [key: string]: any;

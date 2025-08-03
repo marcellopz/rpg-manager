@@ -10,13 +10,13 @@ type Props = {
 };
 
 function getIndicesOf(searchStr: string, str: string) {
-  var searchStrLen = searchStr.length;
+  const searchStrLen = searchStr.length;
   if (searchStrLen == 0) {
     return [];
   }
-  var startIndex = 0,
-    index,
-    indices = [];
+  let startIndex = 0;
+  let index: number;
+  const indices: number[] = [];
   str = str.toLowerCase();
   searchStr = searchStr.toLowerCase();
 

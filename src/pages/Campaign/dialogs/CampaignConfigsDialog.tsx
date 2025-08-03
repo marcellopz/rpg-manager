@@ -62,6 +62,7 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
         setPlayerList(invitedPlayersArray);
       }
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   if (!open) {
@@ -77,11 +78,9 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
       fetchAll();
     });
     if (cardImageBlob) {
-      // @ts-ignore
       uploadImage(cardImageBlob, `campaign/cardImage/${id}`);
     }
     if (backdropImageBlob) {
-      // @ts-ignore
       uploadImage(backdropImageBlob, `campaign/backdropImage/${id}`).then(
         () => {
           window.location.reload();
@@ -92,10 +91,7 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
   };
 
   return (
-    <div
-      className="dialog-background"
-      onMouseDown={onClose}
-    >
+    <div className="dialog-background" onMouseDown={onClose}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -161,10 +157,7 @@ const CampaignConfigsDialog: React.FC<CampaignConfigsDialogProps> = ({
           </ul>
         )}
         <div className="confirm-button-container">
-          <button
-            onClick={onClose}
-            className="button-cancel"
-          >
+          <button onClick={onClose} className="button-cancel">
             {t("CANCEL_BTN")}
           </button>
           <button
