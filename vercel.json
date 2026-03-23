@@ -1,6 +1,1 @@
-{
-  "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }],
-  "analytics": {
-    "enable": true
-  }
-}
+{ "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }] }
