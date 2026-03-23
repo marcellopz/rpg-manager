@@ -54,7 +54,7 @@ const SectionTwo = () => {
             onChange={(e) => {
               setCharSheetData((prev) => ({
                 ...prev,
-                proficiencyBonus: parseInt(e.target.value ?? 0),
+                proficiencyBonus: parseInt(e.target.value || "0"),
               }));
             }}
             maxLength={2}
